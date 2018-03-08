@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+#introduce_area, #info_area{border-radius:4px;font-family:'Open Sans', sans-serif;z-index:7;background-color: #fff;
+ /*background-image: linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),linear-gradient(#eee .1em, transparent .1em);background-size: 100% 1.2em;}body{font-family:'Open Sans';background:linear-gradient(135deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px),linear-gradient(225deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px)0 64px;background-color:#708090;background-size: 64px 128px;*/
+	background-color:#fff;
+}	
+/*body{background-color:#fea;}*/
+.navbar-nav{margin-top: 14px; z-index:8; background-color:#fff;}
+/*.navbar .navbar-nav>li>a:hover,*/ .navbar .navbar-nav>.active>a, .navbar .navbar-nav>li>a:focus{ color:aqua;z-index:8;background-color:rgba(0,136,204,1);border-radius:4px;}
+h1 {font-family: 'Open Sans', sans-serif;}
+#introduce p{font-size:22px;padding-left:25px;}
+#navigation{position:fixed;top:0; width: 100%; background-color:#fff;z-index:8; height: 70px;}
+.carousel-caption h1{
+font-size:22px;}
+.navbar .navbar-nav>li>a:hover{
+	/*border-radius: 34px; background-color:rgba(60,176, 184,1); color:#fff;*/ color:rgba(111,208,38,1);}
+#carousel-id {
+	margin: 30px 0px;
+}			
+#intro-title {
+	font-size:26px;
+}
+#intro-body{
+	font-size:20px;
+}
+#intro{
+	height:520px;
+}
+#sidebar{
+	min-height:90px;
+}
+.navbar-brand {
+	margin: 0px 30px 0px 30px;
+}
+.navbar-nav>li>a{
+	padding-top:10px;z-index:8; margin: 0px 2px;
+	padding-bottom: 20px; height: 40px;text-transform:uppercase;font-weight:700;
+}
+tr td a:hover{
+	text-decoration:none;
+}
+tr td a{color:black;}
+.after-menu{padding-top:68px;position:relative;}
+#title-text{margin-top:0; padding-top:110px;font-weight:900;color:rgba(17,17,173,1);font-family:cursive; font-size:44px;}
+#quote{background-color:rgba(48, 92, 160,1);height:50px;z-index:1;}
+#title-des{font-size:22px;color:rgba(11,15,131,1);padding-top:10px;font-family:'Open Sans';}
+#introduce{padding:35px 30px;}
+
+#function_area{
+	background-color:rgba(66, 129, 202, 1);color:#fff;padding-bottom:20px;;
+}
+hr.under{	
+	width:30%;
+}	
+.fa.function-icon{
+	background-color:#fff;
+	color:rgba(66,129,202,1);
+	width:90px;
+	height:90px;
+	line-height:90px;
+	font-size:46px;
+	border-radius:50%;	
+}
+.jumbo.text-center{
+	background:url(../img/3.jpg);
+	background-size:cover;
+	height:360px;
+	
+}
+i#compare-icon, #ranking-icon, #info-icon{
+	height:150px;
+	width:150px;
+	line-height:150px;
+	background-color:#fff;
+	border-radius:50%;
+	font-size:74px;
+	float:right;
+	color:rgba(66,129,202,1);
+}
+.btn-left{float:left;}
+/*info*/
+#background{background:url(../img/vnu_cover.jpg);background-size:cover;height:460px;}
+#uni-avatar{margin-left:140px ;border:2px solid #fff;}
+#background .col-sm-3{top:69%;}
+#all-info{background-color:rgba(244,244,244,1);padding-bottom:30px;}
+li.pill-item>a{background-color:rgba(66,129,202,1);color:#fff; border-radius:0px;}
+.pill-item>a:focus, .pill-item>a:hover{background-color:rgb(240,240,240);color:rgba(66,130,202,1);}
+#uni-map{margin-top: 10px}
+.list-group{margin-bottom:0;}
+.fa.pointer-md-icon{cursor:pointer;font-size:30px;padding:25px 15px 15px 15px;}
+.fa.pointer-md-icon:hover{color:rgba(66,130,202,1);font-size:40px;padding:15px 15px 7px 15px}
+
+
+#nav-info{height:46px;background-color:rgba(66,130,202,1);margin:10px 15px;padding-top:10px;}
+
+
+
+
+ #rank p, #compare p, #uniinfo p, #compare h2, #uniinfo h2, #rank h2, #info p, #support_area i{
+	padding:10px 0px 20px 0px; margin: 0px;
+}
+#compare p, #uniinfo p, #rank p, #info p, #support_area p{min-height:74px;font-size:16px;};
+#info{}
+#support_area{color:#fff;background-color: rgba(61, 130, 201, 1);}
+.p-large{font-size:18px;}
+.showlater, .fadein{display:none;}
+#gotop{float:right;position:fixed;bottom:10px;right:30px;display:none;z-index:8;}
+.row{margin: 0px;}
+.navbar-collapse{background-color:#fff;}
+.count{font-size:48px; font-weight:bolder;}
+#counter-area{padding-top:22px;}
+#footer{background-color:#fff;position:absolute;width:100%;}
+/*end home*/
+/*start compare*/ 
+#compare-introduce, #ranking-introduce, #info-introduce{padding:90px 0px 24px 0px;background-color:rgba(66,129,202,1);/*rgba(50,30,147,1);*/color:#fff;}
+.center-form {margin:30px auto; width:70%;}
+.select-odd{padding:60px 0;background-color:rgba(244,244,244,1);}
+.btn-1{margin:30px 0px;border-radius:0px; width:100%;}
+/*.cri-group-title{margin:2px 0px ; border-radius:0px;width:100%;}*/
+.title-step{padding-left:6vw;}
+.title-step-des{padding-left:9vw;}
+.btn-2, .btn-3-cg, .btn-22{border-radius:0px;width:100%;background-color:rgb(66,130,202);cursor:pointer;}
+.btn-2:hover, .btn-3:hover, .btn-3-cg:hover, .btn-22:hover{background-color:#eee;color:rgb(66,130,202);}
+.btn-3{border-radius:0px;width:100%;background-color:rgb(76,151,235);cursor:pointer;}
+.btn.btn-select{background-color:#d2f1ed;color:rgb(66,130,202);}
+.select-even{background-color:rgb(244, 230, 244); padding: 60px 0;}
+.btn-3.btn-select:hover{background-color:#eee;color:rgb(66,130,202);}
+.non-display{display:none;min-height: 300px;}
+.nav.nav-pills.nav-stacked{padding-bottom:30px;}
+.cri-select{padding-bottom:30px;}
+
+.step{position:fixed;right:0; height: 28px; width:30px; background-color:#000;color:#fff;}
+#step-1{top:200px;}
+#step-2{top:230px;display:none;}
+/*end compare AND start uniinfo*/
+/*#info-introduce{padding:90px;min-height:300px;background-color:rgba(29,196,176,1);}*/
+#search-uniinfo{min-height:400px;background-color:rgba(244,244,244,1);}
+/*#info-introduce i{padding:20px 0px 20px 0px;}*/
+/*end info*/
+.required{color:red;}
+#register-body{background-color:#ccd6e0;}
+#form-register{background-color:rgba(244,244,244,1);border:1px solid rgba(230,230,230,1);border-radius:8px;padding:30px 20px;margin:30px 0px;}
+#register-title, #contact-title, #ranking-title{padding-bottom:30px;background-color:rgba(50,30,147,1);color:#fff;}
+
+/*end register*/
+#contact-a{padding:20px 90px;}
+#content-respon{height:140px;}
+#contact-body{background-color:rgba(245,245,244,1);}
+#contact-b{padding:20px 35px;}
+#contact-title, #ranking-title{padding-left:6vw;}
+/*end contact*/
+#ranking-body{background-color:rgba(244,244,244,1);padding: 30px 0px;}

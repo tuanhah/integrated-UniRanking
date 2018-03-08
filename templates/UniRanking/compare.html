@@ -1,0 +1,426 @@
+{% extends 'UniRanking/base.html' %}
+{% block title %} So sánh | Hệ thống so sánh các trường Đại học {% endblock %}
+{% block compare %} class="active" {% endblock %}
+{% block body %}
+<script>
+    jQuery(document).ready(function(){
+        jQuery('#subject-compare').click(function(){
+            jQuery('#select-21, #step-2').css({"display":"block"});
+            jQuery('#select-22, #select-23, #select-32, #select-33').css({"display":"none"});
+            
+        });
+        jQuery('#group-compare').click(function(){
+            jQuery('#select-21, #select-23, #select-31, #select-33').hide();
+            jQuery('#select-22, #step-2').show();
+            
+        });
+        jQuery('#university-compare').click(function(){
+            jQuery('#select-21, #select-22, #select-31, #select-32').hide();
+            
+            jQuery('#select-23, #step-2').show();
+        });    
+        jQuery('#btn-23').click(function(){jQuery('#select-33').show();});
+        jQuery('.btn-2').click(function(){
+            jQuery('.btn-2').removeClass("btn-select");
+            jQuery(this).addClass("btn-select");
+            jQuery('#select-31').show();
+        });
+        jQuery('.btn-3').click(function(){
+            jQuery(this).toggleClass('btn-select');
+        });
+        jQuery('.btn-22').click(function(){
+            jQuery('.btn-22').removeClass("btn-select");
+            jQuery(this).toggleClass("btn-select");
+            jQuery('#select-32').show();
+        });
+    });
+
+</script>
+<div class="container-fluid after-menu" id="compare-introduce">
+    <div class="row">
+        <div class="col-sm-3 text-center">
+            <i class="fa fa-object-ungroup" id="compare-icon"></i>
+        </div>
+        <div class="col-sm-9">
+            <h1> Chức năng so sánh:</h1>
+            <!-- <i class="fa fa-object-ungroup" style="font-size:96px"></i> -->
+            <p class="p-large">So sánh các trường tương tự nhau hoặc so sánh các ngành đào tạo giống nhau của các trường</p><hr>
+        </div>
+    </div>
+</div>
+<div class="container-fluid select-odd" id="select-1">
+    <div class="row">
+        <h1 class="title-step">1. Chọn kiểu so sánh bạn muốn:</h1>
+        <p class="title-step-des">Chọn một tùy chọn so sánh</p>
+        
+        
+    </div>
+    <div class="row text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="#select-21" class="btn btn-success btn-lg btn-1" id="subject-compare">So sánh theo ngành</a>
+                    <p>Chọn một ngành cụ thể, hệ thống sẽ lọc cho bạn các trường đào tạo ngành đó</p>
+                </div>
+                <div class="col-md-4">
+                    <a href="#select-22" class="btn btn-primary btn-lg btn-1" id="group-compare">So sánh nhóm 3 trường</a>
+                    <p>Chọn một nhóm tối đa 3 trường có ngành mà bạn đang phân vân để so sánh</p>
+                </div>
+                <div class="col-md-4">
+                    <a href="#select-23" class="btn btn-warning btn-lg btn-1" id="university-compare">So sánh 1 trường cụ thể</a>
+                    <p>Chọn 1 trường cụ thể và so sánh với các trường tương tụ</p>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
+
+<div class="select-even non-display" id="select-21">
+    <div class="container-fluid">
+        <div class="row">
+            <h1 class="title-step">2. Bạn muốn so sánh ngành nào?</h1>
+            <p class="title-step-des">Chọn ngành bạn muốn so sánh</p>
+            
+        </div>
+        <div class="row">   
+            <div class="container">
+                <div class="col-md-5">
+                    <!-- <label class="row" for="subject-select">Chọn 1 ngành:</label> -->
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Công nghệ thông tin</a></li>
+                        <li class="pill-item">
+                            <a class="btn btn-info btn-lg btn-2" data-toggle="collapse" href="#supham">Sư phạm <span class="caret"></span></a>
+                            <div id="supham" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item btn-2">Sư phạm Toán</li>
+                                    <li class="list-group-item btn-2">Sư phạm Lý</li>
+                                </ul> 
+                            </div>
+                        </li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Y-Dược</a></li>        
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Kế toán - Kiểm toán</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Tài chính - Ngân hàng</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Điện tử - Viễn thông</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Khí tượng - Thủy văn</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Chính trị học</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Cơ học kỹ thuật</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Tài nguyên - Môi trường</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Sân khấu - Điện ảnh</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Ngoại ngữ</a></li>
+                        
+                        <!-- </div> -->
+                        <!-- <div class="row text-center"> -->
+                        <!-- <button id="compare-uni-select-1" class="btn btn-success">Tìm trường</button> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid select-even non-display" id="select-23">
+    <div class="row">
+        <h1 class="title-step">2. Bạn muốn so sánh trường nào?</h1>
+        <p class="title-step-des">Chọn một trường và chúng tôi sẽ giúp bạn so sánh trường này với các trường khác</p>
+        
+    </div>
+    <div class="row text-center">
+        <p class="p-large">Tìm kiếm theo tên Trường:</p>
+        <form class="form-vertical">
+            <div class="form-group col-xs-12">
+                <input id="compare-uni-search-23" type="text" class="form-control center-form" placeholder="Tìm kiếm"/>
+            </div>
+            <a id="btn-23" class="btn btn-success" href="#select-33">Chọn</a>
+        </form>
+    </div>
+</div>
+<div class="container-fluid select-even non-display" id="select-22">
+    <div class="row">
+        <h1 class="title-step">2. Các trường bạn đang phân vân thuộc ngành nào?</h1>
+        <p class="title-step-des">Trước khi chọn ra các trường bạn thích, hãy chọn ra ngành mà bạn muốn so sánh</p>
+
+    </div>
+    <div class="row">   
+            <div class="container">
+                <div class="col-md-5">
+                    <!-- <label class="row" for="subject-select">Chọn 1 ngành:</label> -->
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Công nghệ thông tin</a></li>
+                        <li class="pill-item">
+                            <a class="btn btn-info btn-lg btn-22" data-toggle="collapse" href="#supham-22">Sư phạm <span class="caret"></span></a>
+                            <div id="supham-22" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item btn-22">Sư phạm Toán</li>
+                                    <li class="list-group-item btn-22">Sư phạm Lý</li>
+                                </ul> 
+                            </div>
+                        </li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Y-Dược</a></li>        
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Kế toán - Kiểm toán</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Tài chính - Ngân hàng</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Điện tử - Viễn thông</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Khí tượng - Thủy văn</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Chính trị học</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Cơ học kỹ thuật</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Tài nguyên - Môi trường</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Sân khấu - Điện ảnh</a></li>
+                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Ngoại ngữ</a></li>
+                        
+                        <!-- </div> -->
+                        <!-- <div class="row text-center"> -->
+                        <!-- <button id="compare-uni-select-1" class="btn btn-success">Tìm trường</button> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+</div>
+<div id="select-31" class="non-display select-odd">
+    <div class="container-fluid">
+        <div class="row">
+            <h1 class="title-step">3. Bạn muốn so sánh những phương diện nào của các trường?</h1>
+            <p class="title-step-des">Chọn phương diện để so sánh, hay nói cách khác là các tiêu chí so sánh thể hiện trên bảng</p>
+        </div> 
+        <div class="row">
+            <div class="container">
+                <div class="row cri-select">
+                    <div class="col-sm-3">
+                        <a class="btn btn-info btn-lg btn-3-cg cri-group-title">Giảng dạy & Học tập</a>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-1">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-1">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-1">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-1">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-1">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-1">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row cri-select">
+                    <div class="col-sm-3">
+                        <a class="btn btn-info btn-lg btn-3-cg cri-group-title">Giảng dạy & Học tập</a>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-2">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-2">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-2">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-2">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-2">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-2">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row cri-select">
+                    <div class="col-sm-3">
+                        <a class="btn btn-info btn-lg btn-3-cg cri-group-title">Giảng dạy & Học tập</a>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-3">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-3">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-3">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-3">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-3">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-31-3">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <a class="btn btn-success">So sánh</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="select-32" class="non-display select-odd">
+    <div class="container-fluid">
+        <div class="row">
+            <h1 class="title-step">3. Bạn muốn so sánh những trường nào?</h1>
+            <p class="title-step-des">Chọn tối da 5 trường để so sánh</p>
+        </div>
+        <div class="row text-center">
+            <div class="p-large">Tên trường bạn muốn so sánh:</div>
+            <form class="form-vertical">
+                <div class="form-group">
+                    <input id="compare-uni-search-32" type="text" class="form-control center-form" placeholder="Tên trường">
+                </div>
+                <a class="btn btn-info">Thêm trường 1/5</a>
+                <a class="btn btn-success">So sánh</a>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="select-33" class="non-display select-odd">
+    <div class="container-fluid">
+        <div class="row">
+            <h1 class="title-step">3. Bạn muốn so sánh những phương diện nào của các trường?</h1>
+            <p class="title-step-des">Chọn phương diện để so sánh, hay nói cách khác là các tiêu chí so sánh thể hiện trên bảng</p>
+        </div> 
+        <div class="row">
+            <div class="container">
+                <div class="row cri-select">
+                    <div class="col-sm-3">
+                        <a class="btn btn-info btn-lg btn-3-cg cri-group-title">Giảng dạy & Học tập</a>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-1">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-1">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-1">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-1">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-1">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-1">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row cri-select">
+                    <div class="col-sm-3">
+                        <a class="btn btn-info btn-lg btn-3-cg cri-group-title">Giảng dạy & Học tập</a>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-2">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-2">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-2">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-2">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-2">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-2">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row cri-select">
+                    <div class="col-sm-3">
+                        <a class="btn btn-info btn-lg btn-3-cg cri-group-title">Giảng dạy & Học tập</a>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-3">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-3">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-3">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-3">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-3">Số giờ học Trung bình/năm</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-info btn-3 btn-33-3">Tỉ lệ tốt nghiệp đúng hạn</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <a class="btn btn-success">So sánh</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="step text-center" id="step-1">
+    <p class="p-large">1</p>
+</div>
+<div class="step text-center" id="step-2">
+    <p class="p-large">2</p>
+</div>
+<script>
+    var uniName=["Đại Học Quốc Gia Hà Nội","Đại Học Ngoại Thương","Đại Học Bách Khoa Hà Nội","Đại Học Kinh Tế Quốc Dân","Học Viện Tài Chính","Học Viện Ngân Hàng"];
+    jQuery(document).ready(function(){
+        jQuery('#compare-uni-search').autocomplete({
+            source: uniName 
+        });
+    });
+</script>
+
+{% endblock %}

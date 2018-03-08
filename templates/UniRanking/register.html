@@ -1,0 +1,45 @@
+{% extends 'UniRanking/base.html' %}
+{% block title %} Đăng ký | Hệ thống so sánh các trường Đại học{% endblock %}
+{% block register %}class="active"{% endblock %}
+{% block body %}
+<div class="container-fluid after-menu" id="register-body">
+    <div class="row text-center">
+        <div class="col-xs-12" id="register-title"><h1>Đăng ký</h1>
+            <p class="p-large">Điền thông tin của bạn và bấm đăng ký để nhận thông báo của chúng tôi</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-xs-push-3" id="form-register">
+            <form class="" action="">
+                <h4><strong>Đăng ký tài khoản:</strong></h4>
+                <div class="form-group">
+                    <label class="" for="user-register">Tên người dùng <span class="required">*</span>:</label>
+                    <input class="form-control input-lg" type="text" id="user-register" placeholder="Tên người dùng" required/>
+                </div>
+                <div class="form-group">
+                    <label class="" for="email-register">Email <span class="required">*</span>:</label>
+                    <input class="form-control input-lg" type="email" id="email-register" placeholder="Email" required/>
+                </div>
+                <div class="form-group">
+                    <label class="" for="password1-register">Mật khẩu <span class="required">*</span>:</label>
+                    <input class="form-control input-lg" type="password" id="password1-register" placeholder="Mật khẩu" required/>
+                </div>
+                <div class="form-group">
+                    <label class="" for="password2-register">Nhập lại mật khẩu <span class="required">*</span>:</label>
+                    <input class="form-control input-lg" type="password" id="password2-register" placeholder="Nhập lại mật khẩu" required/>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6 text-left">
+                        <p><a href="#">Gửi lại email xác nhận?</a></p>
+                        <!-- <p><a href="/login">Đăng nhập</a></p> -->
+                        <p>Chú thích: <span class="required">*</span> là bắt buộc.</p>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button type="submit" class="btn btn-primary btn-lg">Đăng ký</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

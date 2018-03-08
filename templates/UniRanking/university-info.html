@@ -1,0 +1,285 @@
+{% extends 'UniRanking/base.html' %}
+{% block title %} Thông tin Đại học | Hệ thống so sánh các trường Đại học {% endblock %}
+
+{% block info %}class='active'{% endblock %}
+{% block body %}
+{% load staticfiles %}
+<div class="container-fluid after-menu" id="info-introduce">
+    <div class="row">
+        <div class="col-sm-3 text-center">
+            <i class="fa fa-newspaper-o" id="info-icon"></i>
+        </div>
+        <div class="col-sm-9">
+            <h1>Chức năng xem thông tin trường</h1>
+            <!--<i class="fa fa-newspaper-o" style="font-size:60px"></i>-->
+            <p class="p-large">Hiển thị đầy đủ thông tin của một trường Đại Học</p><hr>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" id="search-uniinfo">
+    <div class="row text-center">
+        <div class="col-xs-12"><h1>Tìm kiếm theo tên trường bạn muốn tìm hiểu:</h1></div>
+    </div>
+    <div class="row text-center">
+        <div class="col-xs-12"><p class="p-large">Tên trường bạn muốn xem thông tin:</p></div>
+        <div class="col-xs-12">
+            <form class="form-vertical">
+                <div class="form-group row">
+                    <input type="text" class="form-control center-form" placeholder="Tìm kiếm" id="info-uni-search"/>
+                </div>
+                <div class="row text-center"><a id="uni-search-btn" href="#all-info" class="btn btn-info">Tìm kiếm</a></div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<div class="container-fluid" id="all-info">
+    <div class="row" id="background">
+        <div class="col-sm-3">
+            <img id="uni-avatar" src="{% static 'img/vnu_avatar.jpg'%}" width=140px>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="container">
+            <!-- <div class="col-sm-5">
+                <img class="img-thumbnail" id="uni-map" src="{% static 'img/map_sample.png'%}" width=100%>
+            </div> -->
+            <div class="col-sm-7">
+                <div class="row"><h1 class="col-xs-10" id="uni-name">Đại Học Quốc Gia Hà Nội</h1>
+                    <span class="col-xs-1 fa fa-plus pointer-md-icon" data-toggle="tooltip" title="Thêm vào danh sách yêu thích"></span>
+                    <span class=" col-xs-1 fa fa-envelope-square pointer-md-icon" data-toggle="tooltip" title="Nhận thông báo"></span>
+                </div>
+                <div class="row">
+                    <p class="col-xs-12 p-large">Đại chỉ: 144, Xuân Thủy, Cầu Giấy</p>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <img class="img-thumbnail" id="uni-map" src="{% static 'img/map_sample.png'%}" width=100%>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="row" id="nav-info">
+                <div class="col-xs-4 text-center">
+                    <p class="p-large">Thông tin</p>
+                </div>
+                <div class="col-xs-8">
+                    <ul class="nav ">
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#dncb">Đội ngũ cán bộ <span class="caret"></span></a>
+                            <div id="dncb" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số Giảng viên</a></li>
+                                    <li class="list-group-item"><a href="#">Số Giáo sư</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc2">Cơ sở vật chất<span class="caret"></span></a>
+                            <div id="csvc2" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc3">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc3" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc4">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc4" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc5">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc5" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc6">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc6" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc7">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc7" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc8">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc8" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc9">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc9" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc10">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc10" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc11">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc11" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc13">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc13" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc14">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc14" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc15">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc15" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc16">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc16" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse17" href="#csvc">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc17" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc18">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc18" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc19">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc19" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc20">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc20" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="pill-item">
+                            <a class="" data-toggle="collapse" href="#csvc21">Cơ sở vật chất <span class="caret"></span></a>
+                            <div id="csvc21" class="collapse">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><a href="#">Số phòng máy</a></li>
+                                    <li class="list-group-item"><a href="#">Thư viện</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <div class="col-xs-8">
+                    <p> </p> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var uniSource = ["Đại Học Quốc Gia Hà Nội","Đại Học Bách Khoa Hà Nội","Đại học Ngoại Thương", "Đại Học Kinh tế Quốc Dân","Đại Học Sư Phạm Hà Nội"];
+    jQuery(document).ready(function(){
+        jQuery('#info-uni-search').autocomplete({
+            source: uniSource
+        });
+    });
+</script>
+{% endblock %}

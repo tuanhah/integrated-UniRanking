@@ -1,0 +1,13 @@
+form.form-horizontal{
+  padding-right: 45px;
+}
+.col-md-5.panel.panel-primary{
+	padding: 0px;
+
+}
+.col-md-6.panel.panel-primary {
+    /*margin-left: 10px;*/
+    padding: 0px;
+    /*max-width: 460px;*/
+    min-height: 250px;
+}
