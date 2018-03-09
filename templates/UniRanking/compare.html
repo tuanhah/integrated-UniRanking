@@ -90,7 +90,7 @@
                         {% for sub in GroupSubject %}
                         <li class="pill-item">
                             {% if sub.parent_id == NULL %}
-                            <a class="btn btn-info btn-lg btn-2" data-toggle="collapse" href="#group-subjec-t{{ sub.id }}-21">{{ sub.name }} <span class="caret"></span></a>
+                            <a class="btn btn-info btn-lg btn-2" data-toggle="collapse" href="#group-subject-{{ sub.id }}-21">{{ sub.name }} <span class="caret"></span></a>
 
                             <div id="group-subject-{{ sub.id }}-21" class="collapse">
                                 <ul class="list-group">
