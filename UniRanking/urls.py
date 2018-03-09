@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls', namespace="api")),
     path('logout',LogoutView.as_view(), name = "logout"),
-    # path('register/',views.register,name="register"),
+    path('register/',views.register,name="register"),
     path('university/', include('university.urls')),
     path('', views.index, name="index"),
     path('index/', views.index, name="index"),
@@ -34,6 +34,5 @@ urlpatterns = [
     path('contact/', views.contact, name="contact"),
     path('help/', views.help, name="help"),
     path('login/', views.login, name="login"),
-    path('register/', views.register, name="register"),
     path('ranking/', views.ranking, name="ranking")
 ]

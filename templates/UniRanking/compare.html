@@ -84,33 +84,28 @@
         </div>
         <div class="row">   
             <div class="container">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <!-- <label class="row" for="subject-select">Chọn 1 ngành:</label> -->
                     <ul class="nav nav-pills nav-stacked">
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Công nghệ thông tin</a></li>
+                        {% for sub in GroupSubject %}
                         <li class="pill-item">
-                            <a class="btn btn-info btn-lg btn-2" data-toggle="collapse" href="#supham">Sư phạm <span class="caret"></span></a>
-                            <div id="supham" class="collapse">
+                            {% if sub.parent_id == NULL %}
+                            <a class="btn btn-info btn-lg btn-2" data-toggle="collapse" href="#group-subjec-t{{ sub.id }}-21">{{ sub.name }} <span class="caret"></span></a>
+
+                            <div id="group-subject-{{ sub.id }}-21" class="collapse">
                                 <ul class="list-group">
-                                    <li class="list-group-item btn-2">Sư phạm Toán</li>
-                                    <li class="list-group-item btn-2">Sư phạm Lý</li>
+                                    {% for sub2 in GroupSubject %}
+                                    {% if sub2.parent_id == sub.id %}
+                                    <li class="btn list-group-item btn-2">{{ sub2.name }}</li>
+                                    {% endif %}
+                                    {% endfor %}
                                 </ul> 
                             </div>
+
+                            {% endif %}
                         </li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Y-Dược</a></li>        
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Kế toán - Kiểm toán</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Tài chính - Ngân hàng</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Điện tử - Viễn thông</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Khí tượng - Thủy văn</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Chính trị học</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Cơ học kỹ thuật</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Tài nguyên - Môi trường</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Sân khấu - Điện ảnh</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-2">Ngoại ngữ</a></li>
+                        {% endfor %}
                         
-                        <!-- </div> -->
-                        <!-- <div class="row text-center"> -->
-                        <!-- <button id="compare-uni-select-1" class="btn btn-success">Tìm trường</button> -->
                     </ul>
                 </div>
             </div>
@@ -140,38 +135,31 @@
 
     </div>
     <div class="row">   
-            <div class="container">
-                <div class="col-md-5">
-                    <!-- <label class="row" for="subject-select">Chọn 1 ngành:</label> -->
-                    <ul class="nav nav-pills nav-stacked">
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Công nghệ thông tin</a></li>
-                        <li class="pill-item">
-                            <a class="btn btn-info btn-lg btn-22" data-toggle="collapse" href="#supham-22">Sư phạm <span class="caret"></span></a>
-                            <div id="supham-22" class="collapse">
-                                <ul class="list-group">
-                                    <li class="list-group-item btn-22">Sư phạm Toán</li>
-                                    <li class="list-group-item btn-22">Sư phạm Lý</li>
-                                </ul> 
-                            </div>
-                        </li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Y-Dược</a></li>        
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Kế toán - Kiểm toán</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Tài chính - Ngân hàng</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Điện tử - Viễn thông</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Khí tượng - Thủy văn</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Chính trị học</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Cơ học kỹ thuật</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Tài nguyên - Môi trường</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Sân khấu - Điện ảnh</a></li>
-                        <li class="pill-item"><a class="btn btn-info btn-lg btn-22">Ngoại ngữ</a></li>
-                        
-                        <!-- </div> -->
-                        <!-- <div class="row text-center"> -->
-                        <!-- <button id="compare-uni-select-1" class="btn btn-success">Tìm trường</button> -->
-                    </ul>
-                </div>
+        <div class="container">
+            <div class="col-md-6">
+                <!-- <label class="row" for="subject-select">Chọn 1 ngành:</label> -->
+                <ul class="nav nav-pills nav-stacked">
+                    {% for sub in GroupSubject %}
+                    <li class="pill-item">
+                        {% if sub.parent_id == NULL %}
+                        <a class="btn btn-info btn-lg btn-22" data-toggle="collapse" href="#group-subject-{{ sub.id }}-22">{{ sub.name }}<span class="caret"></span></a>
+                        <div id="group-subject-{{ sub.id }}-22" class="collapse">
+                            <ul class="list-group">
+                                {% for sub2 in GroupSubject %}
+                                    {% if sub2.parent_id == sub.id %}
+                                        <li class="btn list-group-item btn-22">{{ sub2.name }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul> 
+                        </div>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                    
+                </ul>
             </div>
         </div>
+    </div>
 </div>
 <div id="select-31" class="non-display select-odd">
     <div class="container-fluid">
@@ -181,99 +169,25 @@
         </div> 
         <div class="row">
             <div class="container">
-                <div class="row cri-select">
-                    <div class="col-sm-3">
-                        <a class="btn btn-info btn-lg btn-3-cg cri-group-title">Giảng dạy & Học tập</a>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-1">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-1">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
+                {% for caCrit in CategoryCriterion %}
+                    <div class="row cri-select">
+                        <div class="col-sm-3">
+                            <a class="btn btn-info btn-lg btn-3-cg cri-group-title">{{ caCrit.name }}</a>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-1">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-1">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-1">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-1">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
+                        <div class="col-sm-9">
+                            {% for crit in Criterion %}
+                                {% if caCrit.id == crit.category_id %}
+                        <!-- <div class="row"> -->
+                                    <div class="col-sm-6">
+                                        <a class="btn btn-info btn-3 btn-31-1">{{ crit.name }}</a>
+                                    </div>
+                                {% endif %}        
+                        <!-- </div> -->
+                            {% endfor%}
+                        
                         </div>
                     </div>
-                </div>
-                <div class="row cri-select">
-                    <div class="col-sm-3">
-                        <a class="btn btn-info btn-lg btn-3-cg cri-group-title">Giảng dạy & Học tập</a>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-2">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-2">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-2">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-2">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-2">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-2">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row cri-select">
-                    <div class="col-sm-3">
-                        <a class="btn btn-info btn-lg btn-3-cg cri-group-title">Giảng dạy & Học tập</a>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-3">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-3">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-3">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-3">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-3">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-31-3">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
                 <div class="row text-center">
                     <a class="btn btn-success">So sánh</a>
                 </div>
@@ -307,102 +221,25 @@
         </div> 
         <div class="row">
             <div class="container">
+                {% for caCrit in CategoryCriterion %}
                 <div class="row cri-select">
                     <div class="col-sm-3">
-                        <a class="btn btn-info btn-lg btn-3-cg cri-group-title">Giảng dạy & Học tập</a>
+                        <a class="btn btn-info btn-lg btn-3-cg cri-group-title">{{ caCrit.name }}</a>
                     </div>
                     <div class="col-sm-9">
-                        <div class="row">
+                        {% for crit in Criterion %}
+                            {% if crit.category_id == caCrit.id %}
                             <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-1">Số giờ học Trung bình/năm</a>
+                                <a class="btn btn-info btn-3 btn-33-1">{{ crit.name }}</a>
                             </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-1">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-1">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-1">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-1">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-1">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
+                        
+                    
                 </div>
-                <div class="row cri-select">
-                    <div class="col-sm-3">
-                        <a class="btn btn-info btn-lg btn-3-cg cri-group-title">Giảng dạy & Học tập</a>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-2">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-2">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-2">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-2">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-2">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-2">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row cri-select">
-                    <div class="col-sm-3">
-                        <a class="btn btn-info btn-lg btn-3-cg cri-group-title">Giảng dạy & Học tập</a>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-3">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-3">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-3">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-3">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-3">Số giờ học Trung bình/năm</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-info btn-3 btn-33-3">Tỉ lệ tốt nghiệp đúng hạn</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <a class="btn btn-success">So sánh</a>
-                </div>
+                {% endfor %}
+                
             </div>
         </div>
     </div>
@@ -415,9 +252,12 @@
     <p class="p-large">2</p>
 </div>
 <script>
-    var uniName=["Đại Học Quốc Gia Hà Nội","Đại Học Ngoại Thương","Đại Học Bách Khoa Hà Nội","Đại Học Kinh Tế Quốc Dân","Học Viện Tài Chính","Học Viện Ngân Hàng"];
+    var uniName=[];
+    {% for uni in University %}
+        uniName.push("{{ uni.name }}")
+    {% endfor %}
     jQuery(document).ready(function(){
-        jQuery('#compare-uni-search').autocomplete({
+        jQuery('#compare-uni-search-23, #compare-uni-search-32').autocomplete({
             source: uniName 
         });
     });

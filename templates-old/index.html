@@ -1,0 +1,43 @@
+ {% extends "layouts/base.html" %}{% load static %}
+ 
+{% block title %}
+    UniRanking
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+ {% block intro %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container mt-3">
+            <h1 class="lead text-center font-weight-bold">UniRanking</h1>
+            <p class="lead text-center">Hệ thống xếp hạng các trường đại học, cao đẳng tại Việt Nam</p>
+            <div class="text-center">
+                <button class="btn btn-primary">Xem xếp hạng ngay</button>
+            </div>
+        </div>
+    </div>
+{% endblock %} 
+
+{% block body %}
+    <div class="features row m-4">
+        <div class="col-md-4 text-center">
+            <i class="fa fa-table fa-4x" aria-hidden="true"></i>
+            <h4>Xếp hạng</h4>
+            <p class="text-justify">Bảng xếp hạng 273 trường gồm cả đại học và cao đẳng trên toàn quốc năm 2018, đánh giá dựa trên nhiều tiêu chí giúp
+                bạn tìm kiếm một cách chính xác nhất</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <i class="fa fa-compress fa-4x" aria-hidden="true"></i>
+            <h4>So sánh theo trường</h4>
+            <p class="text-justify">Giúp bạn có cái nhìn rõ nhất giữa các trường bao gồm cơ sở vật chất cũng như chất lượng giảng dạy.... </p>
+        </div>
+        <div class="col-md-4 text-center">
+            <i class="fa fa-graduation-cap fa-4x" aria-hidden="true"></i>
+            <h4>So sánh theo ngành</h4>
+            <p class="text-justify">Có trên 100 ngành của đủ các trường khác nhau giúp bạn dễ so sánh và đưa ra sự lựa chọn rõ nhất, cũng như biết trường
+                nào đang dẫn đầu trong ngành cụ thể</p>
+        </div>
+    </div>
+{% endblock %}

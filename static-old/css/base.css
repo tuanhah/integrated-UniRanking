@@ -1,0 +1,51 @@
+.header{
+    background: url('../image/3.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.navbar{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.navbar li{
+    border-bottom: 3px solid transparent;
+    transition: border-bottom-color 0.5s ease;
+}
+.navbar li:hover{
+    border-bottom: 3px solid white;
+    border-radius: 3px;
+}
+
+.navbar a{
+    color: white;
+}
+
+#login_errors{
+    display: block;
+}
+
+#login_errors:empty{
+    display: none!important;
+}
+
+#signup_success{
+    display: block;
+}
+
+#signup_success:empty{
+    display: none!important;
+}
+
+#signup_errors{
+    display: block;
+}
+
+#signup_errors:empty{
+    display: none!important;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}

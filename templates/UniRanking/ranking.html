@@ -19,22 +19,20 @@
             <table class="sort-table table table-border table-hover" id="ranking-table">
                 <thead>
                     <tr>
-                        <th class="no-sort">Thứ hạng</th>
+                        <!-- <th class="no-sort">Thứ hạng</th> -->
                         <th>Trường Đại học</th>
                         <th>Điểm trung bình</th>
                     </tr>
                     
                 </thead>
-                <tbody><tr>
-                    <td>1</td>
-                    <td>Đại Học Quốc Gia Hà Nội</td>
-                    <td>8.1</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Đại Học Bách Khoa Hà Nội</td>
-                    <td>8.0</td>
-                </tr></tbody>
+                <tbody>
+                {% for uni in University %}
+                    <tr>
+                        <td>{{ uni.name }}</td>
+                        <td>8.1</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
                 <!-- <div id="ranking-table"></div>  -->
             </table>
         </div>
@@ -45,7 +43,7 @@
 
 </div>
 <script>
-    jQuery('#ranking-table tr:last').after('<tr><td>4</td><td>Đại Học Ngoại Thương</td><td>8.2</td></tr>')
+    // jQuery('#ranking-table tr:last').after('<tr><td>4</td><td>Đại Học Ngoại Thương</td><td>8.2</td></tr>')
     jQuery(document).ready(function() {
         jQuery('#ranking-table').DataTable();
     });
