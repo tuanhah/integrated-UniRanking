@@ -35,6 +35,20 @@ class ScoreByCategory(models.Model):
 class Score(models.Model):
     criterion = models.ForeignKey(Criterion, on_delete=models.CASCADE, null=True)
     score = models.FloatField(default=0)
+    score_by_category = "A foreign key to a score by category table, be defined in the child class"
+
+    def update_score_by_category(self):
+        category_cri_score = self.score_by_category
+        cri_data = category_cri_score.cri_scores.all()
+        cri_amount = cri_data.count()
+        total_score = 0
+        if cri_amount > 0:
+            for cri in cri_data: 
+                total_score += cri.score
+            category_cri_score.score = total_score / cri_amount
+            category_cri_score.save(update_fields=['score'])
+        else:
+            category_cri_score.delete()
 
     def __str__(self):
         return str(self.score)

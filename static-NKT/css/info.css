@@ -47,11 +47,11 @@
     margin-top: 15px;
 }
 
-#subject{
+#subject_list{
     padding: 0 !important;
 }
 
-#subject a{
+#subject_list a{
     text-decoration: none !important;
     cursor: pointer;
     color: white !important;
@@ -59,7 +59,7 @@
 
 .uni_whole{
     border: 1px solid white;
-    padding: 15px;
+    padding: 15px 9px 15px 15px;
     background-color: #354A53;
     font-weight: bold;
 }
@@ -78,6 +78,7 @@
     background-color: #354A53;
     padding: 15px !important;
     font-weight: bold;
+    cursor: auto !important;
 }
 
 .dropdown_toggle:after{
@@ -109,6 +110,7 @@
 
 #score_table{
     background-color: #F1FAFF;
+    table-layout: fixed !important;
 }
 
 .table_head{
@@ -128,6 +130,62 @@
     padding: 15px;
     font-size: 20px;
     font-weight: bold;
+}
+
+#active_subject{
+    background-color:#004C71 !important;
+}
+
+.subject_delete_button{
+    float: right;
+    margin-right: 8px;
+}
+
+#subject_add{
+    float :right;
+    margin: 5px 3px 0 0;
+}
+
+.subject_add_button{
+    float: right;
+    margin-right: 8px;
+}
+
+#subject_list_select{
+    font-size: 14px;
+    height: 150px;
+    overflow-y: scroll;
+}
+
+.score_edit_button{
+    cursor: pointer;
+}
+
+.edit_choice{
+    position: absolute;
+    right: 10px;
+    margin: 10px;
+}
+
+.edit_score_confirm{
+    color: green;
+    margin-right: 4px;
+}
+
+.edit_score_cancel{
+    color: red;
+}
+
+#score_add{
+    cursor: pointer;
+}
+
+.table td{
+    vertical-align: middle;
+}
+
+#added_score_field td:first-child{
+    padding-left: 18px;
 }
 
 @media(max-width:576px) {

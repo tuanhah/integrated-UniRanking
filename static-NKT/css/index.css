@@ -1,6 +1,8 @@
 .jumbotron{
-    background-color: transparent;
-    padding: 20% 0px;
+    background: url('../image/3.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .jumbotron h1{

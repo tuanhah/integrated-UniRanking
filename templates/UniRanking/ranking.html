@@ -3,36 +3,38 @@
 {% block ranking %} class="active" {% endblock %}
 {% block body %}
 <div class="container-fluid after-menu" id="ranking-introduce">
-    <div class="row">
-        <div class="col-sm-3 text-center">
+    <div class="row justify-content-center">
+        <div class="col-lg-2 text-center">
             <i class="fa fa-table" id="ranking-icon"></i> 
         </div>
-        <div class="col-sm-9">
+        <div class="col-lg-8">
             <h1> Xếp hạng chung cho các trường</h1>
             <p class="p-large">Bảng xếp hạng chung cho tất cả các trường dựa trên điểm số trung bình của mỗi trường ở mỗi tiêu chí</p><hr>
         </div>
     </div>
 </div>
 <div class="container-fluid">
-    <div class="row" id="ranking-body">
-        <div class="col-xs-10 col-xs-push-1">
+    <div class="row justify-content-center" id="ranking-body">
+        <div class="col-10">
             <table class="sort-table table table-border table-hover" id="ranking-table">
                 <thead>
                     <tr>
-                        <!-- <th class="no-sort">Thứ hạng</th> -->
+                        <th class="no-sort">Thứ hạng</th>
                         <th>Trường Đại học</th>
                         <th>Điểm trung bình</th>
                     </tr>
                     
                 </thead>
-                <tbody>
-                {% for uni in University %}
-                    <tr>
-                        <td>{{ uni.name }}</td>
-                        <td>8.1</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
+                <tbody><tr>
+                    <td>1</td>
+                    <td>Đại Học Quốc Gia Hà Nội</td>
+                    <td>8.1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Đại Học Bách Khoa Hà Nội</td>
+                    <td>8.0</td>
+                </tr></tbody>
                 <!-- <div id="ranking-table"></div>  -->
             </table>
         </div>
@@ -43,7 +45,7 @@
 
 </div>
 <script>
-    // jQuery('#ranking-table tr:last').after('<tr><td>4</td><td>Đại Học Ngoại Thương</td><td>8.2</td></tr>')
+    
     jQuery(document).ready(function() {
         jQuery('#ranking-table').DataTable();
     });

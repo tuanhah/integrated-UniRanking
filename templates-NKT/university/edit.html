@@ -1,0 +1,13 @@
+{% extends "layouts/base.html" %}{% load static %}
+
+{% block title %}
+    {{ university.name }}
+{% endblock %}
+
+{% block body %}   
+    <form method="POST">
+        {% csrf_token %}
+        {{formset}}        
+        <input type="submit">
+    </form>
+{% endblock %}

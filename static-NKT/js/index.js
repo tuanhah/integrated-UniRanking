@@ -36,13 +36,12 @@ function print_response(response){
 }
 
 function login_success_reload(response){
+    let login_error_dom =$("#login_errors").empty()
     if(response.success == true){
         window.location.reload()
     }else{
-        if(response.__all__){
-            let message = (response.__all__)[0].message;
-            $("#login_errors").text(message) ;
-        }
+        list_error = message_to_html(response)
+        login_error_dom.append(list_error)
     }
 }
 
@@ -54,16 +53,21 @@ function register_success(response){
         success_dom.text("Đăng ký thành công !");
         success_dom.empty();
     }else{
-        $.each(response,function(field, errors){
-            let list_error = "";
-            list_error += field + " :<ul>";
-            $.each(errors,function(code,error){
-                list_error += "<li>" + error.message + "</li>";
-            });
-            list_error += "</ul>";
-            error_dom.append(list_error);
-        });
+        let list_error = message_to_html(response)
+        error_dom.append(list_error);
     }
+}
+
+function message_to_html(message){
+    let list_error = "";
+    $.each(message,function(field, errors){
+        list_error += field + " :<ul>";
+        $.each(errors,function(code,error){
+            list_error += "<li>" + error.message + "</li>";
+        });
+        list_error += "</ul>";
+    });
+    return list_error;
 }
 
 $(document).ready(function(){
@@ -78,7 +82,9 @@ $(document).ready(function(){
 
     $("#signup").submit(function(e){
         e.preventDefault();
-        let data = $(this).serialize();
+        let csrftoken = getCookie('csrftoken');
+        let data = $(this).serializeArray();
+        data.push({ name: 'csrfmiddlewaretoken', value: csrftoken });
         let url = "/api/register";
         ajax_request(data, "POST", "json", url, register_success, print_response);
     });

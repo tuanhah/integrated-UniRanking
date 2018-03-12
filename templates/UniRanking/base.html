@@ -5,17 +5,30 @@
             
             <title>{% block title %}Trang chủ | Hệ thống so sánh các trường Đại học{% endblock %}</title> <link rel="shortcut icon" href="{% static 'img/VNU.jpg'%}">
             <script type="text/javascript" src="{% static 'js/jquery321.js'%}"></script>
-            <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}"/>
+            <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}"/> -->
             <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/> -->
-            <link rel="stylesheet" type="text/css" href="{% static 'css/dataTables.bootstrap.css'%}"/>
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+            <!-- jQuery library -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+            <!-- Popper JS -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+            <!-- Latest compiled JavaScript -->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
             <link rel="stylesheet" type="text/css" href="{% static 'css/index.css'%}"/>
-            <script type="text/javascript" src="{% static 'js/bootstrap.js'%}"></script>
+            <!-- <script type="text/javascript" src="{% static 'js/bootstrap.js'%}"></script> -->
             <script type="text/javascript" src="{% static 'js/jquery.dataTables.js'%}"></script>
-            <script type="text/javascript" src="{% static 'js/dataTables.bootstrap.js'%}"></script>                                           
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>                                           
             <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-            {% block staticaddition %}
-                <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-                <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            {% block stt-add %}
+                <link rel="stylesheet" type="text/css" href="{% static 'css/select2.min.css'%}">
+                <script type="text/javascript" src="{% static 'js/select2.min.js'%}"></script>
             {% endblock %}
             <script>
                 $(document).ready(function() {
@@ -55,35 +68,31 @@
         </head>
 
         <body>
-            <div class="navbar" id="navigation" role="navigation">
-                 <div class="container-fluid">
-                     <!-- Brand and toggle get grouped for better mobile display -->
-                     <div class="navbar-header">
-                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                             <span class="sr-only">Toggle navigation</span>
-                             <span class="fa fa-bars" style="font-size:26px" title="Bấm để hiện menu"></span>
-                         </button>
-                         <a class="navbar-brand" href="/" style="font-size:24px"><strong><i class="fa fa-bar-chart"></i>UniRanking</strong></a>
-                     </div>
-             
-                     <!-- Collect the nav links, forms, and other content for toggling -->
-                     <div class="collapse navbar-collapse navbar-ex1-collapse">
-                         <ul class="nav navbar-nav navbar-left">
-                            <li {% block home %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Trang chủ"><a href="/">Trang chủ</a></li>
-                            <li {% block compare %} {% endblock %}><a href="/compare" data-placement="bottom" data-toggle="tooltip" title="So sánh các trường Đại học">So sánh</a></li>
-                            <li {% block ranking %} {% endblock %}><a href="/ranking" data-placement="bottom" data-toggle="tooltip" title="Xếp hạng chung">Xếp hạng</a></li>
-                            <li {% block info %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Thông tin trường Đại học"><a href="/university-info">Thông tin Trường</a></li>
-                            <li {% block contact %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Liên hệ, phản hồi"><a href="/contact">Liên hệ</a></li>
+       
+                
+        
+            <nav class="navbar navbar-expand-xl navbar-dark fixed-top bg-dark" id="navibar">
+                    <a class="navbar-brand" href="#">UniRanking</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav mr-auto">
+                            <li {% block home %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Trang chủ" class="nav-item"><a class="nav-link" href="/">Trang chủ</a></li>
+                            <li {% block compare %} {% endblock %} class="nav-item"><a class="nav-link" href="/compare" data-placement="bottom" data-toggle="tooltip" title="So sánh các trường Đại học">So sánh</a></li>
+                            <li {% block ranking %} {% endblock %} class="nav-item"><a class="nav-link" href="/ranking" data-placement="bottom" data-toggle="tooltip" title="Xếp hạng chung">Xếp hạng</a></li>
+                            <li {% block info %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Thông tin trường Đại học"><a href="/university-info" class="nav-link">Thông tin Trường</a></li>
+                            <li {% block contact %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Liên hệ, phản hồi"><a href="/contact" class="nav-link">Liên hệ</a></li>
                                  
                                  
                               
                              <!-- <li><a href="contact.html">Liên hệ</a></li> -->
-                             <li {% block help %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Trợ giúp"><a href="/help">Trợ giúp</a></li>
+                             <li {% block help %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Trợ giúp"><a class="nav-link" href="/help">Trợ giúp</a></li>
                         </ul>
                          
-                         <ul class="nav navbar-nav navbar-right">
-                            <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng nhập"><a href="#" class="login btn btn-info" data-toggle="modal" data-target="#login_div">Đăng nhập</a></li>
-                            <li {% block register %} {% endblock %}data-toggle="tooltip" data-placement="bottom" title="Đăng ký"><a href="/register" class="btn btn-success">Đăng ký</a></li>
+                         <ul class="navbar-nav">
+                            <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng nhập"><a href="#" class="login btn btn-outline-info" data-toggle="modal" data-target="#login_div">Đăng nhập</a></li>
+                            <li {% block register %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng ký"><a href="/register" class="btn btn-outline-success">Đăng ký</a></li>
                             <!-- <li><a href=""></a></li>
                             <li><a href=""></a></li>
                             <li><a href=""></a></li> -->
@@ -96,22 +105,22 @@
 
                         </ul>
                      </div><!-- /.navbar-collapse -->
-                 </div>
-            </div>
+                 </nav>
+            
             {% block body %}
             {% endblock %}
             <div class="modal fade" id="login_div" role="dialog">
                 <div class="modal-dialog">
-                    <div class=" modal-content">
+                    <div class="modal-content">
                         <div id="img-container" class="modal-header text-center">
-                            <img  class="img-circle"id="avatar" src="https://i56.servimg.com/u/f56/18/59/49/93/noavat10.jpg" alt="Avatar"/>
+                            <!-- <img  class="img-thumbnail " id="avatar" src="https://i56.servimg.com/u/f56/18/59/49/93/noavat10.jpg" alt="Avatar"/> -->
                             <span data-dismiss="modal" class="close" id="close_login" title="Close">X</span>
                         </div>
                         <div class="modal-body">
                             <form id="login_form" class="form-vertical" action="">
                                 <div class="form-group">
                                     <label class="control-label" for="user">Tài Khoản: </label>
-                                    <input type="text" class="form-control" id="user" placeholder="Tên tài khoản" required/>
+                                    <input type="text" class="form-control" id="user" placeholder="Tên người dùng hoặc email" required/>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label" for="password">Mật Khẩu: </label>
@@ -125,8 +134,8 @@
                         </div>
 
                         <div class="text-center modal-footer">
-                            <div class="forgot"><a href="#">Forgot password?</a></div>
-                            <div class="forgot"><a href="#">Forgot username?</a></div>
+                            <div class="forgot"><a href="#">Quên tên người dùng?</a></div>
+                            <div class="forgot"><a href="#">Quên mật khẩu?</a></div>
                         </div>
                     </div>
                 </div>          
@@ -136,7 +145,7 @@
                 <div class="container">
                     
                     <div class="col-md-8">
-                        <h1>Liên hệ:</h1>
+                        <h2 class="area-title">Liên hệ:</h2>
                         <ul>
                             <p><i class="fa fa-envelope"></i><strong> Email:</strong> uniranking@vnu.edu.vn</p>
                             <p><i class="fa fa-map-marker"></i><strong> Địa chỉ:</strong> P.320, E3, Trường Đại Học Công Nghệ, ĐHQGNH, 144, Xuân Thủy, Cầu Giấy, Hà Nội.</p>

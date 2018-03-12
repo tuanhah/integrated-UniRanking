@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="utf-8">
+
+        <title>Orion Ltd' website</title>
+        <link rel="shortcut icon" href="img/icon.jpg"/>
+        <link rel="stylesheet" type="text/css" href="css/main.css"/>
+        <script>
+            function bmi() {
+                var height = document.getElementById("chieucao").value;
+                var weight = document.getElementById("cannang").value;
+                var bmi = (weight/(height*height)); var result01 = "Chỉ số BMI của bạn là: " + bmi.toString(), result02 = "";
+                if(height == "" || weight == "") {
+                    result02 = "Dữ liệu sai, bạn hãy xem lại!";
+                }    
+                else {
+                    if(bmi <= 15.0) result02 = "Bạn thiếu cân rất nặng, bạn cần tăng cân nhiều lắm!";
+                    else if(bmi <= 16.0) result02 = "Bạn thiếu cân ở mức độ nặng, bạn cần phải bổ sung nhiều chất dinh dưỡng để tăng cân nhé!";
+                    else if(bmi <= 18.5) result02 = "Bạn thiếu cân ở mức độ vừa, bạn vẫn cần tăng cân!";
+                    else if(bmi <= 25.0) result02 = "Bạn có một thân hình rất cân đối đấy";
+                    else if(bmi <= 30.0) result02 = "Bạn đang ở chế độ tiền béo phì, bạn cần ăn uống điều độ hơn!";
+                    else if(bmi <= 35.0) result02 = "Bạn đang ở trạng thái béo phì I, bạn cần ăn uống hợp lí hơn!";
+                    else if(bmi <= 40.0) result02 = "Bạn béo mức độ II, bạn cần có chế độ ăn uống, giảm cân hợp lý!";
+                    else result02 = "Bạn béo mức độ III, bạn cần đi gặp bác sĩ để được tư vấn!";
+                
+                    document.getElementById("bmi-display01").innerHTML = result01;
+                }
+                document.getElementById("bmi-display02").innerHTML = result02;
+        }
+        </script>
+    </head>
+
+    <body class="index">
+        <div ID="start">
+            <h1><a href="home.html" id="title">Orion Ltd</a></h1>
+            <p id="web-dercri">Welcome to my website</p>
+        </div>
+        <div id="menu">
+            <a href="home.html">Trang chủ</a>
+            <a href="uac.html">Tính điểm</a>
+            <a href="">Trống</a>
+            <a href="">Trống</a>
+            <a href="about.html">Giới thiệu</a>
+        </div>
+        <div id="home-nav">
+            
+        </div>
+        <div id="home-main">
+            <div id="welcome">
+                <p>VTOR xin chào bạn!</p>
+            </div>
+            <div id="bmi">
+                <div id="bmi-produce">
+                    <p>Ứng dụng tính chỉ số BMI, bạn chỉ cần nhập chiều cao và cân nặng của mình.</p>
+                </div>
+                <div id="bmi-input">
+                    <p>Chiều cao và cân nặng của bạn:</p>
+                    <ul>
+                        <li>Chiều cao (m): <input type="text" id = "chieucao"></li>
+                        <li>Cân nặng (kg): <input type="text" id = "cannang"></li>
+                    </ul>
+                    <input type="button" id="bmi-button" onclick="bmi();" value="Get BMI">
+                </div>
+                <div id="bmi-output">
+                    <p>Kết quả BMI</p>
+                    <div id="bmi-display01"></div>
+                    <div id="bmi-display02"></div>
+                </div>
+            </div>
+            <div id=""></div>
+        </div>    
+        <div>
+            <p id="footer">@ Copyright 2017 by Orion Ltd, Hanoi, VietNam</p>
+        </div>
+    </body>
+</html>

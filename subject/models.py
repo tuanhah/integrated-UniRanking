@@ -2,8 +2,9 @@ from django.db import models
 from criteria.models import Score, ScoreByCategory
 
 class GroupSubject(models.Model):
+    # if a subject belongs to group "Khác", it considers root_group as its direct parent on DB
     name = models.CharField(max_length=100)
-    parent = models.ForeignKey('GroupSubject', on_delete=models.SET_NULL, null=True, blank=True)
+    parent = models.ForeignKey('GroupSubject', on_delete=models.SET_NULL, null=True, blank=True, related_name="groups")
 
     class Meta:
         db_table = "group_subject"
@@ -13,12 +14,12 @@ class GroupSubject(models.Model):
         return self.name
 
 class Subject(models.Model):
-    group = models.ForeignKey(GroupSubject,on_delete=models.CASCADE)
+    group = models.ForeignKey(GroupSubject,on_delete=models.CASCADE, related_name="subjects")
     name = models.CharField(max_length=50)
 
     def root_group(self):
         group = self.group
-        return group if group.parent is None else group.parent
+        return group.name if group.parent is None else group.parent.name
 
     def __str__(self):
         return self.name
@@ -30,6 +31,15 @@ class Subject(models.Model):
 
 class SubjectScoreByCategory(ScoreByCategory):
     univ_subject = models.ForeignKey('university.UniversitySubject', on_delete=models.CASCADE, related_name="scores_by_category")
+
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            try:
+                self.univ_subject.scores_by_category.get(category_criterion = self.category_criterion)
+            except SubjectScoreByCategory.DoesNotExist:
+                super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
 
     def __str__(self):
         score = str(self.score)
@@ -76,32 +86,36 @@ class SubjectScore(Score):
                 total_score += cri_score.score
         uni_score_by_category, created = university.scores_by_category.get_or_create(category_criterion = self_category)
         uni_score, created = uni_score_by_category.cri_scores.get_or_create(criterion = self_criterion)
-        uni_score.score = total_score / amount
-        uni_score.save(update_fields=['score'])
-
-    def update_s_score_by_category(self):
-        category_cri = self.score_by_category
-        cri_data = category_cri.cri_scores.all()
-        cri_amount = cri_data.count()
-        total_score = 0
-        for cri in cri_data: 
-            total_score += cri.score
-        category_cri.score = total_score / cri_amount
-        category_cri.save(update_fields=['score'])
+        if amount > 0:
+            uni_score.score = total_score / amount
+            uni_score.save(update_fields=['score'])
+        else:
+            uni_score.delete()
         
-
     def save(self, univ_subject = None, *args, **kwargs):
         """
             Save SubjectScore record and update/create SubjectScoreByCategory, UniversityScore
         """
-        if univ_subject is not None:
-            self_category_cri = self.criterion.category
-            self.score_by_category, created = univ_subject.scores_by_category.get_or_create(category_criterion = self_category_cri)
-        
-        if self.score_by_category is not None:
+        if self.pk is None: #for creating new object
+            try:
+                existed_subj_score = self.score_by_category.cri_scores.get(criterion = self.criterion)
+            except SubjectScore.DoesNotExist:
+                super().save(*args, **kwargs)
+            else:
+                existed_subj_score.score = self.score
+                existed_subj_score.save(update_fields = ["score"])
+        else: #for editing object
             super().save(*args, **kwargs)
-            self.update_s_score_by_category()
-            self.update_u_score()
+        
+        self.update_score_by_category()
+        self.update_u_score()
+
+        #update parent university score
+    
+    def delete(self):
+        super().delete()
+        self.update_score_by_category()
+        self.update_u_score()
 
     class Meta:
         db_table = "subject_score"
