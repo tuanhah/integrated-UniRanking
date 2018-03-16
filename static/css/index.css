@@ -2,7 +2,7 @@
 .area-title{
 	padding-top:15px;
 }
-.full-width-btn{margin:4px 0;border-radius:0px;width:100%}
+.full-width-btn{margin:2px 0;border-radius:0px;width:100%}
 h1{
 	padding-top: 21px;
 }
@@ -30,10 +30,12 @@ h1{
 	font-size:22px;
 	padding-left:25px;
 }
-.navbar .navbar-nav>li>a:hover{
+.navbar-dark .navbar-nav .nav-link{color:rgba(255,255,255,0.8)}
+
+.navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus{
 	border-radius: 4px;
-	border-bottom: 4px solid; 
-	opacity:1; 
+	border-bottom: 4px solid; color:#fff; 
+	opacity:1 !important; 
 }
 #carousel-id {
 	margin: 30px 0px;
@@ -124,14 +126,14 @@ li.pill-item>a{background-color:rgba(66,129,202,1);color:#fff; border-radius:0px
 
 
 #nav-info{height:46px;background-color:rgba(66,130,202,1);margin:10px 15px;padding-top:10px;}
+.category-criterion{background-color:beige;font-size:large;font-weight:500;}
+.info-col-title{background-color:aqua;font-size:x-large;}
+.show{display:block;}
 
-
-
-
- #rank p, #compare p, #uniinfo p, #compare h2, #uniinfo h2, #rank h2, #info p, #support_area i{
+ #rank p, #compare p, #uniinfo p, #compare h2, #uniinfo h2, #rank h2, #index-intro p, #support_area i{
 	padding:10px 0px 20px 0px; margin: 0px;
 }
-#compare p, #uniinfo p, #rank p, #info p{min-height:125px;font-size:21px;}
+#compare p, #uniinfo p, #rank p, #index-intro p{min-height:125px;font-size:21px;}
 #support_area{color:#fff;background-color: rgba(61, 130, 201, 1);}
 .p-large{font-size:18px;}
 .showlater, .fadein{display:none;}

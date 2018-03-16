@@ -3,7 +3,8 @@ from django.contrib.auth import login
 from .forms import UserRegistrationForm
 from criteria.models import CategoryCriterion, Criterion
 from subject.models import GroupSubject, Subject
-from university.models import University
+from university.models import University, UniversityScoreByCategory
+
 
 def register(request):
     if request.user.is_anonymous:
@@ -27,13 +28,19 @@ def compare(request):
 	context = {'GroupSubject' : GroupSub, 'Subject' : Sub, 'CategoryCriterion' : CateCrit, 'Criterion': Crit, 'University': Uni}
 	return render(request, 'UniRanking/compare.html', context)
 def ranking(request):
-	return render(request, 'Uniranking/ranking.html')
+	CaCr = CategoryCriterion.objects.all()
+	Uni = University.objects.all()
+	Gs = GroupSubject.objects.all()
+	usbc = UniversityScoreByCategory.objects.all()
+	context = {'University': Uni, 'GroupSubject' : Gs, 'CategoryCriterion': CaCr, "UniversityScoreByCategory": usbc}
+	return render(request, 'Uniranking/ranking.html', context)
 
 def info(request):
 	CateCrit = CategoryCriterion.objects.all()
 	Crit = Criterion.objects.all()
 	Uni = University.objects.all()
-	context = {'CategoryCriterion' : CateCrit, 'Criterion' : Crit, 'University' : Uni}
+	usbc = UniversityScoreByCategory.objects.all()
+	context = {'CategoryCriterion' : CateCrit, 'Criterion' : Crit, 'University' : Uni, 'UniversityScoreByCategory': usbc}
 	return render(request, 'UniRanking/university-info.html', context)
 def contact(request):
 	return render(request, 'UniRanking/contact.html')

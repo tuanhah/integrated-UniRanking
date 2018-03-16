@@ -3,7 +3,7 @@
 {% block ranking %} class="active" {% endblock %}
 {% block body %}
 <div class="container-fluid after-menu" id="ranking-introduce">
-    <div class="row justify-content-center">
+<div class="row justify-content-center mx-0">
         <div class="col-lg-2 text-center">
             <i class="fa fa-table" id="ranking-icon"></i> 
         </div>
@@ -13,28 +13,73 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="row justify-content-center" id="ranking-body">
-        <div class="col-10">
+<div class="container-fluid select-even" id="select-22">
+    <div class="row mx-0">
+        <div class="container">
+        <h1>Bạn muốn so sánh theo ngành hay theo trường?</h1>
+        <p>Chọn một ngành, chúng tôi sẽ giúp bạn so sánh các trường có đào tạo ngành đó, hoặc chọn so sánh theo trường nếu bạn muốn biết tổng quan thứ hạng các trường ở từng tiêu chí chung.</p>
+        </div>
+    </div>
+    <div class="row mx-0">   
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <ul class="nav flex-column">
+                        {% for sub in GroupSubject %}
+                        <li class="nav-item">
+                            {% if sub.parent_id == NULL %} 
+                            <a class="btn btn-info btn-block btn-22 full-width-btn" data-toggle="collapse" href="#group-subject-{{ sub.id }}-22"> {{ sub.name }} <span class="fa fa-sort"></span></a>
+                            <div id="group-subject-{{ sub.id }}-22" class="collapse">
+                                <ul class="list-group">
+                                    {% for sub1 in GroupSubject %}
+                                    {% if sub1.parent_id == sub.id %}
+                                    <li class="btn list-group-item btn-22">{{ sub1.name }}</li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul> 
+                            </div>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-lg-1 text-center"><p class="p-large">hoặc</p></div>
+                <div class="col-lg-5">
+                    <a class="btn btn-info btn-block btn-22 full-width-btn" href="#ranking-body">Xếp hạng theo Trường</a>
+                </div>           
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container-fluid non-display" id='ranking-body'>
+    <div class="row mx-0 justify-content-center">
+        <h2>Bảng xếp hạng theo trường</h2>
+        <div class="col-11">
             <table class="sort-table table table-border table-hover" id="ranking-table">
                 <thead>
                     <tr>
-                        <th class="no-sort">Thứ hạng</th>
                         <th>Trường Đại học</th>
-                        <th>Điểm trung bình</th>
+                        {% for cacr in CategoryCriterion %}
+                        <th>{{ cacr.name }}</th>
+                        {% endfor %}
                     </tr>
                     
                 </thead>
-                <tbody><tr>
-                    <td>1</td>
-                    <td>Đại Học Quốc Gia Hà Nội</td>
-                    <td>8.1</td>
-                </tr>
+                <tbody>
+                {% for uni in University %}
                 <tr>
-                    <td>2</td>
-                    <td>Đại Học Bách Khoa Hà Nội</td>
+                    <td>{{ uni.name }}</td>
+                    <td>9.0</td>
+                    <td>8.1</td>
+                    <td>8.7</td>
+                    <td>8.4</td>
                     <td>8.0</td>
-                </tr></tbody>
+                </tr>
+                {% endfor %}
+                </tbody>
                 <!-- <div id="ranking-table"></div>  -->
             </table>
         </div>
@@ -45,9 +90,14 @@
 
 </div>
 <script>
-    
+
     jQuery(document).ready(function() {
         jQuery('#ranking-table').DataTable();
+        jQuery('.btn-22').click(function() {
+            jQuery('.btn-22').removeClass('btn-select');
+            jQuery(this).toggleClass('btn-select');
+            jQuery('#ranking-body').show();
+        });
     });
 </script>
 {% endblock %}

@@ -69,7 +69,7 @@
 
         <body>
             <nav class="navbar navbar-expand-xl navbar-dark fixed-top bg-dark" id="navibar">
-                    <a class="navbar-brand" href="#">UniRanking</a>
+                    <a class="navbar-brand" href="/"><strong><i class="fa fa-bar-chart"></i> UniRanking</strong></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -88,8 +88,11 @@
                         </ul>
                          
                          <ul class="navbar-nav">
-                            <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng nhập"><a href="#" class="login btn btn-outline-info" data-toggle="modal" data-target="#login_div">Đăng nhập</a></li>
-                            <li {% block register %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng ký"><a href="/register" class="btn btn-outline-success">Đăng ký</a></li>
+                            {% if user.is_authenticated %}
+
+                            {% else %}
+                            <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng nhập"><a href="#" class="login btn btn-info" data-toggle="modal" data-target="#login_div">Đăng nhập</a></li>
+                            <li {% block register %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng ký"><a href="/register" class="btn btn-success">Đăng ký</a></li>
                             <!-- <li><a href=""></a></li>
                             <li><a href=""></a></li>
                             <li><a href=""></a></li> -->
@@ -99,7 +102,7 @@
                                     <li><a href="https://vantrong291.wordpress.com">Wordpress.com</a></li>   
                                 </ul>
                             </li> -->
-
+                            {% endif %}
                         </ul>
                      </div><!-- /.navbar-collapse -->
                  </nav>
