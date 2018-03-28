@@ -1,0 +1,661 @@
+{% extends "UniRanking/base.html" %}{% load static %} 
+{% block title %} 
+    Xếp Hạng
+{% endblock %}
+
+{% block stt %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/rank.css' %}">
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'js/jquery.tablesorter.min.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){ 
+            $("#ranking_table").tablesorter({sortList: [[0,0]]});
+        });
+    </script>
+{% endblock %}
+
+{% block intro %}
+    <div class="intro jumbotron jumbotron-fluid py-2">
+        <div class="container">
+            <img class="cover_logo" src="{% static 'image/img1.png' %}" alt="cover logo">
+            <div class="text_intro">
+                <h1 class="display-4">Xếp Hạng Đại Học</h1>
+                <p class="lead">Mục đích nhằm đề xuất một bộ tiêu chí giúp so sánh các cơ sở giáo dục đại học Việt Nam</p>
+            </div>
+            <div class="clearfix"></div>
+            <hr>
+        </div>
+    </div>  
+{% endblock %}
+
+{% block body %}
+    <div class="gap"></div>
+    <div class="body container my-4">
+        <div id="ranking_option" class="card-deck">
+            <div class="card">
+                <img class="card-img-top img-thumbnail" src="{% static 'image/vnu2.jpg' %}" alt="image card">
+                <div class="card-body">
+                    <p class="card-text">Tìm hiểu những trường đại học đang đứng top đầu Việt Nam, UniRanking có tới hơn 700 trường bao gồm cả đại học, cao đẳng để bạn khám phá</p>
+                    <button type="button" class="btn btn-block py-2">Xếp hạng theo Trường <i class="fas fa-angle-double-right fa-lg"></i></a>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top img-thumbnail" src="{% static 'image/uet.jpg' %}" alt="image card">
+                <div class="card-body">
+                    <p class="card-text">Xếp hạng của UniRanking theo ngành giúp bạn thấy được những trường đại học đang đứng đầu thuộc bất kì một lĩnh vực nào</p>
+                    <button type="button" class="btn btn-block py-2">Xếp hạng theo Ngành <i class="fas fa-angle-double-right fa-lg"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="subject_rank" class="container-fluid">
+        <div class="subject_ranking_intro jumbotron">
+            <div class="container">
+                <h1 class="font-weight-bold display-4">
+                    <i class="fas fa-chart-area"></i> UniRanking 
+                </h1>
+                <h3>Hệ Thống Xếp Hạng theo Ngành</h3>
+                <div class="row my-3">
+                    <p class="col-7 text-justify font-italic">Với hơn 300 lĩnh vực khác nhau được UniRanking tổng hợp, khám phá những trường đại học đầu ngành ở Việt Nam giờ đây dễ dàng hơn bao giờ hết </p>
+                </div>
+                <div class="form-group row mt-5">
+                    <label for="select_sector" class="col-2 col-form-label">Chọn khối ngành</label>
+                    <div class="col-3 pl-0">
+                        <select class="form-control">
+                            <option>Khoa học máy tính</option>
+                            <option>Công nghệ thông tin</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="gap"></div>
+        <div class="main_content container">
+            <div class="row">
+                <div id="subject_choice" class="col-9">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-university fa-lg"></i>
+                            <p class="group_name d-inline-block my-0 mx-1">Công Nghệ Thông Tin</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="ranking_overview">
+                                <a class="card-text">Đại học Công Nghệ - Đại học Quốc Gia Hà Nội</a>
+                                <a class="card-text">Đại học Bách Khoa Hà Nội</a>
+                                <a class="card-text">Đại học FPT</a>
+                            </div>
+                        </div>
+                        <div class="card-footer row mx-0">
+                            <label class="col-2 font-weight-bold">NGÀNH:</label>
+                            <div class="col">
+                                <table class="subject_list table table-sm">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a><i class="fas fa-graduation-cap"></i> Sư phạm Tiếng Hàn Quốc</a>
+                                            </td>
+                                            <td>
+                                                <a><i class="fas fa-graduation-cap"></i> Sư phạm Tiếng Hàn Quốc</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a><i class="fas fa-graduation-cap"></i> Sư phạm Tiếng Hàn Quốc</a>
+                                            </td>
+                                            <td>
+                                                <a><i class="fas fa-graduation-cap"></i> Sư phạm Tiếng Hàn Quốc</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a><i class="fas fa-graduation-cap"></i> Sư phạm Tiếng Hàn Quốc</a>
+                                            </td>
+                                            <td>
+                                                <a><i class="fas fa-graduation-cap"></i> Sư phạm Tiếng Hàn Quốc</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-university fa-lg"></i>
+                            <p class="group_name d-inline-block my-0 mx-1">Công Nghệ Thông Tin</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="ranking_overview">
+                                <a class="card-text">Đại học Công Nghệ - Đại học Quốc Gia Hà Nội</a>
+                                <a class="card-text">Đại học Bách Khoa Hà Nội</a>
+                                <a class="card-text">Đại học FPT</a>
+                            </div>
+                        </div>
+                        <div class="card-footer row mx-0">
+                            <label class="col-2 font-weight-bold">NGÀNH:</label>
+                            <div class="col">
+                                <table class="subject_list table table-sm">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a><i class="fas fa-graduation-cap"></i> Sư phạm Tiếng Hàn Quốc</a>
+                                            </td>
+                                            <td>
+                                                <a><i class="fas fa-graduation-cap"></i> Sư phạm Tiếng Hàn Quốc</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a><i class="fas fa-graduation-cap"></i> Sư phạm Tiếng Hàn Quốc</a>
+                                            </td>
+                                            <td>
+                                                <a><i class="fas fa-graduation-cap"></i> Sư phạm Tiếng Hàn Quốc</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a><i class="fas fa-graduation-cap"></i> Sư phạm Tiếng Hàn Quốc</a>
+                                            </td>
+                                            <td>
+                                                <a><i class="fas fa-graduation-cap"></i> Sư phạm Tiếng Hàn Quốc</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="criterion_filtering_nav" class="col list-group">
+                    <p class="list-group-item title"><i class="fas fa-list-ul fa-lg"></i> Tiêu chí xếp hạng</p>
+                    <div id="criterion_list">
+                        <a class="list-group-item list-group-item-action"><i class="fas fa-book fa-lg text-danger"></i> Giáo Dục Và Đào Tạo</a>
+                        <a class="list-group-item list-group-item-action"><i class="fas fa-lightbulb fa-lg text-warning"></i> Nghiên Cứu Khoa Học</a>
+                        <a class="list-group-item list-group-item-action"><i class="fas fa-handshake fa-lg text-primary"></i> Đối Tác</a>
+                        <a class="list-group-item list-group-item-action"><i class="fas fa-briefcase fa-lg text-success"></i> Việc Làm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="ranking_area" class="container-fluid">
+            <table id="ranking_table" class="table table-bordered border-0">
+                <thead>
+                    <tr class="category_criterion_header tablesorter-ignoreRow">
+                        <th scope="col"></th>
+                        <th scope="col" style="width: 20%;"></th>
+                        <th scope="colgroup" colspan="4" class="facility">Cơ Sở Vật Chất Và Quản Trị</th>
+                        <th scope="colgroup" colspan="6" class="education">Giáo Dục Và Đào Tạo</th>
+                        <th scope="colgroup" colspan="4" class="research">Nghiên Cứu Khoa Học</th>
+                        <th scope="colgroup" colspan="5" class="partner">Đối Tác</th>
+                        <th scope="colgroup" colspan="4" class="job" data-sorter="false">Việc Làm</th>
+                    </tr>
+                    <tr class="criterion_header tablesorter-ignoreRow">
+                        <th scope="col"></th>
+                        <th scope="col" style="width: 20%;"></th>
+                        <th scope="col" class="facility">Giảng đường</th>
+                        <th scope="col" class="facility">Thư viện</th>
+                        <th scope="col" class="facility">Chất lượng quản trị</th>
+                        <th scope="col" class="facility">Phòng Thực Hành</th>
+                        <th scope="col" class="education">Quy mô đào tạo</th>
+                        <th scope="col" class="education">Đội ngũ giảng dạy</th>
+                        <th scope="col" class="education">Chất lượng giảng dạy</th>
+                        <th scope="col" class="education">Chất lượng sinh viên</th>
+                        <th scope="col" class="education">Tốt nghiệp</th>
+                        <th scope="col" class="education">Tốt nghiệp đúng hạn</th>
+                        <th scope="col" class="research">Quy mô và chất lượng nghiên cứu</th>
+                        <th scope="col" class="research">Ảnh hưởng trong khoa học</th>
+                        <th scope="col" class="research">Năng suất nghiên cứu</th>
+                        <th scope="col" class="research">Nghiên cứu nổi bật</th>
+                        <th scope="col" class="partner">Đầu tư nghiên cứu</th>
+                        <th scope="col" class="partner">Liên kết việc làm</th>
+                        <th scope="col" class="partner">Đầu tư học bổng</th>
+                        <th scope="col" class="partner">Hợp tác trong nước</th>
+                        <th scope="col" class="partner">Hợp tác nước ngoài</th>
+                        <th scope="col" class="job">Chất lượng việc làm</th>
+                        <th scope="col" class="job">Việc Làm Trong Nước</th>
+                        <th scope="col" class="job">Việc Làm Ngoài Nước</th>
+                        <th scope="col" class="job">Khả năng thực tập</th>
+                    </tr>
+                    <tr class="sorting_option">
+                        <th scope="col"></th>
+                        <th scope="col" style="width: 20%;"></th>
+                        <th scope="col" class="facility"></th>
+                        <th scope="col" class="facility"></th>
+                        <th scope="col" class="facility"></th>
+                        <th scope="col" class="facility"></th>
+                        <th scope="col" class="education"></th>
+                        <th scope="col" class="education"></th>
+                        <th scope="col" class="education"></th>
+                        <th scope="col" class="education"></th>
+                        <th scope="col" class="education"></th>
+                        <th scope="col" class="education"></th>
+                        <th scope="col" class="research"></th>
+                        <th scope="col" class="research"></th>
+                        <th scope="col" class="research"></th>
+                        <th scope="col" class="research"></th>
+                        <th scope="col" class="partner"></th>
+                        <th scope="col" class="partner"></th>
+                        <th scope="col" class="partner"></th>
+                        <th scope="col" class="partner"></th>
+                        <th scope="col" class="partner"></th>
+                        <th scope="col" class="job"></th>
+                        <th scope="col" class="job"></th>
+                        <th scope="col" class="job"></th>
+                        <th scope="col" class="job"></th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Khoa Luật - Đại học Quốc gia Hà Nội</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Khoa Quản trị Kinh doanh - Đại học Quốc gia Hà Nội</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Khoa Quốc tế - Đại học Quốc gia Hà Nội</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Khoa Y Dược - Đại học Quốc gia Hà Nội</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Trường Đại học Công nghệ - Đại học Quốc gia Hà Nội</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Trường Đại học Giáo dục - Đại học Quốc gia Hà Nội</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Trường Đại học Kinh tế - Đại học Quốc gia Hà Nội</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia Hà Nội</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Trường Đại học Khoa học Xã hội và Nhân văn - Đại học Quốc gia Hà Nội</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Trường Đại học Việt - Nhật - Đại học Quốc gia Hà Nội</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Khoa Y - Đại học Quốc gia Thành phố Hồ Chí Minh</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Phân hiệu Đại học Quốc gia Thành phố Hồ Chí Minh tại Bến Tre</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Trường Đại học Bách khoa - Đại học Quốc gia Thành phố Hồ Chí Minh</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td style="width: 20%;">Trường Đại học Công nghệ Thông tin - Đại học Quốc gia Thành phố Hồ Chí Minh</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="facility">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="education">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="research">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="partner">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                        <td class="job">9.5</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

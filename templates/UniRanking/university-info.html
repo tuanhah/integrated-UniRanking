@@ -1,155 +1,163 @@
 {% extends 'UniRanking/base.html' %}
+{% load staticfiles %}
+
 {% block title %} Thông tin Đại học | Hệ thống so sánh các trường Đại học {% endblock %}
 
 {% block info %}class='active'{% endblock %}
+{% block stt %}
+    <script type="text/javascript" src="{% static 'js/info.js'%}"></script>
+    
+{% endblock %}
+
 {% block body %}
-{% load staticfiles %}
-<div class="container-fluid after-menu" id="info-introduce">
-    <div class="row mx-0 justify-content-center">
-        <div class="col-lg-2 text-center">
-            <i class="fa fa-newspaper-o" id="info-icon"></i>
-        </div>
-        <div class="col-lg-8">
-            <h1>Chức năng xem thông tin trường</h1>
-            <!--<i class="fa fa-newspaper-o" style="font-size:60px"></i>-->
-            <p class="p-large">Hiển thị đầy đủ thông tin của một trường Đại Học</p><hr>
-        </div>
-    </div>
-</div>
-<div class="container-fluid" id="search-uniinfo">
-    <div class="row text-center">
-        <div class="col-12"><h2 class="area-title">Tìm kiếm theo tên trường bạn muốn tìm hiểu:</h2></div>
-    </div>
-    <div class="row text-center">
-        <div class="col-12"><p class="p-large">Tên trường bạn muốn xem thông tin:</p></div>
-        <div class="col-12">
-            <form class="form-vertical">
-                <div class="form-group">
-                    <!-- <input type="text" class="form-control center-form" placeholder="Tìm kiếm" id="info-uni-search" autocomplete="off" required/> -->
-                    <select name="state[]" class="info-multiple-select" multiple>
-                        {% for uni in University %}
-                        <option value="{{ uni.name }}">{{ uni.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                
-            </form>
-            <div class="row justify-content-center  "><a id="uni-info-btn" href="#all-info" class="btn btn-info">Xem Thông tin</a></div>
-        </div>
-    </div>
 
-</div>
-<div class="container-fluid non-display" id="all-info">
-    <div class="row" id="background">
-        <div class="col-sm-3">
-            <img id="uni-avatar" src="{% static 'img/vnu_avatar.jpg'%}" width=140px>
-        </div>
-        
-    </div>
-    <div class="row">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-sm-7">
-                    <div class="row">
-                        <h1 class="col-10 area-title" id="uni-name">Đại Học Quốc Gia Hà Nội</h1>
-                        <span class="col-1 fa fa-plus pointer-md-icon" data-toggle="tooltip" title="Thêm vào danh sách yêu thích"></span>
-                        <span class=" col-1 fa fa-envelope-square pointer-md-icon" data-toggle="tooltip" title="Nhận thông báo"></span>
-                    </div>
-                    <div class="row">
-                        <p class="col-12 p-large">Đại chỉ: 144, Xuân Thủy, Cầu Giấy</p>
-                    </div>
-                </div>
-                <div class="col-sm-5">
-                    <img class="img-thumbnail" id="uni-map" src="{% static 'img/map_sample.png'%}" width=100%>
-                </div>
+<div id="page">
+    <div class="container-fluid after-menu" id="info-introduce">
+        <div class="row mx-0 justify-content-center">
+            <div class="col-lg-2 text-center">
+                <i class="fa fa-newspaper-o" id="info-icon"></i>
+            </div>
+            <div class="col-lg-8">
+                <h1>Chức năng xem thông tin trường</h1>
+                <!--<i class="fa fa-newspaper-o" style="font-size:60px"></i>-->
+                <p class="p-large">Hiển thị đầy đủ thông tin của một trường Đại Học</p><hr>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="container">
-            <div class="row mx-0" id="nav-info">
-                <div class="col-4 text-center">
-                    <p class="p-large">Thông tin</p>
-                </div>
-                <div class="col-8">
-                    <ul class="nav ">
-                    </ul>
+    <div class="container-fluid even" id="search-uniinfo">
+        <div class="row mx-0">
+            <div class="col-12">
+                <h2 class="title-step-n"><i class="fa fa-search"></i></h2>
+                <h2 class="title-step">Tìm kiếm theo tên trường bạn muốn tìm hiểu:</h2>
+            </div>
+        </div>
+        <div class="row mx-0 text-center">
+            <div class="col-12"><p class="p-large">Tên trường bạn muốn xem thông tin:</p></div>
+            <div class="col-12">
+                <form class="form-vertical">
+                    <div class="form-group">
+                        <!-- <input type="text" class="form-control center-form" placeholder="Tìm kiếm" id="info-uni-search" autocomplete="off" required/> -->
+                        <select name="state[]" class="info-multiple-select" multiple id="university-list">
+                            
+                            <!-- % for uni in University %}
+                            <option value="{{ uni.name }}">{{ uni.name }}</option>
+                            % endfor %} -->
+                        </select>
+                    </div>
+
+                </form>
+                <div class="row justify-content-center  "><a id="uni-info-btn" href="#all-info" class="btn btn-info go-to-id">Xem Thông tin</a></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid non-display" id="all-info">
+        <div class="row" id="background">
+            <div class="col-sm-3">
+                <img id="uni-avatar" src="{% static 'img/vnu_avatar.jpg'%}" width=140px>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-7">
+                        <div class="row">
+                            <h1 class="col-10" id="uni-name">Đại Học Quốc Gia Hà Nội</h1>
+                            <span class="col-1 fa fa-plus pointer-md-icon" data-toggle="tooltip" title="Thêm vào danh sách yêu thích"></span>
+                            <span class=" col-1 fa fa-envelope-square pointer-md-icon" data-toggle="tooltip" title="Nhận thông báo"></span>
+                        </div>
+                        <div class="row">
+                            <p class="col-12 p-large">Đại chỉ: 144, Xuân Thủy, Cầu Giấy</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <img class="img-thumbnail" id="uni-map" src="{% static 'img/map_sample.png'%}" width=100%>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-4">
-                    <ul class="nav flex-column">
-                        <li class="nav-item"><btn id="show-all-score" class="btn btn-success btn-lg full-width-btn">Hiển thị tất cả điểm</btn></li>
-                        {% for caCr in CategoryCriterion %}
-                        <li class="nav-item">
-                            <btn id="info-category-criterion-{{ caCr.id }}" class="btn btn-primary btn-lg full-width-btn" data-toggle="collapse" href="#category-criterion-{{ caCr.id }}">{{ caCr.name }} <span class="fa fa-sort"></span></btn>
-                            <div id="category-criterion-{{ caCr.id }}" class="collapse">
-                                <ul class="list-group">
-                                    {% for cr in Criterion%}
-                                    {% if cr.category_id == caCr.id %}
-                                    <li class="btn btn-info btn-2" id="score-cr-{{ cr.id }}-btn"><btn>{{ cr.name }}</btn></li>
-                                    {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </li>
-                        {% endfor %}
-                        
-
-
-                    </ul>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="row mx-0" id="nav-info">
+                    <div class="col-4 text-center">
+                        <p class="p-large">Thông tin</p>
+                    </div>
+                    <div class="col-8">
+                        <ul class="nav ">
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-8">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr class="info-col-title">
-                                <th>Tiêu chí</th>
-                                <th>Điểm</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <div class="row">
+                    <div class="col-4">
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><btn id="show-all-score" class="btn btn-success btn-lg full-width-btn">Hiển thị tất cả điểm</btn></li>
                             {% for caCr in CategoryCriterion %}
-                            <tr class="category-criterion">
-                                <td>{{ caCr.name }}</td>
-                                <!-- % for usbc in UniversityScoreByCategory %} -->
-                                <!-- % if caCr.id == usbc.category_criterion_id %} -->
-                                <td>9.05</td>
-                                <!-- % endif %} -->
-                                <!-- % endfor %} -->
-                            </tr>
-                            {% for cr in Criterion %}
-                            {% if cr.category_id == caCr.id %}
-                            <tr class="row-cr" id= 'row-cr-{{ cr.id }}'>
-                                <td>{{ cr.name }}</td>
-                                <td>9.1</td>
-                            </tr>
-                            
-                            {% endif %}        
+                            <li class="nav-item">
+                                <btn id="info-category-criterion-{{ caCr.id }}" class="btn btn-primary btn-lg full-width-btn" data-toggle="collapse" href="#category-criterion-{{ caCr.id }}">{{ caCr.name }} <span class="fa fa-sort"></span></btn>
+                                <div id="category-criterion-{{ caCr.id }}" class="collapse">
+                                    <ul class="list-group">
+                                        {% for cr in Criterion%}
+                                        {% if cr.category_id == caCr.id %}
+                                        <li class="btn btn-info btn-2" id="score-cr-{{ cr.id }}-btn"><btn>{{ cr.name }}</btn></li>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
                             {% endfor %}
-                            {% endfor %}
-                            
-                        </tbody>
-                    </table> 
+
+
+
+                        </ul>
+                    </div>
+                    <div class="col-8">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr class="info-col-title">
+                                    <th>Tiêu chí</th>
+                                    <th>Điểm</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for caCr in CategoryCriterion %}
+                                <tr class="category-criterion">
+                                    <td>{{ caCr.name }}</td>
+                                    <!-- % for usbc in UniversityScoreByCategory %} -->
+                                    <!-- % if caCr.id == usbc.category_criterion_id %} -->
+                                    <td>9.05</td>
+                                    <!-- % endif %} -->
+                                    <!-- % endfor %} -->
+                                </tr>
+                                {% for cr in Criterion %}
+                                {% if cr.category_id == caCr.id %}
+                                <tr class="row-cr" id= 'row-cr-{{ cr.id }}'>
+                                    <td>{{ cr.name }}</td>
+                                    <td>9.1</td>
+                                </tr>
+
+                                {% endif %}        
+                                {% endfor %}
+                                {% endfor %}
+
+                            </tbody>
+                        </table> 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
-    // var uniSource = [];
-    // {% for uni in University %}
-    // uniSource.push("{{ uni.name }}")
-    // {% endfor %}
+    <script>
+    
+    
+    
+    
     
     jQuery(document).ready(function(){
-        jQuery('.info-multiple-select').select2({
-            maximumSelectionLength: 1
-        });
-        jQuery('#uni-info-btn').click(function() {
-            var uniName = jQuery('.info-multiple-select').val();
-            jQuery('#uni-name').text(uniName);
-            $('#all-info').show();  
-        })
+        // jQuery('.info-multiple-select').select2({
+        //     maximumSelectionLength: 1
+        // });
         {% for cacr in CategoryCriterion %}
         jQuery('#info-category-criterion-{{ cacr.id }}').click(function(){
             jQuery('#score-{{ cacr.id }}').toggleClass('show');

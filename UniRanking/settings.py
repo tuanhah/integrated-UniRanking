@@ -37,13 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'widget_tweaks',
+    'debug_toolbar',
+    'guardian',
     'criteria',
     'subject',
     'university', 
     'compare',
     'api',
-    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -55,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    
+    'UniRanking.middleware.HttpPostTunnelingMiddleware',
 ]
 
 ROOT_URLCONF = 'UniRanking.urls'
@@ -75,6 +77,11 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend', # this is default
+    'guardian.backends.ObjectPermissionBackend',
+)
+
 WSGI_APPLICATION = 'UniRanking.wsgi.application'
 
 
@@ -84,9 +91,9 @@ WSGI_APPLICATION = 'UniRanking.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysql',
+        'NAME': 'uniranking',
         'USER': 'root',
-        'PASSWORD': '1111',
+        'PASSWORD': '',
     }
 }
 

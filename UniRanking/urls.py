@@ -21,6 +21,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.views import LogoutView
 from . import views
 
+
 urlpatterns = [
     # path('', TemplateView.as_view(template_name ="index.html"), name = "homepage"),
     path('admin/', admin.site.urls),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('logout',LogoutView.as_view(), name = "logout"),
     path('register/',views.register,name="register"),
     path('university/', include('university.urls')),
+    path('rank/', views.rank),
     path('compare/', views.compare, name="compare"),
     path('', views.index, name="index"),
     path('university-info/', views.info, name="info"),
@@ -35,10 +37,13 @@ urlpatterns = [
     path('contact/', views.contact, name="contact"),
     path('help/', views.help, name="help"),
     path('register/', views.register, name="register"),
+    path('rank/', views.rank, name="rank"),
+
 ]
+
+
 if settings.DEBUG:
     import debug_toolbar
-
-    urlpatterns = urlpatterns + [
+    urlpatterns = [
         url(r'^__debug__/', include(debug_toolbar.urls)),
-    ]
+    ] + urlpatterns

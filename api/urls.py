@@ -1,19 +1,42 @@
 from django.urls import include, path
-from . import views
+from . import views, criterion_views, subject_views, university_views
 
 app_name = "api"
+
+
+university_url_patterns = [
+    path('scores', university_views.UniversityScoreDetailView.as_view()),
+    path('subjects', university_views.UniversitySubjectListView.as_view()),
+    path('subjects/<int:subject_id>', university_views.UniversitySubjectDetailView.as_view()),
+    path('subjects/<int:subject_id>/scores', subject_views.SubjectScoreDetailView.as_view()),
+
+]
+
+subject_url_patterns = [
+    path('groups', subject_views.GroupListView.as_view()),
+    path('subjects', subject_views.SubjectsOfSectorListView.as_view()),
+    path('groups/<int:group_id>/subjects', subject_views.SubjectListView.as_view()),
+]
+
+criterion_url_paterns = [
+    path('criteria', criterion_views.CriteriaOfCategoryListView.as_view()),
+]
+
+rank_url_patterns = [
+    path("subject/<int:subject_id>", subject_views.SubjectScoreListView.as_view()),
+    path("university", university_views.UniversityScoreListView.as_view()),
+
+]
 
 urlpatterns = [
     path('auth',views.login, name="login"),
     path('register',views.register, name="register"),
-    path('scores',views.get_scores, name="get_scores"),
-    path('subjects',views.get_subjects, name = 'get_subjects'),
-    path('groups', views.get_groups_of_sector, name = "get_groups"),    
-    path('editor/subjects/delete', views.delete_subject, name = "editor_delete_subject"),
-    path('editor/subjects/add', views.add_subject, name="editor_add_subject"),
-    path('editor/subjects', views.get_subjects_of_group, name="editor_get_subjects"),
-    path('editor/scores/edit', views.edit_score, name="editor_edit_score"),
-    path('editor/scores/delete', views.delete_score, name="editor_delete_score"),
-    path('editor/criteria/categories', views.get_editable_criterion_categories, name="editor_get_editable_criterion_categories"),
-    path('editor/criteria', views.get_criteria_of_category, name="editor_get_non_added_criteria_of_category"),
+    path('sectors', subject_views.SectorListView.as_view()),
+    path('sectors/<int:sector_id>/', include(subject_url_patterns)),
+    path('universities/<int:university_id>/', include(university_url_patterns)),
+    path('categories', criterion_views.CriterionCategoryListView.as_view()),
+    path('categories/<int:category_id>/', include(criterion_url_paterns)),
+    path('criteria/', criterion_views.CriterionListView.as_view()),
+    path("rank/", include(rank_url_patterns)),
+    path('allUniversity', university_views.UniversityListView.as_view()),
 ]

@@ -1,10 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from .forms import UserRegistrationForm
-from criteria.models import CategoryCriterion, Criterion
-from subject.models import GroupSubject, Subject
-from university.models import University, UniversityScoreByCategory
-
+from university.models import University
 
 def register(request):
     if request.user.is_anonymous:
@@ -15,36 +12,42 @@ def register(request):
         return render(request, "registration.html",{"form" : form})
     else:
         return redirect("homepage")
+
+def rank(request):
+    return render(request, 'rank/rank.html')
 def index(request):
-	subject = GroupSubject.objects.all()
-	context = {'GroupSubject' : subject}
-	return render(request, 'UniRanking/index.html', context)
+	# subject = SubjectGroup.objects.all()
+	# context = {'SubjectGroup' : subject}
+	return render(request, 'UniRanking/index.html')
 def compare(request):
-	GroupSub = GroupSubject.objects.all()
-	Sub = Subject.objects.all()
-	CateCrit = CategoryCriterion.objects.all()
-	Crit = Criterion.objects.all()
+	# GroupSub = SubjectGroup.objects.all()
+	# Sub = Subject.objects.all()
+	# CateCrit = CategoryCriterion.objects.all()
+	# Crit = Criterion.objects.all()
 	Uni = University.objects.all()
-	context = {'GroupSubject' : GroupSub, 'Subject' : Sub, 'CategoryCriterion' : CateCrit, 'Criterion': Crit, 'University': Uni}
+	context = {'University': Uni}
 	return render(request, 'UniRanking/compare.html', context)
 def ranking(request):
-	CaCr = CategoryCriterion.objects.all()
-	Uni = University.objects.all()
-	Gs = GroupSubject.objects.all()
-	usbc = UniversityScoreByCategory.objects.all()
-	context = {'University': Uni, 'GroupSubject' : Gs, 'CategoryCriterion': CaCr, "UniversityScoreByCategory": usbc}
-	return render(request, 'Uniranking/ranking.html', context)
+	# CaCr = CategoryCriterion.objects.all()
+	# Uni = University.objects.all()
+	# Gs = SubjectGroup.objects.all()
+	# sub = Subject.objects.all()
+	# usbc = UniversityScoreByCategory.objects.all()
+	# context = {'University': Uni, 'SubjectGroup' : Gs, 'CategoryCriterion': CaCr, "UniversityScoreByCategory": usbc, 'Subject': sub}
+	return render(request, 'Uniranking/ranking.html')
 
 def info(request):
-	CateCrit = CategoryCriterion.objects.all()
-	Crit = Criterion.objects.all()
-	Uni = University.objects.all()
-	usbc = UniversityScoreByCategory.objects.all()
-	context = {'CategoryCriterion' : CateCrit, 'Criterion' : Crit, 'University' : Uni, 'UniversityScoreByCategory': usbc}
-	return render(request, 'UniRanking/university-info.html', context)
+	# CateCrit = CategoryCriterion.objects.all()
+	# Crit = Criterion.objects.all()
+	# Uni = University.objects.all()
+	# usbc = UniversityScoreByCategory.objects.all()
+	# context = {'CategoryCriterion' : CateCrit, 'Criterion' : Crit, 'University' : Uni, 'UniversityScoreByCategory': usbc}
+	return render(request, 'UniRanking/university-info.html')
 def contact(request):
 	return render(request, 'UniRanking/contact.html')
 def help(request):
 	return render(request, 'UniRanking/help.html')
 def register(request):
 	return render(request, 'UniRanking/register.html')
+def rank(request):
+	return render(request, 'UniRanking/rank.html')    

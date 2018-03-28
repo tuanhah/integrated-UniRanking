@@ -1,57 +1,61 @@
 from django.db import models
+from django.core.exceptions import ObjectDoesNotExist
 
-class CategoryCriterion(models.Model):
+class CriterionCategory(models.Model):
     name = models.CharField(max_length=50)
+    university_only = models.BooleanField(default = False) #indenfy whether this category criterion is represented on university level only (not particular subject)
     
+    class Meta:
+        db_table = 'criterion_category'
+        ordering = ['id']
+
     def __str__(self):
         return self.name
-
-    class Meta:
-        db_table = "category_criterion"
-        ordering = ['id']
 
 class Criterion(models.Model):
-    category = models.ForeignKey(CategoryCriterion, on_delete=models.CASCADE, related_name="criteria")
+    category = models.ForeignKey(CriterionCategory, on_delete=models.CASCADE, related_name='criteria')
     name = models.CharField(max_length=50)
-    description = models.TextField(null=True,blank=True)
+    description = models.TextField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'criterion'
+        ordering = ['id']
 
     def __str__(self):
         return self.name
 
-    class Meta:
-        db_table = "criterion"
-        ordering = ['id']
-
 class ScoreByCategory(models.Model):
-    category_criterion = models.ForeignKey(CategoryCriterion, on_delete=models.CASCADE, null=True)
+    criterion_category = models.ForeignKey(CriterionCategory, on_delete=models.CASCADE)
     score = models.FloatField(default=0)
-
-    def __str__(self):
-        return str(self.score)
 
     class Meta:
         abstract = True
+
+    def __str__(self):
+        return str(self.score)
 
 class Score(models.Model):
-    criterion = models.ForeignKey(Criterion, on_delete=models.CASCADE, null=True)
+    criterion = models.ForeignKey(Criterion, on_delete=models.CASCADE)
     score = models.FloatField(default=0)
-    score_by_category = "A foreign key to a score by category table, be defined in the child class"
+    score_by_category = 'A foreign key to a score by category table, will be defined in the child class'
 
-    def update_score_by_category(self):
-        category_cri_score = self.score_by_category
-        cri_data = category_cri_score.cri_scores.all()
-        cri_amount = cri_data.count()
-        total_score = 0
-        if cri_amount > 0:
-            for cri in cri_data: 
-                total_score += cri.score
-            category_cri_score.score = total_score / cri_amount
-            category_cri_score.save(update_fields=['score'])
-        else:
-            category_cri_score.delete()
+    class Meta:
+        abstract = True
 
     def __str__(self):
         return str(self.score)
 
-    class Meta:
-        abstract = True
+    def update_score_by_category(self):
+        try:
+            cri_category_score = self.score_by_category
+        except ObjectDoesNotExist:
+            #handled when this record is deleted before post delete is triggered (ex:  on cascade delete category_criterion)
+            pass 
+        else:
+            avg_score = cri_category_score.cri_scores.aggregate(models.Avg('score'))
+            avg_score = avg_score.get('score__avg')
+            if avg_score is not None:
+                cri_category_score.score = round(avg_score, 2)
+                cri_category_score.save(update_fields = ['score'])
+            else:
+                cri_category_score.delete()

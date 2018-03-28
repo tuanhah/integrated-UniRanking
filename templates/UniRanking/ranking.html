@@ -1,27 +1,56 @@
 {% extends 'UniRanking/base.html' %}
+{% load staticfiles %}
 {% block title %} Xếp hạng chung | Hệ thống so sánh các trường Đại học {% endblock %}
 {% block ranking %} class="active" {% endblock %}
+{% block stt %}
+<script type="text/javascript" src="{% static 'js/ranking.js'%}"></script>
+{% endblock %}
 {% block body %}
-<div class="container-fluid after-menu" id="ranking-introduce">
-<div class="row justify-content-center mx-0">
-        <div class="col-lg-2 text-center">
-            <i class="fa fa-table" id="ranking-icon"></i> 
-        </div>
-        <div class="col-lg-8">
-            <h1> Xếp hạng chung cho các trường</h1>
-            <p class="p-large">Bảng xếp hạng chung cho tất cả các trường dựa trên điểm số trung bình của mỗi trường ở mỗi tiêu chí</p><hr>
-        </div>
-    </div>
-</div>
-<div class="container-fluid select-even" id="select-22">
-    <div class="row mx-0">
-        <div class="container">
-        <h1>Bạn muốn so sánh theo ngành hay theo trường?</h1>
-        <p>Chọn một ngành, chúng tôi sẽ giúp bạn so sánh các trường có đào tạo ngành đó, hoặc chọn so sánh theo trường nếu bạn muốn biết tổng quan thứ hạng các trường ở từng tiêu chí chung.</p>
+
+<div id="page">
+    <div class="container-fluid after-menu" id="ranking-introduce">
+        <div class="row justify-content-center mx-0">
+            <div class="col-lg-2 text-center">
+                <i class="fa fa-table" id="ranking-icon"></i> 
+            </div>
+            <div class="col-lg-8">
+                <h1> Xếp hạng chung cho các trường</h1>
+                <p class="p-large">Bảng xếp hạng chung cho tất cả các trường dựa trên điểm số trung bình của mỗi trường ở mỗi tiêu chí</p><hr>
+            </div>
         </div>
     </div>
-    <div class="row mx-0">   
-        <div class="container">
+    <div class="container-fluid s-odd" id="r-select">
+        <div class="row mx-0">
+            <div class="col-12">
+                <h2 class="title-step-n">1</h2>
+                <h2 class="title-step"> Bạn muốn xem xếp hạng theo ngành hay theo trường?</h2>
+                <p class="title-step-des">Chọn một ngành, chúng tôi sẽ giúp bạn so sánh các trường có đào tạo ngành đó, hoặc chọn so sánh theo trường nếu bạn muốn biết tổng quan thứ hạng các trường ở từng tiêu chí chung.</p>
+            </div>
+        </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="container">
+                <div class="row mx-0 justify-content-center">
+                    <div class="col-lg-6">
+                        <a href="#r-select-subject" show="#r-select-subject" class="btn btn-success btn-1 go-to-id" id="r-by-s-btn">Xếp hạng theo ngành</a>
+                    </div>
+                    <!-- <div class="col-lg-2 text-center"></div> -->
+                    <div class="col-lg-6">
+                        <a href="#r-table-area-u" show="#r-table-area-u" class="btn btn-warning btn-1 go-to-id" id="r-by-u-btn">Xếp hạng theo trường</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid s-even non-display" id="r-select-subject">
+        <div class="row mx-0">
+            <div class="col-12">
+                <h2 class="title-step-n">2</h2>
+                <h2 class="title-step">Chọn ngành bạn muốn xem xếp hạng</h2>
+                <p class="title-step-des">Lần lượt chọn khối ngành -> nhóm ngành -> ngành bạn muốn</p>
+            </div>
+        </div>
+        <div class="row mx-0">   
+            <!-- <div class="container">
             <div class="row">
                 <div class="col-lg-6">
                     <ul class="nav flex-column">
@@ -47,57 +76,91 @@
                 <div class="col-lg-5">
                     <a class="btn btn-info btn-block btn-22 full-width-btn" href="#ranking-body">Xếp hạng theo Trường</a>
                 </div>           
+                </div>
+            </div> -->
+
+            <div class="container">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a id ="r-tab1" class="nav-link active" href="#r-groupSubject-1" data-toggle="tab">Khối ngành</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="r-tab2" class="nav-link" href="#r-groupSubject-2" data-toggle="tab">Nhóm ngành</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="r-tab3" class="nav-link" href="#r-subject" data-toggle="tab">Ngành</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane in active" id="r-groupSubject-1">
+                        <div class="row mx-0 gs-table" id="r-gs1-area">
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade in" id="r-groupSubject-2" style="min-height:300px">
+                        <div class="row mx-0 gs-table" id="r-gs2-area">
+                            <div class="alert alert-warning mx-auto mt-3">Bạn chưa chọn khối ngành!</div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="r-subject" style="min-height:300px">
+                        <div class="row mx-0 gs-table" id="r-subject-area">
+                            <div class="alert alert-warning mx-auto mt-3">Bạn chưa chọn nhóm ngành!</div>
+                        </div>
+                    </div>
+                </div> 
             </div>
         </div>
     </div>
-</div>
 
+    <div class="container-fluid s-even non-display" id='r-table-area-u'>
+        <div class="row mx-0 justify-content-center">
+            <div class="col-md-12">
+                <h2 class="title-step-n mb-5">2</h2>
+                <h2 class="title-step mb-5">Bảng xếp hạng theo trường</h2>
+            </div>
 
-
-<div class="container-fluid non-display" id='ranking-body'>
-    <div class="row mx-0 justify-content-center">
-        <h2>Bảng xếp hạng theo trường</h2>
-        <div class="col-11">
-            <table class="sort-table table table-border table-hover" id="ranking-table">
-                <thead>
-                    <tr>
-                        <th>Trường Đại học</th>
-                        {% for cacr in CategoryCriterion %}
-                        <th>{{ cacr.name }}</th>
-                        {% endfor %}
-                    </tr>
-                    
-                </thead>
-                <tbody>
-                {% for uni in University %}
-                <tr>
-                    <td>{{ uni.name }}</td>
-                    <td>9.0</td>
-                    <td>8.1</td>
-                    <td>8.7</td>
-                    <td>8.4</td>
-                    <td>8.0</td>
-                </tr>
-                {% endfor %}
-                </tbody>
-                <!-- <div id="ranking-table"></div>  -->
-            </table>
         </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="col-10">
+                <table class="sort-table table table-border table-hover" id="ranking-table">
+                    <thead>
+                        <tr id ="r-u-category-criterion-row">
+                            
+                        </tr>
+                        <tr id="r-u-criterion-row">
+                            
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        {% for uni in University %}
+                        <tr>
+                            <td>{{ uni.name }}</td>
+                            <td>9.0</td>
+                            <td>8.1</td>
+                            <td>8.7</td>
+                            <td>8.4</td>
+                            <td>8.0</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
     </div>
+    <div class="container-fluid s-odd non-display" id="r-table-area-s">
+        <div class="row mx-0 justify-content-center">
+            <div class="col-12">
+                <h2 class="title-step-n">3</h2>
+                <h2 class="title-step" id="r-s-table-title"></h2>        
+
+            </div>
+        </div>  
+    </div>  
+</div>
 
 </div>
 
-
-</div>
-<script>
-
-    jQuery(document).ready(function() {
-        jQuery('#ranking-table').DataTable();
-        jQuery('.btn-22').click(function() {
-            jQuery('.btn-22').removeClass('btn-select');
-            jQuery(this).toggleClass('btn-select');
-            jQuery('#ranking-body').show();
-        });
-    });
-</script>
 {% endblock %}

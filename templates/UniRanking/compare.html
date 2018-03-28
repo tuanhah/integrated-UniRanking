@@ -1,222 +1,123 @@
 {% extends 'UniRanking/base.html' %}
+{% load staticfiles %}
 {% block title %} So sánh | Hệ thống so sánh các trường Đại học {% endblock %}
 {% block compare %} class="active" {% endblock %}
+{% block stt %}
+<script type="text/javascript" src="{% static 'js/compare.js'%}"></script>
+
+{% endblock %}
 {% block body %}
-<script>
-    jQuery(document).ready(function(){
-        jQuery('#subject-compare').click(function(){
-            jQuery('#select-21, #step-2').css({"display":"block"});
-            jQuery('#select-22, #select-23, #select-32, #select-33, #table-2, #table-3').css({"display":"none"});
-            
-        });
-        jQuery('#group-compare').click(function(){
-            jQuery('#select-21, #select-23, #select-31, #select-33, #table-1, #table-3').hide();
-            jQuery('#select-22, #step-2').show();
-            
-        });
-        jQuery('#university-compare').click(function(){
-            jQuery('#select-21, #select-22, #select-31, #select-32, #table-2, #table-3').hide();
-            
-            jQuery('#select-23, #step-2').show();
-        });    
-        jQuery('#btn-23').click(function(){jQuery('#select-33').show();});
-        jQuery('.btn-2').click(function(){
-            jQuery('.btn-2').removeClass("btn-select");
-            jQuery(this).addClass("btn-select");
-            jQuery('#select-31').show();
-        });
-        jQuery('.btn-3').click(function(){
-            jQuery(this).toggleClass('btn-select');
-        });
-        jQuery('.btn-22').click(function(){
-            jQuery('.btn-22').removeClass("btn-select");
-            jQuery(this).toggleClass("btn-select");
-            jQuery('#select-32').show();
-        });
-    });
-
-</script>
-<div class="container-fluid after-menu" id="compare-introduce">
-    <div class="row mx-0 justify-content-center">
-        <div class="col-lg-2 text-center">
-            <i class="fa fa-object-ungroup" id="compare-icon"></i>
-        </div>
-        <div class="col-lg-8">
-            <h1> Chức năng so sánh:</h1>
-            <!-- <i class="fa fa-object-ungroup" style="font-size:96px"></i> -->
-            <p class="p-large">So sánh các trường tương tự nhau hoặc so sánh các ngành đào tạo giống nhau của các trường</p><hr>
+<div id="page">
+    <div class="container-fluid after-menu" id="compare-introduce">
+        <div class="row mx-0 justify-content-center">
+            <div class="col-lg-2 text-center">
+                <i class="fa fa-object-ungroup" id="compare-icon"></i>
+            </div>
+            <div class="col-lg-8">
+                <h1> Chức năng so sánh:</h1>
+                <!-- <i class="fa fa-object-ungroup" style="font-size:96px"></i> -->
+                <p class="p-large">So sánh các trường tương tự nhau hoặc so sánh các ngành đào tạo giống nhau của các trường</p><hr>
+            </div>
         </div>
     </div>
-</div>
-<div class="container-fluid select-odd" id="select-1">
-    <div class="row mx-0">
-        <div class="col-12">
-            <h1 class="title-step">1. Chọn kiểu so sánh bạn muốn:</h1>
-            <p class="title-step-des">Chọn một tùy chọn so sánh</p>
-        </div>
-        
-    </div>
-    <div class="row mx-0 text-center">
-        <div class="container">
-            <div class="row mx-0">
-                <div class="col-lg-4">
-                    <a href="#select-21" class="btn btn-success btn-lg btn-1" id="subject-compare">So sánh theo ngành</a>
-                    <p>Chọn một ngành cụ thể, hệ thống sẽ lọc cho bạn các trường đào tạo ngành đó</p>
-                </div>
-                <div class="col-lg-4">
-                    <a href="#select-22" class="btn btn-primary btn-lg btn-1" id="group-compare">So sánh nhóm 3 trường</a>
-                    <p>Chọn một nhóm tối đa 3 trường có ngành mà bạn đang phân vân để so sánh</p>
-                </div>
-                <div class="col-lg-4">
-                    <a href="#select-23" class="btn btn-warning btn-lg btn-1" id="university-compare">So sánh 1 trường cụ thể</a>
-                    <p>Chọn 1 trường cụ thể và so sánh với các trường tương tụ</p>
-                </div>
-            </div> 
-        </div>
-    </div>
-</div>
-
-<div class="select-even non-display" id="select-21">
-    <div class="container-fluid">
+    <div class="container-fluid s-odd" id="select-1">
         <div class="row mx-0">
             <div class="col-12">
-                <h1 class="title-step">2. Bạn muốn so sánh ngành nào?</h1>
+                <h2 class="title-step-n">1</h2>
+                <h2 class="title-step">Chọn kiểu so sánh bạn muốn:</h2>
+                <p class="title-step-des">Chọn một tùy chọn so sánh</p>
+            </div>
+            <!-- <div class="navbar navbar-dark bg-dark"><h1 class="navbar-brand">Bạn muốn so sánh gì</h1></div> -->
+        </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="container">
+                <div class="row mx-0">
+                    <div class="col-lg-6">
+                        <a href="#select-21" class="btn btn-success btn-1 go-to-id" id="subject-compare">So sánh theo ngành</a>
+                        <p>Chọn một ngành cụ thể, hệ thống sẽ lọc cho bạn các trường đào tạo ngành đó</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <a href="#select-22" class="btn btn-primary btn-1 go-to-id" id="university-compare">So sánh theo trường</a>
+                        <p>Chọn các trường mà bạn đang phân vân để so sánh các tiêu chí của chúng</p>
+                    </div>
+
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <div class="s-even container-fluid non-display" id="select-21">
+        <!-- <div class="container-fluid"> -->
+        <div class="row mx-0">
+            <div class="col-12">
+                <h2 class="title-step-n">2</h2>
+                <h2 class="title-step">Bạn muốn so sánh ngành nào?</h2>
                 <p class="title-step-des">Chọn ngành bạn muốn so sánh</p>
             </div>
         </div>
         <div class="row mx-0">   
             <div class="container">
-                <div class="row mx-0">
-                    <div class="col-lg-6">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a id ="tab1" class="nav-link active" href="#groupSubject-1" data-toggle="tab">Khối ngành</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tab2" class="nav-link" href="#groupSubject-2" data-toggle="tab">Nhóm ngành</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tab3" class="nav-link" href="#subject" data-toggle="tab">Ngành</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane in active" id="groupSubject-1">
+                        <div class="row mx-0 gs-table" id="gs1-area">
 
-                        <ul class="nav flex-column">
-                            {% for sub in GroupSubject %}
-                            <li class="nav-item">
-                                {% if sub.parent_id == NULL %} 
-                                <a class="btn btn-info btn-block btn-2 full-width-btn" data-toggle="collapse" href="#group-subject-{{ sub.id }}-21"> {{ sub.name }} <span class="fa fa-sort"></span></a>
-                                <div id="group-subject-{{ sub.id }}-21" class="collapse">
-                                    <ul class="list-group">
-                                        {% for sub1 in GroupSubject %}
-                                        {% if sub1.parent_id == sub.id %}
-                                        <li class="btn"><a href="#select-31" class="btn list-group-item btn-2">{{ sub1.name }}</a></li>
-                                        {% endif %}
-                                        {% endfor %}
-
-                                    </ul> 
-                                </div>
-                                {% endif %}
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container-fluid select-even non-display" id="select-23">
-    <div class="row mx-0">
-        <div class="col-12">
-            <h1 class="title-step">2. Bạn muốn so sánh trường nào?</h1>
-            <p class="title-step-des">Chọn một trường và chúng tôi sẽ giúp bạn so sánh trường này với các trường khác</p>
-        </div>
-    </div>
-    <div class="row mx-0 text-center">
-        <div class="col-12">
-            <p class="p-large">Tìm kiếm theo tên Trường:</p>
-            <form class="form-vertical">
-                <div class="form-group">
-                    <!-- <input id="compare-uni-search-23" type="text" class="form-control center-form" placeholder="Tìm kiếm"/> -->
-                    <select namw="state[]" class="multiple-select-23" multiple="multiple">
-                        {% for uni in University %}
-                        <option value="{{ uni.id }}-23">{{ uni.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <a id="btn-23" class="btn btn-success" href="#select-33">Chọn</a>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="container-fluid select-even non-display" id="select-22">
-    <div class="row mx-0">
-        <h1 class="title-step">2. Các trường bạn đang phân vân thuộc ngành nào?</h1>
-        <p class="title-step-des">Trước khi chọn ra các trường bạn thích, hãy chọn ra ngành mà bạn muốn so sánh</p>
-
-    </div>
-    <div class="row mx-0">   
-        <div class="container">
-            <div clas="row mx-0">
-                <div class="col-lg-6">
-
-                    <ul class="nav flex-column">
-                        {% for sub in GroupSubject %}
-                        <li class="nav-item">
-                            {% if sub.parent_id == NULL %} 
-                            <a class="btn btn-info btn-block btn-22 full-width-btn" data-toggle="collapse" href="#group-subject-{{ sub.id }}-22"> {{ sub.name }} <span class="fa fa-sort"></span></a>
-                            <div id="group-subject-{{ sub.id }}-22" class="collapse">
-                                <ul class="list-group">
-                                    {% for sub1 in GroupSubject %}
-                                    {% if sub1.parent_id == sub.id %}
-                                    <li class="btn"><a href="#select-32" class="btn list-group-item btn-22">{{ sub1.name }}</a></li>
-                                    {% endif %}
-                                    {% endfor %}
-
-                                </ul> 
-                            </div>
-                            {% endif %}
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="select-31" class="non-display select-odd">
-    <div class="container-fluid">
-        <div class="row mx-0">
-            <h1 class="title-step">3. Bạn muốn so sánh những phương diện nào của các trường?</h1>
-            <p class="title-step-des">Chọn phương diện để so sánh, hay nói cách khác là các tiêu chí so sánh thể hiện trên bảng</p>
-        </div> 
-        <div class="row mx-0">
-            <div class="container">
-                {% for caCr in CategoryCriterion %}
-                <div class="row mx-0 cri-select">
-                    <div class="col-lg-3">
-                        <btn class="btn btn-info btn-3-cg cri-group-title">{{ caCr.name }}</btn>
-                        <btn class="btn btn-success btn-sm half-btn cri-group-{{ caCr.id }}-s-31">Chọn tất cả</btn>
-                        <btn class="btn btn-warning btn-sm half-btn cri-group-{{ caCr.id }}-r-31">Huỷ tất cả</btn>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="row mx-0">
-                            {% for crit in Criterion %}
-                            {% if crit.category_id == caCr.id %}
-                            <div class="col-sm-6">
-                                <btn class="btn btn-info btn-3 btn-31-1 cri-{{ caCr.id }}-31">{{ crit.name }}</btn>
-                            </div>
-                            {% endif %}
-                            {% endfor %}
                         </div>
-
                     </div>
-                </div>
-                {% endfor %}
-
-                <div class="row mx-0 text-center">
-                    <div class="col-12">
-                        <a id="compare-btn-31" class="btn btn-success" href="#table-1">So sánh</a>
+                    <div class="tab-pane fade in" id="groupSubject-2" style="min-height:300px">
+                        <div class="row mx-0 gs-table" id="gs2-area">
+                            <div class="alert alert-warning mx-auto mt-3">Bạn chưa chọn khối ngành!</div>
+                        </div>
                     </div>
-                </div>
+                    <div class="tab-pane fade" id="subject" style="min-height:300px">
+                        <div class="row mx-0 gs-table" id="subject-area">
+                            <div class="alert alert-warning mx-auto mt-3">Bạn chưa chọn nhóm ngành!</div>
+                        </div>
+                    </div>
+                </div> 
             </div>
         </div>
+        <!-- </div> -->
     </div>
-</div>
-<div id="select-32" class="non-display select-odd">
-    <div class="container-fluid">
+    <div id="select-31" class="container-fluid non-display s-odd">
+        <!-- <div class="container-fluid"> -->
         <div class="row mx-0">
             <div class="col-12">
-                <h1 class="title-step">3. Bạn muốn so sánh những trường nào?</h1>
+                <h2 class="title-step-n">3</h2>
+                <h2 class="title-step" id="c-s-tit-31"> Bạn muốn so sánh những trường nào?</h2>
+                <p class="title-step-des">Chọn tối đa 5 trường để so sánh</p>
+            </div>
+        </div>
+        <div class="row mx-0 text-center">
+            <div class="col-12">
+                <div class="p-large">Tên trường bạn muốn so sánh:</div>
+                <form class="form-vertical">
+                    <div class="form-group">
+                        <select name="state[]" class="multiple-uni-select" multiple="multiple" id="mul-s-31">
+                        </select>
+                    </div>
+                    <a show="#table-1" id="compare-btn-31" class="btn btn-success go-to-id" href="#table-1">So sánh</a>
+                </form>
+            </div>
+        </div>
+        <!-- </div> -->
+    </div>
+    <div id="select-22" class="container-fluid non-display s-even">
+        <!-- <div class="container-fluid"> -->
+        <div class="row mx-0">
+            <div class="col-12">
+                <h2 class="title-step-n">2</h2>
+                <h2 class="title-step"> Bạn muốn so sánh những trường nào?</h2>
                 <p class="title-step-des">Chọn tối da 5 trường để so sánh</p>
             </div>
         </div>
@@ -225,146 +126,76 @@
                 <div class="p-large">Tên trường bạn muốn so sánh:</div>
                 <form class="form-vertical">
                     <div class="form-group">
-                        <!-- <input id="compare-uni-search-32" type="text" class="form-control center-form" placeholder="Tên trường"> -->
-                        <select name="state[]" class="multiple-select-32" multiple="multiple">
-                            {% for uni in University %}
-                            <option value="{{ uni.id }}-32">{{ uni.name }}</option>
-                            {% endfor %}
+                        <select name="state[]" class="multiple-uni-select" multiple="multiple" id="mul-s-22">
+
                         </select>
                     </div>
-                    <!-- <a class="btn btn-info">Thêm trường 1/5</a> -->
-                    <a id="compare-btn-32" class="btn btn-success" href="#table-2">So sánh</a>
+                    <a show="#table-2" id="c-btn-2-2" class="btn btn-success go-to-id" href="#table-2">So sánh</a>
                 </form>
             </div>
         </div>
+        <!-- </div> -->
     </div>
-</div>
-<div id="select-33" class="non-display select-odd">
-    <div class="container-fluid">
-        <div class="row mx-0">
-            <h1 class="title-step">3. Bạn muốn so sánh những phương diện nào của các trường?</h1>
-            <p class="title-step-des">Chọn phương diện để so sánh, hay nói cách khác là các tiêu chí so sánh thể hiện trên bảng</p>
-        </div> 
-        <div class="row mx-0">
-            <div class="container">
-                {% for caCr in CategoryCriterion %}
-                <div class="row mx-0 cri-select">
-                    <div class="col-lg-3">
-                        <btn class="btn btn-info btn-3-cg cri-group-title ">{{ caCr.name }}</btn>
-                        <btn class="btn btn-success btn-sm half-btn cri-group-{{ caCr.id }}-s-33">Chọn tất cả</btn>
-                        <btn class="btn btn-warning btn-sm half-btn cri-group-{{ caCr.id }}-r-33">Huỷ tất cả</btn>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="row mx-0">
-                            {% for crit in Criterion %}
-                            {% if crit.category_id == caCr.id %}
-                            <div class="col-sm-6">
-                                <btn class="btn btn-info btn-3 btn-31-1 cri-{{ caCr.id }}-33">{{ crit.name }}</btn>
-                            </div>
-                            {% endif %}
-                            {% endfor %}
-                        </div>
+    
+    <div class="container-fluid non-display s-even" id="table-1">
+        <div class="row mx-0 justify-content-center">
+            <div class="col-12">
+                <h2 class="title-step-n">4</h2>
+                <h2 class="title-step" id ="c-s-table-title"></h2>
+                <p class='p-large'></p></div>  
 
-                    </div>
-                </div>
-                {% endfor %}
+            </div>
+            <div class="row mx-0 justify-content-center">
+                <div class="container">
+                    <table class="table table-bordered table-hover table-fixed sortable">
+                        <thead>
+                            <tr id="uni-selected-t-1">
 
-                <div class="row mx-0 text-center">
-                    <div class="col-12">
-                        <a class="btn btn-success">So sánh</a>
-                    </div>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="c-s-tbody-1">
+
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        <div class="container-fluid non-display s-odd" id="table-2">
+            <div class="row mx-0 justify-content-center">
+                <div class="col-12">
+                    <h2 class="title-step-n">3</h2>
+                    <h2 class="title-step">Bảng so sánh các tiêu chí theo trường: </h2>
+                    <p class="title-step-des"> </p>
+                </div>
+            </div>
+            <div class="row mx-0 justify-content-center">
+                <div class="col-10">
+                    <table class="table table-bordered table-hover table-fixed sortable">
+                        <thead>
+                            <tr id="uni-selected-t-2">
 
-<div class="container-fluid non-display select-even" id="table-1">
-    <div class="row justify-content-center">
-        <div class="col-5 text-center"><p class='p-large'>So sánh ngành Công nghệ thông tin</p></div>  
-        <div class="col-11">
-            <table class="table table-striped sortable">
-                <thead>
-                    <tr>
-                        <th>Tên Trường</th>
-                        {% for cacr in CategoryCriterion %}
-                        <th>{{ cacr.name }}</th>
-                        {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for uni in University %}
-                    <tr>
-                        <td>{{ uni.name }}</td>
-                        <td>7.4</td>
-                        <td>8.4</td>
-                        <td>8.6</td>
-                        <td>9.6</td>
-                        <td>8.5></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                            </tr>
+                        </thead>
+                        <tbody id="c-u-tbody-2">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="step text-center" id="step-1">
+            <p class="p-large">1</p>
+        </div>
+        <div class="step text-center" id="step-2">
+            <p class="p-large">2</p>
         </div>
     </div>
-</div>
-<div class="container-fluid non-display select-even" id="table-2">
-    <div class="row justify-content-center">
-        <div class="col-11">
-            <table class="table table-bordered sortable">
-                <thead>
-                    <tr>
-                        <th>Tiêu chí</th>
-                        <th>Đại Học Bách Khoa HÀ Nội</th>
-                        <th>Đại Học Công Nghệ - ĐHQGHN</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for cacr in CategoryCriterion %}
-                    <tr>
-                        <td>{{ cacr.name }}</td>
-                        <td>9.7</td>
-                        <td>8.9</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-<div class="step text-center" id="step-1">
-    <p class="p-large">1</p>
-</div>
-<div class="step text-center" id="step-2">
-    <p class="p-large">2</p>
-</div>
-<script>
-    // var uniName=["Đại Học Quốc Gia Hà Nội","Đại Học Ngoại Thương","Đại Học Bách Khoa Hà Nội","Đại Học Kinh Tế Quốc Dân","Học Viện Tài Chính","Học Viện Ngân Hàng"];
-    jQuery(document).ready(function(){
-        jQuery('.sortable').DataTable();
-        jQuery('#compare-btn-31').click(function() {
-            jQuery('#table-1').show();
-        });
-        jQuery('#compare-btn-32').click(function(){
-            jQuery('#table-2').show();
-        });
-        $('.multiple-select-32').select2({maximumSelectionLength: 5});
-        jQuery('.multiple-select-23').select2({maximumSelectionLength: 1});
-        {% for cacr in CategoryCriterion %}
-        $('.cri-group-{{ cacr.id }}-s-33').click(function(){
-            $('.cri-{{ cacr.id }}-33').addClass('btn-select');
-        });
-        $('.cri-group-{{ cacr.id }}-r-33').click(function() {
-            $('.cri-{{ cacr.id }}-33').removeClass('btn-select');
-        });
-        $('.cri-group-{{ cacr.id }}-s-31').click(function(){
-            $('.cri-{{ cacr.id }}-31').addClass('btn-select');
-        });
-        $('.cri-group-{{ cacr.id }}-r-31').click(function() {
-            $('.cri-{{ cacr.id }}-31').removeClass('btn-select');
-        });
-        {% endfor %}
+    <script>
+        $(document).on('click', 'compare-btn-31', function(){
+        // $('.sortable').DataTable();
     });
 </script>
-
 {% endblock %}
