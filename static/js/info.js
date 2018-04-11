@@ -1,5 +1,5 @@
 // jQuery('.info-multiple-select').select2({ maximumSelectionLength:1});
-    
+$
 jQuery(document).ready(function(){
         jQuery('.info-multiple-select').select2({
             maximumSelectionLength: 1
@@ -10,18 +10,6 @@ jQuery(document).ready(function(){
             jQuery('#uni-name').text(uniName);
             $('#all-info').show();  
         })
-        // {% for cacr in CategoryCriterion %}
-        // jQuery('#info-category-criterion-{{ cacr.id }}').click(function(){
-        //     jQuery('#score-{{ cacr.id }}').toggleClass('show');
-        // });
-        // {% endfor %}
-        // {% for cr in Criterion %}
-        // jQuery('#score-cr-{{ cr.id }}-btn').click(function(){
-        //     jQuery('.row-cr').hide();
-        //     jQuery('#row-cr-{{ cr.id }}').show();
-        // });
-
-        // {% endfor %}
         jQuery('.btn-2').click(function(){
             jQuery('.btn-2').removeClass("btn-select");
             jQuery(this).addClass('btn-select');
@@ -43,6 +31,7 @@ function get_university_list(){
     };
     ajax_request(data, "POST", "json", url, university_success_callback, error_callback);
 }
+
 
 function university_success_callback(response){
     if(response.success){

@@ -33,10 +33,10 @@ urlpatterns = [
     path('register',views.register, name="register"),
     path('sectors', subject_views.SectorListView.as_view()),
     path('sectors/<int:sector_id>/', include(subject_url_patterns)),
+    path('universities', university_views.UniversityListView.as_view()),
     path('universities/<int:university_id>/', include(university_url_patterns)),
     path('categories', criterion_views.CriterionCategoryListView.as_view()),
     path('categories/<int:category_id>/', include(criterion_url_paterns)),
     path('criteria/', criterion_views.CriterionListView.as_view()),
     path("rank/", include(rank_url_patterns)),
-    path('allUniversity', university_views.UniversityListView.as_view()),
 ]

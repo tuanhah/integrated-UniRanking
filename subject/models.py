@@ -28,7 +28,7 @@ class Subject(models.Model):
 
     def sector(self):
         group = self.group
-        return group.name if group.parent is None else group.parent.name
+        return group if group.parent is None else group.parent
 
 
 

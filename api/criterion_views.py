@@ -1,8 +1,9 @@
 from django.http import JsonResponse
 
 from criteria.models import CriterionCategory
-from .functions import json_error
+from .functions import json_error, string_to_boolean
 from .base import BaseManageView
+# from django.db.models import Prefetch
 
 class CriterionCategoryListView(BaseManageView):
     """
@@ -28,22 +29,15 @@ class CriterionCategoryListView(BaseManageView):
         if target == "subject":
             categories_queryset = CriterionCategory.objects.filter(university_only = False)
         elif target == 'university':
-            all = request_data.get("all") or "true" #default is true
-            if all == "true":
+            all = string_to_boolean(request_data.get("all"))
+            if all == True:
                 categories_queryset = CriterionCategory.objects.all()
             else:
                 categories_queryset = CriterionCategory.objects.filter(university_only = True)
         else:
             return json_error(field, self.error_messages)
-        result = []
-        for category in categories_queryset:
-            category_id = category.id
-            category_name = category.name
-            criterion_list = []
-            for criterion in category.criteria.all():
-                criterion_list.append({"id" : criterion.id, "name" : criterion.name, "description" : criterion.description})
-            result.append({"id" : category_id, "name" : category_name, "criteria" : criterion_list})
-        return JsonResponse({"categories": result}, safe = False)
+        categories = [{"id" : category.id, "name" : category.name} for category in categories_queryset]
+        return JsonResponse(categories, safe = False)
 
 class CriteriaOfCategoryListView(BaseManageView):
     """
@@ -82,6 +76,11 @@ class CriterionListView(BaseManageView):
         List all objects of Criterion Model 
         Model Criterion
     """
+    error_messages = {
+        "target" : [
+            {"code": "invalid", "message" : "This target is invalid"},
+        ],
+    }
 
     def __init__(self, *args, **kwargs):
         self.VIEWS_BY_METHOD = {
@@ -89,7 +88,17 @@ class CriterionListView(BaseManageView):
         }
     
     def get_sorted_criteria(self, request):
-        criterion_categories = CriterionCategory.objects.prefetch_related("criteria")
+        request_data = request.GET
+        target = request_data.get("target")
+        field = "target"
+        if target == "university":
+            criterion_categories = CriterionCategory.objects.prefetch_related("criteria")
+        elif target == "subject":
+            criterion_categories = CriterionCategory.objects.filter(university_only = False).prefetch_related("criteria")
+        else:
+            return json_error(field, self.error_messages)
+        
+
         result = []
         for criterion_category in criterion_categories:
             criterion_category_id = criterion_category.id
@@ -97,7 +106,7 @@ class CriterionListView(BaseManageView):
             criteria = []
             for criterion in criterion_category.criteria.all():
                 criteria.append({ "id" : criterion.id, "name" : criterion.name, "description" : criterion.description})
-            result.append({"id" : criterion_category_id,"name" : criterion_category_name, "criteria" : criteria})
+            result.append({"category": {"id" : criterion_category_id,"name" : criterion_category_name}, "criteria" : criteria})
         return JsonResponse(result, safe = False)
         
 

@@ -28,22 +28,7 @@ class SubjectScoreForm(ScoreForm):
             self.fields['univ_subject'].disabled = True
             self.fields['criterion'].disabled = True
             
-    def get_criterion_scores_of_category(self, category):
-        all_criteria = self.fields['criterion'].queryset.filter(category = category)
-        added_criteria = []
-        try:
-            score_by_category = self.cleaned_data['univ_subject'].scores_by_category.get(criterion_category = category)
-        except SubjectScoreByCategory.DoesNotExist:
-            pass
-        else:
-            for subj_score in score_by_category.cri_scores.select_related('criterion'):
-                criterion = subj_score.criterion
-                score = subj_score.score
-                added_criteria.append({"id": criterion.id, "name" : criterion.name, 'description' : criterion.description, "score" : score})
-        non_added_criteria_queryset = all_criteria.exclude(pk__in = [criterion["id"] for criterion in added_criteria])
-        non_added_criteria = [{"id" : criterion.id, "name" : criterion.name, 'description' : criterion.description} for criterion in non_added_criteria_queryset.all()]
-        return (added_criteria, non_added_criteria)
-
+    
 class SubjectScoreAddForm(SubjectScoreForm):
     def clean(self):
         cleaned_data = super().clean()

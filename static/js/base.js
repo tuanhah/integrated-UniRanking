@@ -1,9 +1,10 @@
 $(document).ready(function() {
-  $('#example').DataTable(); $('[data-toggle="tooltip"]').tooltip(); $('.showlater').hide().show(4000); jQuery('.fadein').hide().fadeIn(8000); 
+  $('#example').DataTable(); $('[data-toggle="tooltip"]').tooltip(); 
   jQuery('.hoveranim').hover(function() {
     jQuery('.hoveranim').animate({left:"300px"});
-
+    
   });
+  
   window.onscroll=function(){ scroll()};
   function scroll(){
     if(document.body.scrollTop>20 || document.documentElement.scrollTop > 20) {
@@ -18,13 +19,14 @@ $(document).ready(function() {
 
                   }, 250);
   });
-  jQuery('.count').each(function() {
-    jQuery(this).prop('Counter', 0).animate({
-      counter: jQuery(this).text()}, {duration: 4000, easing:'swing',step: function(now) {
-        jQuery(this).text(Math.ceil(now));
-      }
-    });
-  });
+  
+  // jQuery('.count').each(function() {
+  //   jQuery(this).prop('Counter', 0).animate({
+  //     counter: jQuery(this).text()}, {duration: 4000, easing:'swing',step: function(now) {
+  //       jQuery(this).text(Math.ceil(now));
+  //     }
+  //   });
+  // });
   // jQuery('.sortable').DataTable({
     /*"columnDefs": [{
       "targets" : "no-sort",
@@ -41,10 +43,15 @@ $(document).ready(function() {
   // });
 });
 jQuery(document).on('click', '.go-to-id', function(){
-  jQuery(jQuery(this).attr('show')).show();
-  jQuery('html, body').animate({
-    scrollTop: jQuery(jQuery(this).attr('href')).offset().top
-  }, 250);
+    
+    //setTimeout(function(){
+        jQuery(jQuery(this).attr('show')).show();
+    
+    // setTimeout(function(){
+        jQuery('html, body').animate({
+            scrollTop: jQuery(jQuery(this).attr('show')).offset().top - 80
+        }, 300);
+    // }, 300);
 });
 
 

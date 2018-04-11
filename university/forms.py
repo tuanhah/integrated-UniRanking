@@ -14,10 +14,18 @@ class UniversityForm(forms.ModelForm):
         fields = ['name']
 
 
-class UniversitySubjectCreateForm(forms.ModelForm):
+class UniversitySubjectForm(forms.ModelForm):
     class Meta: 
         model = UniversitySubject
         fields = "__all__"
+
+    def __init__(self, *arg, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['overall_score'].disabled = True
+        self.fields['rank'].disabled = True
+
+class UniversitySubjectCreateForm(UniversitySubjectForm):
+        pass
 
 class UniversitySubjectDeleteForm(forms.ModelForm):
     error_messages = {
@@ -71,23 +79,7 @@ class UniversityScoreForm(ScoreForm):
             if not filter_cri_queryset.filter(id = inst_criterion).exists():
                 self.fields['criterion'].empty_label = self.instance.criterion.name
                 self.fields['score'].disabled = True
-
-    def get_criterion_scores_of_category(self, category):
-        all_criteria = self.fields['criterion'].queryset.filter(category = category)
-        try:
-            score_by_category = self.cleaned_data['university'].scores_by_category.get(criterion_category = category)
-        except UniversityScoreByCategory.DoesNotExist:
-            added_criteria = []
-        else:
-            added_criteria = []
-            for univ_score in score_by_category.cri_scores.all():
-                criterion = univ_score.criterion
-                score = univ_score.score
-                added_criteria.append({"id": criterion.id, "name" : criterion.name, "score" : score})
-        non_added_criteria_queryset = all_criteria.exclude(pk__in = [criterion["id"] for criterion in added_criteria])
-        non_added_criteria = [{"id" : criterion.id, "name" : criterion.name} for criterion in non_added_criteria_queryset.all()]
-        return (added_criteria, non_added_criteria)
-
+    
 class UniversityScoreAddForm(UniversityScoreForm):
     def clean(self):
         cleaned_data = super().clean()

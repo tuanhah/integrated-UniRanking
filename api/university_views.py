@@ -8,72 +8,100 @@ from guardian.decorators import permission_required_or_403
 from university.models import University, UniversitySubject, UniversityScoreByCategory, UniversityScore
 from university.forms import (UniversitySubjectDeleteForm, UniversitySubjectCreateForm, UniversityScoreForm, 
                                 UniversityScoreAddForm, UniversityScoreEditForm, UniversityScoreDeleteForm)
-from subject.models import SubjectGroup
+from subject.models import SubjectGroup, Subject
 from .base import BaseManageView, ScoreListView, ScoreDetailView
-from .functions import (json_error, get_all_scores_from_category_score, get_sorted_univ_subjects, 
+from .functions import (json_error, string_to_boolean, get_all_scores_from_category_score, get_sorted_univ_subjects, 
                             get_all_subjects_of_group,get_scores_of_object, get_category_scores_of_object)
 
+class UniversityListView(BaseManageView):
+    """
+        List all universities
+        University model
+    """
+
+    error_messages = {
+        "subject" : [
+            {"code" : "invalid", "message": "This subject is invalid"},
+        ],
+
+    }
+  
+    def __init__(self, *arg, **kwargs):
+        self.VIEWS_BY_METHOD = {
+            'GET' : self.get_universities,
+        }
+
+    def get_universities(self, request):
+        request_data = request.GET
+        search_keyword = request_data.get("search")
+        subject_id = request_data.get("subject")        
+        if subject_id is None:
+            universities_queryset = University.objects.all()
+        else:
+            field = "subject"
+            if not subject_id.isdigit():
+                return json_error(field, self.error_messages)
+            else:
+                try:    
+                    subject = Subject.objects.get(id = subject_id)
+                except Subject.DoesNotExist:
+                    return json_error(field, self.error_messages)
+                else:
+                    universities_queryset = subject.university_set.all()
+        if search_keyword is not None:
+            universities = universities_queryset.filter(name__icontains = search_keyword)
+        else:
+            universities = universities_queryset 
+        result = [{"id" : university.id, "name" : university.name} for university in universities]
+        return JsonResponse(result, safe = False)
 
 class UniversitySubjectListView(BaseManageView):
     """
         List all objects based on UniversitySubject model
     """
+    
+    eror_messages = {
+        "group" : [
+            {"code" : "invalid", "message" : "This group is invalid"},
+        ],
+        "university" : [
+            {"code" : "invalid", "message" : "This university is invalid"}
+        ],
+    }
+
     def __init__(self, *args, **kwargs):
         self.VIEWS_BY_METHOD = {
             'GET' : self.get_subjects,
         } 
 
     def get_subjects(self, request, university_id):
-        error_messages = {
-            "group" : [
-                {"code" : "invalid", "message" : "This group is invalid"},
-            ],
-            "university" : [
-                {"code" : "invalid", "message" : "This university is invalid"},
-            ],
-        }
 
         field = 'university'
         try:
             university = University.objects.get(id = university_id)
         except University.DoesNotExist:
-            return json_error(field, error_messages)
+            return json_error(field, self.error_messages)
         else:
             group_id = request.GET.get('group')
             if group_id is not None:
                 field = 'group'
-                group_id = group_id if group_id.isdigit() else '0'
+                if not group_id.isdigit():
+                    return json_error(field, self.error_messages)
                 try:
                     group = SubjectGroup.objects.get(id = group_id)
                 except SubjectGroup.DoesNotExist:
-                    return json_error(field, error_messages)
+                    return json_error(field, self.error_messages)
                 else:
                     if group.parent_id is None: 
-                        return json_error(field, error_messages)
+                        return json_error(field, self.error_messages)
                     else:
                         list_subject = get_all_subjects_of_group(university, group)
                         return JsonResponse(list_subject, safe=False)
             else:
                 name = university.name
                 sorted_subjects = get_sorted_univ_subjects(university)
-                result = {"university" : name, "sectors" : sorted_subjects}
+                result = {"university" : name, "sorted_subjects" : sorted_subjects}
                 return JsonResponse(result)  
-
-class UniversityListView(BaseManageView):
-    """
-        List all universities
-        Model University
-    """
-    def __init__(self, *args, **kwargs):
-        self.VIEWS_BY_METHOD = {
-            'GET' : self.get_all_universities,
-        }
-    def get_all_universities(self, request):
-        universities = University.objects.all()
-        list_university = [{"id": university.id, "name" : university.name} for university in universities]
-        result = { "universities" : list_university}
-        return JsonResponse(result, safe = False)
-
 
 
 class UniversitySubjectDetailView(BaseManageView):
@@ -166,9 +194,9 @@ class UniversityScoreListView(ScoreListView):
             scores_by_category = university.scores_by_category.all()
             scores = []
             for score_by_category in scores_by_category:
-                data = get_all_scores_from_category_score(score_by_category)
+                data = get_all_scores_from_category_score(score_by_category, labeled=False)
                 scores.append(data)
-            result.append({"id" : university_id, "university" : university_name, "href" : university_href, "scores" : scores})
+            result.append({"university" : {"id" : university_id, "university" : university_name, "href" : university_href}, "scores" : scores})
         return JsonResponse(result, safe=False)
 
     
@@ -196,50 +224,21 @@ class UniversityScoreDetailView(ScoreDetailView):
             return json_error(field, self.error_messages)
         else:
             filter = request.GET.get("filter")
-            result = None
+            labeled = string_to_boolean(request.GET.get("label"))
+            result = {}
             if filter == self.ScoresFiltering.ONLY_CATEGORY_SCORES:
-                result = self.get_category_scores_only(university)
+                result['categoryScores'] = get_category_scores_of_object(university, labeled)
             elif filter == self.ScoresFiltering.ONLY_CRITERION_SCORES:
                 #not implemented yet
                 result = {"scores" : []}
             else:
                 #filter == self.ScoresFiltering.ALL_SCORES
-                category = request.GET.get("category")
-                if category is None:
-                    result = self.get_added_scores(university)
-                else:
-                    if category.isdigit():
-                        result = self.get_all_scores_of_category(university, category)
-                    else:
-                        field = "category"
-                        return json_error(field, self.error_messages)
-            result["university"] = "Toàn Trường"
+                result["score"] = get_scores_of_object(university, labeled)
+            result["subject"] = "Toàn Trường"
+            result["university_id"] = university_id
             return JsonResponse(result)
             
-    def get_added_scores(self, university):
-        scores = get_scores_of_object(university)
-        result = {"subject" : "Toàn Trường" ,"scores" : scores}
-        return result
-    def get_category_scores_only(self, university):
-        """
-            Fetch all category criterion scores of univ_subject
-        """
-
-        scores = get_category_scores_of_object(university)
-        result = {"scores" : scores}
-        return result
-
-    def get_all_scores_of_category(self, university, category):
-        input = {"university" : university.pk, "criterion" : 1, "score" : 0}
-        score_form = UniversityScoreForm(input)
-        if score_form.is_valid():
-            added_criterion_scores, non_added_criterion_scores = score_form.get_criterion_scores_of_category(category)
-            result = {"added_criterion_scores" : added_criterion_scores, "non_added_criterion_scores" : non_added_criterion_scores}
-            return result
-        else:
-            error = score_form.errors.get_json_data()   
-            return error
-
+    
     @method_decorator(permission_required_or_403("university.change_university", (University, 'id', 'university_id')))
     def add_score(self, request, university_id):
         request_data = request.POST

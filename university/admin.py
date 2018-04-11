@@ -4,11 +4,16 @@ from guardian.admin import GuardedModelAdmin
 from .models import University, UniversityScore, UniversitySubject, UniversityScoreByCategory
 from criteria.models import Criterion
 from criteria.admin import ScoreAdmin
-from .forms import UniversityScoreForm
+from .forms import UniversitySubjectForm, UniversityScoreForm
 
 @admin.register(University)
 class UniversityAdmin(GuardedModelAdmin):
     pass
+
+@admin.register(UniversitySubject)
+class UniversitySubjectAdmin(ScoreAdmin):
+    list_display = ('id', 'university', 'subject')
+    form = UniversitySubjectForm
 
 @admin.register(UniversityScoreByCategory)
 class UniversityScoreByCategoryAdmin(ScoreAdmin):
@@ -28,8 +33,4 @@ class UniversityScoreByCategoryAdmin(ScoreAdmin):
 @admin.register(UniversityScore)
 class UniversityScoreAdmin(ScoreAdmin):
     form = UniversityScoreForm
-    list_display = ('id','_university','criterion','score')
-
-@admin.register(UniversitySubject)
-class UniversitySubjectAdmin(admin.ModelAdmin):
-    list_display = ('id','university','subject')
+    list_display = ('id','_university','criterion', 'score')

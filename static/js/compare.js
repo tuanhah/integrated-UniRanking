@@ -1,36 +1,29 @@
-jQuery(document).ready(function(){
+jQuery(document).ready(function(){         
 	jQuery('#subject-compare').click(function(){
-		jQuery('#select-21, #step-2').css({"display":"block"});
-		jQuery('#select-22, #select-23, #select-32, #select-33, #table-2, #table-3').css({"display":"none"});
-
-	});
+		jQuery('#compare__subject_subj-selection, #step-2').hide().animate({opacity:'show'}, 500);
+		jQuery('#compare__university_univ-selection, #compare__university-table, #compare__university-table, #compare__subject-table, #compare__subject_univ-selection').hide();
+        get_all_sector();
+        get_all_category('subject');
+    });
 	jQuery('#university-compare').click(function(){
-		jQuery('#select-21, #select-23, #select-31, #select-33, #table-1, #table-3').hide();
-		jQuery('#select-22, #step-2').show();
+		jQuery('#compare__subject_subj-selection, #compare__subject_univ-selection, #compare__subject-table, #compare__university-table').hide();
+		jQuery('#compare__university_univ-selection, #step-2').hide().animate({opacity:'show'}, 500);
+        let url = '/api/universities';
+        let data = {
 
-	});
-    // jQuery('#university-compare').click(function(){
-    //     jQuery('#select-21, #select-22, #select-31, #select-32, #table-2, #table-3').hide();
-
-    //     jQuery('#select-23, #step-2').show();
-    // });    
-    jQuery('#btn-23').click(function(){jQuery('#select-33').show();});
-    jQuery(document).on('click', '.btn-2', function(){
-    	jQuery('.btn-2').removeClass("btn-select");
-    	jQuery(this).addClass("btn-select");
-    	jQuery('#select-31').show();
+        };
+        ajax_request(false, true, "GET", "json", url, data, null, all_universities_success_callback, error_callback);
+        get_all_category('university');
     });
-    jQuery('.btn-3').click(function(){
-    	jQuery(this).toggleClass('btn-select');
-    });
-    jQuery('.btn-22').click(function(){
-    	jQuery('.btn-22').removeClass("btn-select");
-    	jQuery(this).toggleClass("btn-select");
-    	jQuery('#select-32').show();
-    });
-    var table_th_1 ="";
-    var caCr = [];
-    jQuery("#compare-btn-31").click(function(){
+    
+    var subj_table_th ="";
+    var subj_ctgrCrtr = [];
+    var ctgr_with_criterions = [];
+    var scores = [];
+    var score_list = new Array();
+    var ctgr_width = 161;
+    var crtr_width =171;
+    jQuery("#compare__subject-btn").click(function(){
     	// jQuery('#DataTables_Table_0_length label').contents().first()[0].textContent="Số trường trên bảng: ";
     	// jQuery('#DataTables_Table_0_length label').contents().last()[0].textContent=" trường."
     	// jQuery('#DataTables_Table_0_filter label').contents().first()[0].textContent="Tìm kiếm: ";
@@ -41,161 +34,76 @@ jQuery(document).ready(function(){
     	// Info.html(Info.html().replace("to", " tới trường số "));
     	// Info.html(Info.html().replace("of", " trên tổng số "));
     	// Info.html(Info.html().replace("entries", " trường."));
-        var containerWidth = $('.container').width();
-        var selectedNum = $('#mul-s-31 :selected').length;
-        var w1 = 161; var w2 = 171;
-        table_th_1 =`<th class='c-t-s-category-h' style='width:${w1}px'>Nhóm tiêu chí</th><th class='c-t-s-criterion-h' style='width:${w2}px'>Tiêu chí</th>`;
-        var table_tbody = "";
-        // var containerWidth = $('.container').width();
-        // var selectedNum = $('#mul-s-31 :selected').length;
-        var w = (containerWidth-w1-w2)/selectedNum;
-        $('#mul-s-31 option:selected').each(function(){
-            let tmp = $(this).text();
-            let id = $(this).val();
-            table_th_1 += `<th class="c-t-s-${id}-h c-t-s-uni-h" style="width:${w}px">` + tmp + '</th>';
-        });
-        $('#uni-selected-t-1').html(table_th_1);
-        $.each(caCr, function(index, cCr){
-            let tmp = '';
-            table_tbody += `<tr><td class="c-t-s-category c-t-s-ca-${cCr.id}" rowspan='${Object.keys(cCr.criteria).length}'>${cCr.name}</td>`;
-            let crs = cCr.criteria;
-
-            $.each(crs, function(index, cr){
-                table_tbody +=  tmp + `<td class="c-t-s-criterion c-t-s-${cCr.id}-cr">${cr.name}</td>`;
-                jQuery('#mul-s-31 option:selected').each(function(){
-                    let id = $(this).val();
-                    // table_th_1 += '<th>'+ txt + '</th>';
-                    table_tbody += `<td class="c-t-s-${id} c-t-s-${cr.id}">9.0 <i class="fa" style="color:yellow"></i></td>`;
-                });
-                tmp = '<tr>';
-                table_tbody += '</tr>';
-
-            });
-            
-        });
+        // alert($('#comp-subj-multiselect option:selected').length);
         
-        jQuery('#c-s-tbody-1').html(table_tbody);
-        
-        setWidth();
-        function setWidth(){
-            jQuery('#mul-s-31 option:selected').each(function(){
+
+        if($('#comp-subj-multiselect option:selected').length > 1){
+            $('.loader-img').fadeIn(200).delay(800).animate({height:"hide"},300);
+            var containerWidth = $('.comp_table').width();
+            var selectedNum = $('#comp-subj-multiselect :selected').length;
+            ctgr_width = 161;crtr_width = 171;
+            subj_table_th =`<th class='comp__subj_table-category-h' style='width:${ctgr_width}px'>Nhóm tiêu chí</th><th class='comp__subj_table--criterion-h' style='width:${crtr_width}px'>Tiêu chí</th>`;
+            var table_tbody = "";
+            scores = []; scores_index = 0; score_list = [];
+
+            var univ_width = (containerWidth-ctgr_width-crtr_width)/selectedNum;
+            $('#comp-subj-multiselect option:selected').each(function(index){
+                let tmp = $(this).text();
                 let id = $(this).val();
-                let width = $(`.c-t-s-${id}-h`).width();
-                
-                $(`.c-t-s-${id}`).width(width);
+                subj_table_th += `<th class="comp__subj_table-${id}-h comp__subj_table-uni-h" style="width:${univ_width}px">` + tmp + '</th>';
+                scores_list_for_subject_compare(parseInt(id));
             });
-        }
-        $('.c-t-s-category').width($('.c-t-s-category-h').width()-1);
-        $('.c-t-s-criterion').width($('.c-t-s-criterion-h').width());
-        // $('.sortable').DataTable();
-        $.each(caCr, function(index, cCr){
-            let crs = cCr.criteria;
-            $.each(crs, function(index, cr){
-                var high = 0;
-                $(`.c-t-s-${cr.id}`).each(function(){
-                    let num = parseInt($(this).text());
-                    if(num >= high) high = num;
-                });
+            setTimeout(function() {   
+                $('#compare__subject_table-th').html(subj_table_th);                
+            }, 300);
 
-                $(`.c-t-s-${cr.id}`).each(function(){
-                    let num = parseInt($(this).text());
-                    if(num === high){
-                        $(this).find($('.fa')).addClass('fa-star');
-                        $(this).css("font-size","19px");
-                        $(this).addClass('highest');
-                    }
-                });
-            });
-        });
+            $($(this).attr('show')).animate({opacity:"show"},1000);
+            $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 1000);
+            
+        }
+        else{
+            $('html, body').animate({scrollTop:$('#compare__subject_univ-selection').offset().top - 70}, 200);
+            $(".notification").hide();
+            $(".notification").html("<p class='my-2 mx-4'>Bạn phải chọn ít nhất 2 trường Đại học để so sánh!</p>");
+            $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});   
+            $($(this).attr('show')).hide();
+        }
     });
 
-    var groups_json;
-    get_all_sector();
-    get_university_list();
-    get_all_category('subject');
-    
-    // Compare-table-by-university
-
-    $('.multiple-uni-select').select2({maximumSelectionLength: 5});
-    var table_th_2 = ""; var caCr_u = [];
-    get_all_category('university');
-    jQuery(document).on('click', '#c-btn-2-2', function(){
-        var containerWidth = $('.container').width();
-        var selectedNum = $('#mul-s-22 :selected').length;
-        var w1 = 161; var w2 = 171;
-        table_th_2 =`<th class='c-t-u-category-h' style='width:${w1}px'>Nhóm tiêu chí</th><th class='c-t-u-criterion-h' style='width:${w2}px'>Tiêu chí</th>`;
-        var table_tbody = "";
-        // var containerWidth = $('.container').width();
-        // var selectedNum = $('#mul-s-31 :selected').length;
-        var w = (containerWidth-w1-w2)/selectedNum;
-        $('#mul-s-22 option:selected').each(function(){
-            let tmp = $(this).text();
-            let id = $(this).val();
-            table_th_2 += `<th class="c-t-u-${id}-h c-t-u-uni-h" style="width:${w}px">` + tmp + '</th>';
-        });
-        $('#uni-selected-t-2').html(table_th_2);
-        $.each(caCr_u, function(index, cCr){
-            let tmp = '';
-            table_tbody += `<tr><td class="c-t-u-category c-t-u-ca-${cCr.id}" rowspan='${Object.keys(cCr.criteria).length}'>${cCr.name}</td>`;
-            let crs = cCr.criteria;
-
-            $.each(crs, function(index, cr){
-                table_tbody +=  tmp + `<td class="c-t-u-criterion c-t-u-${cCr.id}-cr">${cr.name}</td>`;
-                jQuery('#mul-s-22 option:selected').each(function(){
-                    let id = $(this).val();
-                    // table_th_1 += '<th>'+ txt + '</th>';
-                    table_tbody += `<td class="c-t-u-${id} c-t-u-${cr.id}">9.0 <i class="fa" style="color:yellow"></i></td>`;
-                });
-                tmp = '<tr>';
-                table_tbody += '</tr>';
-
-            });
-            
-        });
-        
-        jQuery('#c-u-tbody-2').html(table_tbody);
-        
-        setWidth();
-        function setWidth(){
-            jQuery('#mul-s-22 option:selected').each(function(){
+    var groups_list;
+    var univ_table_th = ""; var univ_ctgrCrtr = [];
+    jQuery(document).on('click', '#compare__university-btn', function(){
+        if($('#comp-univ-multiselect option:selected').length > 1){
+            $('.loader-img').fadeIn(200).delay(800).animate({height: "hide"}, 300);
+            var containerWidth = $('.comp_table').width();
+            var selectedNum = $('#comp-univ-multiselect :selected').length;
+            ctgr_width = 161;crtr_width = 171;
+            univ_table_th =`<th class='comp__univ_table-category-h' style='width:${ctgr_width}px'>Nhóm tiêu chí</th><th class='comp__univ_table-criterion-h' style='width:${crtr_width}px'>Tiêu chí</th>`;
+            var table_tbody = "";
+            var univ_width = (containerWidth-ctgr_width-crtr_width)/selectedNum;
+            $('#comp-univ-multiselect option:selected').each(function(){
+                let tmp = $(this).text();
                 let id = $(this).val();
-                let width = $(`.c-t-u-${id}-h`).width();
-                
-                $(`.c-t-u-${id}`).width(width);
+                univ_table_th += `<th class="comp__univ_table-${id}-h comp__univ_table-uni-h" style="width:${univ_width}px">` + tmp + '</th>';
+                scores_list_for_university_compare(parseInt(id));
             });
+            setTimeout( function(){
+                $('#compare__university_table-th').html(univ_table_th);
+            }, 300);
+
+            $($(this).attr('show')).animate({opacity:"show"},300);
+            $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 400);
         }
-        $('.c-t-u-category').width($('.c-t-u-category-h').width()-1);
-        $('.c-t-u-criterion').width($('.c-t-u-criterion-h').width());
-        // $('.sortable').DataTable();
-        $.each(caCr_u, function(index, cCr){
-            let crs = cCr.criteria;
-            $.each(crs, function(index, cr){
-                var high = 0;
-                $(`.c-t-u-${cr.id}`).each(function(){
-                    let num = parseInt($(this).text());
-                    if(num >= high) high = num;
-                });
-
-                $(`.c-t-u-${cr.id}`).each(function(){
-                    let num = parseInt($(this).text());
-                    if(num === high){
-                        $(this).find($('.fa')).addClass('fa-star');
-                        $(this).css("font-size","19px");
-                        $(this).addClass('highest');
-                    }
-                });
-            });
-        });
-
-    	// table_u_body ="";
-    	// jQuery('#mul-s-22 option:selected').each(function(){
-    	// 	let txt = $(this).text();
-    	// 	table_u_body += '<tr><td>'+ txt + '</td><td>8.9</td><td>9.0</td><td>8.7</td><td>9.3</td><td>9.5</td></tr>';
-    	// });
-    	// jQuery('#table-u-body').html(table_u_body);
+        else{
+            $('html, body').animate({scrollTop:$('#compare__university_univ-selection').offset().top - 70}, 200);
+            $(".notification").hide();
+            $(".notification").html("<p class='my-2 mx-4'>Bạn phải chọn ít nhất 2 trường Đại học để so sánh!</p>");
+            $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});
+            $($(this).attr('show')).hide();   
+        }
     });
     jQuery(document).on('click', '.gs1-btn', function(){
-    	jQuery('#select-31').hide();
+    	jQuery('#compare__subject_univ-selection').hide();
     	jQuery('.gs1-btn').removeClass('btn-select');
     	$('.gs1-btn').find($('.fa')).removeClass('fa-check');
     	jQuery(this).addClass('btn-select');
@@ -207,14 +115,14 @@ jQuery(document).ready(function(){
         ajax_request(false, true, "GET", "json", url, null, null, group_success_callback, error_callback);
     });
     jQuery(document).on('click', '.gs2-btn', function(){
-    	jQuery('#select-31').hide();
+    	jQuery('#compare__subject_univ-selection').hide();
     	jQuery('.gs2-btn').removeClass("btn-select");
     	$('.gs2-btn').find($('.fa')).removeClass('fa-check');
     	jQuery(this).addClass('btn-select');
     	$(this).find($('.fa')).addClass('fa-check');
     	let group_id = $(this).attr('id-gs2');
     	// update_group_choice(group_id);
-        let subject_list = jQuery(groups_json).filter(function(index, entry){
+        let subject_list = jQuery(groups_list).filter(function(index, entry){
             if(entry.id == group_id) return entry;
         });
         subjects_list_of_group(subject_list[0].subjects);
@@ -224,14 +132,21 @@ jQuery(document).ready(function(){
     	jQuery(this).addClass('btn-select');
     	$('.subject-btn').find($('.fa')).removeClass('fa-check');
     	$(this).find($('.fa')).addClass('fa-check');
-    	let subjectName = $(this).attr('id-subject');
-        $('#c-s-tit-31').text('Bạn muốn so sánh những trường nào trong ngành ' + subjectName + '?');
-    	$('#c-s-table-title').text('So sánh ngành ' + subjectName);
+    	let subjectName = $(this).attr('subject-name');
+        $('#c-s-tit-31').text('Chọn trường ngành ' + subjectName);
+        $('#compare__subject_table-title').text('So sánh ngành ' + subjectName);
+        let subject_selected_id = parseInt($(this).attr('subject-id'));
+        let url = '/api/universities';
+        let data = {
+            // subject : subject_selected_id,
+            // subject : 1,
+        };
+        ajax_request(false, true, "GET", "json", url, null, data, universities_success_callback , error_callback);
     });
     jQuery(document).on('click', '.gs-btn', function(){
-    	jQuery('#table-1').hide();
+    	jQuery('#compare__subject-table').hide();
 
-        table_th ="<th>Nhóm tiêu chí</th><th>Tiêu chí</th>";
+        subj_table_th ="<th>Nhóm tiêu chí</th><th>Tiêu chí</th>";
     });
     function error_callback(response){
     	alert("Đã xảy ra lỗi, xem response tại console");
@@ -239,10 +154,10 @@ jQuery(document).ready(function(){
     
     function group_success_callback(response){
     	
-        let groups = response.groups; groups_json = groups;
+        let groups = response.groups; groups_list = groups;
         let pane = "";
         $.each(groups, function(index, group){
-           pane += `<div class="col-md-4"><a href="#select-21" show="#select-21" class="btn gs-btn gs2-btn go-to-id" id="gs-2-${group.id}" id-gs2="${group.id}">${group.name}<i class="fa mt-1" style="float:right"></i></a></div>`; 
+           pane += `<div class="col-md-4"><a href="#" show="#compare__subject_subj-selection" class="btn gs-btn gs2-btn go-to-id" id="gs-2-${group.id}" id-gs2="${group.id}">${group.name}<i class="fa mt-1" style="float:right"></i></a></div>`; 
        });
         $('#gs2-area').html(pane);
         $('#tab1, #groupSubject-1').removeClass('active');
@@ -252,14 +167,14 @@ jQuery(document).ready(function(){
 
     }
 
-    // function update_group_choice(group_id){
+    // function update_group_   choice(group_id){
     //     let url = "/api/allSubjects";
     //     ajax_request(false, true, "GET", "json", url, null, null, subject_success_callback, error_callback);
     // }
     function subjects_list_of_group(subjects){
     	let pane = "";
         $.each(subjects, function(index, subject){
-            pane += `<div class="col-md-4"><a show="#select-31" href="#select-31" class="btn gs-btn subject-btn go-to-id" id="subject-${subject.id}" id-subject="${subject.name}">${subject.name}<i class="fa mt-1" style="float:right"></i></a></div>`;
+            pane += `<div class="col-md-4"><a show="#compare__subject_univ-selection" href="#" class="btn gs-btn subject-btn go-to-id" id="subject-${subject.id}" subject-name="${subject.name}" subject-id="${subject.id}">${subject.name}<i class="fa mt-1" style="float:right"></i></a></div>`;
         });
         $('#subject-area').html(pane);
         $('#tab2, #groupSubject-2').removeClass('active');
@@ -267,18 +182,136 @@ jQuery(document).ready(function(){
         $('#subject').removeClass('fade');
         $('#subject').addClass('active');
     };
-    function get_university_list(){
-    	let url = "/api/allUniversity";
-    	ajax_request(false, true,  "GET", 'json', url, null, null, all_universities_success_callback, error_callback);
-    }
-    function all_universities_success_callback(response){
-        let universities = response.universities;
-        let pane = "";
-        $.each(universities, function(ỉndex, university){
-            pane += `<option value="${university.id}">${university.name}</option>`;
+    // function get_university_list(){
+    // 	let url = "/api/allUniversity";
+    // 	ajax_request(false, true,  "GET", 'json', url, null, null, all_universities_success_callback, error_callback);
+    // }
+    function universities_success_callback(response){
+        let universities = response;
+        let pane = "", selected = "";
+        $.each(universities, function(index, university){
+            pane += `<option univ-name="${university.name}" value="${university.id}">${university.name}</option>`;
         });
-        $('.multiple-uni-select').html(pane);
+        $('#comp-subj-multiselect').html(pane);
+        
+        $('#comp-subj-multiselect').chosen({max_selected_options: 5});
+        
+        $(".search-choice").remove(); $('.subject__selected-box').html("");
+        $('#comp-subj-multiselect').trigger('chosen:updated');
+        $('#comp-subj-multiselect').bind("chosen:maxselected", function(){    
+            $('.notification').html('<p class="mx-4 my-2">Bạn đã chọn đủ số trường tối đa là 5 trường</p>');
+            $('.notification').animate({height: "show"}).delay(2000).animate({height: "hide"});
+            
+        });
+
     };
+
+    function all_universities_success_callback(response){
+        let universities = response;
+        let pane = "", selected = "";
+        $.each(universities, function(index, university){
+            pane += `<option univ-name="${university.name}" value="${university.id}">${university.name}</option>`;
+        });
+        
+        $('#comp-univ-multiselect').html(pane);
+        $('#comp-univ-multiselect').chosen({max_selected_options: 5});
+        $('.search-choice, .university__selected-box p').remove();
+        $('#comp-univ-multiselect').trigger('chosen:updated');
+        $('#comp-univ-multiselect').bind("chosen:maxselected", function(){
+            $('.notification').html('<p class="mx-4 my-2">Bạn đã chọn đủ số trường tối đa là 5 trường</p>');
+            $('.notification').animate({height: "show"}).delay(2000).animate({height: "hide"});
+        });
+    };
+    var selected_univ = [];
+    
+    $(document).on("change", "#comp-subj-multiselect", function(){
+        selected_univ = [];
+        // $('#compare__subject-table').hide();
+        // let univ_name = "";
+        $("#comp-subj-multiselect option:selected").each(function(){
+            let univ_name = $(this).attr('univ-name');
+            let univ_id = $(this).val();
+            let data = {
+                id : univ_id,
+                name : univ_name,
+            };
+            selected_univ.push(data);
+            
+        });
+        
+        let li_count = $("#comp_subj_multiselect_chosen .chosen-choices").find("li").length;
+        let last_select_univ = $('#comp_subj_multiselect_chosen .chosen-choices').find('li').eq(li_count - 2).find('span').text();
+        $(".notification").hide();
+        $(".notification").html("<p class='my-2 mx-4'>Đã thêm " + last_select_univ + " để so sánh!</p>");
+        $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});
+        let univ_box = '';
+        $.each(selected_univ, function(index, university){  
+            univ_box += `<p class="my-1 ml-0 mr-lg-4"><i title="Xóa khỏi danh sách" class="fa fa-remove subject__remove-univ" target="${university.id}" target-name="${university.name}"></i> ${university.name}</p>`;
+        });
+        $(".subject__selected-box").html(univ_box);
+        // $('[data-toggle="tooltip"]').tooltip();
+
+
+
+
+
+
+
+    });
+    $(document).on("change", "#comp-univ-multiselect", function(){
+        selected_univ = [];
+        $('#comp-univ-multiselect option:selected').each(function(){
+            let univ_name = $(this).attr('univ-name');
+            let univ_id = $(this).val();
+            let data = {
+                id: univ_id,
+                name: univ_name,
+            };
+            selected_univ.push(data);
+        });
+        let li_count = $("#comp_univ_multiselect_chosen .chosen-choices").find("li").length;
+        let last_select_univ = $('#comp_univ_multiselect_chosen .chosen-choices').find('li').eq(li_count - 2).find('span').text();
+        $(".notification").html('<p class="my-2 mx-4">Đã thêm ' + last_select_univ + ' để so sánh!</p>');
+        $(".notification").animate({height: "show"}).delay(2000).animate({heigth: "hide"});
+        let univ_box = "";
+        $.each(selected_univ, function(index, university){
+            univ_box += `<p class="my-1 ml-0 mr-xl-4"><i title="Xóa khỏi danh sách" class="fa fa-remove university__remove-univ" target="${university.id}" target-name="${university.name}"></i> ${university.name}</p>`;
+        });
+        $('.university__selected-box').html(univ_box);
+    });
+
+    $(document).on("click", ".subject__remove-univ", function(){
+        let id = $(this).attr('target');
+        let name = $(this).attr('target-name');
+        let values = $('#comp-subj-multiselect').val();
+        if(values){
+            let i = values.indexOf(id);
+            if(i >= 0){
+                values.splice(i, 1);
+                $('#comp-subj-multiselect').val(values).change();
+            }
+        }
+        // let data_index = $(this).attr('index'); alert(data_index);
+        $(".notification").html("<p class='my-2 mx-4'>Đã xóa " + name + " khỏi danh sách so sánh!");
+        // alert(`li:contains("${name}")`);
+        // $(`li[data-option-array-index="${data_index}"]`).removeClass('result-selected').addClass('active-result');
+        $('#comp-subj-multiselect').trigger("chosen:updated");
+    });
+    $(document).on('click', '.university__remove-univ', function(){
+        let id = $(this).attr('target');
+        let name = $(this).attr('target-name');
+        let values = $('#comp-univ-multiselect').val();
+        if(values){
+            let i = values.indexOf(id);
+            if(i >= 0){
+                values.splice(i, 1);
+                $('#comp-univ-multiselect').val(values).change();
+            }
+        }
+        $(".notification").html('<p class="my-2 mx-4"> Đã xóa ' + name + ' khỏi danh sách so sánh!');
+        $("#comp-univ-multiselect").trigger("chosen:updated");
+    });
+
     function get_all_sector(){
         let url = "/api/sectors";
         ajax_request(false, true, "GET", "json", url, null, null, all_sectors_success_callback, error_callback);
@@ -287,14 +320,14 @@ jQuery(document).ready(function(){
         let sectors = response.sectors;
         let pane = "";
         $.each(sectors, function(index, sector){
-            pane += `<div class="col-md-4"><a show="#select-21" class="btn gs-btn gs1-btn go-to-id" href="#select-21" id-gs1="${sector.id}">${sector.name}<i class="fa mt-1" style="float:right"></i></a></div>`;
+            pane += `<div class="col-md-4"><a show="#compare__subject_subj-selection" class="btn gs-btn gs1-btn go-to-id" href="#" id-gs1="${sector.id}">${sector.name}<i class="fa mt-1" style="float:right"></i></a></div>`;
         });
         $("#gs1-area").html(pane);
 
     }
 
     function get_all_category(target){
-        let url = "/api/categories";
+        let url = "/api/criteria";
         let data = {
             target : target,
         };
@@ -306,14 +339,218 @@ jQuery(document).ready(function(){
         }
     }
     function all_category_subject_callback(response){
-        let categories = response.categories; caCr = categories;
-        $.each(categories, function(index, category){
-            console.log(Object.keys(category.criteria).length);
-        });
+        let categories = response;
+        subj_ctgrCrtr = categories;
+        
     }
     function all_category_university_callback(response){
-        caCr_u = response.categories;
+        univ_ctgrCrtr = response;
     }
+    
+    function scores_list_for_subject_compare(university_id){
+        let uni_id = university_id;
+        let url = `/api/universities/${uni_id}/scores`;
+        let data = {
+            university_id : university_id,
+        };
+        ajax_request(false, true, "GET", "json", url, null, data, score_list_subject_compare_success_callback, error_callback);
+    }
+    var scores_index = 0;
+    function score_list_subject_compare_success_callback(response){
+        response_id = response.university_id;
+        let table_tbody = "";
+        score_list[`${response_id}`] = response.score;
+        
+        $.each(subj_ctgrCrtr, function(category_index, cCr){
+            let tmp = '';
+            let rowspan = Object.keys(cCr.criteria).length;
+            let category = cCr.category;
+            table_tbody += `<tr><td class="comp__subj_table-category comp__subj_table-ctgr-${category.id}" rowspan='${rowspan}'>${category.name}</td>`;
+            let crs = cCr.criteria;
+            $.each(crs, function(criterion_index, cr){
+                table_tbody +=  tmp + `<td class="comp__subj_table-criterion comp__subj_table-${category.id}-cr">${cr.name}</td>`;
+                let uni_index = 0; let cr_id = cr.id;
+                jQuery('#comp-subj-multiselect option:selected').each(function(){
+                    let id = parseInt($(this).val());
+                    let detail = "";
+                    
+                    if(score_list[id] != undefined) {
+                        if(score_list[id].length != 0){
+                            $(score_list[id][category_index + 1].criterionScores).filter(function(i, entry){
+                                if(entry.id == cr_id){
+
+                                    detail = entry.score;
+                                }
+                            });
+                        }
+                        else detail = "Chưa có dữ liệu!";
+                    }
+                    else detail = "Chưa có dữ liệu!";
+                    table_tbody += `<td class="comp__subj_table-${id} comp__subj_table-cr-${cr.id} comp__subj_score-ctgr-${category.id}">${detail} <i class="fa" style="color:yellow"></i></td>`;
+                    uni_index += 1;
+                });
+                tmp = '<tr>';
+                table_tbody += '</tr>';
+
+            });
+            
+        });
+
+        // jQuery('#compare__subject_table-tbody').html(table_tbody);
+        // // $('.comp__subj_table-criterion').width($('.comp__subj_table-criterion-h').width()+1);
+        setTimeout(function(){
+            jQuery('#compare__subject_table-tbody').html(table_tbody);
+            setWidth();
+            highestScore();
+        },400);
+        function setWidth(){
+            jQuery('#comp-subj-multiselect option:selected').each(function(){
+                let id = $(this).val();
+                let width = $(`.comp__subj_table-${id}-h`).width();
+
+                $(`.comp__subj_table-${id}`).width(width);
+            });
+
+            $('.comp__subj_table-category').width($('.comp__subj_table-category-h').width());
+            // let criterion_width = $('comp__subj_table-criterion-h').width;
+            $('.comp__subj_table-criterion').width($('.comp__subj_table-criterion-h').width());
+        }
+        function highestScore(){
+            $.each(subj_ctgrCrtr, function(index, cCr){
+                let crs = cCr.criteria;
+                $.each(crs, function(index, cr){
+                    var high = 0;
+                    $(`.comp__subj_table-cr-${cr.id}`).each(function(){
+                        let num = parseFloat($(this).text());
+                        if(num >= high) high = num;
+                    });
+
+                    $(`.comp__subj_table-cr-${cr.id}`).each(function(){
+                        let num = parseFloat($(this).text());
+                        if(num == high){
+                            $(this).find($('.fa')).addClass('fa-star');
+                            // $(this).css("font-size","19px");
+                            $(this).addClass('highest');
+                        }
+                    });
+                });
+            });
+        }
+
+    }
+    function scores_list_for_university_compare(university_id){
+        let uni_id = university_id;
+        let url = `/api/universities/${uni_id}/scores`;
+        let data = {
+            university_id : university_id,
+        };
+        ajax_request(false, true, "GET", "json", url, null, data, score_list_university_compare_success_callback, error_callback);
+    }
+    // var scores_index = 0;
+    function score_list_university_compare_success_callback(response){
+        response_id = response.university_id;
+        let table_tbody = "";
+        
+        score_list[`${response_id}`] = response.score;
+        // console.log(score_list);
+        $.each(univ_ctgrCrtr, function(category_index, cCr){
+            let tmp = '';
+            // console.log(category_index);
+            let rowspan = Object.keys(cCr.criteria).length;
+            let category = cCr.category;
+            table_tbody += `<tr><td class="comp__univ_table-category comp__univ_table-ctgr-${category.id}" rowspan='${rowspan}'>${category.name}</td>`;
+            let crs = cCr.criteria;
+            $.each(crs, function(criterion_index, cr){
+                table_tbody +=  tmp + `<td class="comp__univ_table-criterion comp__univ_table-${category.id}-cr">${cr.name}</td>`;
+                let uni_index = 0; let cr_id = cr.id;
+                jQuery('#comp-univ-multiselect option:selected').each(function(){
+                    let id = parseInt($(this).val());
+                    let detail = "";
+                    
+                    if(score_list[id] != undefined) {
+                        if(score_list[id].length != 0){
+                            $(score_list[id][category_index].criterionScores).filter(function(i, entry){
+                                if(entry.id == cr_id){
+
+                                    detail = entry.score;
+                                }
+                            });
+                        }
+                        else detail = "Chưa có dữ liệu!";
+                    }
+                    else detail = "Chưa có dữ liệu!";
+                    table_tbody += `<td class="comp__univ_table-${id} comp__univ_table-cr-${cr.id} comp__univ_score-ctgr-${category.id}">${detail} <i class="fa" style="color:yellow"></i></td>`;
+                    uni_index += 1;
+                });
+                tmp = '<tr>';
+                table_tbody += '</tr>';
+
+            });
+            
+        });
+
+        
+        setTimeout(function(){
+            jQuery('#compare__university_table-tbody').html(table_tbody);
+            setWidth();
+            highestScore();
+        }, 400);
+        function setWidth(){
+            jQuery('#comp-univ-multiselect option:selected').each(function(){
+                let id = $(this).val();
+                let width = $(`.comp__univ_table-${id}-h`).width();
+
+                $(`.comp__univ_table-${id}`).width(width);
+            });
+
+            $('.comp__univ_table-category').width($('.comp__univ_table-category-h').width());
+            $('.comp__univ_table-criterion').width($('.comp__univ_table-criterion-h').width());
+        }
+        function highestScore(){
+            $.each(univ_ctgrCrtr, function(index, cCr){
+                let crs = cCr.criteria;
+                $.each(crs, function(index, cr){
+                    var high = 0;
+                    $(`.comp__univ_table-cr-${cr.id}`).each(function(){
+                        let num = parseFloat($(this).text());
+                        if(num >= high) high = num;
+                    });
+
+                    $(`.comp__univ_table-cr-${cr.id}`).each(function(){
+                        let num = parseFloat($(this).text());
+                        if(num == high){
+                            $(this).find($('.fa')).addClass('fa-star');
+                            // $(this).css("font-size","19px");
+                            $(this).addClass('highest');
+                        }
+                    });
+                });
+            });
+        }
+        
+    }
+    //Fix a div to top after scroll over it
+    // $(window).scroll(function(){
+    //     if($(window).scrollTop() >= $('.fix-on-scroll').offset().top){
+    //         $('.fix-on-scroll').css({
+    //             position:'fixed',
+    //             top: '72px',
+    //             left: '77px',
+
+    //             'z-index': "100",
+
+    //         });
+    //     }
+    //     else{
+    //         $('.fix-on-scroll').css({
+    //             position: 'absolute',
+    //         });
+    //     }
+    // });
+
+    setTimeout( function(){
+        console.log($('#compare__subject-table').html());
+    }, 30000)
 });
 
 

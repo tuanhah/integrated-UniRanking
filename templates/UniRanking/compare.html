@@ -1,200 +1,320 @@
-{% extends 'UniRanking/base.html' %}
-{% load staticfiles %}
-{% block title %} So sánh | Hệ thống so sánh các trường Đại học {% endblock %}
-{% block compare %} class="active" {% endblock %}
-{% block stt %}
+{% extends 'UniRanking/base.html' %} {% load staticfiles %} {% block title %} So sánh | Hệ thống so sánh các trường Đại học
+{% endblock %} {% block compare %} class="active" {% endblock %} {% block stt %}
 <script type="text/javascript" src="{% static 'js/compare.js'%}"></script>
 
-{% endblock %}
-{% block body %}
+{% endblock %} {% block body %}
 <div id="page">
     <div class="container-fluid after-menu" id="compare-introduce">
         <div class="row mx-0 justify-content-center">
-            <div class="col-lg-2 text-center">
+            <!-- <div class="col-lg-2 text-center">
                 <i class="fa fa-object-ungroup" id="compare-icon"></i>
             </div>
             <div class="col-lg-8">
                 <h1> Chức năng so sánh:</h1>
-                <!-- <i class="fa fa-object-ungroup" style="font-size:96px"></i> -->
                 <p class="p-large">So sánh các trường tương tự nhau hoặc so sánh các ngành đào tạo giống nhau của các trường</p><hr>
+            </div> -->
+            <div class="col-1"></div>
+            <div class="col-3">
+                <p class="p-large">Một số ngành nổi bật:</p>
+                <ol>
+                    <li>
+                        <p class="my-1"> Công nghệ thông tin
+                            <i class="right-icon mt-1 fa fa-plus"></i>
+                        </p>
+                    </li>
+                    <li>
+                        <p class="my-1"> Kế toán
+                            <i class="right-icon mt-1 fa fa-plus"></i>
+                        </p>
+                    </li>
+                    <li>
+                        <p class="my-1"> Tự động hóa
+                            <i class="right-icon mt-1 fa fa-plus"></i>
+                        </p>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-1">
+                <!-- <p class="p-large"></p> -->
+                <!-- <p class="my-1">Dược học</p> -->
+                <!-- <p class="my-1">Y học Đa khoa<i class="right-icon mt-1 fa fa-plus"></i></p> -->
+            </div>
+            <div class="col-4">
+                <p class="p-large"> Một số trường nổi bật:</p>
+                <ol>
+                    <li>
+                        <p class="my-1"> Đại Học Quốc Gia Hà Nội
+                            <i class="right-icon mt-1 fa fa-plus"></i>
+                        </p>
+                    </li>
+                    <li>
+                        <p class="my-1"> Đại Học Bách Khoa Hà Nội
+                            <i class="right-icon mt-1 fa fa-plus"></i>
+                        </p>
+                    </li>
+                    <li>
+                        <p class="my-1"> Đại Học Ngoại Thương Hà Nội
+                            <i class="right-icon mt-1 fa fa-plus"></i>
+                        </p>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-2"></div>
+        </div>
+    </div>
+    <div class="container-fluid s-odd" id="compare__type-selection">
+        <div class="row mx-0 justify-content-center">
+            <div class="col-10">
+                <p class="custom-polygon">
+                    <i class="fa fa-cogs"></i>
+                </p>
+                <h2 class="title-step px-3 py-2">Chọn kiểu so sánh</h2>
+                <!-- <i class="fa fa-check mb-4 mx-3"></i><i class="fa fa-check mb-4 mx-3"></i><i class="fa fa-check mb-4 mx-3"></i> -->
+            </div>
+
+        </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="col-10">
+                <div class="row mx-0 justify-content-center">
+                    <div class="col-lg-6 mb-4">
+                        <div class="btn btn-sm px-0 go-to-id" id="subject-compare" show="#compare__subject_subj-selection">
+                            <div class="card">
+                                <img src="{% static 'img/VNU.jpg'%}" width=100%>
+                                <btn class="btn btn-success btn-w-100 mt-3 mb-0">So sánh theo ngành</btn>
+                                <p class="my-0 p-2 text-center">Chọn một ngành cụ thể, hệ thống sẽ lọc cho bạn các trường đào tạo ngành đó</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-4">
+                        <div class="btn btn-sm px-0 go-to-id" id="university-compare" show="#compare__university_univ-selection">
+                            <div class="card">
+                                <img src="{% static 'img/FTU.jpg'%}" width=100%>
+                                <btn class="btn btn-primary btn-w-100 mt-3 mb-0">So sánh theo trường</btn>
+                                <p class="my-0 p-2 text-center">Chọn các trường mà bạn đang phân vân để so sánh các tiêu chí của chúng</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid s-odd" id="select-1">
-        <div class="row mx-0">
-            <div class="col-12">
-                <h2 class="title-step-n">1</h2>
-                <h2 class="title-step">Chọn kiểu so sánh bạn muốn:</h2>
-                <p class="title-step-des">Chọn một tùy chọn so sánh</p>
+    <div class="s-even container-fluid non-display" id="compare__subject_subj-selection">
+        <div class="row mx-0 justify-content-center">
+            <div class="col-10">
+                <p class="custom-polygon">
+                    <i class="fa fa-cogs"></i>
+                </p>
+                <h2 class="title-step px-3 py-2">Bạn muốn so sánh ngành nào?</h2>
+                <!-- <p class="title-step-des">Chọn ngành bạn muốn so sánh</p> -->
             </div>
-            <!-- <div class="navbar navbar-dark bg-dark"><h1 class="navbar-brand">Bạn muốn so sánh gì</h1></div> -->
         </div>
         <div class="row mx-0 justify-content-center">
-            <div class="container">
+            <div class="col-10">
                 <div class="row mx-0">
-                    <div class="col-lg-6">
-                        <a href="#select-21" class="btn btn-success btn-1 go-to-id" id="subject-compare">So sánh theo ngành</a>
-                        <p>Chọn một ngành cụ thể, hệ thống sẽ lọc cho bạn các trường đào tạo ngành đó</p>
-                    </div>
-                    <div class="col-lg-6">
-                        <a href="#select-22" class="btn btn-primary btn-1 go-to-id" id="university-compare">So sánh theo trường</a>
-                        <p>Chọn các trường mà bạn đang phân vân để so sánh các tiêu chí của chúng</p>
-                    </div>
 
-                </div> 
-            </div>
-        </div>
-    </div>
+                    <div class="col-12">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item text-center">
+                                <a id="tab1" class="nav-link active" href="#groupSubject-1" data-toggle="tab">Khối ngành</a>
+                            </li>
+                            <li class="nav-item text-center">
+                                <a id="tab2" class="nav-link" href="#groupSubject-2" data-toggle="tab">Nhóm ngành</a>
+                            </li>
+                            <li class="nav-item text-center">
+                                <a id="tab3" class="nav-link" href="#subject" data-toggle="tab">Ngành</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane in active" id="groupSubject-1">
+                                <div class="row mx-0 gs-table" id="gs1-area">
 
-    <div class="s-even container-fluid non-display" id="select-21">
-        <!-- <div class="container-fluid"> -->
-        <div class="row mx-0">
-            <div class="col-12">
-                <h2 class="title-step-n">2</h2>
-                <h2 class="title-step">Bạn muốn so sánh ngành nào?</h2>
-                <p class="title-step-des">Chọn ngành bạn muốn so sánh</p>
-            </div>
-        </div>
-        <div class="row mx-0">   
-            <div class="container">
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a id ="tab1" class="nav-link active" href="#groupSubject-1" data-toggle="tab">Khối ngành</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tab2" class="nav-link" href="#groupSubject-2" data-toggle="tab">Nhóm ngành</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tab3" class="nav-link" href="#subject" data-toggle="tab">Ngành</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane in active" id="groupSubject-1">
-                        <div class="row mx-0 gs-table" id="gs1-area">
-
+                                </div>
+                            </div>
+                            <div class="tab-pane fade in" id="groupSubject-2" style="min-height:300px">
+                                <div class="row mx-0 gs-table" id="gs2-area">
+                                    <div class="alert alert-warning mx-auto mt-3">Bạn chưa chọn khối ngành!</div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="subject" style="min-height:300px">
+                                <div class="row mx-0 gs-table" id="subject-area">
+                                    <div class="alert alert-warning mx-auto mt-3">Bạn chưa chọn nhóm ngành!</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade in" id="groupSubject-2" style="min-height:300px">
-                        <div class="row mx-0 gs-table" id="gs2-area">
-                            <div class="alert alert-warning mx-auto mt-3">Bạn chưa chọn khối ngành!</div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="subject" style="min-height:300px">
-                        <div class="row mx-0 gs-table" id="subject-area">
-                            <div class="alert alert-warning mx-auto mt-3">Bạn chưa chọn nhóm ngành!</div>
-                        </div>
-                    </div>
-                </div> 
+                </div>
             </div>
         </div>
         <!-- </div> -->
     </div>
-    <div id="select-31" class="container-fluid non-display s-odd">
-        <!-- <div class="container-fluid"> -->
-        <div class="row mx-0">
-            <div class="col-12">
-                <h2 class="title-step-n">3</h2>
-                <h2 class="title-step" id="c-s-tit-31"> Bạn muốn so sánh những trường nào?</h2>
-                <p class="title-step-des">Chọn tối đa 5 trường để so sánh</p>
-            </div>
-        </div>
-        <div class="row mx-0 text-center">
-            <div class="col-12">
-                <div class="p-large">Tên trường bạn muốn so sánh:</div>
-                <form class="form-vertical">
-                    <div class="form-group">
-                        <select name="state[]" class="multiple-uni-select" multiple="multiple" id="mul-s-31">
-                        </select>
-                    </div>
-                    <a show="#table-1" id="compare-btn-31" class="btn btn-success go-to-id" href="#table-1">So sánh</a>
-                </form>
-            </div>
-        </div>
-        <!-- </div> -->
-    </div>
-    <div id="select-22" class="container-fluid non-display s-even">
-        <!-- <div class="container-fluid"> -->
-        <div class="row mx-0">
-            <div class="col-12">
-                <h2 class="title-step-n">2</h2>
-                <h2 class="title-step"> Bạn muốn so sánh những trường nào?</h2>
-                <p class="title-step-des">Chọn tối da 5 trường để so sánh</p>
-            </div>
-        </div>
-        <div class="row mx-0 text-center">
-            <div class="col-12">
-                <div class="p-large">Tên trường bạn muốn so sánh:</div>
-                <form class="form-vertical">
-                    <div class="form-group">
-                        <select name="state[]" class="multiple-uni-select" multiple="multiple" id="mul-s-22">
-
-                        </select>
-                    </div>
-                    <a show="#table-2" id="c-btn-2-2" class="btn btn-success go-to-id" href="#table-2">So sánh</a>
-                </form>
-            </div>
-        </div>
-        <!-- </div> -->
-    </div>
-    
-    <div class="container-fluid non-display s-even" id="table-1">
+    <div id="compare__subject_univ-selection" class="container-fluid non-display s-odd">
         <div class="row mx-0 justify-content-center">
-            <div class="col-12">
-                <h2 class="title-step-n">4</h2>
-                <h2 class="title-step" id ="c-s-table-title"></h2>
-                <p class='p-large'></p></div>  
-
+            <div class="col-10">
+                <p class="custom-polygon">
+                    <i class="fa fa-cogs"></i>
+                </p>
+                <h2 class="title-step px-3 py-2" id="c-s-tit-31"> Bạn muốn so sánh những trường nào?</h2>
+                <!-- <p class="title-step-des">Chọn/\ tối đa 5 trường để so sánh</p> -->
             </div>
-            <div class="row mx-0 justify-content-center">
-                <div class="container">
-                    <table class="table table-bordered table-hover table-fixed sortable">
-                        <thead>
-                            <tr id="uni-selected-t-1">
+        </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="col-10">
+                <div class="row mx-0">
 
-                            </tr>
+                    <div class="col-lg-12 text-center">
+                        <div class="row mx-0">
+                            <div class="col-lg-7">
+                                <form class="form-vertical">
+                                    <div class="form-group">
+                                        <label class="control-label" for="comp-subj-multiselect">Bạn có thể chọn tối đa 5 trường để so sánh</label>
+                                        <select data-placeholder="Tên trường cần so sánh ..." name="state[]" class="multiple-uni-select chosen-select" multiple id="comp-subj-multiselect">
 
-                        </thead>
+                                        </select>
+                                    </div>
+                                    <a show="#compare__subject-table" id="compare__subject-btn" class="btn btn-success" href="#">So sánh</a>
+                                </form>
+                            </div>
 
-                        <tbody id="c-s-tbody-1">
 
-
-                        </tbody>
-                    </table>
+                            <div class="col-lg-5 text-left border-left">
+                                <p class="">Danh sách so sánh:</p>
+                                <div class="subject__selected-box"></div>
+                            </div>
+                        </div>
+                        <!-- <div class="row mx-0"> -->
+                        <!-- <div class="col-12 text-center"> -->
+                        <!-- <a show="#compare__subject-table" id="compare__subject-btn" class="btn btn-sm btn-success" href="#">So sánh</a> -->
+                        <!-- </div> -->
+                        <!-- </div> -->
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid non-display s-odd" id="table-2">
-            <div class="row mx-0 justify-content-center">
-                <div class="col-12">
-                    <h2 class="title-step-n">3</h2>
-                    <h2 class="title-step">Bảng so sánh các tiêu chí theo trường: </h2>
-                    <p class="title-step-des"> </p>
-                </div>
+        <!-- </div> -->
+    </div>
+    <div id="compare__university_univ-selection" class="container-fluid non-display s-even">
+        <div class="row mx-0 justify-content-center">
+            <div class="col-10">
+                <p class="custom-polygon">
+                    <i class="fa fa-cogs"></i>
+                </p>
+                <h2 class="title-step px-3 py-2"> Bạn muốn so sánh những trường nào?</h2>
+                <!-- <p class="title-step-des">Chọn tối da 5 trường để so sánh</p> -->
             </div>
-            <div class="row mx-0 justify-content-center">
-                <div class="col-10">
-                    <table class="table table-bordered table-hover table-fixed sortable">
-                        <thead>
-                            <tr id="uni-selected-t-2">
+        </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="col-10">
+                <div class="row mx-0">
+                    <div class="col-lg-12 text-center">
+                        <div class="row mx-0 justify-content-center">
+                            <div class="col-lg-7">
+                                <!-- <div class="p-large">Tên trường bạn muốn so sánh:</div> -->
+                                <form class="form-vertical">
+                                    <div class="form-group">
+                                        <label class="control-label" for="comp-univ-multiselect">Bạn có thể so sánh tối đa 5 trường</label>
+                                        <select data-placeholder="Tên trường cần so sánh ..." name="state[]" class="multiple-uni-select chosen-select" multiple id="comp-univ-multiselect">
 
-                            </tr>
-                        </thead>
-                        <tbody id="c-u-tbody-2">
+                                        </select>
+                                    </div>
+                                    <a show="#compare__university-table" id="compare__university-btn" class="btn btn-success" href="#">So sánh</a>
+                                </form>
+                            </div>
 
-                        </tbody>
-                    </table>
+
+                            <div class="col-lg-5 text-left border-left">
+                                <p>Danh sách so sánh</p>
+                                <div class="university__selected-box"></div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
+    </div>
+    <!-- </div> -->
+
+
+    <div class="container-fluid non-display s-even" id="compare__subject-table">
+        <div class="row mx-0 justify-content-center">
+            <div class="" style="width:94%">
+                <p class="custom-polygon">
+                    <i class="fa fa-check"></i>
+                </p>
+                <h2 class="title-step px-3 py-2" id="compare__subject_table-title"></h2>
+                <!-- <p class='p-large'></p> -->
+            </div>
+
+        </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="comp_table">
+                <table class="table table-fixed table-bordered table-hover sortable">
+                    <thead class="fix-on-scroll">
+                        <tr id="compare__subject_table-th">
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="compare__subject_table-tbody">
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid non-display s-odd" id="compare__university-table">
+        <div class="row mx-0 justify-content-center">
+            <div class="" style="width:94%">
+                <p class="custom-polygon">
+                    <i class="fa fa-check "></i>
+                </p>
+                <h2 class="title-step px-3 py-2">Bảng so sánh các tiêu chí theo trường: </h2>
+                <!-- <p class="title-step-des"> </p> -->
+            </div>
+        </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="comp_table">
+                <table class="table table-bordered table-hover table-fixed">
+                    <thead>
+                        <tr id="compare__university_table-th">
+
+                        </tr>
+                    </thead>
+                    <tbody id="compare__university_table-tbody">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="pop-up">
         <div class="step text-center" id="step-1">
             <p class="p-large">1</p>
         </div>
         <div class="step text-center" id="step-2">
             <p class="p-large">2</p>
         </div>
+        <div class="loader-img">
+            <!-- <div class="img-loader"></div> -->
+            <img class="img-loader" src="http://gifimage.net/wp-content/uploads/2017/09/ajax-loader-gif-13.gif" alt="" width="800px">
+        </div>
+
+        <div class="container-fluid text-center">
+            <div class="row justify-content-center">
+                <div class="notification">
+
+                </div>
+            </div>
+        </div>
     </div>
-    <script>
-        $(document).on('click', 'compare-btn-31', function(){
+</div>
+<script>
+    $(document).ready(function () {
+        // $('.multiple-uni-select').chosen({max_selected_option: 5});
+
         // $('.sortable').DataTable();
     });
 </script>

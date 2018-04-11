@@ -1,7 +1,10 @@
+from itertools import groupby
 from django.http import JsonResponse
 from django.db.models import Prefetch
+
 from university.models import University, UniversityScore
 from subject.models import SubjectScore
+
 
 def json_error(field, error_messages, error_indices = (0,)):
     field_errors = []
@@ -10,24 +13,26 @@ def json_error(field, error_messages, error_indices = (0,)):
         field_errors.append({"code" : error["code"], "message" : error["message"]})
     return JsonResponse({field : field_errors}, safe = False, status = 404)
 
+def string_to_boolean(value):
+    if value is not None and value.lower() == 'false':
+        return False
+    else:
+        return True
+
 def get_sorted_univ_subjects(university):
-    from itertools import groupby
     result = []
-    sorted_subjects = university.subjects.select_related("group", "group__parent").order_by("group")        
-    sorted_subjects = sorted(sorted_subjects, key = lambda s : s.sector())
+    sorted_subjects = university.subjects.select_related("group__parent")        
+    sorted_subjects = sorted(sorted_subjects, key = lambda s : s.sector().id)
     iter = groupby(sorted_subjects, key = lambda s : s.sector())
     for sector, subjects in iter:
         inner_iter = groupby(subjects, key = lambda s : s.group)
         group_list = []
         for group, inner_subjects in inner_iter:
-            group_name = group.name
-            if group_name == sector:
-                group_name = "Khác"
             subject_list = []
             for subject in inner_subjects:
                 subject_list.append({"id" : subject.id,"name" : subject.name})
-            group_list.append({"name" : group_name, "subjects" : subject_list})
-        result.append({"name" : sector , "groups" : group_list})
+            group_list.append({"group": {"id": group.id , "name" : group.name}, "subjects" : subject_list})
+        result.append({"sector" : {"id" : sector.id, "name" : sector.name} , "groups" : group_list})
     return result
 
 def get_all_subjects_of_group(university, group):
@@ -38,58 +43,91 @@ def get_all_subjects_of_group(university, group):
     list_subject = list_subject_added + list_subject_non_added
     return list_subject
 
-
-def get_all_scores_from_category_score(score_by_category):
-    category = score_by_category.criterion_category
-    category_id = category.id
-    category_name = category.name
-    score = score_by_category.score
-    cri_scores = score_by_category.cri_scores.all()
-    detail = []
-    for cri_score in cri_scores:
-        criterion = cri_score.criterion
-        cri_id = criterion.id
-        cri_name = criterion.name
-        cri_descr = criterion.description
-        score = cri_score.score
-        detail.append({ "id" : cri_id, "name" : cri_name, "description" : cri_descr, "score" : score})
-    result = {"id" : category_id, "name" : category_name, "score" : score, "detail" : detail}
-    return result
-
-def get_scores_of_object(_object):
-    result = []
-    #check type of object for choosing appropriate score model
+def get_score_model(_object):
     if isinstance(_object, University):
         score_model = UniversityScore
-    else:
+    else:  #Subject model
         score_model = SubjectScore
-    
-    scores_by_category = _object.scores_by_category.order_by(
-        "-criterion_category__university_only",
-        "criterion_category_id"
-        ).select_related(
-            'criterion_category'
-        ).prefetch_related(
-            Prefetch('cri_scores', queryset=score_model.objects.select_related('criterion'))
-        )
-    
-    for score_by_category in scores_by_category:
-        data = get_all_scores_from_category_score(score_by_category)
+    return score_model 
+
+def parse_category_score(category_score, labeled=True):
+    result = {}
+    if labeled:
+        category = category_score.criterion_category
+        category_id = category.id
+        category_name = category.name
+        result = {"id" : category_id, "name" : category_name}
+    else:
+        category_id = category_score.criterion_category_id
+        result = {"id" : category_id}
+    result['score'] = category_score.score
+    return result
+
+def parse_criterion_score(criterion_score, labeled = True):
+    result = {}
+    if labeled:
+        criterion = criterion_score.criterion
+        cri_id = criterion.id
+        cri_name = criterion.name
+        cri_description = criterion.description
+        result = {"id": cri_id, "name": cri_name, "description": cri_description}
+    else:
+        cri_id = criterion_score.criterion_category_id
+        result = {"id": cri_id}
+    result['score'] = criterion_score.score
+    return result
+
+
+def get_all_scores_from_category_score(category_score, labeled = "True"):
+    result = {}
+    result["categoryScore"] = parse_category_score(category_score, labeled)
+    cri_scores = category_score.cri_scores.all()
+    detail = []
+    for cri_score in cri_scores:
+        parse_cri_score = parse_criterion_score(cri_score, labeled)
+        detail.append(parse_cri_score)
+    result['criterionScores'] = detail
+    return result
+
+def get_scores_of_object(_object, labeled = True):        
+    result = []
+    if labeled:
+        score_model = get_score_model(_object)
+        category_scores = _object.scores_by_category.order_by(
+                "-criterion_category__university_only",
+                "criterion_category_id"
+            ).select_related(
+                'criterion_category'
+            ).prefetch_related(
+                Prefetch('cri_scores', queryset=score_model.objects.select_related('criterion'))
+            )
+    else:
+        category_score = _object.scores_by_category.order_by(
+                "-criterion_category__university_only",
+                "criterion_category_id"
+            ).prefetch_related(
+                'cri_scores'
+            )
+
+    for category_score in category_scores:
+        data = get_all_scores_from_category_score(category_score, labeled)
         result.append(data)
     return result
 
-def get_category_scores_of_object(_object):
+def get_category_scores_of_object(_object, labeled):
     result = []
-    scores_by_category = _object.scores_by_category.order_by(
-        "criterion_category_id"
-        ).select_related(
-            'criterion_category'
-        )
-    
-    for score_by_category in scores_by_category:
-        category = score_by_category.criterion_category
-        category_id = category.id
-        category_name = category.name
-        score = score_by_category.score
-        result.append({"id" : category_id, "name" : category_name, "score" : score})
+    if labeled:
+        category_scores = _object.scores_by_category.order_by(
+            "-criterion_category__university_only",
+            "criterion_category_id"
+            ).select_realted(
+                'criterion_category'
+            )
+    else:
+        catgory_scores = _object.scores_by_category.order_by(
+            "criterion_category_id"
+            )
+    for category_score in category_scores:
+        parsed_score = parse_category_score(category_score, labeled)
+        result.append(parsed_score)
     return result
