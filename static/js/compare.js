@@ -335,7 +335,7 @@ jQuery(document).ready(function(){
             ajax_request(false, true, "GET", "json", url, null, data, all_category_subject_callback, error_callback);
         }
         else if(target == "university"){
-            ajax_request(false, true, "GET", "json", url, null, data, all_category_university_callback, error_callback);
+            ajax_request(false, true, "GET", "json", url, null, null, all_category_university_callback, error_callback);
         }
     }
     function all_category_subject_callback(response){

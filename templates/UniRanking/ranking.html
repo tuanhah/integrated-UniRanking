@@ -72,7 +72,7 @@
                         <div class="btn btn-sm px-0 go-to-id" id="subject-ranking" show="#ranking__subject_subj-selection">
                             <div class="card">
                                 <img src="{% static 'img/VNU.jpg'%}" width=100%>
-                                <btn class="btn btn-success btn-w-100 mt-3 mb-0">xếp hạng theo ngành</btn>
+                                <btn class="btn btn-success btn-w-100 mt-3 mb-0">Xếp hạng theo ngành</btn>
                                 <p class="my-0 p-2 text-center">Chọn một ngành cụ thể, hệ thống sẽ lọc cho bạn các trường đào tạo ngành đó</p>
                             </div>
                         </div>
@@ -81,8 +81,8 @@
                         <div class="btn btn-sm px-0 go-to-id" id="university-ranking" show="#ranking__university-table">
                             <div class="card">
                                 <img src="{% static 'img/FTU.jpg'%}" width=100%>
-                                <btn class="btn btn-primary btn-w-100 mt-3 mb-0">xếp hạng theo trường</btn>
-                                <p class="my-0 p-2 text-center">Chọn các trường mà bạn đang phân vân để xếp hạng các tiêu chí của chúng</p>
+                                <btn class="btn btn-primary btn-w-100 mt-3 mb-0">Xếp hạng theo trường</btn>
+                                <p class="my-0 p-2 text-center">Xếp hạng chung cho tất cả các trường ở tất cả các ngành</p>
                             </div>
                         </div>
                     </div>
@@ -139,91 +139,13 @@
         </div>
     </div>
 
-    <!-- <div id="ranking__subject_univ-selection" class="non-display container-fluid s-odd">
-        <div class="row mx-0 justify-content-center">
-            <div class="col-10">
-                <p class="custom-polygon">
-                    <i class="fa fa-cogs"></i>
-                </p>    
-                <h2 class="title-step px-3 py-2" id="c-s-tit-31"> Bạn muốn xếp hạng những trường nào?</h2>
-            </div>
-        </div>
-        <div class="row mx-0 justify-content-center">
-            <div class="col-10">
-                <div class="row mx-0">
-
-                    <div class="col-lg-12 text-center">
-                        <div class="row mx-0">
-                            <div class="col-lg-7">
-                                <form class="form-vertical">
-                                    <div class="form-group">
-                                        <label class="control-label" for="rank-subj-multiselect">Bạn có thể chọn tối đa 5 trường để xếp hạng</label>
-                                        <select data-placeholder="Tên trường cần xếp hạng ..." name="state[]" class="multiple-uni-select chosen-select" multiple id="rank-subj-multiselect">
-
-                                        </select>
-                                    </div>
-                                    <a show="#ranking__subject-table" id="ranking__subject-btn" class="btn btn-success" href="#">xếp hạng</a>
-                                </form>
-                            </div>
-
-
-                            <div class="col-lg-5 text-left border-left">
-                                <p class="">Danh sách xếp hạng:</p>
-                                <div class="subject__selected-box"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    
-    </div>
-    <div id="ranking__university_univ-selection" class="non-display container-fluid s-even">
-        <div class="row mx-0 justify-content-center">
-            <div class="col-10">
-                <p class="custom-polygon">
-                    <i class="fa fa-cogs"></i>
-                </p>
-                <h2 class="title-step px-3 py-2"> Bạn muốn xếp hạng những trường nào?</h2>
-                
-            </div>
-        </div> -->
-    <!-- <div class="row mx-0 justify-content-center">
-            <div class="col-10">
-                <div class="row mx-0">
-                    <div class="col-lg-12 text-center">
-                        <div class="row mx-0 justify-content-center">
-                            <div class="col-lg-7">
-                                <form class="form-vertical">
-                                    <div class="form-group">
-                                        <label class="control-label" for="rank-univ-multiselect">Bạn có thể xếp hạng tối đa 5 trường</label>
-                                        <select data-placeholder="Tên trường cần xếp hạng ..." name="state[]" class="multiple-uni-select chosen-select" multiple id="rank-univ-multiselect">
-
-                                        </select>
-                                    </div>
-                                    <a show="#ranking__university-table" id="ranking__university-btn" class="btn btn-success" href="#">xếp hạng</a>
-                                </form>
-                            </div>
-
-
-                            <div class="col-lg-5 text-left border-left">
-                                <p>Danh sách xếp hạng</p>
-                                <div class="university__selected-box"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div> -->
-    <div class="container-fluid s-odd" id="ranking__subject-table">
+    <div class="container-fluid s-odd non-display" id="ranking__subject-table">
         <div class="row mx-0 justify-content-center">
             <div class="" style="width:94%">
                 <p class="custom-polygon">
                     <i class="fa fa-check "></i>
                 </p>
-                <h2 class="title-step px-3 py-2">Bảng so sánh các tiêu chí theo trường: </h2>
+                <h2 class="title-step px-3 py-2">Bảng xếp hạng ngành: </h2>
 
             </div>
         </div>
@@ -238,7 +160,7 @@
                         <tr id="subject_table_th-sort">
                         </tr>
                     </thead>
-                    <tbody id="ranking__university_table-tbody">
+                    <tbody id="ranking__university_table-tbody" style="width:98.8%">
 
                     </tbody>
                 </table>
@@ -246,13 +168,13 @@
         </div>
     </div>
 
-    <div class="container-fluid s-odd" id="ranking__university-table">
+    <div class="container-fluid s-odd non-display" id="ranking__university-table">
         <div class="row mx-0 justify-content-center">
             <div class="" style="width:94%">
                 <p class="custom-polygon">
                     <i class="fa fa-check "></i>
                 </p>
-                <h2 class="title-step px-3 py-2">Bảng so sánh các tiêu chí theo trường: </h2>
+                <h2 class="title-step px-3 py-2">Bảng xếp hạng các tiêu chí theo trường:(Chưa hoàn thiện) </h2>
 
             </div>
         </div>

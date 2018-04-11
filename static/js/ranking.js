@@ -57,15 +57,7 @@ jQuery(document).ready(function(){
 		}	
 
 
-
-
-		// $('#rank-subj-multiselect option:selected').each(function(index){
-        //     let tmp = $(this).text();
-        //     let id = $(this).val();
-        //     subj_table_th += `<th class="rank__subj_table-${id}-h rank__subj_table-uni-h" style="width:${univ_width}px">` + tmp + '</th>';
-		// 	scores_list_for_subject_ranking(parseInt(id));
-        // });
-        setTimeout(function() {   
+	    setTimeout(function() {   
 			$('#university_table_th-ctgr').html(univ_th_ctgr);
 			$('#university_table_th-crtr').html(univ_th_crtr);
 			$('#university_table_th-sort').html(univ_th_sort);
@@ -73,9 +65,6 @@ jQuery(document).ready(function(){
 
 		$($(this).attr('show')).animate({opacity:"show"},1000);
         $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 1000);
-        
-
-
     });
     
     var subj_table_th ="";
@@ -84,87 +73,22 @@ jQuery(document).ready(function(){
     var scores = [];
     var score_list = new Array();
     var crtr_width =171;
-    // jQuery("#ranking__subject-btn").click(function(){
-    // 	// jQuery('#DataTables_Table_0_length label').contents().first()[0].textContent="Số trường trên bảng: ";
-    // 	// jQuery('#DataTables_Table_0_length label').contents().last()[0].textContent=" trường."
-    // 	// jQuery('#DataTables_Table_0_filter label').contents().first()[0].textContent="Tìm kiếm: ";
-    // 	// jQuery('a[data-dt-idx="0"]').text("Trang trước");
-    // 	// jQuery('a[data-dt-idx="8"]').text("Trang sau");
-    // 	// let Info = jQuery("#DataTables_Table_0_info");
-    // 	// Info.html(Info.html().replace("Showing", "Đang thể hiện trên bảng từ trường số "));
-    // 	// Info.html(Info.html().replace("to", " tới trường số "));
-    // 	// Info.html(Info.html().replace("of", " trên tổng số "));
-    // 	// Info.html(Info.html().replace("entries", " trường."));
-    //     // alert($('#rank-subj-multiselect option:selected').length);
-        
-
-    //     $('.loader-img').fadeIn(200).delay(800).animate({height:"hide"},300);
-    //     var containerWidth = $('.rank_table').width();
-    //     var num_of_ctgr = 4;//$('#rank-subj-multiselect :selected').length;
-    //     letuniv_width = 200;
-    //     subj_table_th =`<th class='rank__subj_table-category-h' rowspan="2" style='width:${univ_width}px'>Nhóm tiêu chí</th>`;
-    //     // var table_tbody = "";
-    //     // scores = []; scores_index = 0; score_lisvar ctgr_width = (containerWidth-univ_width)/num_of_ctgr;
-	// 	var ctgr_width = (containerWidth-univ_width)/num_of_ctgr;
-	// 	console.log(subj_ctgrCrtr);
-
-	// 	$('#rank-subj-multiselect option:selected').each(function(index){
-    //         let tmp = $(this).text();
-    //         let id = $(this).val();
-    //         subj_table_th += `<th class="rank__subj_table-${id}-h rank__subj_table-uni-h" style="width:${univ_width}px">` + tmp + '</th>';
-	// 		scores_list_for_subject_ranking(parseInt(id));
-    //     });
-    //     setTimeout(function() {   
-    //         $('#ranking__subject_table-th').html(subj_table_th);                
-    //     }, 300);
-
-	// 	$($(this).attr('show')).animate({opacity:"show"},1000);
-    //     $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 1000);
-            
-        
-    //         // $('html, body').animate({scrollTop:$('#ranking__subject_univ-selection').offset().top - 70}, 200);
-    //         // $(".notification").hide();
-    //         // $(".notification").html("<p class='my-2 mx-4'>Bạn phải chọn ít nhất 2 trường Đại học để so sánh!</p>");
-    //         // $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});   
-    //         // $($(this).attr('show')).hide();
-        
-    // });
-
+    function translate(){
+    	jQuery('#DataTables_Table_0_length label').contents().first()[0].textContent="Số trường trên bảng: ";
+    	jQuery('#DataTables_Table_0_length label').contents().last()[0].textContent=" trường."
+    	jQuery('#DataTables_Table_0_filter label').contents().first()[0].textContent="Tìm kiếm: ";
+    	jQuery('a[data-dt-idx="0"]').text("Trang trước");
+    	jQuery('a[data-dt-idx="8"]').text("Trang sau");
+    	let Info = jQuery("#DataTables_Table_0_info");
+    	Info.html(Info.html().replace("Showing", "Đang thể hiện trên bảng từ trường số "));
+    	Info.html(Info.html().replace("to", " tới trường số "));
+    	Info.html(Info.html().replace("of", " trên tổng số "));
+    	Info.html(Info.html().replace("entries", " trường."));
+        // alert($('#rank-subj-multiselect option:selected').length);
+    }
+    
     var groups_list;
     var univ_table_th = ""; var univ_ctgrCrtr = [];
-    // jQuery(document).on('click', '#ranking__university-btn', function(){
-    //     if($('#rank-univ-multiselect option:selected').length > 1){
-    //         $('.loader-img').fadeIn(200).delay(800).animate({height: "hide"}, 300);
-    //         var containerWidth = $('.rank_table').width();
-    //         var num_of_ctgr = $('#rank-univ-multiselect :selected').length;
-    //         univ_width = 161;crtr_width = 171;
-    //         univ_table_th =`<th class='rank__univ_table-category-h' style='width:${univ_width}px'>Nhóm tiêu chí</th><th class='rank__univ_table-criterion-h' style='width:${crtr_width}px'>Tiêu chí</th>`;
-    //         // var table_tbody = "";
-    //         var univ_width = (containerWidth-univ_width)/num_of_ctgr;
-			
-			
-			
-	// 		$('#rank-univ-multiselect option:selected').each(function(){
-    //             let tmp = $(this).text();
-    //             let id = $(this).val();
-    //             univ_table_th += `<th class="rank__univ_table-${id}-h rank__univ_table-uni-h" style="width:${univ_width}px">` + tmp + '</th>';
-    //             scores_list_for_university_ranking(parseInt(id));
-    //         });
-    //         setTimeout( function(){
-    //             $('#ranking__university_table-th').html(univ_table_th);
-    //         }, 300);
-
-    //         $($(this).attr('show')).animate({opacity:"show"},300);
-    //         $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 400);
-    //     }
-    //     else{
-    //         $('html, body').animate({scrollTop:$('#ranking__university_univ-selection').offset().top - 70}, 200);
-    //         $(".notification").hide();
-    //         $(".notification").html("<p class='my-2 mx-4'>Bạn phải chọn ít nhất 2 trường Đại học để so sánh!</p>");
-    //         $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});
-    //         $($(this).attr('show')).hide();   
-    //     }
-    // });
     jQuery(document).on('click', '.gs1-btn', function(){
     	jQuery('#ranking__subject_univ-selection').hide();
     	jQuery('.gs1-btn').removeClass('btn-select');
@@ -207,23 +131,24 @@ jQuery(document).ready(function(){
         };
 		var subj_th_ctgr = '';
 		var subj_th_crtr = '';
-		var subj_th_sort = '';
+        var subj_th_sort = '';
+        subj_table_body = '';
         ajax_request(false, true, "GET", "json", url, null, data, universities_success_callback , error_callback);
 	
 		
-
-		// jQuery('#DataTables_Table_0_length label').contents().first()[0].textContent="Số trường trên bảng: ";
-    	// jQuery('#DataTables_Table_0_length label').contents().last()[0].textContent=" trường."
-    	// jQuery('#DataTables_Table_0_filter label').contents().first()[0].textContent="Tìm kiếm: ";
-    	// jQuery('a[data-dt-idx="0"]').text("Trang trước");
-    	// jQuery('a[data-dt-idx="8"]').text("Trang sau");
-    	// let Info = jQuery("#DataTables_Table_0_info");
-    	// Info.html(Info.html().replace("Showing", "Đang thể hiện trên bảng từ trường số "));
-    	// Info.html(Info.html().replace("to", " tới trường số "));
-    	// Info.html(Info.html().replace("of", " trên tổng số "));
-    	// Info.html(Info.html().replace("entries", " trường."));
-        // alert($('#rank-subj-multiselect option:selected').length);
-        
+        // function translate(){
+		//     jQuery('#DataTables_Table_0_length label').contents().first()[0].textContent="Số trường trên bảng: ";
+        // 	jQuery('#DataTables_Table_0_length label').contents().last()[0].textContent=" trường."
+        // 	jQuery('#DataTables_Table_0_filter label').contents().first()[0].textContent="Tìm kiếm: ";
+    	//     jQuery('a[data-dt-idx="0"]').text("Trang trước");
+        // 	jQuery('a[data-dt-idx="8"]').text("Trang sau");
+        // 	let Info = jQuery("#DataTables_Table_0_info");
+    	//     Info.html(Info.html().replace("Showing", "Đang thể hiện trên bảng từ trường số "));
+        // 	Info.html(Info.html().replace("to", " tới trường số "));
+        // 	Info.html(Info.html().replace("of", " trên tổng số "));
+    	//     Info.html(Info.html().replace("entries", " trường."));
+        // // alert($('#rank-subj-multiselect option:selected').length);
+        // }
 
         $('.loader-img').fadeIn(200).delay(800).animate({height:"hide"},300);
         var containerWidth = $('.rank_table').width();
@@ -247,42 +172,17 @@ jQuery(document).ready(function(){
 			});
 		});
 
-
-
-
-
-		// $('#rank-subj-multiselect option:selected').each(function(index){
-        //     let tmp = $(this).text();
-        //     let id = $(this).val();
-        //     subj_table_th += `<th class="rank__subj_table-${id}-h rank__subj_table-uni-h" style="width:${univ_width}px">` + tmp + '</th>';
-		// 	scores_list_for_subject_ranking(parseInt(id));
-        // });
         setTimeout(function() {   
 			$('#subject_table_th-ctgr').html(subj_th_ctgr);
 			$('#subject_table_th-crtr').html(subj_th_crtr);
 			$('#subject_table_th-sort').html(subj_th_sort);
+            translate();
         }, 300);
 
 		$($(this).attr('show')).animate({opacity:"show"},1000);
         $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 1000);
-            
         
-            // $('html, body').animate({scrollTop:$('#ranking__subject_univ-selection').offset().top - 70}, 200);
-            // $(".notification").hide();
-            // $(".notification").html("<p class='my-2 mx-4'>Bạn phải chọn ít nhất 2 trường Đại học để so sánh!</p>");
-            // $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});   
-            // $($(this).attr('show')).hide();
-        
-    
-
-
-	
-	
 	});
-    // jQuery(document).on('click', '.gs-btn', function(){
-    	
-    //     subj_table_th ="<th>Nhóm tiêu chí</th><th>Tiêu chí</th>";
-    // });
     function error_callback(response){
     	alert("Đã xảy ra lỗi, xem response tại console");
     }
@@ -302,10 +202,6 @@ jQuery(document).ready(function(){
 
     }
 
-    // function update_group_   choice(group_id){
-    //     let url = "/api/v1/allSubjects";
-    //     ajax_request(false, true, "GET", "json", url, null, null, subject_success_callback, error_callback);
-    // }
     function subjects_list_of_group(subjects){
     	let pane = "";
         $.each(subjects, function(index, subject){
@@ -317,10 +213,6 @@ jQuery(document).ready(function(){
         $('#subject').removeClass('fade');
         $('#subject').addClass('active');
     };
-    // function get_university_list(){
-    // 	let url = "/api/v1/allUniversity";
-    // 	ajax_request(false, true,  "GET", 'json', url, null, null, all_universities_success_callback, error_callback);
-    // }
     var univ_for_test = [];
     function universities_success_callback(response){
         let universities = response;
@@ -344,9 +236,7 @@ jQuery(document).ready(function(){
                     let ctgr_index = parseInt(i/4);
 
                     if(score_list[univ_id] != undefined){
-                        // if(score_list[univ_id].length != 0 && score_list[univ_id][ctgr_index + 1] != undefined){
                         if(score_list[univ_id].length != 0){                            
-                            // if(score_list[univ_id][ctgr_index + 1]== undefined) console.log();
                             $(score_list[univ_id][ctgr_index + 1].criterion_scores).filter(function(i, entry){
                                 if(entry.criterion.id == crtr_id){
                                     detail = entry.score;
@@ -356,7 +246,7 @@ jQuery(document).ready(function(){
                         else detail = "E!";
                     }
                     else detail = "E!";
-                    subj_table_body += `<td class="comp__subj_table-${univ_id} comp__subj_table-cr-${crtr_id} comp__subj_score-ctgr-${ctgr_id}">${detail} <i class="fa" style="color:yellow"></i></td>`;
+                    subj_table_body += `<td class="comp__subj_table-${univ_id} comp__subj_table-cr-${crtr_id} comp__subj_score-ctgr-${ctgr_id}">${detail}</td>`;
                     
                 }
                 subj_table_body += '</tr>'; 
@@ -365,21 +255,21 @@ jQuery(document).ready(function(){
         }, 300);
         setTimeout(function(){
             $('#ranking__university_table-tbody').html(subj_table_body);
-            setWidth();
+            // setWidth();
+            $('.sortable').DataTable();
             
-        },400);
-        function setWidth(){
+        }, 350);
+        setTimeout(function(){
             jQuery('#subject_table_th-crtr th').each(function(){
                 let id = $(this).attr('crtr-id');
-                let width = ($(this).width());
+                let width = ($(this).width()+1);
                 $(`.comp__subj_table-cr-${id}`).width(width);
             });
 
             // $('.subj-rank').width($('.subj-rank-th').width());
-            // let criterion_width = $('comp__subj_table-criterion-h').width;
-            $('.subj__table_univ-name').width($('.rank__subj_table-category-h').width() + 15);
-        }
-        // $('.sortable').DataTable();
+            $('.subj__table_univ-name').width($('.rank__subj_table-category-h').width() + 17);
+        
+        },400)
     };
 
     function all_universities_success_callback(response){
@@ -393,95 +283,7 @@ jQuery(document).ready(function(){
     };
     var selected_univ = [];
     
-    $(document).on("change", "#rank-subj-multiselect", function(){
-        selected_univ = [];
-        // $('#ranking__subject-table').hide();
-        // let univ_name = "";
-        $("#rank-subj-multiselect option:selected").each(function(){
-            let univ_name = $(this).attr('univ-name');
-            let univ_id = $(this).val();
-            let data = {
-                id : univ_id,
-                name : univ_name,
-            };
-            selected_univ.push(data);
-            
-        });
-        
-        let li_count = $("#rank_subj_multiselect_chosen .chosen-choices").find("li").length;
-        let last_select_univ = $('#rank_subj_multiselect_chosen .chosen-choices').find('li').eq(li_count - 2).find('span').text();
-        $(".notification").hide();
-        $(".notification").html("<p class='my-2 mx-4'>Đã thêm " + last_select_univ + " để so sánh!</p>");
-        $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});
-        let univ_box = '';
-        $.each(selected_univ, function(index, university){  
-            univ_box += `<p class="my-1 ml-0 mr-lg-4"><i title="Xóa khỏi danh sách" class="fa fa-remove subject__remove-univ" target="${university.id}" target-name="${university.name}"></i> ${university.name}</p>`;
-        });
-        $(".subject__selected-box").html(univ_box);
-        // $('[data-toggle="tooltip"]').tooltip();
-
-
-
-
-
-
-
-    });
-    $(document).on("change", "#rank-univ-multiselect", function(){
-        selected_univ = [];
-        $('#rank-univ-multiselect option:selected').each(function(){
-            let univ_name = $(this).attr('univ-name');
-            let univ_id = $(this).val();
-            let data = {
-                id: univ_id,
-                name: univ_name,
-            };
-            selected_univ.push(data);
-        });
-        let li_count = $("#rank_univ_multiselect_chosen .chosen-choices").find("li").length;
-        let last_select_univ = $('#rank_univ_multiselect_chosen .chosen-choices').find('li').eq(li_count - 2).find('span').text();
-        $(".notification").html('<p class="my-2 mx-4">Đã thêm ' + last_select_univ + ' để so sánh!</p>');
-        $(".notification").animate({height: "show"}).delay(2000).animate({heigth: "hide"});
-        let univ_box = "";
-        $.each(selected_univ, function(index, university){
-            univ_box += `<p class="my-1 ml-0 mr-xl-4"><i title="Xóa khỏi danh sách" class="fa fa-remove university__remove-univ" target="${university.id}" target-name="${university.name}"></i> ${university.name}</p>`;
-        });
-        $('.university__selected-box').html(univ_box);
-    });
-
-    $(document).on("click", ".subject__remove-univ", function(){
-        let id = $(this).attr('target');
-        let name = $(this).attr('target-name');
-        let values = $('#rank-subj-multiselect').val();
-        if(values){
-            let i = values.indexOf(id);
-            if(i >= 0){
-                values.splice(i, 1);
-                $('#rank-subj-multiselect').val(values).change();
-            }
-        }
-        
-        // let data_index = $(this).attr('index'); alert(data_index);
-        $(".notification").html("<p class='my-2 mx-4'>Đã xóa " + name + " khỏi danh sách so sánh!");
-        // alert(`li:contains("${name}")`);
-        // $(`li[data-option-array-index="${data_index}"]`).removeClass('result-selected').addClass('active-result');
-        $('#rank-subj-multiselect').trigger("chosen:updated");
-    });
-    $(document).on('click', '.university__remove-univ', function(){
-        let id = $(this).attr('target');
-        let name = $(this).attr('target-name');
-        let values = $('#rank-univ-multiselect').val();
-        if(values){
-            let i = values.indexOf(id);
-            if(i >= 0){
-                values.splice(i, 1);
-                $('#rank-univ-multiselect').val(values).change();
-            }
-        }
-        $(".notification").html('<p class="my-2 mx-4"> Đã xóa ' + name + ' khỏi danh sách so sánh!');
-        $("#rank-univ-multiselect").trigger("chosen:updated");
-    });
-
+    
     function get_all_sector(){
         let url = "/api/v1/sectors";
         ajax_request(false, true, "GET", "json", url, null, null, all_sectors_success_callback, error_callback);
@@ -529,19 +331,7 @@ jQuery(document).ready(function(){
 	var scores_index = 0;
 	function score_list_subject_ranking_success_callback(response){
         response_id = response.university_id;
-        // let table_tbody = "";
-		score_list[`${response_id}`] = response.score;
-        // setTimeout(function(){
-        //     univ_for_test.forEach(function(index, univ) {
-        //         console.log(univ);
-        //         for (let i = 1; i <= 16; i++) {
-        //             let id = $(`#subject_table_th-crtr th:nth-child(${i})`).attr('crtr-id');
-
-        //         }
-        //     });
-
-        // }, 300);
-
+        score_list[`${response_id}`] = response.score;
 	}
 
 	function scores_list_for_university_ranking(university_id){
@@ -555,14 +345,8 @@ jQuery(document).ready(function(){
     // var scores_index = 0;
     function score_list_university_ranking_success_callback(response){
         response_id = response.university_id;
-        
         score_list[`${response_id}`] = response.score;
         
-	
-	
 	}
-
-
-
 
 });

@@ -131,16 +131,16 @@ hr.under{
 	padding-top:0 !important;
 }
 /*table*/
-#compare__subject-table, #compare__university-table{
-	min-height:700px;
+#compare__subject-table, #compare__university-table, #ranking__subject-table, #ranking__subject-table{
+	min-height:800px;
 	
 }
-.table-fixed{
+.table-fixed, .sortable{
 	min-height:600px;/* background-color: rgba(143, 197, 79, 0.15);*/
 	
 }
 /*.table-fixed thead{position:absolute;}*/
-.table-fixed tbody{
+.table-fixed tbody, .sortable tbody{
 		height:390px;
 		overflow-y:scroll;
 		position:absolute;
@@ -199,7 +199,10 @@ html{overflow-y:scroll;}
 .comp__subj_table-9-cr, .comp__univ_table-9-cr{background-color:rgba(0,206,206,0.6);}
 .comp__univ_score-ctgr-9, .comp__subj_score-ctgr-9{background-color:rgba(0,206,206,0.1);}
 .highest{background-color:rgba(3,114,225,0.35);}
-.subj-rank{width:63px !important}
+.subj-rank{width:53px !important}
+#subject_table_th-sort th{height:30px !important}
+#DataTables_Table_0_wrapper .row:nth-child(2) .col-sm-12{height:700px;}
+/* #DataTables_Table_0{height:662px !important} */
 /*end table*/
 /*info*/
 #background{background:url(../img/vnu_cover.jpg);background-size:cover;height:460px;}
