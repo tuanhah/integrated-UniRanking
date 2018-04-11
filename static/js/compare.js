@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
 	jQuery('#university-compare').click(function(){
 		jQuery('#compare__subject_subj-selection, #compare__subject_univ-selection, #compare__subject-table, #compare__university-table').hide();
 		jQuery('#compare__university_univ-selection, #step-2').hide().animate({opacity:'show'}, 500);
-        let url = '/api/universities';
+        let url = '/api/v1/universities';
         let data = {
 
         };
@@ -111,7 +111,7 @@ jQuery(document).ready(function(){
     	let sector_id = $(this).attr('id-gs1');
     	$('#subject-area').html('<div class="alert alert-warning mx-auto mt-3">Bạn chưa chọn nhóm ngành</div>');
     	// update_sector_choice(sector_id);
-        let url = `/api/sectors/${sector_id}/subjects`;
+        let url = `/api/v1/sectors/${sector_id}/subjects`;
         ajax_request(false, true, "GET", "json", url, null, null, group_success_callback, error_callback);
     });
     jQuery(document).on('click', '.gs2-btn', function(){
@@ -123,7 +123,7 @@ jQuery(document).ready(function(){
     	let group_id = $(this).attr('id-gs2');
     	// update_group_choice(group_id);
         let subject_list = jQuery(groups_list).filter(function(index, entry){
-            if(entry.id == group_id) return entry;
+            if(entry.group.id == group_id) return entry;
         });
         subjects_list_of_group(subject_list[0].subjects);
     });
@@ -136,7 +136,7 @@ jQuery(document).ready(function(){
         $('#c-s-tit-31').text('Chọn trường ngành ' + subjectName);
         $('#compare__subject_table-title').text('So sánh ngành ' + subjectName);
         let subject_selected_id = parseInt($(this).attr('subject-id'));
-        let url = '/api/universities';
+        let url = '/api/v1/universities';
         let data = {
             // subject : subject_selected_id,
             // subject : 1,
@@ -154,10 +154,10 @@ jQuery(document).ready(function(){
     
     function group_success_callback(response){
     	
-        let groups = response.groups; groups_list = groups;
+        let groups = response; groups_list = groups;
         let pane = "";
         $.each(groups, function(index, group){
-           pane += `<div class="col-md-4"><a href="#" show="#compare__subject_subj-selection" class="btn gs-btn gs2-btn go-to-id" id="gs-2-${group.id}" id-gs2="${group.id}">${group.name}<i class="fa mt-1" style="float:right"></i></a></div>`; 
+           pane += `<div class="col-md-4"><a href="#" show="#compare__subject_subj-selection" class="btn gs-btn gs2-btn go-to-id" id="gs-2-${group.group.id}" id-gs2="${group.group.id}">${group.group.name}<i class="fa mt-1" style="float:right"></i></a></div>`; 
        });
         $('#gs2-area').html(pane);
         $('#tab1, #groupSubject-1').removeClass('active');
@@ -168,13 +168,13 @@ jQuery(document).ready(function(){
     }
 
     // function update_group_   choice(group_id){
-    //     let url = "/api/allSubjects";
+    //     let url = "/api/v1/allSubjects";
     //     ajax_request(false, true, "GET", "json", url, null, null, subject_success_callback, error_callback);
     // }
     function subjects_list_of_group(subjects){
     	let pane = "";
         $.each(subjects, function(index, subject){
-            pane += `<div class="col-md-4"><a show="#compare__subject_univ-selection" href="#" class="btn gs-btn subject-btn go-to-id" id="subject-${subject.id}" subject-name="${subject.name}" subject-id="${subject.id}">${subject.name}<i class="fa mt-1" style="float:right"></i></a></div>`;
+            pane += `<div class="col-md-4"><a show="#compare__subject_univ-selection" href="#" class="btn gs-btn subject-btn go-to-id" id="subject-${subject.id}" subject-name="${subject.subject}" subject-id="${subject.id}">${subject.subject}<i class="fa mt-1" style="float:right"></i></a></div>`;
         });
         $('#subject-area').html(pane);
         $('#tab2, #groupSubject-2').removeClass('active');
@@ -183,7 +183,7 @@ jQuery(document).ready(function(){
         $('#subject').addClass('active');
     };
     // function get_university_list(){
-    // 	let url = "/api/allUniversity";
+    // 	let url = "/api/v1/allUniversity";
     // 	ajax_request(false, true,  "GET", 'json', url, null, null, all_universities_success_callback, error_callback);
     // }
     function universities_success_callback(response){
@@ -313,11 +313,11 @@ jQuery(document).ready(function(){
     });
 
     function get_all_sector(){
-        let url = "/api/sectors";
+        let url = "/api/v1/sectors";
         ajax_request(false, true, "GET", "json", url, null, null, all_sectors_success_callback, error_callback);
     };
     function all_sectors_success_callback(response){
-        let sectors = response.sectors;
+        let sectors = response;
         let pane = "";
         $.each(sectors, function(index, sector){
             pane += `<div class="col-md-4"><a show="#compare__subject_subj-selection" class="btn gs-btn gs1-btn go-to-id" href="#" id-gs1="${sector.id}">${sector.name}<i class="fa mt-1" style="float:right"></i></a></div>`;
@@ -327,7 +327,7 @@ jQuery(document).ready(function(){
     }
 
     function get_all_category(target){
-        let url = "/api/criteria";
+        let url = "/api/v1/criteria";
         let data = {
             target : target,
         };
@@ -349,7 +349,7 @@ jQuery(document).ready(function(){
     
     function scores_list_for_subject_compare(university_id){
         let uni_id = university_id;
-        let url = `/api/universities/${uni_id}/scores`;
+        let url = `/api/v1/universities/${uni_id}/scores`;
         let data = {
             university_id : university_id,
         };
@@ -360,11 +360,12 @@ jQuery(document).ready(function(){
         response_id = response.university_id;
         let table_tbody = "";
         score_list[`${response_id}`] = response.score;
-        
+        // console.log(score_list[174][1].criterion_scores);
+
         $.each(subj_ctgrCrtr, function(category_index, cCr){
             let tmp = '';
             let rowspan = Object.keys(cCr.criteria).length;
-            let category = cCr.category;
+            let category = cCr.criterion_category;
             table_tbody += `<tr><td class="comp__subj_table-category comp__subj_table-ctgr-${category.id}" rowspan='${rowspan}'>${category.name}</td>`;
             let crs = cCr.criteria;
             $.each(crs, function(criterion_index, cr){
@@ -376,9 +377,8 @@ jQuery(document).ready(function(){
                     
                     if(score_list[id] != undefined) {
                         if(score_list[id].length != 0){
-                            $(score_list[id][category_index + 1].criterionScores).filter(function(i, entry){
-                                if(entry.id == cr_id){
-
+                            $(score_list[id][category_index + 1].criterion_scores).filter(function(i, entry){
+                                if(entry.criterion.id == cr_id){
                                     detail = entry.score;
                                 }
                             });
@@ -440,7 +440,7 @@ jQuery(document).ready(function(){
     }
     function scores_list_for_university_compare(university_id){
         let uni_id = university_id;
-        let url = `/api/universities/${uni_id}/scores`;
+        let url = `/api/v1/universities/${uni_id}/scores`;
         let data = {
             university_id : university_id,
         };
@@ -457,7 +457,7 @@ jQuery(document).ready(function(){
             let tmp = '';
             // console.log(category_index);
             let rowspan = Object.keys(cCr.criteria).length;
-            let category = cCr.category;
+            let category = cCr.criterion_category;
             table_tbody += `<tr><td class="comp__univ_table-category comp__univ_table-ctgr-${category.id}" rowspan='${rowspan}'>${category.name}</td>`;
             let crs = cCr.criteria;
             $.each(crs, function(criterion_index, cr){
@@ -469,9 +469,8 @@ jQuery(document).ready(function(){
                     
                     if(score_list[id] != undefined) {
                         if(score_list[id].length != 0){
-                            $(score_list[id][category_index].criterionScores).filter(function(i, entry){
-                                if(entry.id == cr_id){
-
+                            $(score_list[id][category_index].criterion_scores).filter(function(i, entry){
+                                if(entry.criterion.id == cr_id){
                                     detail = entry.score;
                                 }
                             });
@@ -548,9 +547,9 @@ jQuery(document).ready(function(){
     //     }
     // });
 
-    setTimeout( function(){
-        console.log($('#compare__subject-table').html());
-    }, 30000)
+    // setTimeout( function(){
+        // console.log($('#compare__subject-table').html());
+    // }, 30000)
 });
 
 

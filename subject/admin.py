@@ -1,20 +1,25 @@
 from django.contrib import admin
 
-from .models import SubjectGroup, Subject, SubjectScore, SubjectScoreByCategory
-from criteria.models import Criterion
-from criteria.admin import ScoreAdmin
-from .forms import SubjectScoreAddForm
+from .models import SubjectGroup, Subject, UniversitySubject, SubjectScoreByCriterionCategory, SubjectScoreByCriterion
+from .forms import SubjectGroupForm, SubjectForm, UniversitySubjectForm, SubjectScoreByCriterionForm
 
-admin.site.register(SubjectGroup)
+
+@admin.register(SubjectGroup)
+class SubjectGroupAdmin(admin.ModelAdmin):
+    form = SubjectGroupForm
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
-    list_display = ('id','name','group')
+    form = SubjectForm
 
-@admin.register(SubjectScoreByCategory)
-class SubjectScoreByCategoryAdmin(ScoreAdmin):
-    list_display = ('id','_university','_subject','criterion_category','score')
-    readonly_fields = ('criterion_category','score','univ_subject')
+@admin.register(UniversitySubject)
+class UniversitySubjectAdmin(admin.ModelAdmin):
+    form = UniversitySubjectForm
+
+@admin.register(SubjectScoreByCriterionCategory)
+class SubjectScoreByCriterionCategoryAdmin(admin.ModelAdmin):
+    list_display = ('id','university','subject','criterion_category','score')
+    readonly_fields = ('univ_subject', 'criterion_category', 'score')
 
     def has_add_permission(self, request):
         return False
@@ -25,8 +30,15 @@ class SubjectScoreByCategoryAdmin(ScoreAdmin):
     def save_model(self, request, obj, form, change):
         pass
 
-@admin.register(SubjectScore)
-class SubjectScoreAdmin(ScoreAdmin):
-    form = SubjectScoreAddForm
-    list_display = ('id','_university','_subject','criterion','score')
-    
+@admin.register(SubjectScoreByCriterion)
+class UniversityScoreByCriterionAdmin(admin.ModelAdmin):
+    form = SubjectScoreByCriterionForm
+    list_display = ('id','university','subject','criterion','score')
+    non_editable_fields = ('univ_subject', 'criterion')
+
+    def get_readonly_fields(self, request, obj=None): 
+        if obj is not None: 
+            readonly_fields = self.readonly_fields + self.non_editable_fields
+            return readonly_fields
+        else:
+            return self.readonly_fields

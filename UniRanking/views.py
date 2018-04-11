@@ -1,18 +1,13 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
-from .forms import UserRegistrationForm
-from university.models import University
 
-def register(request):
-    if request.user.is_anonymous:
-        form = UserRegistrationForm(request.POST or None)
-        if request.method == "POST":
-            if form.is_valid():
-                form.save()
-        return render(request, "registration.html",{"form" : form})
-    else:
-        return redirect("homepage")
+from subject.models import *
 
+def test(request):
+    score = SubjectScoreByCriterion.objects.first()
+    score.score = 7.4
+    score.save()
+    return HttpResponse("<body></body>")
 def rank(request):
     return render(request, 'rank/rank.html')
 def index(request):
@@ -24,9 +19,9 @@ def compare(request):
 	# Sub = Subject.objects.all()
 	# CateCrit = CategoryCriterion.objects.all()
 	# Crit = Criterion.objects.all()
-	Uni = University.objects.all()
-	context = {'University': Uni}
-	return render(request, 'UniRanking/compare.html', context)
+	# Uni = University.objects.all()
+	# context = {'University': Uni}
+	return render(request, 'UniRanking/compare.html')
 def ranking(request):
 	# CaCr = CategoryCriterion.objects.all()
 	# Uni = University.objects.all()
@@ -50,4 +45,4 @@ def help(request):
 def register(request):
 	return render(request, 'UniRanking/register.html')
 def rank(request):
-	return render(request, 'UniRanking/rank.html')    
+	return render(request, 'UniRanking/rank.html') 

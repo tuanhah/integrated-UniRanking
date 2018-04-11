@@ -199,6 +199,7 @@ html{overflow-y:scroll;}
 .comp__subj_table-9-cr, .comp__univ_table-9-cr{background-color:rgba(0,206,206,0.6);}
 .comp__univ_score-ctgr-9, .comp__subj_score-ctgr-9{background-color:rgba(0,206,206,0.1);}
 .highest{background-color:rgba(3,114,225,0.35);}
+.subj-rank{width:63px !important}
 /*end table*/
 /*info*/
 #background{background:url(../img/vnu_cover.jpg);background-size:cover;height:460px;}
