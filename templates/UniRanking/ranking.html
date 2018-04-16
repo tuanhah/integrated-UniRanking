@@ -1,6 +1,13 @@
 {% extends 'UniRanking/base.html' %} {% load staticfiles %} {% block title %} Xếp hạng chung | Hệ thống xếp hạng các trường
 Đại học {% endblock %} {% block ranking %} class="active" {% endblock %} {% block stt %}
+<script type="text/javascript" src="{% static 'js/iziToast.min.js'%}"></script>
 <script type="text/javascript" src="{% static 'js/ranking.js'%}"></script>
+<link rel="stylesheet" href="{% static 'css/iziToast.min.css'%}">
+
+<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script> -->
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.6/js/tabulator.min.js"></script> -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.6/css/tabulator.min.css">  -->
+<!-- <script type="text/javascript" src="{% static 'js/ranking.js'%}"></script> -->
 {% endblock %} {% block body %}
 
 <div id="page">
@@ -69,20 +76,20 @@
             <div class="col-10">
                 <div class="row mx-0 justify-content-center">
                     <div class="col-lg-6 mb-4">
-                        <div class="btn btn-sm px-0 go-to-id" id="subject-ranking" show="#ranking__subject_subj-selection">
+                        <div class="btn btn-sm px-0 go-to-id background-img" id="subject-ranking" show="#ranking__subject_subj-selection">
                             <div class="card">
                                 <img src="{% static 'img/VNU.jpg'%}" width=100%>
                                 <btn class="btn btn-success btn-w-100 mt-3 mb-0">Xếp hạng theo ngành</btn>
-                                <p class="my-0 p-2 text-center">Chọn một ngành cụ thể, hệ thống sẽ lọc cho bạn các trường đào tạo ngành đó</p>
+                                <p class="my-0 p-2 text-center wrap-text">Chọn một ngành cụ thể, hệ thống sẽ lọc cho bạn các trường đào tạo ngành đó</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 mb-4">
-                        <div class="btn btn-sm px-0 go-to-id" id="university-ranking" show="#ranking__university-table">
+                        <div class="btn btn-sm px-0 go-to-id background-img" id="university-ranking" show="#ranking__university-table">
                             <div class="card">
                                 <img src="{% static 'img/FTU.jpg'%}" width=100%>
                                 <btn class="btn btn-primary btn-w-100 mt-3 mb-0">Xếp hạng theo trường</btn>
-                                <p class="my-0 p-2 text-center">Xếp hạng chung cho tất cả các trường ở tất cả các ngành</p>
+                                <p class="my-0 p-2 text-center wrap-text">Xếp hạng chung cho tất cả các trường ở tất cả các ngành</p>
                             </div>
                         </div>
                     </div>
@@ -150,20 +157,23 @@
             </div>
         </div>
         <div class="row mx-0 justify-content-center">
-            <div class="rank_table">
-                <table class="table table-bordered table-hover table-fixed sortable">
-                    <thead>
-                        <tr id="subject_table_th-ctgr">
-                        </tr>
-                        <tr id="subject_table_th-crtr">
-                        </tr>
-                        <tr id="subject_table_th-sort">
-                        </tr>
-                    </thead>
-                    <tbody id="ranking__university_table-tbody" style="width:98.8%">
+            <div class="rank_table" style="width:95%">
+                <div class="col-12">
+                    <table class="table table-bordered table-hover table-fixed sortable">
+                        <thead>
+                            <tr id="subject_table_th-ctgr">
+                            </tr>
+                            <tr id="subject_table_th-crtr">
+                            </tr>
+                            <tr id="subject_table_th-sort">
+                                
+                            </tr>
+                        </thead>
+                        <tbody id="ranking__university_table-tbody" style="width:98.8%">
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -223,6 +233,24 @@
                 <h2 class="title-step-n">3</h2>
                 <h2 class="title-step" id="r-s-table-title"></h2>
 
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="crtr-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Chọn tiêu chí thể hiện trên bảng:</h4>
+                    <button class="close" type="button" data-dismiss="modal">X</button>
+                </div>
+                <div class="modal-body px-4 py-2">
+                    <p class="text-center">Chọn 4 tiêu chí:</p>
+                    <div id ="crtr-modal-body"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-success" id="">Xem bảng</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Hủy</button>
+                </div>
             </div>
         </div>
     </div>

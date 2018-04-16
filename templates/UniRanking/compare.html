@@ -1,5 +1,8 @@
 {% extends 'UniRanking/base.html' %} {% load staticfiles %} {% block title %} So sánh | Hệ thống so sánh các trường Đại học
 {% endblock %} {% block compare %} class="active" {% endblock %} {% block stt %}
+<script type="text/javascript" src="{% static 'js/iziToast.min.js'%}"></script>
+<link rel="stylesheet" href="{% static 'css/iziToast.min.css'%}">
+
 <script type="text/javascript" src="{% static 'js/compare.js'%}"></script>
 
 {% endblock %} {% block body %}
@@ -172,7 +175,7 @@
 
                                         </select>
                                     </div>
-                                    <a show="#compare__subject-table" id="compare__subject-btn" class="btn btn-success" href="#">So sánh</a>
+                                    <btn show="#compare__subject-table" id="compare__subject-btn" class="btn btn-success">So sánh</btn>
                                 </form>
                             </div>
 
@@ -217,7 +220,7 @@
 
                                         </select>
                                     </div>
-                                    <a show="#compare__university-table" id="compare__university-btn" class="btn btn-success" href="#">So sánh</a>
+                                    <btn show="#compare__university-table" id="compare__university-btn" class="btn btn-success">So sánh</btn>
                                 </form>
                             </div>
 

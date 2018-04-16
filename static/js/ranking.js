@@ -1,17 +1,22 @@
 jQuery(document).ready(function(){         
-	jQuery('#subject-ranking').click(function(){
+    $(window).resize(function(){
+        var img_width = $('.background-img').parent().width(); 
+        $('.background-img').css({'width':img_width});
+    });
+    jQuery(document).on('click touch', '#subject-ranking', function(){
+        
 		jQuery('#ranking__subject_subj-selection, #step-2').hide().animate({opacity:'show'}, 500);
 		jQuery('#ranking__university_univ-selection, #ranking__university-table, #ranking__university-table').hide();
 		get_all_sector();
         get_all_category('subject');
+        
 	});
 	var univ_th_ctgr;
 	var univ_th_crtr;
 	var univ_th_sort;
     var subj_table_body = '';
     var univ_table_body = '';
-            
-	jQuery('#university-ranking').click(function(){
+	jQuery(document).on('click touch', '#university-ranking', function(){
         univ_th_ctgr = '';
         univ_th_crtr = '';
         univ_th_sort = '';
@@ -20,9 +25,9 @@ jQuery(document).ready(function(){
 		jQuery('#ranking__university_univ-selection, #step-2').hide().animate({opacity:'show'}, 500);
         let url = '/api/v1/universities';
         let data = {
-
+            //data here
         };
-        //ajax_request(false, true, "GET", "json", url, data, null, all_universities_success_callback, error_callback);
+        // ajax_request(false, true, "GET", "json", url, data, null, all_universities_success_callback, error_callback);
 		get_all_category('university');
 		
 
@@ -71,7 +76,7 @@ jQuery(document).ready(function(){
     var subj_ctgrCrtr = [];
     var ctgr_with_criterions = [];
     var scores = [];
-    var score_list = new Array();
+    var score_list = [];
     var crtr_width =171;
     function translate(){
     	jQuery('#DataTables_Table_0_length label').contents().first()[0].textContent="Số trường trên bảng: ";
@@ -89,7 +94,7 @@ jQuery(document).ready(function(){
     
     var groups_list;
     var univ_table_th = ""; var univ_ctgrCrtr = [];
-    jQuery(document).on('click', '.gs1-btn', function(){
+    jQuery(document).on('click touch', '.gs1-btn', function(){
     	jQuery('#ranking__subject_univ-selection').hide();
     	jQuery('.gs1-btn').removeClass('btn-select');
     	$('.gs1-btn').find($('.fa')).removeClass('fa-check');
@@ -101,7 +106,7 @@ jQuery(document).ready(function(){
         let url = `/api/v1/sectors/${sector_id}/subjects`;
         ajax_request(false, true, "GET", "json", url, null, null, group_success_callback, error_callback);
     });
-    jQuery(document).on('click', '.gs2-btn', function(){
+    jQuery(document).on('click touch', '.gs2-btn', function(){
     	jQuery('#ranking__subject_univ-selection').hide();
     	jQuery('.gs2-btn').removeClass("btn-select");
     	$('.gs2-btn').find($('.fa')).removeClass('fa-check');
@@ -114,7 +119,7 @@ jQuery(document).ready(function(){
         });
         subjects_list_of_group(subject_list[0].subjects);
     });
-    jQuery(document).on('click', '.subject-btn', function(){
+    jQuery(document).on('click touch', '.subject-btn', function(){
 		
     	jQuery('.subject-btn').removeClass('btn-select');
     	jQuery(this).addClass('btn-select');
@@ -133,8 +138,16 @@ jQuery(document).ready(function(){
 		var subj_th_crtr = '';
         var subj_th_sort = '';
         subj_table_body = '';
-        ajax_request(false, true, "GET", "json", url, null, data, universities_success_callback , error_callback);
-	
+        table_title_data(subj_ctgrCrtr, function(){
+            get_universities_with_scores();
+        })
+        function get_universities_with_scores(){
+            let url = '/api/v1/universities';
+            let data = {
+                // subject: subject_selected_id,
+            }
+            ajax_request(false, true, "GET", "json", url, null, data, universities_success_callback , error_callback);
+        }
 		
         // function translate(){
 		//     jQuery('#DataTables_Table_0_length label').contents().first()[0].textContent="Số trường trên bảng: ";
@@ -151,38 +164,54 @@ jQuery(document).ready(function(){
         // }
 
         $('.loader-img').fadeIn(200).delay(800).animate({height:"hide"},300);
-        var containerWidth = $('.rank_table').width();
-		var num_of_ctgr = 4;
-		var num_of_crtr = 4;//$('#rank-subj-multiselect :selected').length;
-		let univ_width = 350;
-		let rank_width = 63;
-        subj_th_ctgr =`<th rowspan="2" style="width:${rank_width}px">Thứ hạng</th><th class='rank__subj_table-category-h' rowspan="2" style='width:${univ_width}px'>Trường</th>`;
-        var ctgr_width = (containerWidth-univ_width)/num_of_ctgr;
-		subj_th_sort = '<th></th><th></th>';
-		$.each(subj_ctgrCrtr, function(ctgr_index, ctgr){
-			let colspan = Object.keys(ctgr.criteria).length;
-			let category = ctgr.criterion_category;
-			subj_th_ctgr += `<th class="comp__subj_table-category comp__subj_table-ctgr-${category.id}" colspan="${num_of_crtr}">${category.name}</th> `;
-			let crtrs = ctgr.criteria;
-			$.each(crtrs, function(crtr_index, crtr){
-				if(crtr_index <= num_of_crtr - 1){
-					subj_th_crtr += `<th class="comp__subj_table-criterion comp__subj_table-${category.id}-cr" crtr-id="${crtr.id}" ctgr-id="${category.id}">${crtr.name}</th>`;
-					subj_th_sort += '<th> </th>'
-				}
-			});
-		});
+        function table_title_data(array_of_ctgr, callback){
+            var containerWidth = $('.rank_table').width();
+		    var num_of_ctgr = 4;
+		    var num_of_crtr = 4;//$('#rank-subj-multiselect :selected').length;
+		    let univ_width = 350;
+	    	let rank_width = 63;
+            subj_th_ctgr =`<th rowspan="2" style="width:${rank_width}px">Thứ hạng</th><th class='rank__subj_table-category-h' rowspan="2" style='width:${univ_width}px'>Trường</th>`;
+            var ctgr_width = (containerWidth-univ_width)/num_of_ctgr;
+	    	subj_th_sort = '<th></th><th></th>';
+    		$.each(array_of_ctgr, function(ctgr_index, ctgr){
+		    	let colspan = Object.keys(ctgr.criteria).length;
+	    		let category = ctgr.criterion_category;
+    			subj_th_ctgr += `<th class="py-0 pr-0 ctgr comp__subj_table-category comp__subj_table-ctgr-${category.id}" colspan="${num_of_crtr}">${category.name}<btn class="btn change-crtr-btn" data-toggle="modal" data-target="#crtr-modal" ctgr-id="${category.id}"><i class="fa fa-plus"></i><btn></th>`;
+			    let crtrs = ctgr.criteria;
+		    	$.each(crtrs, function(crtr_index, crtr){
+	    			if(crtr_index <= num_of_crtr - 1){
+					    subj_th_crtr += `<th class="comp__subj_table-criterion comp__subj_table-${category.id}-cr" crtr-id="${crtr.id}" ctgr-id="${category.id}">${crtr.name}</th>`;
+					    subj_th_sort += '<th> </th>';
+				    }
+			    });
+		    });
 
-        setTimeout(function() {   
-			$('#subject_table_th-ctgr').html(subj_th_ctgr);
-			$('#subject_table_th-crtr').html(subj_th_crtr);
-			$('#subject_table_th-sort').html(subj_th_sort);
-            translate();
-        }, 300);
-
+            // setTimeout(function() {   
+			    $('#subject_table_th-ctgr').html(subj_th_ctgr);
+			    $('#subject_table_th-crtr').html(subj_th_crtr);
+			    $('#subject_table_th-sort').html(subj_th_sort);
+                // translate();
+            // }, 300);
+            callback();    
+        }
 		$($(this).attr('show')).animate({opacity:"show"},1000);
-        $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 1000);
-        
-	});
+        $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 1000);        
+    });
+    $(document).on('click touch', '.change-crtr-btn', function(){
+        let id = $(this).attr('ctgr-id');
+        let crtrs = [];
+        let modal_body = '';
+        $(subj_ctgrCrtr).filter(function(_i, element){
+            if(element.criterion_category.id == id){
+                crtrs = element.criteria;
+            }
+        });
+        $.each(crtrs, function(index, crtr){
+            modal_body += `<div class="checkbox"><label> <input type="checkbox" value="${crtr.id}"> ${crtr.name}</label></div>`;
+        });
+        $('#crtr-modal-body').html(modal_body);
+    });
+
     function error_callback(response){
     	alert("Đã xảy ra lỗi, xem response tại console");
     }
@@ -192,7 +221,7 @@ jQuery(document).ready(function(){
         let groups = response; groups_list = groups;
         let pane = "";
         $.each(groups, function(index, group){
-           pane += `<div class="col-md-4"><a href="#" show="#ranking__subject_subj-selection" class="btn gs-btn gs2-btn go-to-id" id="gs-2-${group.group.id}" id-gs2="${group.group.id}">${group.group.name}<i class="fa mt-1" style="float:right"></i></a></div>`; 
+           pane += `<div class="col-md-4"><btn show="#ranking__subject_subj-selection" class="btn gs-btn gs2-btn go-to-id" id="gs-2-${group.group.id}" id-gs2="${group.group.id}">${group.group.name}<i class="fa mt-1" style="float:right"></i></btn></div>`; 
        });
         $('#gs2-area').html(pane);
         $('#tab1, #groupSubject-1').removeClass('active');
@@ -205,7 +234,7 @@ jQuery(document).ready(function(){
     function subjects_list_of_group(subjects){
     	let pane = "";
         $.each(subjects, function(index, subject){
-            pane += `<div class="col-md-4"><a show="#ranking__subject-table" href="#" class="btn gs-btn subject-btn go-to-id" id="subject-${subject.id}" subject-name="${subject.subject}" subject-id="${subject.id}">${subject.subject}<i class="fa mt-1" style="float:right"></i></a></div>`;
+            pane += `<div class="col-md-4"><btn show="#ranking__subject-table" href="#" class="btn gs-btn subject-btn go-to-id" id="subject-${subject.id}" subject-name="${subject.subject}" subject-id="${subject.id}">${subject.subject}<i class="fa mt-1" style="float:right"></i></btn></div>`;
         });
         $('#subject-area').html(pane);
         $('#tab2, #groupSubject-2').removeClass('active');
@@ -217,59 +246,71 @@ jQuery(document).ready(function(){
     function universities_success_callback(response){
         let universities = response;
         score_list = [];
-        $.each(universities, function(index, university){
-            if(university.id == 1 || university.id == 24 || university.id == 135 || university.id == 174 || university.id == 175 || university.id == 13){
-                // subj_table_body += `<tr><td>1</td><td>${university.name}</td>`;
-                univ_for_test[`${university.id}`] = university;
-                scores_list_for_subject_ranking(parseInt(university.id));
-            }
+        function get_univ_list(univs){
+            $.each(univs, function(index, university){
+                if(university.id == 1 || university.id == 24 || university.id == 135 || university.id == 174 || university.id == 175 || university.id == 13){
+                    // subj_table_body += `<tr><td>1</td><td>${university.name}</td>`;
+                    univ_for_test[`${university.id}`] = university;
+                    scores_list_for_subject_ranking(parseInt(university.id));
+                } 
+            });
             
-        });
-        setTimeout(function(){
-            univ_for_test.forEach(function(univ, index) {
-                
-                let univ_id = univ.id;
-                subj_table_body += `<tr><td class="subj-rank">1</td><td class="subj__table_univ-name">${univ.name}</td>`;
-                for (let i = 0; i < 16; i++) {
-                    let crtr_id = $(`#subject_table_th-crtr th:nth-child(${i+1})`).attr('crtr-id');
-                    let ctgr_id = parseInt($(`#subject_table_th-crtr th:nth-child(${i+1})`).attr('ctgr-id'));
-                    let ctgr_index = parseInt(i/4);
-
-                    if(score_list[univ_id] != undefined){
-                        if(score_list[univ_id].length != 0){                            
-                            $(score_list[univ_id][ctgr_index + 1].criterion_scores).filter(function(i, entry){
-                                if(entry.criterion.id == crtr_id){
-                                    detail = entry.score;
-                                }
-                            });
-                        }
-                        else detail = "E!";
-                    }
-                    else detail = "E!";
-                    subj_table_body += `<td class="comp__subj_table-${univ_id} comp__subj_table-cr-${crtr_id} comp__subj_score-ctgr-${ctgr_id}">${detail}</td>`;
+        }
+        get_univ_list(universities);
+        // , function(){
+        //     get_data(univ_for_test, score_list, function(){
+        //         display_data(function(){
+        //             width_setting();            
+        //             // $('.sortable').DataTable();
                     
-                }
-                subj_table_body += '</tr>'; 
-            });
-            
-        }, 300);
-        setTimeout(function(){
-            $('#ranking__university_table-tbody').html(subj_table_body);
-            // setWidth();
-            $('.sortable').DataTable();
-            
-        }, 350);
-        setTimeout(function(){
-            jQuery('#subject_table_th-crtr th').each(function(){
-                let id = $(this).attr('crtr-id');
-                let width = ($(this).width()+1);
-                $(`.comp__subj_table-cr-${id}`).width(width);
-            });
-
-            // $('.subj-rank').width($('.subj-rank-th').width());
-            $('.subj__table_univ-name').width($('.rank__subj_table-category-h').width() + 17);
+        //         });
+        //     });
+        // });
         
-        },400)
+
+        // function get_data(array, scores, callback){
+        //     array.forEach(function(univ, index) {
+        //         let univ_id = univ.id;
+        //         subj_table_body += `<tr><td class="subj-rank">1</td><td class="subj__table_univ-name">${univ.name}</td>`;
+        //         for (let i = 0; i < 16; i++) {
+        //             let crtr_id = $(`#subject_table_th-crtr th:nth-child(${i+1})`).attr('crtr-id');
+        //             let ctgr_id = parseInt($(`#subject_table_th-crtr th:nth-child(${i+1})`).attr('ctgr-id'));
+        //             let ctgr_index = parseInt(i/4);
+        //             if(scores[univ_id] != undefined){
+        //                 if(scores[univ_id].length != 0){                            
+        //                     $(scores[univ_id][ctgr_index + 1].criterion_scores).filter(function(i, entry){
+        //                         if(entry.criterion.id == crtr_id){
+        //                             detail = entry.score;
+        //                         }
+        //                     });
+        //                 }
+        //                 else detail = "E!";
+        //             }
+        //             else detail = "E!";
+        //             subj_table_body += `<td class="comp__subj_table-${univ_id} comp__subj_table-cr-${crtr_id} comp__subj_score-ctgr-${ctgr_id}">${detail}</td>`;
+        //         }
+        //         subj_table_body += '</tr>';   
+        //     });
+        //     callback();
+        // }
+        
+        // function display_data(callback){
+        //     $('#ranking__university_table-tbody').html(subj_table_body);
+        //     //$('.sortable').DataTable();
+        //     // $('.sortable').tabulator();
+        //     callback();
+        // }
+        // function width_setting(){
+            
+        //     jQuery('#subject_table_th-crtr th').each(function(){
+        //         let id = $(this).attr('crtr-id');
+        //         let width = ($(this).width());
+        //         $(`.comp__subj_table-cr-${id}`).width(width);
+        //     });
+        //     // $('.subj-rank').width($('.subj-rank-th').width());
+        //     $('.subj__table_univ-name').width($('.rank__subj_table-category-h').width());
+            
+        // }
     };
 
     function all_universities_success_callback(response){
@@ -292,7 +333,7 @@ jQuery(document).ready(function(){
         let sectors = response;
         let pane = "";
         $.each(sectors, function(index, sector){
-            pane += `<div class="col-md-4"><a show="#ranking__subject_subj-selection" class="btn gs-btn gs1-btn go-to-id" href="#" id-gs1="${sector.id}">${sector.name}<i class="fa mt-1" style="float:right"></i></a></div>`;
+            pane += `<div class="col-md-4"><btn show="#ranking__subject_subj-selection" class="btn gs-btn gs1-btn go-to-id" href="#" id-gs1="${sector.id}">${sector.name}<i class="fa mt-1" style="float:right"></i></btn></div>`;
         });
         $("#gs1-area").html(pane);
 
@@ -332,7 +373,54 @@ jQuery(document).ready(function(){
 	function score_list_subject_ranking_success_callback(response){
         response_id = response.university_id;
         score_list[`${response_id}`] = response.score;
-	}
+        
+        subj_table_body = '';
+        get_data(univ_for_test, score_list, function(){
+            display_data(function(){
+                width_setting();
+                // $('.sortable').DataTable();
+            });
+        });
+        function get_data(arrays,scores, callback){
+            arrays.forEach(function(univ, index){
+                let univ_id = univ.id;
+                subj_table_body += `<tr><td class="subj-rank">1</td><td class="subj__table_univ-name">${univ.name}</td>`;
+                let score;
+                for(let i = 0; i < 16; i++){
+                    let crtr_id = $(`#subject_table_th-crtr th:nth-child(${i+1})`).attr('crtr-id');
+                    let ctgr_id = parseInt($(`#subject_table_th-crtr th:nth-child(${i+1})`).attr('ctgr-id'));
+                    let ctgr_index = parseInt(i/4);
+                    if(scores[univ_id] != undefined){
+                        if(scores[univ_id].length != 0){
+                            $(scores[univ_id][ctgr_index + 1].criterion_scores).filter(function(_i, param){
+                                if(param.criterion.id == crtr_id){
+                                    score = param.score;
+                                }
+                            });
+                        }
+                        else score = "E!";
+                    }
+                    else score = "E!";
+                    subj_table_body += `<td class="comp__subj_table-${univ_id} comp__subj_table-cr-${crtr_id} comp__subj_score-ctgr-${ctgr_id}">${score}</td>`;
+                }
+                subj_table_body += '</tr>';
+            });
+            callback();
+        }
+        function display_data(callback){
+            $('#ranking__university_table-tbody').html(subj_table_body);
+            callback();
+        }
+        function width_setting(){
+            $('#subject_table_th-crtr th').each(function(){
+                let id = $(this).attr('crtr-id');
+                let width = $(this).width();
+                $(`.comp__subj_table-cr-${id}`).width(width);
+            });
+            // $('.subj-rank').width($('.subj-rank-th').width());
+            $('.subj__table_univ-name').width($('.rank__subj_table-category-h').width());
+        }
+    }
 
 	function scores_list_for_university_ranking(university_id){
         let uni_id = university_id;
@@ -345,8 +433,7 @@ jQuery(document).ready(function(){
     // var scores_index = 0;
     function score_list_university_ranking_success_callback(response){
         response_id = response.university_id;
-        score_list[`${response_id}`] = response.score;
-        
+        score_list[`${response_id}`] = response.score; 
 	}
 
 });

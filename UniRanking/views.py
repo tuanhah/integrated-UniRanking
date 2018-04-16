@@ -21,7 +21,7 @@ def compare(request):
 	# Crit = Criterion.objects.all()
 	# Uni = University.objects.all()
 	# context = {'University': Uni}
-	return render(request, 'UniRanking/compare.html')
+	return render(request, 'Uniranking/compare.html')
 def ranking(request):
 	# CaCr = CategoryCriterion.objects.all()
 	# Uni = University.objects.all()
@@ -29,7 +29,7 @@ def ranking(request):
 	# sub = Subject.objects.all()
 	# usbc = UniversityScoreByCategory.objects.all()
 	# context = {'University': Uni, 'SubjectGroup' : Gs, 'CategoryCriterion': CaCr, "UniversityScoreByCategory": usbc, 'Subject': sub}
-	return render(request, 'Uniranking/ranking.html')
+	return render(request, 'UniRanking/ranking.html')
 
 def info(request):
 	# CateCrit = CategoryCriterion.objects.all()
