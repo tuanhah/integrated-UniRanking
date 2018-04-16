@@ -1,12 +1,24 @@
-jQuery(document).ready(function(){         
+jQuery(document).ready(function(){   
+    iziToast.settings({
+        timeout:2500,
+    });
 	jQuery(document).on('click touch','#subject-compare', function(){
-		jQuery('#compare__subject_subj-selection, #step-2').hide().animate({opacity:'show'}, 500);
+        iziToast.info({
+            title: 'Đã chọn so sánh theo ngành',
+            position: 'bottomLeft',
+        });
+        jQuery('#compare__subject_subj-selection, #step-2').hide().animate({opacity:'show'}, 500);
 		jQuery('#compare__university_univ-selection, #compare__university-table, #compare__university-table, #compare__subject-table, #compare__subject_univ-selection').hide();
         get_all_sector();
         get_all_category('subject');
+        
     });
 	jQuery(document).on('click touch', '#university-compare', function(){
-		jQuery('#compare__subject_subj-selection, #compare__subject_univ-selection, #compare__subject-table, #compare__university-table').hide();
+        iziToast.info({
+            title: 'Đã chọn so sánh theo trường',
+            position: 'bottomLeft',
+        });
+        jQuery('#compare__subject_subj-selection, #compare__subject_univ-selection, #compare__subject-table, #compare__university-table').hide();
 		jQuery('#compare__university_univ-selection, #step-2').hide().animate({opacity:'show'}, 500);
         let url = '/api/v1/universities';
         let data = {
@@ -52,9 +64,14 @@ jQuery(document).ready(function(){
         }
         else{
             $('html, body').animate({scrollTop:$('#compare__subject_univ-selection').offset().top - 70}, 200);
-            $(".notification").hide();
-            $(".notification").html("<p class='my-2 mx-4'>Bạn phải chọn ít nhất 2 trường Đại học để so sánh!</p>");
-            $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});   
+            iziToast.error({
+                title: 'Bạn phải chọn ít nhất 2 trường để so sánh!',
+                position: 'bottomLeft',
+            });
+            
+            // $(".notification").hide();
+            // $(".notification").html("<p class='my-2 mx-4'>Bạn phải chọn ít nhất 2 trường Đại học để so sánh!</p>");
+            // $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});   
             $($(this).attr('show')).hide();
         }
     });
@@ -85,14 +102,23 @@ jQuery(document).ready(function(){
         }
         else{
             $('html, body').animate({scrollTop:$('#compare__university_univ-selection').offset().top - 70}, 200);
-            $(".notification").hide();
-            $(".notification").html("<p class='my-2 mx-4'>Bạn phải chọn ít nhất 2 trường Đại học để so sánh!</p>");
-            $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});
+            // $(".notification").hide();
+            // $(".notification").html("<p class='my-2 mx-4'>Bạn phải chọn ít nhất 2 trường Đại học để so sánh!</p>");
+            // $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});
+            iziToast.error({
+                title: 'Bạn phải chọn ít nhất 2 trường để so sánh!',
+                position: 'bottomLeft',
+            });
             $($(this).attr('show')).hide();   
         }
     });
     jQuery(document).on('click touch', '.gs1-btn', function(){
-    	jQuery('#compare__subject_univ-selection').hide();
+        let sectorName = $(this).text();
+        iziToast.info({
+            title: `Đã chọn khối ngành ${sectorName}`,
+            position: 'bottomLeft',
+        });
+        jQuery('#compare__subject_univ-selection').hide();
     	jQuery('.gs1-btn').removeClass('btn-select');
     	$('.gs1-btn').find($('.fa')).removeClass('fa-check');
     	jQuery(this).addClass('btn-select');
@@ -104,7 +130,12 @@ jQuery(document).ready(function(){
         ajax_request(false, true, "GET", "json", url, null, null, group_success_callback, error_callback);
     });
     jQuery(document).on('click touch', '.gs2-btn', function(){
-    	jQuery('#compare__subject_univ-selection').hide();
+        let groupName = $(this).text();
+        iziToast.info({
+            title: `Đã chọn nhóm ngành ${groupName}`,
+            position: 'bottomLeft',
+        });
+        jQuery('#compare__subject_univ-selection').hide();
     	jQuery('.gs2-btn').removeClass("btn-select");
     	$('.gs2-btn').find($('.fa')).removeClass('fa-check');
     	jQuery(this).addClass('btn-select');
@@ -117,18 +148,22 @@ jQuery(document).ready(function(){
         subjects_list_of_group(subject_list[0].subjects);
     });
     jQuery(document).on('click touch', '.subject-btn', function(){
-    	jQuery('.subject-btn').removeClass('btn-select');
+        let subjectName = $(this).attr('subject-name');
+        iziToast.info({
+            title: `Đã chọn ngành ${subjectName}`,
+            position: 'bottomLeft',
+        });
+        jQuery('.subject-btn').removeClass('btn-select');
     	jQuery(this).addClass('btn-select');
     	$('.subject-btn').find($('.fa')).removeClass('fa-check');
     	$(this).find($('.fa')).addClass('fa-check');
-    	let subjectName = $(this).attr('subject-name');
-        $('#c-s-tit-31').text('Chọn trường ngành ' + subjectName);
+    	$('#c-s-tit-31').text('Chọn trường ngành ' + subjectName);
         $('#compare__subject_table-title').text('So sánh ngành ' + subjectName);
         let subject_selected_id = parseInt($(this).attr('subject-id'));
         let url = '/api/v1/universities';
         let data = {
             // subject : subject_selected_id,
-            // subject : 1,
+            subject : 195,
         };
         ajax_request(false, true, "GET", "json", url, null, data, universities_success_callback , error_callback);
     });
@@ -188,9 +223,13 @@ jQuery(document).ready(function(){
         $(".search-choice").remove(); $('.subject__selected-box').html("");
         $('#comp-subj-multiselect').trigger('chosen:updated');
         $('#comp-subj-multiselect').bind("chosen:maxselected", function(){    
-            $('.notification').html('<p class="mx-4 my-2">Bạn đã chọn đủ số trường tối đa là 5 trường</p>');
-            $('.notification').animate({height: "show"}).delay(2000).animate({height: "hide"});
-            
+            // $('.notification').html('<p class="mx-4 my-2">Bạn đã chọn đủ số trường tối đa là 5 trường</p>');
+            // $('.notification').animate({height: "show"}).delay(2000).animate({height: "hide"});
+            iziToast.destroy();
+            iziToast.warning({
+                title: 'Bạn đã chọn đủ số trường tối đa là 5 trường!',
+                position: 'bottomLeft',
+            });
         });
 
     };
@@ -207,8 +246,13 @@ jQuery(document).ready(function(){
         $('.search-choice, .university__selected-box p').remove();
         $('#comp-univ-multiselect').trigger('chosen:updated');
         $('#comp-univ-multiselect').bind("chosen:maxselected", function(){
-            $('.notification').html('<p class="mx-4 my-2">Bạn đã chọn đủ số trường tối đa là 5 trường</p>');
-            $('.notification').animate({height: "show"}).delay(2000).animate({height: "hide"});
+            // $('.notification').html('<p class="mx-4 my-2">Bạn đã chọn đủ số trường tối đa là 5 trường</p>');
+            // $('.notification').animate({height: "show"}).delay(2000).animate({height: "hide"});
+            iziToast.destroy();
+            iziToast.warning({
+                title: 'Bạn đã chọn đủ số trường tối đa là 5 trường!',
+                position: 'bottomLeft',
+            });
         });
     };
     var selected_univ = [];
@@ -230,9 +274,13 @@ jQuery(document).ready(function(){
         
         let li_count = $("#comp_subj_multiselect_chosen .chosen-choices").find("li").length;
         let last_select_univ = $('#comp_subj_multiselect_chosen .chosen-choices').find('li').eq(li_count - 2).find('span').text();
-        $(".notification").hide();
-        $(".notification").html("<p class='my-2 mx-4'>Đã thêm " + last_select_univ + " để so sánh!</p>");
-        $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});
+        iziToast.success({
+            title: `Đã thêm ${last_select_univ} vào danh sách so sánh!`,
+            position: 'bottomLeft',
+        });
+        // $(".notification").hide();
+        // $(".notification").html("<p class='my-2 mx-4'>Đã thêm " + last_select_univ + " để so sánh!</p>");
+        // $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});
         let univ_box = '';
         $.each(selected_univ, function(index, university){  
             univ_box += `<p class="my-1 ml-0 mr-lg-4"><i title="Xóa khỏi danh sách" class="fa fa-remove subject__remove-univ" target="${university.id}" target-name="${university.name}"></i> ${university.name}</p>`;
@@ -260,8 +308,13 @@ jQuery(document).ready(function(){
         });
         let li_count = $("#comp_univ_multiselect_chosen .chosen-choices").find("li").length;
         let last_select_univ = $('#comp_univ_multiselect_chosen .chosen-choices').find('li').eq(li_count - 2).find('span').text();
-        $(".notification").html('<p class="my-2 mx-4">Đã thêm ' + last_select_univ + ' để so sánh!</p>');
-        $(".notification").animate({height: "show"}).delay(2000).animate({heigth: "hide"});
+        // $(".notification").html('<p class="my-2 mx-4">Đã thêm ' + last_select_univ + ' để so sánh!</p>');
+        // $(".notification").animate({height: "show"}).delay(2000).animate({heigth: "hide"});
+        iziToast.success({
+            title: `Đã thêm ${last_select_univ} vào danh sách so sánh!`,
+            position: 'bottomLeft',
+        });
+        
         let univ_box = "";
         $.each(selected_univ, function(index, university){
             univ_box += `<p class="my-1 ml-0 mr-xl-4"><i title="Xóa khỏi danh sách" class="fa fa-remove university__remove-univ" target="${university.id}" target-name="${university.name}"></i> ${university.name}</p>`;
@@ -280,8 +333,14 @@ jQuery(document).ready(function(){
                 $('#comp-subj-multiselect').val(values).change();
             }
         }
+        iziToast.destroy();
+        iziToast.warning({
+            title: `Đã xóa ${name} khỏi danh sách so sánh!`,
+            position: 'bottomLeft',
+        });
+        
         // let data_index = $(this).attr('index'); alert(data_index);
-        $(".notification").html("<p class='my-2 mx-4'>Đã xóa " + name + " khỏi danh sách so sánh!");
+        // $(".notification").html("<p class='my-2 mx-4'>Đã xóa " + name + " khỏi danh sách so sánh!");
         // alert(`li:contains("${name}")`);
         // $(`li[data-option-array-index="${data_index}"]`).removeClass('result-selected').addClass('active-result');
         $('#comp-subj-multiselect').trigger("chosen:updated");
@@ -297,7 +356,11 @@ jQuery(document).ready(function(){
                 $('#comp-univ-multiselect').val(values).change();
             }
         }
-        $(".notification").html('<p class="my-2 mx-4"> Đã xóa ' + name + ' khỏi danh sách so sánh!');
+        iziToast.destroy();
+        iziToast.warning({
+            title: `Đã xóa ${name} khỏi danh sách so sánh!`,
+            position: 'bottomLeft',
+        });
         $("#comp-univ-multiselect").trigger("chosen:updated");
     });
 

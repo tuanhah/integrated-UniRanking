@@ -3,8 +3,14 @@ jQuery(document).ready(function(){
         var img_width = $('.background-img').parent().width(); 
         $('.background-img').css({'width':img_width});
     });
+    iziToast.settings({
+        timeout: 2500,
+    });
     jQuery(document).on('click touch', '#subject-ranking', function(){
-        
+        iziToast.info({
+            title: 'Đã chọn xếp hạng theo ngành!',
+            position: 'bottomLeft',
+        });
 		jQuery('#ranking__subject_subj-selection, #step-2').hide().animate({opacity:'show'}, 500);
 		jQuery('#ranking__university_univ-selection, #ranking__university-table, #ranking__university-table').hide();
 		get_all_sector();
@@ -17,6 +23,10 @@ jQuery(document).ready(function(){
     var subj_table_body = '';
     var univ_table_body = '';
 	jQuery(document).on('click touch', '#university-ranking', function(){
+        iziToast.info({
+            title: 'Đã chọn xếp hạng theo trường!',
+            position: 'bottomLeft',
+        });
         univ_th_ctgr = '';
         univ_th_crtr = '';
         univ_th_sort = '';
@@ -95,7 +105,12 @@ jQuery(document).ready(function(){
     var groups_list;
     var univ_table_th = ""; var univ_ctgrCrtr = [];
     jQuery(document).on('click touch', '.gs1-btn', function(){
-    	jQuery('#ranking__subject_univ-selection').hide();
+        let sectorName = $(this).text();
+        iziToast.info({
+            title: `Đã chọn khối ngành ${sectorName}!`,
+            position: 'bottomLeft',
+        });
+        jQuery('#ranking__subject_univ-selection').hide();
     	jQuery('.gs1-btn').removeClass('btn-select');
     	$('.gs1-btn').find($('.fa')).removeClass('fa-check');
     	jQuery(this).addClass('btn-select');
@@ -107,7 +122,12 @@ jQuery(document).ready(function(){
         ajax_request(false, true, "GET", "json", url, null, null, group_success_callback, error_callback);
     });
     jQuery(document).on('click touch', '.gs2-btn', function(){
-    	jQuery('#ranking__subject_univ-selection').hide();
+        let groupName = $(this).text();
+        iziToast.info({
+            title: `Đã chọn nhóm ngành ${groupName}!`,
+            position: 'bottomLeft',
+        });
+        jQuery('#ranking__subject_univ-selection').hide();
     	jQuery('.gs2-btn').removeClass("btn-select");
     	$('.gs2-btn').find($('.fa')).removeClass('fa-check');
     	jQuery(this).addClass('btn-select');
@@ -120,19 +140,22 @@ jQuery(document).ready(function(){
         subjects_list_of_group(subject_list[0].subjects);
     });
     jQuery(document).on('click touch', '.subject-btn', function(){
-		
+        let subjectName = $(this).attr('subject-name');
+        
+        iziToast.info({
+            title: `Đã chọn ngành ${subjectName}!`,
+            position: 'bottomLeft',
+        });
     	jQuery('.subject-btn').removeClass('btn-select');
     	jQuery(this).addClass('btn-select');
     	$('.subject-btn').find($('.fa')).removeClass('fa-check');
     	$(this).find($('.fa')).addClass('fa-check');
-    	let subjectName = $(this).attr('subject-name');
-        $('#c-s-tit-31').text('Chọn trường ngành ' + subjectName);
-        $('#ranking__subject_table-title').text('So sánh ngành ' + subjectName);
+    	$('#ranking__subject_table-title').text('So sánh ngành ' + subjectName);
         let subject_selected_id = parseInt($(this).attr('subject-id'));
         let url = '/api/v1/universities';
         let data = {
             // subject : subject_selected_id,
-            // subject : 1,
+            subject : 195,
         };
 		var subj_th_ctgr = '';
 		var subj_th_crtr = '';
