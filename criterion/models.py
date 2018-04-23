@@ -4,7 +4,7 @@ from criterion.querysets import CriterionCategoryQueryset, CriterionQueryset
 
 class CriterionCategory(models.Model):
     name = models.CharField(max_length=50)
-    #indenfy whether this category criterion is represented on university level only (not particular subject)
+    #indenfy whether this category criterion is represented on university level only (not subject)
     university_only = models.BooleanField(default = False) 
     
     objects = CriterionCategoryQueryset.as_manager()
@@ -48,3 +48,7 @@ class Criterion(models.Model):
         else: 
             data = { "id" : self.id}
         return data
+
+    def university_only(self):
+        return self.category.university_only
+    university_only.boolean = True

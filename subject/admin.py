@@ -2,22 +2,27 @@ from django.contrib import admin
 
 from .models import SubjectGroup, Subject, UniversitySubject, SubjectScoreByCriterionCategory, SubjectScoreByCriterion
 from .forms import SubjectGroupForm, SubjectForm, UniversitySubjectForm, SubjectScoreByCriterionForm
+from score.admin import ScoreByCriterionCategoryAdmin
 
 
 @admin.register(SubjectGroup)
 class SubjectGroupAdmin(admin.ModelAdmin):
     form = SubjectGroupForm
+    list_display = ('id', 'name', 'is_sector', 'is_group')
 
 @admin.register(Subject)
 class SubjectAdmin(admin.ModelAdmin):
     form = SubjectForm
+    list_display = ('id', 'name', 'group')
 
 @admin.register(UniversitySubject)
 class UniversitySubjectAdmin(admin.ModelAdmin):
     form = UniversitySubjectForm
+    list_display = ('id', 'university', 'subject', 'avg_score', 'rank')
+    readonly_fields = ('avg_score', 'rank')
 
 @admin.register(SubjectScoreByCriterionCategory)
-class SubjectScoreByCriterionCategoryAdmin(admin.ModelAdmin):
+class SubjectScoreByCriterionCategoryAdmin(ScoreByCriterionCategoryAdmin):
     list_display = ('id','university','subject','criterion_category','score')
     readonly_fields = ('univ_subject', 'criterion_category', 'score')
 

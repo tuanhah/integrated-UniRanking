@@ -14,8 +14,8 @@ class UniversityRankingView(RankingView):
 
     def get_ranking(self, request):
         universities = University.objects.order_by_rank().prefetch_scores()
-        result = [university.parse_data() for university in universities]
-        return JsonResponse(result, safe=False)
+        result = {"rank" : [university.parse_data() for university in universities]}
+        return JsonResponse(result)
 
 class UniversityScoreDetailView(ScoreDetailView):
     """
@@ -54,9 +54,10 @@ class UniversityScoreDetailView(ScoreDetailView):
             except University.DoesNotExist:
                 return self.json_error(field = 'university', code = "invalid")
             else:
-                result["score"] = university.parse_scores(named = named)
-        result["subject"] = "Toàn Trường"
-        result["university_id"] = university_id
+                result["scores"] = university.parse_scores(named = named)
+        university_info = university.parse_basic_info()
+        subject_info = {"id" : 0, "name" : "Toàn Trường"}
+        result["profile"] = {"university" : university_info, "subject" : subject_info}
         return JsonResponse(result)
 
     @method_decorator(permission_required_or_403("university.change_university", (University, 'id', 'university_id')))

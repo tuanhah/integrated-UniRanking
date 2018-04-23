@@ -12,7 +12,7 @@ from api.functions import string_to_boolean
 
 class UniversityListView(BaseManageView):
     """ 
-        List all universities 
+        List all universities (base on subject)
         University model
     """
 
@@ -47,5 +47,32 @@ class UniversityListView(BaseManageView):
             universities = universities_queryset.filter(name__icontains = search_keyword)            
         else: 
             universities = universities_queryset
-        result = [university.parse_basic_info() for university in universities]
-        return JsonResponse(result, safe=False)
+        result = {"universities" : [university.parse_basic_info() for university in universities]}
+        return JsonResponse(result)
+
+class UniversityDetailView(BaseManageView):
+    """ 
+        Get specific university profile
+        University model
+    """
+
+    error_messages = {
+        "university" : {
+            "invalid" : "This university is invalid",
+        },
+    }
+
+    def __init__(self, *args, **kwargs):
+        self.VIEWS_BY_METHOD = {
+            'GET' : self.get_university,
+        } 
+
+    def get_university(self, request, university_id):
+        try:
+            university = University.objects.get(pk = university_id)
+        except University.DoesNotExist:
+            return self.json_error(field = 'university', code = 'invalid')
+        else:
+            result = university.parse_full_profile()
+            return JsonResponse(result)
+    

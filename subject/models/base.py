@@ -18,7 +18,20 @@ class SubjectGroup(models.Model):
         ordering = ['id']
 
     def __str__(self):
-        return self.name
+        name = self.name
+        if name == "Khác": 
+            name += " ({})".format(self.sector)
+        return name
+
+    def is_sector(self):
+        return not self.is_group()
+    is_sector.short_description = "SECTOR"
+    is_sector.boolean = True
+
+    def is_group(self):
+        return self.sector_id is not None
+    is_group.short_description = "Group"
+    is_group.boolean = True
 
     def is_group_of_sector(self, sector_id):
         return self.sector_id == sector_id
@@ -48,7 +61,7 @@ class Subject(models.Model):
         return self.group.sector
 
     def parse_profile(self):
-        data = {"id" : self.id, "subject" : self.name}
+        data = {"id" : self.id, "name" : self.name}
         return data
 
 class UniversitySubject(models.Model, ScoreOwnerMixin, ScoreParserMixin):
@@ -70,10 +83,16 @@ class UniversitySubject(models.Model, ScoreOwnerMixin, ScoreParserMixin):
     def get_absolute_url(self):
         return reverse('university_profile', kwargs={'id': self.id})
 
-    def parse_profile(self):
-        data = ({
+    def parse_basic_info(self):
+        data = {
             "university" : self.university.parse_basic_info(),
             "subject" : self.subject.parse_profile(),
+        }
+        return data
+
+    def parse_profile(self):
+        data = self.parse_basic_info() 
+        data.update({
             "general_statistics" : self.parse_general_statistics()
         })  
         return data

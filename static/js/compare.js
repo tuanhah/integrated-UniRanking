@@ -2,24 +2,45 @@ jQuery(document).ready(function(){
     iziToast.settings({
         timeout:2500,
     });
+    // function scroll_to_id(){
+    //     jQuery(document).on("click", ".go-to-id", function() {
+    //         jQuery(jQuery(this).attr("show")).show();
+    
+    //         jQuery("html, body").animate(
+    //         {
+    //             scrollTop: jQuery(jQuery(this).attr("show")).offset().top - 80
+    //         },300);
+        
+    //     });
+    //   } 
 	jQuery(document).on('click touch','#subject-compare', function(){
-        iziToast.info({
-            title: 'Đã chọn so sánh theo ngành',
-            position: 'bottomLeft',
+        // iziToast.info({
+        //     title: 'Đã chọn so sánh theo ngành',
+        //     position: 'bottomLeft',
+        // });
+        $('#subject-compare i').remove();
+        $(this).append(' <i class="fa fa-check-circle success-icon"></i>');
+        $('#university-compare i').remove();
+        jQuery('#compare__subject_subj-selection, #step-2').hide().animate({opacity:'show'},500, function(){;
+            scroll_to_id();
         });
-        jQuery('#compare__subject_subj-selection, #step-2').hide().animate({opacity:'show'}, 500);
-		jQuery('#compare__university_univ-selection, #compare__university-table, #compare__university-table, #compare__subject-table, #compare__subject_univ-selection').hide();
+		jQuery('#carousel-comp-area, #compare__university_univ-selection, #compare__university-table, #compare__university-table, #compare__subject-table, #compare__subject_univ-selection').hide();
         get_all_sector();
         get_all_category('subject');
         
     });
 	jQuery(document).on('click touch', '#university-compare', function(){
-        iziToast.info({
-            title: 'Đã chọn so sánh theo trường',
-            position: 'bottomLeft',
+        // iziToast.info({
+        //     title: 'Đã chọn so sánh theo trường',
+        //     position: 'bottomLeft',
+        // });
+        $('#university-compare i').remove();
+        $(this).append(' <i class="fa fa-check-circle success-icon"></i>');
+        $('#subject-compare i').remove();
+        jQuery('#carousel-comp-area, #compare__subject_subj-selection, #compare__subject_univ-selection, #compare__subject-table, #compare__university-table').hide();
+		jQuery('#compare__university_univ-selection, #step-2').hide().animate({opacity:'show'}, 500, function(){
+            scroll_to_id();
         });
-        jQuery('#compare__subject_subj-selection, #compare__subject_univ-selection, #compare__subject-table, #compare__university-table').hide();
-		jQuery('#compare__university_univ-selection, #step-2').hide().animate({opacity:'show'}, 500);
         let url = '/api/v1/universities';
         let data = {
 
@@ -76,6 +97,27 @@ jQuery(document).ready(function(){
         }
     });
 
+    // $('#subj-back-btn, #univ-next-btn').hover(function(){
+    //     $(this).animate({
+    //         width: "27%",
+    //     }, "slow");
+    // }, function(){
+    //     $(this).animate({
+    //         width: "25%",
+    //     }, "slow");
+    // });
+
+    $(document).on('click', '#subj-back-btn', function(){
+        jQuery('#compare__subject_subj-selection').hide().animate({opacity:'show'},500, function(){;
+            scroll_to_id();
+        });
+		jQuery('#compare__university_univ-selection, #compare__subject_univ-selection').hide();
+    });
+    $(document).on('click', '#univ-next-btn', function(){
+        $('#compare__subject_subj-selection').hide(0, function(){
+            scroll_to_id();
+        });
+    });
     var groups_list;
     var univ_table_th = ""; var univ_ctgrCrtr = [];
     jQuery(document).on('click touch', '#compare__university-btn', function(){
@@ -114,27 +156,27 @@ jQuery(document).ready(function(){
     });
     jQuery(document).on('click touch', '.gs1-btn', function(){
         let sectorName = $(this).text();
-        iziToast.info({
-            title: `Đã chọn khối ngành ${sectorName}`,
-            position: 'bottomLeft',
-        });
+        // iziToast.info({
+        //     title: `Đã chọn khối ngành ${sectorName}`,
+        //     position: 'bottomLeft',
+        // });
         jQuery('#compare__subject_univ-selection').hide();
     	jQuery('.gs1-btn').removeClass('btn-select');
     	$('.gs1-btn').find($('.fa')).removeClass('fa-check');
     	jQuery(this).addClass('btn-select');
     	$(this).find($('.fa')).addClass('fa-check');
     	let sector_id = $(this).attr('id-gs1');
-    	$('#subject-area').html('<div class="alert alert-warning mx-auto mt-3">Bạn chưa chọn nhóm ngành</div>');
+    	$('#subject-area').html('<div class="alert alert-warning mx-auto mt-3 h-25">Bạn chưa chọn nhóm ngành</div>');
     	// update_sector_choice(sector_id);
         let url = `/api/v1/sectors/${sector_id}/subjects`;
         ajax_request(false, true, "GET", "json", url, null, null, group_success_callback, error_callback);
     });
     jQuery(document).on('click touch', '.gs2-btn', function(){
         let groupName = $(this).text();
-        iziToast.info({
-            title: `Đã chọn nhóm ngành ${groupName}`,
-            position: 'bottomLeft',
-        });
+        // iziToast.info({
+        //     title: `Đã chọn nhóm ngành ${groupName}`,
+        //     position: 'bottomLeft',
+        // });
         jQuery('#compare__subject_univ-selection').hide();
     	jQuery('.gs2-btn').removeClass("btn-select");
     	$('.gs2-btn').find($('.fa')).removeClass('fa-check');
@@ -149,10 +191,14 @@ jQuery(document).ready(function(){
     });
     jQuery(document).on('click touch', '.subject-btn', function(){
         let subjectName = $(this).attr('subject-name');
-        iziToast.info({
-            title: `Đã chọn ngành ${subjectName}`,
-            position: 'bottomLeft',
+        // iziToast.info({
+        //     title: `Đã chọn ngành ${subjectName}`,
+        //     position: 'bottomLeft',
+        // });
+        $('#compare__subject_subj-selection').hide(0, function(){
+            scroll_to_id();
         });
+        $('#univ-next-btn').removeClass('disabled');
         jQuery('.subject-btn').removeClass('btn-select');
     	jQuery(this).addClass('btn-select');
     	$('.subject-btn').find($('.fa')).removeClass('fa-check');
@@ -162,8 +208,8 @@ jQuery(document).ready(function(){
         let subject_selected_id = parseInt($(this).attr('subject-id'));
         let url = '/api/v1/universities';
         let data = {
-            // subject : subject_selected_id,
-            subject : 195,
+            subject : subject_selected_id,
+            // subject : 195,
         };
         ajax_request(false, true, "GET", "json", url, null, data, universities_success_callback , error_callback);
     });
@@ -178,10 +224,10 @@ jQuery(document).ready(function(){
     
     function group_success_callback(response){
     	
-        let groups = response; groups_list = groups;
+        let groups = response.sorted_subjects; groups_list = groups;
         let pane = "";
         $.each(groups, function(index, group){
-           pane += `<div class="col-md-4"><btn href="#" show="#compare__subject_subj-selection" class="btn gs-btn gs2-btn go-to-id" id="gs-2-${group.group.id}" id-gs2="${group.group.id}">${group.group.name}<i class="fa mt-1" style="float:right"></i></btn></div>`; 
+           pane += `<div class="col-md-6 h-25"><btn href="#" show="#compare__subject_subj-selection" class="btn gs-btn gs2-btn go-to-id" id="gs-2-${group.group.id}" id-gs2="${group.group.id}">${group.group.name}<i class="fa mt-1" style="float:right"></i></btn></div>`; 
        });
         $('#gs2-area').html(pane);
         $('#tab1, #groupSubject-1').removeClass('active');
@@ -198,7 +244,7 @@ jQuery(document).ready(function(){
     function subjects_list_of_group(subjects){
     	let pane = "";
         $.each(subjects, function(index, subject){
-            pane += `<div class="col-md-4"><btn show="#compare__subject_univ-selection" href="#" class="btn gs-btn subject-btn go-to-id" id="subject-${subject.id}" subject-name="${subject.subject}" subject-id="${subject.id}">${subject.subject}<i class="fa mt-1" style="float:right"></i></btn></div>`;
+            pane += `<div class="col-md-6 h-25"><btn show="#compare__subject_univ-selection" href="#" class="btn gs-btn subject-btn go-to-id" id="subject-${subject.id}" subject-name="${subject.name}" subject-id="${subject.id}">${subject.name}<i class="fa mt-1" style="float:right"></i></btn></div>`;
         });
         $('#subject-area').html(pane);
         $('#tab2, #groupSubject-2').removeClass('active');
@@ -211,7 +257,7 @@ jQuery(document).ready(function(){
     // 	ajax_request(false, true,  "GET", 'json', url, null, null, all_universities_success_callback, error_callback);
     // }
     function universities_success_callback(response){
-        let universities = response;
+        let universities = response.universities;
         let pane = "", selected = "";
         $.each(universities, function(index, university){
             pane += `<option univ-name="${university.name}" value="${university.id}">${university.name}</option>`;
@@ -235,7 +281,7 @@ jQuery(document).ready(function(){
     };
 
     function all_universities_success_callback(response){
-        let universities = response;
+        let universities = response.universities;
         let pane = "", selected = "";
         $.each(universities, function(index, university){
             pane += `<option univ-name="${university.name}" value="${university.id}">${university.name}</option>`;
@@ -256,7 +302,7 @@ jQuery(document).ready(function(){
         });
     };
     var selected_univ = [];
-    
+
     $(document).on("change", "#comp-subj-multiselect", function(){
         selected_univ = [];
         // $('#compare__subject-table').hide();
@@ -369,10 +415,10 @@ jQuery(document).ready(function(){
         ajax_request(false, true, "GET", "json", url, null, null, all_sectors_success_callback, error_callback);
     };
     function all_sectors_success_callback(response){
-        let sectors = response;
+        let sectors = response.sectors;
         let pane = "";
         $.each(sectors, function(index, sector){
-            pane += `<div class="col-md-4"><btn show="#compare__subject_subj-selection" class="btn gs-btn gs1-btn go-to-id" href="#" id-gs1="${sector.id}">${sector.name}<i class="fa mt-1" style="float:right"></i></btn></div>`;
+            pane += `<div class="col-md-6 h-25"><btn show="#compare__subject_subj-selection" class="btn gs-btn gs1-btn go-to-id" href="#" id-gs1="${sector.id}">${sector.name}<i class="fa mt-1" style="float:right"></i></btn></div>`;
         });
         $("#gs1-area").html(pane);
 
@@ -409,9 +455,9 @@ jQuery(document).ready(function(){
     }
     var scores_index = 0;
     function score_list_subject_compare_success_callback(response){
-        response_id = response.university_id;
+        response_id = response.profile.university.id;
         let table_tbody = "";
-        score_list[`${response_id}`] = response.score;
+        score_list[`${response_id}`] = response.scores;
         // console.log(score_list[174][1].criterion_scores);
 
         $.each(subj_ctgrCrtr, function(category_index, cCr){
@@ -500,10 +546,10 @@ jQuery(document).ready(function(){
     }
     // var scores_index = 0;
     function score_list_university_compare_success_callback(response){
-        response_id = response.university_id;
+        response_id = response.profile.university.id;
         let table_tbody = "";
         
-        score_list[`${response_id}`] = response.score;
+        score_list[`${response_id}`] = response.scores;
         // console.log(score_list);
         $.each(univ_ctgrCrtr, function(category_index, cCr){
             let tmp = '';

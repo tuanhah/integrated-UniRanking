@@ -29,7 +29,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-xl navbar-dark fixed-top bg-dark" id="navibar">
+    <nav class="navbar navbar-expand-xl navbar-light fixed-top bg-light" id="navibar">
         <a class="navbar-brand" href="/"><strong><i class="fa fa-bar-chart"></i> UniRanking</strong></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -52,8 +52,8 @@
                 {% if user.is_authenticated %}
 
                 {% else %}
-                <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng nhập"><a href="#" class="login btn btn-info" data-toggle="modal" data-target="#login_div">Đăng nhập</a></li>
-                <li {% block register %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng ký"><a href="/register" class="btn btn-success">Đăng ký</a></li>
+                <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng nhập"><a href="#" class="login nav-link" data-toggle="modal" data-target="#login_div">Đăng nhập</a></li>
+                <li {% block register %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng ký"><a href="/register" class="register nav-link">Đăng ký</a></li>
                 <!-- <li><a href=""></a></li>
                 <li><a href=""></a></li>
                 <li><a href=""></a></li> -->

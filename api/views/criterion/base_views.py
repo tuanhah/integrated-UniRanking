@@ -21,8 +21,7 @@ class CriterionCategoryListView(BaseManageView):
         if target == "subject":
             criterion_categories = CriterionCategory.objects.subject_only()
         elif target == 'university':
-            criterion_categories = CriterionCategory.objects.all()
-            # criterion_categories = CriterionCategory.objects.university_only()
+            criterion_categories = CriterionCategory.objects.university_only()
         else:
             criterion_categories = CriterionCategory.objects.all()
         parsed_categories = [category.parse_info() for category in criterion_categories]

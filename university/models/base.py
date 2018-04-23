@@ -33,10 +33,10 @@ class University(models.Model, ScoreOwnerMixin, UniversitySubjectParserMixin, Sc
         }
         return data
 
-    def parse_full_info(self):
+    def parse_full_profile(self):
+        data = self.parse_profile()
         detail = self.profile
-        data = self.parse_basic_info()
-        data.update({
+        data["university"].update({
             "overview" : detail.overview,
             "site_url" : detail.site_url,
             "address" : detail.address,

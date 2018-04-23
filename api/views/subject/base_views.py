@@ -24,7 +24,7 @@ class SectorListView(BaseManageView):
     def get_sectors(self, request):
         sectors = SubjectGroup.objects.filter(sector_id = None)
         parsed_sector_list = [sector.parse_profile() for sector in sectors]
-        return JsonResponse(parsed_sector_list, safe=False)
+        return JsonResponse({"sectors" : parsed_sector_list})
 
 
 class GroupListView(BaseManageView):
@@ -52,7 +52,7 @@ class GroupListView(BaseManageView):
         else:
             groups = sector.groups.all()
             parsed_group_list = [group.parse_profile() for group in groups] 
-            return JsonResponse(parsed_group_list, safe=False)
+            return JsonResponse({"groups" : parsed_group_list})
 
 
 class SubjectsOfSectorListView(BaseManageView):
@@ -79,12 +79,13 @@ class SubjectsOfSectorListView(BaseManageView):
             return self.json_error(field = 'sector', code = "invalid")
         else:
             group_queryset = sector.groups.all().prefetch_related("subjects")
-            result = [] 
+            sorted_subjects = [] 
             for group in group_queryset:
                 parsed_group = group.parse_profile()
                 parsed_subject_list = group.parse_all_subject_profiles()
-                result.append({"group" : parsed_group, "subjects" : parsed_subject_list})
-            return JsonResponse(result, safe=False) 
+                sorted_subjects.append({"group" : parsed_group, "subjects" : parsed_subject_list})
+            result = {"sorted_subjects" : sorted_subjects}
+            return JsonResponse(result) 
 
 class SubjectOfGroupListView(BaseManageView):
     """
@@ -110,7 +111,7 @@ class SubjectOfGroupListView(BaseManageView):
             return self.json_error(field = 'group', code = 'invalid')
         else:
             parsed_subject_list = group.parse_all_subject_profiles()
-            return JsonResponse(parsed_subject_list, safe=False) 
+            return JsonResponse({"subjects" : parsed_subject_list}) 
 
 class UniversitySubjectListView(BaseManageView):
     """
@@ -148,10 +149,10 @@ class UniversitySubjectListView(BaseManageView):
                     return self.json_error(field = 'group', code = "invalid")
                 else:
                     subject_list = university.parse_university_subjects_of_group(group)
-                    return JsonResponse(subject_list, safe=False)
+                    return JsonResponse({"subjects" : subject_list})
             else:
                 sorted_subjects = university.parse_sorted_university_subjects()
-                return JsonResponse(sorted_subjects, safe=False)  
+                return JsonResponse({"sorted_subjects" : sorted_subjects})  
 
 
 class UniversitySubjectDetailView(BaseManageView):

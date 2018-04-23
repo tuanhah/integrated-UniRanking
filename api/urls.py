@@ -15,6 +15,7 @@ app_name = "api"
 
 
 university_url_patterns = [
+    path('', university_base_views.UniversityDetailView.as_view()),
     path('subjects', subject_base_views.UniversitySubjectListView.as_view()),
     path('subjects/<int:subject_id>', subject_base_views.UniversitySubjectDetailView.as_view()),
     path('scores', university_score_views.UniversityScoreDetailView.as_view()),

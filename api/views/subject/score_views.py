@@ -20,8 +20,8 @@ class SubjectRankingView(RankingView):
                 "university",
                 "subject"
             ).order_by_rank().prefetch_scores()
-        result = [univ_subject.parse_data() for univ_subject in univ_subjects]
-        return JsonResponse(result, safe=False)
+        result = {"rank" : [univ_subject.parse_data() for univ_subject in univ_subjects]}
+        return JsonResponse(result)
 
 class SubjectScoreDetailView(ScoreDetailView):
     """
@@ -40,10 +40,11 @@ class SubjectScoreDetailView(ScoreDetailView):
 
     def get_scores(self, request, university_id, subject_id):
         univ_subject_queryset = UniversitySubject.objects.select_related(
+                "university",
                 "subject"
             ).filter(
-                university = university_id,
-                subject = subject_id
+                university_id = university_id,
+                subject_id = subject_id
             )        
         filter = request.GET.get("filter")
         named = string_to_boolean(request.GET.get("named"))
@@ -63,7 +64,8 @@ class SubjectScoreDetailView(ScoreDetailView):
                 return self.json_error(field = '__all__', code = "invalid")
             else:            
                 result["scores"] = univ_subject.parse_scores(named = named)
-        result["subject"] = univ_subject.subject.parse_profile()
+        univ_subject_info = univ_subject.parse_basic_info()
+        result["profile"] = univ_subject_info
         return JsonResponse(result)
 
     @method_decorator(permission_required_or_403("university.change_university", (University, 'id', 'university_id')))

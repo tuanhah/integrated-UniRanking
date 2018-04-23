@@ -26,9 +26,9 @@ urlpatterns = [
     # path('', TemplateView.as_view(template_name ="index.html"), name = "homepage"),
     path('university/', include('university.urls')),
     path('api/v1/', include("api.urls")),
-    
+
     path('compare/', views.compare, name="compare"),
-    path('', views.index, name="index"),    
+    path('', views.index, name="index"),
     path('university-info/', views.info, name="info"),
     path('ranking/', views.ranking, name="ranking"),
     path('contact/', views.contact, name="contact"),

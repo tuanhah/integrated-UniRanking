@@ -1,15 +1,13 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
 
 from subject.models import *
+from django.shortcuts import render, redirect
 
 def test(request):
     score = SubjectScoreByCriterion.objects.first()
     score.score = 7.4
     score.save()
     return HttpResponse("<body></body>")
-def rank(request):
-    return render(request, 'rank/rank.html')
 def index(request):
 	# subject = SubjectGroup.objects.all()
 	# context = {'SubjectGroup' : subject}
