@@ -65,16 +65,16 @@ $(document).ready(function() {
 
   // });
 });
-function scroll_to_id(){
-  jQuery(document).on("click", ".go-to-id", function() {
-      jQuery(jQuery(this).attr("show")).show();
+function scroll_to_id($this){
+      
+    jQuery($this.attr("show")).show();
 
-      jQuery("html, body").animate(
-      {
-          scrollTop: jQuery(jQuery(this).attr("show")).offset().top - 110
-      }, 400);
+    jQuery("html, body").animate(
+    {
+        scrollTop: jQuery($this.attr("show")).offset().top - 110
+    }, 400);
   
-  });
+  
 }
 
 

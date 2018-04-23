@@ -18,11 +18,13 @@ jQuery(document).ready(function(){
         //     title: 'Đã chọn so sánh theo ngành',
         //     position: 'bottomLeft',
         // });
+        let $this = $(this);
+        // console.log($this.attr('show'));
         $('#subject-compare i').remove();
         $(this).append(' <i class="fa fa-check-circle success-icon"></i>');
         $('#university-compare i').remove();
-        jQuery('#compare__subject_subj-selection, #step-2').hide().animate({opacity:'show'},500, function(){;
-            scroll_to_id();
+        jQuery('#compare__subject_subj-selection, #step-2').hide().animate({opacity:'show'}, 200, function(){;
+            scroll_to_id($this);
         });
 		jQuery('#carousel-comp-area, #compare__university_univ-selection, #compare__university-table, #compare__university-table, #compare__subject-table, #compare__subject_univ-selection').hide();
         get_all_sector();
@@ -34,12 +36,13 @@ jQuery(document).ready(function(){
         //     title: 'Đã chọn so sánh theo trường',
         //     position: 'bottomLeft',
         // });
+        let $this = $(this);
         $('#university-compare i').remove();
         $(this).append(' <i class="fa fa-check-circle success-icon"></i>');
         $('#subject-compare i').remove();
         jQuery('#carousel-comp-area, #compare__subject_subj-selection, #compare__subject_univ-selection, #compare__subject-table, #compare__university-table').hide();
-		jQuery('#compare__university_univ-selection, #step-2').hide().animate({opacity:'show'}, 500, function(){
-            scroll_to_id();
+		jQuery('#compare__university_univ-selection, #step-2').hide().animate({opacity:'show'}, 200, function(){
+            scroll_to_id($this);
         });
         let url = '/api/v1/universities';
         let data = {
@@ -108,14 +111,17 @@ jQuery(document).ready(function(){
     // });
 
     $(document).on('click', '#subj-back-btn', function(){
-        jQuery('#compare__subject_subj-selection').hide().animate({opacity:'show'},500, function(){;
-            scroll_to_id();
+        let $this = $(this);
+        jQuery('#compare__subject_subj-selection').hide().animate({opacity:'show'}, 200, function(){;
+            scroll_to_id($this);
         });
 		jQuery('#compare__university_univ-selection, #compare__subject_univ-selection').hide();
     });
     $(document).on('click', '#univ-next-btn', function(){
-        $('#compare__subject_subj-selection').hide(0, function(){
-            scroll_to_id();
+        let $this = $(this);
+        $('#compare__subject_subj-selection').hide();
+        $('#compare__subject_univ-selection').hide().animate({opacity:"show"},200, function(){
+            scroll_to_id($this);
         });
     });
     var groups_list;
@@ -195,9 +201,12 @@ jQuery(document).ready(function(){
         //     title: `Đã chọn ngành ${subjectName}`,
         //     position: 'bottomLeft',
         // });
-        $('#compare__subject_subj-selection').hide(0, function(){
-            scroll_to_id();
+        let $this = $(this);
+        $('#compare__subject_subj-selection').hide();
+        $('#compare__subject_univ-selection').hide().animate({opacity: "show"}, 200, function(){
+            scroll_to_id($this);
         });
+        
         $('#univ-next-btn').removeClass('disabled');
         jQuery('.subject-btn').removeClass('btn-select');
     	jQuery(this).addClass('btn-select');
