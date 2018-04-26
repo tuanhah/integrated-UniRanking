@@ -49,54 +49,62 @@ jQuery(document).ready(function(){
         jQuery('#ranking__university_univ-selection, #carousel-rank-area').hide().animate({opacity:'show'}, 200, function(){
             scroll_to_id($this);
         });
-        let url = '/api/v1/rank/university';
-        let data = {
-            //data here
-        };
-        ajax_request(false, true, "GET", "json", url, data, null, universities_ranking_success_callback, error_callback);
+        function university_rank(){
+            let url = '/api/v1/rank/university';
+            let data = {
+                //data here
+            };
+            ajax_request(false, true, "GET", "json", url, data, null, universities_ranking_success_callback, error_callback);
+        }
         get_all_category('university');
 
 
 
 
         $('.loader-img').fadeIn(200).delay(800).animate({height:"hide"},300);
-        setTimeout(function(){
-         set_table_title();
-     },300);
-        function set_table_title(){
-          var containerWidth = $('.rank_table').width();
-          var num_of_ctgr = 5;
-          let univ_width = 350;
-          let rank_width = 63;
-          let number_of_crtr = 3;
-          univ_th_ctgr =`<th rowspan="2" class="subj-rank-th" style="width:${rank_width}px">Thứ hạng</th><th class='rank__univ_table-category-h' rowspan="2" style='width:${univ_width}px'>Trường</th>`;
-          var ctgr_width = (containerWidth-rank_width-univ_width)/num_of_ctgr;
-          univ_th_sort = '<th>s</th><th>s</th>';
-          $.each(univ_ctgrCrtr, function(ctgr_index, ctgr){
-             let colspan = Object.keys(ctgr.criteria).length;
-             let category = ctgr.criterion_category;
-             univ_th_ctgr += `<th class="comp__univ_table-category comp__univ_table-ctgr-${category.id}" colspan="${number_of_crtr}">${category.name}</th> `;
-             let crtrs = ctgr.criteria;
-             $.each(crtrs, function(crtr_index, crtr){
-                if(crtr_index <= number_of_crtr - 1){
-                   univ_th_crtr += `<th class="comp__univ_table-criterion comp__univ_table-${category.id}-cr" criterion-id="${crtr.id}">${crtr.name}</th>`;
-                   univ_th_sort += '<th>s</th>';
-               }
-           });
-         });
+        set_table_title(function(){
+            university_rank();
+        });
+        function set_table_title(callback){
+            var containerWidth = $('.rank_table').width();
+            var num_of_ctgr = 5;
+            let univ_width = 350;
+            let rank_width = 63;
+            let number_of_crtr = 3;
+            univ_th_ctgr =`<th rowspan="2" class="subj-rank-th" style="width:${rank_width}px">Thứ hạng</th><th class='rank__univ_table-category-h' rowspan="2" style='width:${univ_width}px'>Trường</th>`;
+            var ctgr_width = (containerWidth-rank_width-univ_width)/num_of_ctgr;
+            univ_th_sort = '<th>s</th><th>s</th>';
+            $.each(univ_ctgrCrtr, function(ctgr_index, ctgr){
+                let colspan = Object.keys(ctgr.criteria).length;
+                let category = ctgr.criterion_category;
+                univ_th_ctgr += `<th class="comp__univ_table-category comp__univ_table-ctgr-${category.id}" colspan="${number_of_crtr}">${category.name}</th> `;
+                let crtrs = ctgr.criteria;
+                $.each(crtrs, function(crtr_index, crtr){
+                    if(crtr_index <= number_of_crtr - 1){
+                    univ_th_crtr += `<th class="comp__univ_table-criterion comp__univ_table-${category.id}-cr" criterion-id="${crtr.id}">${crtr.name}</th>`;
+                    univ_th_sort += '<th>s</th>';
+                    }
+                });
+            });
+            $('#university_table_th-ctgr').html(univ_th_ctgr);
+            $('#university_table_th-crtr').html(univ_th_crtr);
+            $('#university_table_th-sort').html(univ_th_sort);
 
-      }	
+            callback();
+        }	
 
 
-      setTimeout(function() {   
-         $('#university_table_th-ctgr').html(univ_th_ctgr);
-         $('#university_table_th-crtr').html(univ_th_crtr);
-         $('#university_table_th-sort').html(univ_th_sort);
-     }, 400);
+        // function set_data_title(callback) {   
+        //     $('#university_table_th-ctgr').html(univ_th_ctgr);
+        //     $('#university_table_th-crtr').html(univ_th_crtr);
+        //     $('#university_table_th-sort').html(univ_th_sort);
+        // };
 
-      $($(this).attr('show')).animate({opacity:"show"},1000);
-      $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 1000);
-  });
+        // $($(this).attr('show')).animate({opacity:"show"},1000, function(){
+        //     scroll_to_id()
+        // });
+        // $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 1000);
+    });
     
     var subj_table_th ="";
     var subj_ctgrCrtr = [];
@@ -104,18 +112,7 @@ jQuery(document).ready(function(){
     var scores = [];
     var score_list = [];
     var crtr_width =171;
-    function translate(){
-    	jQuery('#DataTables_Table_0_length label').contents().first()[0].textContent="Số trường trên bảng: ";
-    	jQuery('#DataTables_Table_0_length label').contents().last()[0].textContent=" trường."
-    	jQuery('#DataTables_Table_0_filter label').contents().first()[0].textContent="Tìm kiếm: ";
-    	jQuery('a[data-dt-idx="0"]').text("Trang trước");
-    	jQuery('a[data-dt-idx="8"]').text("Trang sau");
-    	let Info = jQuery("#DataTables_Table_0_info");
-    	Info.html(Info.html().replace("Showing", "Đang thể hiện trên bảng từ trường số "));
-    	Info.html(Info.html().replace("to", " tới trường số "));
-    	Info.html(Info.html().replace("of", " trên tổng số "));
-    	Info.html(Info.html().replace("entries", " trường."));
-    }
+    
     
     var groups_list;
     var univ_table_th = ""; var univ_ctgrCrtr = [];
@@ -167,11 +164,7 @@ jQuery(document).ready(function(){
         $(this).find($('.fa')).addClass('fa-check');
         $('#ranking__subject_table-title').text('So sánh ngành ' + subjectName);
         let subject_selected_id = parseInt($(this).attr('subject-id'));
-        // let url = '/api/v1/universities';
-        // let data = {
-        //     subject : subject_selected_id,
-        //     // subject : 195,
-        // };
+        
         var subj_th_ctgr = '';
         var subj_th_crtr = '';
         var subj_th_sort = '';
@@ -189,20 +182,7 @@ jQuery(document).ready(function(){
             ajax_request(false, true, "GET", "json", url, null, data, subject_ranking_success_callback , error_callback);
         }
 
-        // function translate(){
-		//     jQuery('#DataTables_Table_0_length label').contents().first()[0].textContent="Số trường trên bảng: ";
-        // 	jQuery('#DataTables_Table_0_length label').contents().last()[0].textContent=" trường."
-        // 	jQuery('#DataTables_Table_0_filter label').contents().first()[0].textContent="Tìm kiếm: ";
-    	//     jQuery('a[data-dt-idx="0"]').text("Trang trước");
-        // 	jQuery('a[data-dt-idx="8"]').text("Trang sau");
-        // 	let Info = jQuery("#DataTables_Table_0_info");
-    	//     Info.html(Info.html().replace("Showing", "Đang thể hiện trên bảng từ trường số "));
-        // 	Info.html(Info.html().replace("to", " tới trường số "));
-        // 	Info.html(Info.html().replace("of", " trên tổng số "));
-    	//     Info.html(Info.html().replace("entries", " trường."));
-        // // alert($('#rank-subj-multiselect option:selected').length);
-        // }
-
+        
         $('.loader-img').fadeIn(200).delay(800).animate({height:"hide"},300);
         function table_title_data(array_of_ctgr, callback){
             var containerWidth = $('.rank_table').width();
@@ -220,10 +200,10 @@ jQuery(document).ready(function(){
                 let crtrs = ctgr.criteria;
                 $.each(crtrs, function(crtr_index, crtr){
                     if(crtr_index <= num_of_crtr - 1){
-                       subj_th_crtr += `<th class="comp__subj_table-criterion comp__subj_table-${category.id}-cr" crtr-id="${crtr.id}" ctgr-id="${category.id}">${crtr.name}</th>`;
-                       subj_th_sort += '<th> </th>';
-                   }
-               });
+                     subj_th_crtr += `<th class="comp__subj_table-criterion comp__subj_table-${category.id}-cr" crtr-id="${crtr.id}" ctgr-id="${category.id}">${crtr.name}</th>`;
+                     subj_th_sort += '<th> </th>';
+                 }
+             });
             });
 
             $('#subject_table_th-ctgr').html(subj_th_ctgr);
@@ -235,7 +215,7 @@ jQuery(document).ready(function(){
         $($(this).attr('show')).animate({opacity:"show"},1000, function(){
             scroll_to_id($this);
         });
-        // $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 1000);        
+        
     });
 $(document).on('click touch', '.change-crtr-btn', function(){
     let id = $(this).attr('ctgr-id');
@@ -253,7 +233,7 @@ $(document).on('click touch', '.change-crtr-btn', function(){
 });
 
 function error_callback(response){
-   alert("Đã xảy ra lỗi, xem response tại console");
+ alert("Đã xảy ra lỗi, xem response tại console");
 }
 
 function group_success_callback(response){
@@ -261,8 +241,8 @@ function group_success_callback(response){
     let groups = response.sorted_subjects; groups_list = groups;
     let pane = "";
     $.each(groups, function(index, group){
-     pane += `<div class="col-md-6"><btn show="#ranking__subject_subj-selection" class="btn gs-btn gs2-btn go-to-id" id="gs-2-${group.group.id}" id-gs2="${group.group.id}">${group.group.name}<i class="fa mt-1" style="float:right"></i></btn></div>`; 
- });
+       pane += `<div class="col-md-6"><btn show="#ranking__subject_subj-selection" class="btn gs-btn gs2-btn go-to-id" id="gs-2-${group.group.id}" id-gs2="${group.group.id}">${group.group.name}<i class="fa mt-1" style="float:right"></i></btn></div>`; 
+   });
     $('#gs2-area').html(pane);
     $('#tab1, #groupSubject-1').removeClass('active');
     $('#tab2').addClass('active');
@@ -272,31 +252,31 @@ function group_success_callback(response){
 }
 
 function subjects_list_of_group(subjects){
-   let pane = "";
-   $.each(subjects, function(index, subject){
+ let pane = "";
+ $.each(subjects, function(index, subject){
     pane += `<div class="col-md-6"><btn show="#ranking__subject-table" href="#" class="btn gs-btn subject-btn go-to-id" id="subject-${subject.id}" subject-name="${subject.name}" subject-id="${subject.id}">${subject.name}<i class="fa mt-1" style="float:right"></i></btn></div>`;
 });
-   $('#subject-area').html(pane);
-   $('#tab2, #groupSubject-2').removeClass('active');
-   $('#tab3').addClass('active');
-   $('#subject').removeClass('fade');
-   $('#subject').addClass('active');
+ $('#subject-area').html(pane);
+ $('#tab2, #groupSubject-2').removeClass('active');
+ $('#tab3').addClass('active');
+ $('#subject').removeClass('fade');
+ $('#subject').addClass('active');
 };
 var univ_for_test = [];
 
-    function universities_ranking_success_callback(response){
-        let subjectRank = response.rank;
-        univTablData = [];
-        widthArray = [];
-        
-        get_data(subjectRank, function(){
-            display_data(function(){
-                width_setting();
-                console.log(table);
-                if(table != undefined) {
-                    table.destroy();
-                }
-                table = $('.sort-table').DataTable({
+function universities_ranking_success_callback(response){
+    let subjectRank = response.rank;
+    univTablData = [];
+    widthArray = [];
+
+    get_data(subjectRank, function(){
+        display_data(function(){
+            width_setting();
+            console.log(table);
+            if(table != undefined) {
+                table.destroy();
+            }
+            table = $('.sort-table').DataTable({
                     // "searching": false,
                     // "lengthChange": false,
                     "language":{
@@ -308,7 +288,7 @@ var univ_for_test = [];
                         },
                         "search" : "Tìm kiếm: ",
                     },
-                    "scrollY" : "200px",
+                    "scrollY" : "50px",
                     "scrollColapse" : "true",
                     "data": univTablData,
                     "autoWidth": true, 
@@ -324,26 +304,26 @@ var univ_for_test = [];
                         filename: 'dt_custom_pdf',
                         // orientation: 'landscape', //portrait
                         pageSize: 'A4', //A3 , A5 , A6 , legal , letter
-                         exportOptions: {
-                        columns: ':visible',
+                        exportOptions: {
+                            columns: ':visible',
                         // search: 'applied',
                         // order: 'applied'
 
-                        },
-                        header: true,
-                        footer: true,
                     },
-                    ]
-                });
+                    header: true,
+                    footer: true,
+                },
+                ]
+            });
                 // $(".dataTables_scrollBody table thead:nth-child(3)").empty();
             });
-        });
-        function get_data(arrays, callback){
-            arrays.forEach(function(univ, index){
-                let university = univ.profile.university;
-                let general_statistics = univ.profile.general_statistics;
-                let univ_id = university.id;
-                univTablData[index] = new Array();
+    });
+    function get_data(arrays, callback){
+        arrays.forEach(function(univ, index){
+            let university = univ.profile.university;
+            let general_statistics = univ.profile.general_statistics;
+            let univ_id = university.id;
+            univTablData[index] = new Array();
                 univTablData[index].push(`${general_statistics.rank}`, `${university.name}`);// += `<tr><td class="subj-rank">${general_statistics.rank}</td><td class="subj__table_univ-name">${university.name}</td>`;
                 let scores = univ.scores;
                 let score;
@@ -363,49 +343,49 @@ var univ_for_test = [];
                 }
                 // subjTablData += '</tr>';
             });
-            callback();
-        }
-        function display_data(callback){
-            callback();
-        }
-        function width_setting(){
-            widthArray[0] = $(`#subject_table_th-ctgr th:nth-child(1)`).width();
-            widthArray[1] = $(`#subject_table_th-ctgr th:nth-child(2)`).width();
-            for(let i = 1; i <= 16; i++){
-                widthArray[i+1] = $(`#subject_table_th-crtr th:nth-child(${i})`).width();
-            }
-            
-        }
+        callback();
     }
-        
-        
-    
-    var selected_univ = [];
-    
-    
-    function get_all_sector(){
-        let url = "/api/v1/sectors";
-        ajax_request(false, true, "GET", "json", url, null, null, all_sectors_success_callback, error_callback);
+    function display_data(callback){
+        callback();
+    }
+    function width_setting(){
+        widthArray[0] = $(`#subject_table_th-ctgr th:nth-child(1)`).width();
+        widthArray[1] = $(`#subject_table_th-ctgr th:nth-child(2)`).width();
+        for(let i = 1; i <= 16; i++){
+            widthArray[i+1] = $(`#subject_table_th-crtr th:nth-child(${i})`).width();
+        }
+
+    }
+}
+
+
+
+var selected_univ = [];
+
+
+function get_all_sector(){
+    let url = "/api/v1/sectors";
+    ajax_request(false, true, "GET", "json", url, null, null, all_sectors_success_callback, error_callback);
+};
+function all_sectors_success_callback(response){
+    let sectors = response.sectors;
+    let pane = "";
+    $.each(sectors, function(index, sector){
+        pane += `<div class="col-md-6"><btn show="#ranking__subject_subj-selection" class="btn gs-btn gs1-btn go-to-id" href="#" id-gs1="${sector.id}">${sector.name}<i class="fa mt-1" style="float:right"></i></btn></div>`;
+    });
+    $("#gs1-area").html(pane);
+
+}
+
+function get_all_category(target){
+    let url = "/api/v1/criteria";
+    let data = {
+        target : target,
     };
-    function all_sectors_success_callback(response){
-        let sectors = response.sectors;
-        let pane = "";
-        $.each(sectors, function(index, sector){
-            pane += `<div class="col-md-6"><btn show="#ranking__subject_subj-selection" class="btn gs-btn gs1-btn go-to-id" href="#" id-gs1="${sector.id}">${sector.name}<i class="fa mt-1" style="float:right"></i></btn></div>`;
-        });
-        $("#gs1-area").html(pane);
-
+    if(target == "subject"){
+        ajax_request(false, true, "GET", "json", url, null, data, all_category_subject_callback, error_callback);
     }
-
-    function get_all_category(target){
-        let url = "/api/v1/criteria";
-        let data = {
-            target : target,
-        };
-        if(target == "subject"){
-            ajax_request(false, true, "GET", "json", url, null, data, all_category_subject_callback, error_callback);
-        }
-        else if(target == "university"){
+    else if(target == "university"){
             // data={};
             ajax_request(false, true, "GET", "json", url, null, null, all_category_university_callback, error_callback);
         }
@@ -444,11 +424,11 @@ var univ_for_test = [];
                         },
                         "search" : "Tìm kiếm: ",
                     },
-                    "scrollY" : "200px",
+                    "scrollY" : "150px",
                     "scrollColapse" : "true",
                     "data": subjTablData,
                     "autoWidth": true, 
-                        
+
                     dom: 'Bfrtip',
                     buttons: [
                     'copyHtml5',
@@ -461,18 +441,18 @@ var univ_for_test = [];
                         filename: 'dt_custom_pdf',
                         // orientation: 'landscape', //portrait
                         pageSize: 'A4', //A3 , A5 , A6 , legal , letter
-                         exportOptions: {
-                        columns: ':visible',
+                        exportOptions: {
+                            columns: ':visible',
                         // search: 'applied',
                         // order: 'applied'
 
-                        },
-                        header: true,
-                        footer: true,
                     },
-                    ]
-                });
-                // $(".dataTables_scrollBody table thead:nth-child(3)").empty();
+                    header: true,
+                    footer: true,
+                },
+                ]
+            });
+                $(".dataTables_scrollBody #subject_table_th-sort").empty();
             });
         });
         function get_data(arrays, callback){

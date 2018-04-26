@@ -232,6 +232,7 @@ ul.ch
 tr th.sorting{
 	height:28px;
 }
+.dataTables_scrollBody{overflow-y: scroll !important;}
 
 /*.sort-table td{
 	font-size:14px;
