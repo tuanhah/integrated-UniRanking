@@ -2,17 +2,7 @@ jQuery(document).ready(function(){
     iziToast.settings({
         timeout:2500,
     });
-    // function scroll_to_id(){
-    //     jQuery(document).on("click", ".go-to-id", function() {
-    //         jQuery(jQuery(this).attr("show")).show();
-    
-    //         jQuery("html, body").animate(
-    //         {
-    //             scrollTop: jQuery(jQuery(this).attr("show")).offset().top - 80
-    //         },300);
-        
-    //     });
-    //   } 
+     
 	jQuery(document).on('click touch','#subject-compare', function(){
         // iziToast.info({
         //     title: 'Đã chọn so sánh theo ngành',
@@ -301,8 +291,6 @@ jQuery(document).ready(function(){
         $('.search-choice, .university__selected-box p').remove();
         $('#comp-univ-multiselect').trigger('chosen:updated');
         $('#comp-univ-multiselect').bind("chosen:maxselected", function(){
-            // $('.notification').html('<p class="mx-4 my-2">Bạn đã chọn đủ số trường tối đa là 5 trường</p>');
-            // $('.notification').animate({height: "show"}).delay(2000).animate({height: "hide"});
             iziToast.destroy();
             iziToast.warning({
                 title: 'Bạn đã chọn đủ số trường tối đa là 5 trường!',

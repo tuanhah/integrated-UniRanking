@@ -158,20 +158,20 @@ ul.ch
 .table-fixed{
 	min-height:600px;/* background-color: rgba(143, 197, 79, 0.15);*/	
 }
-.sortable{
+/* .sort-table{
 	min-height:540px;
-}
+} */
 /*.table-fixed thead{position:absolute;}*/
 .table-fixed tbody{
 	height:390px;
 	overflow-y:scroll;
 	position:absolute;
 }
-.sortable tbody{
+/* .sort-table tbody{
 	height:300px;
 	overflow-y:scroll;
 	position:absolute;
-}
+} */
 /* html{overflow-y:scroll;} */
 .table-fixed tr{
 	table-layout:fixed;
@@ -228,10 +228,18 @@ ul.ch
 .highest{background-color:rgba(3,114,225,0.35);}
 .subj-rank{width:63px !important}
 #subject_table_th-sort th{height:30px !important}
-#DataTables_Table_0_wrapper .row:nth-child(2) .col-sm-12{height:600px;}
-.sortable td{
-	font-size:14px;
+#DataTables_Table_0_wrapper .row:nth-child(2) .col-sm-12{height:600px; padding:0;}
+tr th.sorting{
+	height:28px;
 }
+
+/*.sort-table td{
+	font-size:14px;
+}*/
+/*.sort-table .col-sm-12{
+	padding-left:0;
+	padding-right:0;
+}*/
 .ctgr{
 	line-height:45px;
 }
