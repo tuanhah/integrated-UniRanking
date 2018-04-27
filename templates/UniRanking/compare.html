@@ -19,7 +19,7 @@
             <div class="col-1"></div>
             <div class="col-3">
                 <p class="p-large">Một số ngành nổi bật:</p>
-                <ol>
+                <ul>
                     <li>
                         <p class="my-1"> Công nghệ thông tin
                             <i class="right-icon mt-1 fa fa-plus"></i>
@@ -35,7 +35,7 @@
                             <i class="right-icon mt-1 fa fa-plus"></i>
                         </p>
                     </li>
-                </ol>
+                </ul>
             </div>
             <div class="col-1">
                 <!-- <p class="p-large"></p> -->
@@ -44,7 +44,7 @@
             </div>
             <div class="col-4">
                 <p class="p-large"> Một số trường nổi bật:</p>
-                <ol>
+                <ul>
                     <li>
                         <p class="my-1"> Đại Học Quốc Gia Hà Nội
                             <i class="right-icon mt-1 fa fa-plus"></i>
@@ -60,7 +60,7 @@
                             <i class="right-icon mt-1 fa fa-plus"></i>
                         </p>
                     </li>
-                </ol>
+                </ul>
             </div>
             <div class="col-2"></div>
         </div>
@@ -71,16 +71,20 @@
 
                 <div class="my-4 bg-custom shadow-custom">
                     <div class="card-body">
-                        <h5 class="card-title">Chọn kiểu so sánh:</h5>
+                        <h4 class="card-title"><i class="fa fa-gears"></i> Chọn kiểu so sánh:</h4>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item bg-custom">
-                            <btn class="btn btn-success go-to-id" id="subject-compare" show="#compare__subject_subj-selection">So sánh theo ngành</btn>
+                            <div class="pb-3 text-center"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                            <btn class="btn btn-lg btn-primary go-to-id w-100" id="subject-compare" show="#compare__subject_subj-selection">So sánh theo ngành</btn>
+                            <p class="my-0 p-2 text-center wrap-text">Chọn một ngành cụ thể, hệ thống sẽ lọc cho bạn các trường đào tạo ngành đó</p>
                         </li>
 
                         <li class="list-group-item bg-custom">
-                            <btn class="btn btn-success go-to-id" id="university-compare" show="#compare__university_univ-selection">So sánh theo trường </btn>
+                            <div class="pb-3 text-center"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
+                            <btn class="btn btn-lg btn-primary go-to-id w-100" id="university-compare" show="#compare__university_univ-selection">So sánh theo trường </btn>
+                            <p class="my-0 p-2 text-center wrap-text">Chọn một ngành cụ thể, hệ thống sẽ lọc cho bạn các trường đào tạo ngành đó</p>
                         </li>
 
                     </ul>
@@ -97,12 +101,22 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <img data-src="holder.js/600x500/auto/#777:#7a7a7a/text:First slide" alt="First slide" src="../../static/img/VNU.jpg" title="Đại Học Quốc Gia Hà Nội, số 144, Xuân Thủy, Cầu Giấy, Hà Nội"
-                                width="100%">
+                            <img data-src="holder.js/600x500/auto/#777:#7a7a7a/text:First slide" alt="First slide" src="../../static/img/VNU.jpg" title="Đại Học Quốc Gia Hà Nội, số 144, Xuân Thủy, Cầu Giấy, Hà Nội" width="100%">
+                            <div class="carousel-caption">
+                                <h2>So sánh theo ngành</h2>
+                                <p>bla bla bla ...</p>
+                                <hr>
+                                <p>bla bla bla ...</p>
+                            </div>
                         </div>
                         <div class="carousel-item">
-                            <img data-src="holder.js/600x500/auto/#666:#6a6a6a/text:Second slide" alt="Fouth slide" src="../../static/img/HUST.jpg" title="Đại Học Bách Khoa Hà Nội, số 1, Đại Cồ Việt, Bách Khoa, Hai Bà Trưng, Hà Nội"
-                                width="100%">
+                            <img data-src="holder.js/600x500/auto/#666:#6a6a6a/text:Second slide" alt="Fouth slide" src="../../static/img/VNU.jpg" title="Đại Học Bách Khoa Hà Nội, số 1, Đại Cồ Việt, Bách Khoa, Hai Bà Trưng, Hà Nội" width="100%">
+                            <div class="carousel-caption">
+                                <h2>So sánh theo trường</h2>
+                                <p>bla bla bla ...</p>
+                                <hr>
+                                <p>bla bla bla ...</p>
+                            </div>
                         </div>
 
                     </div>
@@ -119,7 +133,7 @@
                     <div class="col-12">
                         <div class="row mx-0 mt-4">
                             <div class="col-6 px-0">
-                                <h5>Chọn ngành cần so sánh:</h5>
+                                <h4><i class="fa fa-th"></i> Chọn ngành cần so sánh:</h4>
                             </div>
                             <div class="col-6 px-0 text-right">
                                 <button class="btn btn-link go-to-id disabled" id="univ-next-btn" show="#compare__subject_univ-selection">Chọn trường
@@ -166,7 +180,8 @@
                         <button class="btn btn-link" id="subj-back-btn" show="#compare__subject_subj-selection">
                             <i class="fa fa-angle-double-left"></i> Quay lại chọn ngành</button>
                     </div>
-                    <div class="col-lg-11 text-center">
+                    <div class="col-lg-10">
+                        <h4><i class="fa fa-pencil-square-o"></i> Chọn trường cần so sánh</h4>
                         <form class="form-vertical">
                             <div class="form-group">
                                 <label class="control-label" for="comp-subj-multiselect">Bạn có thể chọn tối đa 5 trường để so sánh</label>
@@ -179,17 +194,18 @@
                     </div>
 
 
-                    <div class="col-lg-8 py-4 text-center">
-                        <p class="">Danh sách so sánh:</p>
+                    <div class="col-lg-10 py-4">
+                        <h4><i class="fa fa-list-ul"></i> Danh sách so sánh:</h4>
                         <div class="subject__selected-box text-left my-4" style="min-height:4rem"></div>
-                        <btn show="#compare__subject-table" id="compare__subject-btn" class="btn btn-success">So sánh</btn>
+                        <btn show="#compare__subject-table" id="compare__subject-btn" class="btn btn-info">So sánh <i class="fa fa-hand-o-right"></i></btn>
                     </div>
                 </div>
             </div>
 
             <div class="col-lg-7 my-4 mx-3 non-display bg-custom shadow-custom" id="compare__university_univ-selection">
                 <div class="row mx-0 justify-content-center">
-                    <div class="col-lg-11 text-center my-4">
+                    <div class="col-lg-10 my-4">
+                        <h4><i class="fa fa-pencil-square-o"></i> Chọn trường cần so sánh</h4>
                         <form class="form-vertical">
                             <div class="form-group">
                                 <label class="control-label" for="comp-univ-multiselect">Bạn có thể chọn tối đa 5 trường để so sánh</label>
@@ -202,10 +218,10 @@
                     </div>
 
 
-                    <div class="col-lg-8 py-4 text-center">
-                        <p class="">Danh sách so sánh:</p>
+                    <div class="col-lg-10 py-4">
+                        <h4><i class="fa fa-list-ul"></i> Danh sách so sánh:</h4>
                         <div class="university__selected-box text-left my-4" style="min-height:4rem"></div>
-                        <btn show="#compare__university-table" id="compare__university-btn" class="btn btn-success">So sánh</btn>
+                        <btn show="#compare__university-table" id="compare__university-btn" class="btn btn-info">So sánh <i class="fa fa-hand-o-right"></i></btn>
                     </div>
                 </div>
             </div>

@@ -9,9 +9,9 @@ jQuery(document).ready(function(){
         //     position: 'bottomLeft',
         // });
         let $this = $(this);
-        // console.log($this.attr('show'));
         $('#subject-compare i').remove();
-        $(this).append(' <i class="fa fa-check-circle success-icon"></i>');
+        $('#subject-compare, #university-compare').removeClass('text-left');
+        $(this).addClass('text-left').append(' <i class="fa fa-check-circle success-icon float-right"></i>');
         $('#university-compare i').remove();
         jQuery('#compare__subject_subj-selection, #step-2').hide().animate({opacity:'show'}, 200, function(){;
             scroll_to_id($this);
@@ -28,7 +28,8 @@ jQuery(document).ready(function(){
         // });
         let $this = $(this);
         $('#university-compare i').remove();
-        $(this).append(' <i class="fa fa-check-circle success-icon"></i>');
+        $('#subject-compare, #university-compare').removeClass('text-left');
+        $(this).addClass('text-left').append(' <i class="fa fa-check-circle success-icon float-right"></i>');
         $('#subject-compare i').remove();
         jQuery('#carousel-comp-area, #compare__subject_subj-selection, #compare__subject_univ-selection, #compare__subject-table, #compare__university-table').hide();
 		jQuery('#compare__university_univ-selection, #step-2').hide().animate({opacity:'show'}, 200, function(){
