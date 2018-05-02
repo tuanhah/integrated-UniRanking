@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
         let $this = $(this);
         $('#subject-compare i').remove();
         $('#subject-compare, #university-compare').removeClass('text-left');
-        $(this).addClass('text-left').append(' <i class="fa fa-check-circle success-icon float-right"></i>');
+        $(this).addClass('text-left').append(' <i class="fa fa-check-circle md-icon float-right"></i>');
         $('#university-compare i').remove();
         jQuery('#compare__subject_subj-selection, #step-2').hide().animate({opacity:'show'}, 200, function(){;
             scroll_to_id($this);
@@ -30,7 +30,7 @@ jQuery(document).ready(function(){
         let $this = $(this);
         $('#university-compare i').remove();
         $('#subject-compare, #university-compare').removeClass('text-left');
-        $(this).addClass('text-left').append(' <i class="fa fa-check-circle success-icon float-right"></i>');
+        $(this).addClass('text-left').append(' <i class="fa fa-check-circle md-icon float-right"></i>');
         $('#subject-compare i').remove();
         jQuery('#carousel-comp-area, #compare__subject_subj-selection, #compare__subject_univ-selection, #compare__subject-table, #compare__university-table').hide();
 		jQuery('#compare__university_univ-selection, #step-2').hide().animate({opacity:'show'}, 200, function(){
@@ -267,7 +267,8 @@ jQuery(document).ready(function(){
         
         $('#comp-subj-multiselect').chosen({max_selected_options: 5});
         
-        $(".search-choice").remove(); $('.subject__selected-box').html("");
+        $(".search-choice").remove();
+        $('.subject__selected-box').html("<div class=\"blank-select my-1 text-center\"><i class=\"fa fa-plus\"></i></div><div class=\"blank-select my-1 text-center\"><i class=\"fa fa-plus\"></i></div><div class=\"blank-select my-1 text-center\"><i class=\"fa fa-plus\"></i></div><div class=\"blank-select my-1 text-center\"><i class=\"fa fa-plus\"></i></div><div class=\"blank-select my-1 text-center\"><i class=\"fa fa-plus\"></i></div>");
         $('#comp-subj-multiselect').trigger('chosen:updated');
         $('#comp-subj-multiselect').bind("chosen:maxselected", function(){    
             // $('.notification').html('<p class="mx-4 my-2">Bạn đã chọn đủ số trường tối đa là 5 trường</p>');
@@ -362,7 +363,7 @@ jQuery(document).ready(function(){
         
         let univ_box = "";
         $.each(selected_univ, function(index, university){
-            univ_box += `<p class="my-1 ml-0 mr-xl-4"><i title="Xóa khỏi danh sách" class="fa fa-remove university__remove-univ" target="${university.id}" target-name="${university.name}"></i> ${university.name}</p>`;
+            univ_box += `<p class="my-1 ml-0 mr-xl-4"> <i title="Xóa khỏi danh sách" class="fa fa-remove university__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i> ${university.name} <a class="" href="#"><i class="fa fa-info-circle right-icon"></i></a> </p>`;
         });
         $('.university__selected-box').html(univ_box);
     });

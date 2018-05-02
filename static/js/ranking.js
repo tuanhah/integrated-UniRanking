@@ -14,7 +14,7 @@ jQuery(document).ready(function(){
         let $this = $(this);
         $('#subject-ranking i').remove();
         $('#subject-ranking, #university-ranking').removeClass('text-left');
-        $(this).addClass('text-left').append(' <i class="fa fa-check-circle success-icon float-right"></i>');
+        $(this).addClass('text-left').append(' <i class="fa fa-check-circle md-icon float-right"></i>');
         $('#university-ranking i').remove();
         jQuery('#ranking__subject_subj-selection, #step-2').hide().animate({opacity:'show'}, 200, function(){
             scroll_to_id($this);
@@ -43,7 +43,7 @@ jQuery(document).ready(function(){
 
         $('#subject-ranking, #university-ranking').removeClass('text-left');
         $('#university-ranking i').remove();
-        $(this).addClass('text-left').append(' <i class="fa fa-check-circle success-icon float-right"></i>');
+        $(this).addClass('text-left').append(' <i class="fa fa-check-circle md-icon float-right"></i>');
         $('#subject-ranking i').remove();
         let $this = $(this);
 

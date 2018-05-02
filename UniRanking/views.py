@@ -19,7 +19,7 @@ def compare(request):
 	# Crit = Criterion.objects.all()
 	# Uni = University.objects.all()
 	# context = {'University': Uni}
-	return render(request, 'Uniranking/compare.html')
+	return render(request, 'UniRanking/compare.html')
 def ranking(request):
 	# CaCr = CategoryCriterion.objects.all()
 	# Uni = University.objects.all()

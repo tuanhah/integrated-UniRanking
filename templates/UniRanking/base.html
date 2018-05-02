@@ -41,28 +41,15 @@
                 <li {% block ranking %} {% endblock %} class="nav-item"><a class="nav-link" href="/ranking" data-placement="bottom" data-toggle="tooltip" title="Xếp hạng chung">Xếp hạng</a></li>
                 <li {% block info %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Thông tin trường Đại học"><a href="/university-info" class="nav-link">Thông tin Trường</a></li>
                 <li {% block contact %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Liên hệ, phản hồi"><a href="/contact" class="nav-link">Liên hệ</a></li>
-
-
-
-                <!-- <li><a href="contact.html">Liên hệ</a></li> -->
                 <li {% block help %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Trợ giúp"><a class="nav-link" href="/help">Trợ giúp</a></li>
             </ul>
 
-            <ul class="navbar-nav">
+            <ul class="navbar-nav navbar-right">
                 {% if user.is_authenticated %}
 
                 {% else %}
-                <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng nhập"><a href="#" class="login nav-link" data-toggle="modal" data-target="#login_div">Đăng nhập</a></li>
-                <li {% block register %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng ký"><a href="/register" class="register nav-link">Đăng ký</a></li>
-                <!-- <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li> -->
-                <!-- <li class = "dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="https://vantrong291.wordpress.com">Wordpress.com</a></li>   
-                    </ul>
-                </li> -->
+                <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng nhập"><a href="#" class="login nav-link" data-toggle="modal" data-target="#login_div"><i class="fa fa-user"></i> Đăng nhập</a></li>
+                <li {% block register %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng ký"><a href="/register" class="register nav-link"><i class="fa fa-user-plus"></i> Đăng ký</a></li>
                 {% endif %}
             </ul>
         </div>
