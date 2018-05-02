@@ -21,6 +21,7 @@ jQuery(document).ready(function(){
         get_all_category('subject');
         
     });
+
 	jQuery(document).on('click touch', '#university-compare', function(){
         // iziToast.info({
         //     title: 'Đã chọn so sánh theo trường',
