@@ -50,29 +50,30 @@ jQuery(document).ready(function(){
     var scores = [];
     var score_list = new Array();
     var ctgr_width = 161;
-    var crtr_width =171;
+    var crtr_width = 250;
+
     jQuery(document).on('click touch', '#compare__subject-btn', function(){
     	
 
         if($('#comp-subj-multiselect option:selected').length > 1){
             $('.loader-img').fadeIn(200).delay(800).animate({height:"hide"},300);
-            var containerWidth = $('.comp_table').width();
+            var containerWidth = $(window).width() * 0.94;
+
             var selectedNum = $('#comp-subj-multiselect :selected').length;
-            ctgr_width = 161;crtr_width = 171;
-            subj_table_th =`<th class='comp__subj_table-category-h' style='width:${ctgr_width}px'>Nhóm tiêu chí</th><th class='comp__subj_table--criterion-h' style='width:${crtr_width}px'>Tiêu chí</th>`;
+            crtr_width = 270;
+            subj_table_th =`<th class='comp__subj_table-criterion-h' style='width:${crtr_width}px'>Tiêu chí</th>`;
             var table_tbody = "";
             scores = []; scores_index = 0; score_list = [];
 
-            var univ_width = (containerWidth-ctgr_width-crtr_width)/selectedNum;
+            univ_width = (containerWidth-crtr_width)/selectedNum;
+
             $('#comp-subj-multiselect option:selected').each(function(index){
                 let tmp = $(this).text();
                 let id = $(this).val();
-                subj_table_th += `<th class="comp__subj_table-${id}-h comp__subj_table-uni-h" style="width:${univ_width}px">` + tmp + '</th>';
+                subj_table_th += `<th class="subject-univ-${id}" style="width:${univ_width}px">` + tmp + '</th>';
                 scores_list_for_subject_compare(parseInt(id));
             });
-            setTimeout(function() {   
-                $('#compare__subject_table-th').html(subj_table_th);                
-            }, 300);
+            $('#compare__subject_table-th').html(subj_table_th);
 
             $($(this).attr('show')).animate({opacity:"show"},1000);
             $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 1000);
@@ -123,8 +124,8 @@ jQuery(document).ready(function(){
             $('.loader-img').fadeIn(200).delay(800).animate({height: "hide"}, 300);
             var containerWidth = $('.comp_table').width();
             var selectedNum = $('#comp-univ-multiselect :selected').length;
-            ctgr_width = 161;crtr_width = 171;
-            univ_table_th =`<th class='comp__univ_table-category-h' style='width:${ctgr_width}px'>Nhóm tiêu chí</th><th class='comp__univ_table-criterion-h' style='width:${crtr_width}px'>Tiêu chí</th>`;
+            ctgr_width = 161;crtr_width = 270;
+            univ_table_th =`<th class='comp__univ_table-criterion-h' style='width:${crtr_width}px'>Tiêu chí</th>`;
             var table_tbody = "";
             var univ_width = (containerWidth-ctgr_width-crtr_width)/selectedNum;
             $('#comp-univ-multiselect option:selected').each(function(){
@@ -133,18 +134,13 @@ jQuery(document).ready(function(){
                 univ_table_th += `<th class="comp__univ_table-${id}-h comp__univ_table-uni-h" style="width:${univ_width}px">` + tmp + '</th>';
                 scores_list_for_university_compare(parseInt(id));
             });
-            setTimeout( function(){
-                $('#compare__university_table-th').html(univ_table_th);
-            }, 300);
+            $('#compare__university_table-th').html(univ_table_th);
 
             $($(this).attr('show')).animate({opacity:"show"},300);
             $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 400);
         }
         else{
             $('html, body').animate({scrollTop:$('#compare__university_univ-selection').offset().top - 70}, 200);
-            // $(".notification").hide();
-            // $(".notification").html("<p class='my-2 mx-4'>Bạn phải chọn ít nhất 2 trường Đại học để so sánh!</p>");
-            // $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});
             iziToast.error({
                 title: 'Bạn phải chọn ít nhất 2 trường để so sánh!',
                 position: 'bottomLeft',
@@ -253,10 +249,6 @@ jQuery(document).ready(function(){
         $('#subject').removeClass('fade');
         $('#subject').addClass('active');
     };
-    // function get_university_list(){
-    // 	let url = "/api/v1/allUniversity";
-    // 	ajax_request(false, true,  "GET", 'json', url, null, null, all_universities_success_callback, error_callback);
-    // }
     function universities_success_callback(response){
         let universities = response.universities;
         let pane = "", selected = "";
@@ -271,8 +263,6 @@ jQuery(document).ready(function(){
         $('.subject__selected-box').html("<div class=\"blank-select my-1 text-center\"><i class=\"fa fa-plus\"></i></div><div class=\"blank-select my-1 text-center\"><i class=\"fa fa-plus\"></i></div><div class=\"blank-select my-1 text-center\"><i class=\"fa fa-plus\"></i></div><div class=\"blank-select my-1 text-center\"><i class=\"fa fa-plus\"></i></div><div class=\"blank-select my-1 text-center\"><i class=\"fa fa-plus\"></i></div>");
         $('#comp-subj-multiselect').trigger('chosen:updated');
         $('#comp-subj-multiselect').bind("chosen:maxselected", function(){    
-            // $('.notification').html('<p class="mx-4 my-2">Bạn đã chọn đủ số trường tối đa là 5 trường</p>');
-            // $('.notification').animate({height: "show"}).delay(2000).animate({height: "hide"});
             iziToast.destroy();
             iziToast.warning({
                 title: 'Bạn đã chọn đủ số trường tối đa là 5 trường!',
@@ -324,19 +314,11 @@ jQuery(document).ready(function(){
             title: `Đã thêm ${last_select_univ} vào danh sách so sánh!`,
             position: 'bottomLeft',
         });
-        // $(".notification").hide();
-        // $(".notification").html("<p class='my-2 mx-4'>Đã thêm " + last_select_univ + " để so sánh!</p>");
-        // $(".notification").animate({height: "show"}).delay(2000).animate({height: "hide"});
         let univ_box = '';
         $.each(selected_univ, function(index, university){  
-            univ_box += `<p class="my-1 ml-0 mr-lg-4"><i title="Xóa khỏi danh sách" class="fa fa-remove subject__remove-univ" target="${university.id}" target-name="${university.name}"></i> ${university.name}</p>`;
+            univ_box += `<p class="my-1 ml-0 mr-lg-4"><i title="Xóa khỏi danh sách" data-toggle="tooltip" class="fa fa-remove subject__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i> ${university.name} <a href="#"><i class="fa fa-info-circle right-icon" data-toggle="tooltip" title="Xem thông tin ${university.name}"></i></a> </p>`;
         });
         $(".subject__selected-box").html(univ_box);
-        // $('[data-toggle="tooltip"]').tooltip();
-
-
-
-
 
 
 
@@ -363,7 +345,7 @@ jQuery(document).ready(function(){
         
         let univ_box = "";
         $.each(selected_univ, function(index, university){
-            univ_box += `<p class="my-1 ml-0 mr-xl-4"> <i title="Xóa khỏi danh sách" class="fa fa-remove university__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i> ${university.name} <a class="" href="#"><i class="fa fa-info-circle right-icon"></i></a> </p>`;
+            univ_box += `<p class="my-1 ml-0 mr-xl-4"> <i title="Xóa khỏi danh sách" data-toggle="tooltip" class="fa fa-remove university__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i> ${university.name} <a class="" href="#"><i class="fa fa-info-circle right-icon" data-toggle="tooltip" title="Xem thông tin ${university.name}"></i></a> </p>`;
         });
         $('.university__selected-box').html(univ_box);
     });
@@ -458,16 +440,16 @@ jQuery(document).ready(function(){
         response_id = response.profile.university.id;
         let table_tbody = "";
         score_list[`${response_id}`] = response.scores;
-        // console.log(score_list[174][1].criterion_scores);
+        let colspan = $('#comp-subj-multiselect option:selected').length + 1;
 
         $.each(subj_ctgrCrtr, function(category_index, cCr){
             let tmp = '';
             let rowspan = Object.keys(cCr.criteria).length;
             let category = cCr.criterion_category;
-            table_tbody += `<tr><td class="comp__subj_table-category comp__subj_table-ctgr-${category.id}" rowspan='${rowspan}'>${category.name}</td>`;
+            table_tbody += `<tr><td class="text-left comp__subj_table-category comp__subj_table-ctgr-${category.id}" colspan='${colspan}'>${category.name} <i class="right-icon sm-icon text-success fa fa-minus-circle"></i></td></tr>`;
             let crs = cCr.criteria;
             $.each(crs, function(criterion_index, cr){
-                table_tbody +=  tmp + `<td class="comp__subj_table-criterion comp__subj_table-${category.id}-cr">${cr.name}</td>`;
+                table_tbody +=  '<tr>' + `<td class="comp__subj_table-criterion comp__subj_table-${category.id}-cr">${cr.name} <i class="right-icon sm-icon fa fa-info-circle"></i></td>`;
                 let uni_index = 0; let cr_id = cr.id;
                 jQuery('#comp-subj-multiselect option:selected').each(function(){
                     let id = parseInt($(this).val());
@@ -487,31 +469,36 @@ jQuery(document).ready(function(){
                     table_tbody += `<td class="comp__subj_table-${id} comp__subj_table-cr-${cr.id} comp__subj_score-ctgr-${category.id}">${detail} <i class="fa" style="color:yellow"></i></td>`;
                     uni_index += 1;
                 });
-                tmp = '<tr>';
+                // tmp = '<tr>';
                 table_tbody += '</tr>';
 
             });
             
         });
+        setData(table_tbody, function(){
+            setWidth(function(){
+                highestScore();
+            })
+        });
 
-        // jQuery('#compare__subject_table-tbody').html(table_tbody);
-        // // $('.comp__subj_table-criterion').width($('.comp__subj_table-criterion-h').width()+1);
-        setTimeout(function(){
+
+        function setData(table_tboddy, callback){
             jQuery('#compare__subject_table-tbody').html(table_tbody);
-            setWidth();
-            highestScore();
-        },400);
-        function setWidth(){
+            callback();
+        };
+
+        function setWidth(callback){
             jQuery('#comp-subj-multiselect option:selected').each(function(){
                 let id = $(this).val();
-                let width = $(`.comp__subj_table-${id}-h`).width();
+                let width = $(`.subject-univ-${id}`).width();
 
                 $(`.comp__subj_table-${id}`).width(width);
             });
 
-            $('.comp__subj_table-category').width($('.comp__subj_table-category-h').width());
+            // $('.comp__subj_table-category').width($('.comp__subj_table-category-h').width());
             // let criterion_width = $('comp__subj_table-criterion-h').width;
             $('.comp__subj_table-criterion').width($('.comp__subj_table-criterion-h').width());
+            callback();
         }
         function highestScore(){
             $.each(subj_ctgrCrtr, function(index, cCr){
@@ -550,16 +537,17 @@ jQuery(document).ready(function(){
         let table_tbody = "";
         
         score_list[`${response_id}`] = response.scores;
-        // console.log(score_list);
+        let colspan = $('#comp-univ-multiselect option:selected').length + 1;
+
         $.each(univ_ctgrCrtr, function(category_index, cCr){
             let tmp = '';
             // console.log(category_index);
-            let rowspan = Object.keys(cCr.criteria).length;
+            // let rowspan = Object.keys(cCr.criteria).length;
             let category = cCr.criterion_category;
-            table_tbody += `<tr><td class="comp__univ_table-category comp__univ_table-ctgr-${category.id}" rowspan='${rowspan}'>${category.name}</td>`;
+            table_tbody += `<tr><td class="text-left comp__univ_table-category" colspan='${colspan}'>${category.name}<i class="right-icon sm-icon text-success fa fa-minus-circle"></i></td></tr>`;
             let crs = cCr.criteria;
             $.each(crs, function(criterion_index, cr){
-                table_tbody +=  tmp + `<td class="comp__univ_table-criterion comp__univ_table-${category.id}-cr">${cr.name}</td>`;
+                table_tbody +=  "<tr>" + `<td class="comp__univ_table-criterion comp__univ_table-${category.id}-cr">${cr.name} <i class="right-icon sm-icon fa fa-info-circle"></i></td>`;
                 let uni_index = 0; let cr_id = cr.id;
                 jQuery('#comp-univ-multiselect option:selected').each(function(){
                     let id = parseInt($(this).val());
@@ -579,20 +567,23 @@ jQuery(document).ready(function(){
                     table_tbody += `<td class="comp__univ_table-${id} comp__univ_table-cr-${cr.id} comp__univ_score-ctgr-${category.id}">${detail} <i class="fa" style="color:yellow"></i></td>`;
                     uni_index += 1;
                 });
-                tmp = '<tr>';
+                // tmp = '<tr>';
                 table_tbody += '</tr>';
 
             });
             
         });
-
+        setData(table_tbody, function(){
+            setWidth(function(){
+               highestScore();
+            });
+        });
         
-        setTimeout(function(){
+        function setData(table_tbody, callback){
             jQuery('#compare__university_table-tbody').html(table_tbody);
-            setWidth();
-            highestScore();
-        }, 400);
-        function setWidth(){
+            callback();
+        };
+        function setWidth(callback){
             jQuery('#comp-univ-multiselect option:selected').each(function(){
                 let id = $(this).val();
                 let width = $(`.comp__univ_table-${id}-h`).width();
@@ -600,8 +591,9 @@ jQuery(document).ready(function(){
                 $(`.comp__univ_table-${id}`).width(width);
             });
 
-            $('.comp__univ_table-category').width($('.comp__univ_table-category-h').width());
+            // $('.comp__univ_table-category').width($('.comp__univ_table-category-h').width());
             $('.comp__univ_table-criterion').width($('.comp__univ_table-criterion-h').width());
+            callback();
         }
         function highestScore(){
             $.each(univ_ctgrCrtr, function(index, cCr){
