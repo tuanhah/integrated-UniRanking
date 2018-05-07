@@ -51,7 +51,7 @@ jQuery(document).ready(function(){
     var score_list = new Array();
     var ctgr_width = 161;
     var crtr_width = 250;
-
+    var subjectId;
     jQuery(document).on('click touch', '#compare__subject-btn', function(){
     	
 
@@ -60,7 +60,7 @@ jQuery(document).ready(function(){
             var containerWidth = $(window).width() * 0.94;
 
             var selectedNum = $('#comp-subj-multiselect :selected').length;
-            crtr_width = 270;
+            crtr_width = 320;
             subj_table_th =`<th class='comp__subj_table-criterion-h' style='width:${crtr_width}px'>Tiêu chí</th>`;
             var table_tbody = "";
             scores = []; scores_index = 0; score_list = [];
@@ -71,7 +71,7 @@ jQuery(document).ready(function(){
                 let tmp = $(this).text();
                 let id = $(this).val();
                 subj_table_th += `<th class="subject-univ-${id}" style="width:${univ_width}px">` + tmp + '</th>';
-                scores_list_for_subject_compare(parseInt(id));
+                scores_list_for_subject_compare(parseInt(id), parseInt(subjectId));
             });
             $('#compare__subject_table-th').html(subj_table_th);
 
@@ -124,7 +124,7 @@ jQuery(document).ready(function(){
             $('.loader-img').fadeIn(200).delay(800).animate({height: "hide"}, 300);
             var containerWidth = $('.comp_table').width();
             var selectedNum = $('#comp-univ-multiselect :selected').length;
-            ctgr_width = 161;crtr_width = 270;
+            ctgr_width = 161;crtr_width = 320;
             univ_table_th =`<th class='comp__univ_table-criterion-h' style='width:${crtr_width}px'>Tiêu chí</th>`;
             var table_tbody = "";
             var univ_width = (containerWidth-ctgr_width-crtr_width)/selectedNum;
@@ -203,6 +203,7 @@ jQuery(document).ready(function(){
     	$('#c-s-tit-31').text('Chọn trường ngành ' + subjectName);
         $('#compare__subject_table-title').text('So sánh ngành ' + subjectName);
         let subject_selected_id = parseInt($(this).attr('subject-id'));
+        subjectId = subject_selected_id;
         let url = '/api/v1/universities';
         let data = {
             subject : subject_selected_id,
@@ -215,6 +216,26 @@ jQuery(document).ready(function(){
 
         subj_table_th ="<th>Nhóm tiêu chí</th><th>Tiêu chí</th>";
     });
+    let display = true;
+    $(document).on('click touch', '.comp__subj_table-category', function(){
+       let ctgr_id = $(this).attr('ctgr-id');
+       if(display){
+           $(`.subj__ctgr_${ctgr_id}-row`).hide();
+           $(this).find('.fa').removeClass('fa-minus-circle').addClass('fa-plus-circle');
+           display = false;
+       }
+       else{
+           $(`.subj__ctgr_${ctgr_id}-row`).show();
+           $(this).find('.fa').removeClass('fa-plus-circle').addClass('fa-minus-circle');
+           display = true;
+       }
+    });
+
+
+
+
+
+
     function error_callback(response){
     	alert("Đã xảy ra lỗi, xem response tại console");
     }
@@ -427,11 +448,13 @@ jQuery(document).ready(function(){
         univ_ctgrCrtr = response;
     }
     
-    function scores_list_for_subject_compare(university_id){
-        let uni_id = university_id;
-        let url = `/api/v1/universities/${uni_id}/scores`;
+    function scores_list_for_subject_compare(university_id, subject_id){
+        let univ_id = university_id;
+        let subj_id = subject_id;
+        let url = `/api/v1/universities/${univ_id}/subjects/${subj_id}/scores`;
         let data = {
-            university_id : university_id,
+            university_id: university_id,
+            subject_id : subject_id,
         };
         ajax_request(false, true, "GET", "json", url, null, data, score_list_subject_compare_success_callback, error_callback);
     }
@@ -446,10 +469,10 @@ jQuery(document).ready(function(){
             let tmp = '';
             let rowspan = Object.keys(cCr.criteria).length;
             let category = cCr.criterion_category;
-            table_tbody += `<tr><td class="text-left comp__subj_table-category comp__subj_table-ctgr-${category.id}" colspan='${colspan}'>${category.name} <i class="right-icon sm-icon text-success fa fa-minus-circle"></i></td></tr>`;
+            table_tbody += `<tr><td class="text-left comp__subj_table-category" ctgr-id="${category.id}" colspan='${colspan}'>${category.name} <i class="right-icon sm-icon text-success fa fa-minus-circle"></i></td></tr>`;
             let crs = cCr.criteria;
             $.each(crs, function(criterion_index, cr){
-                table_tbody +=  '<tr>' + `<td class="comp__subj_table-criterion comp__subj_table-${category.id}-cr">${cr.name} <i class="right-icon sm-icon fa fa-info-circle"></i></td>`;
+                table_tbody +=  `<tr class="subj__ctgr_${category.id}-row">` + `<td class="comp__subj_table-criterion">${cr.name} <i class="right-icon sm-icon fa fa-info-circle"></i></td>`;
                 let uni_index = 0; let cr_id = cr.id;
                 jQuery('#comp-subj-multiselect option:selected').each(function(){
                     let id = parseInt($(this).val());
@@ -457,7 +480,7 @@ jQuery(document).ready(function(){
                     
                     if(score_list[id] != undefined) {
                         if(score_list[id].length != 0){
-                            $(score_list[id][category_index + 1].criterion_scores).filter(function(i, entry){
+                            $(score_list[id][category_index].criterion_scores).filter(function(i, entry){
                                 if(entry.criterion.id == cr_id){
                                     detail = entry.score;
                                 }
@@ -567,7 +590,6 @@ jQuery(document).ready(function(){
                     table_tbody += `<td class="comp__univ_table-${id} comp__univ_table-cr-${cr.id} comp__univ_score-ctgr-${category.id}">${detail} <i class="fa" style="color:yellow"></i></td>`;
                     uni_index += 1;
                 });
-                // tmp = '<tr>';
                 table_tbody += '</tr>';
 
             });
@@ -591,7 +613,6 @@ jQuery(document).ready(function(){
                 $(`.comp__univ_table-${id}`).width(width);
             });
 
-            // $('.comp__univ_table-category').width($('.comp__univ_table-category-h').width());
             $('.comp__univ_table-criterion').width($('.comp__univ_table-criterion-h').width());
             callback();
         }

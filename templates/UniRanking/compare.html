@@ -1,11 +1,6 @@
 {% extends 'UniRanking/base.html' %} {% load staticfiles %} {% block title %} So sánh | Hệ thống so sánh các trường Đại học
-{% endblock %} {% block compare %} class="active" {% endblock %} {% block stt %}
-<script type="text/javascript" src="{% static 'js/iziToast.min.js'%}"></script>
-<link rel="stylesheet" href="{% static 'css/iziToast.min.css'%}">
-
-<script type="text/javascript" src="{% static 'js/compare.js'%}"></script>
-
-{% endblock %} {% block body %}
+{% endblock %} {% block compare %} class="active" {% endblock %}
+{% block body %}
 <div id="page">
     <div class="container-fluid after-menu" id="compare-introduce">
         <div class="row mx-0 justify-content-center">
@@ -33,7 +28,7 @@
         <div class="row mx-0 justify-content-center">
             <div class="col-lg-3">
 
-                <div class="my-4 bg-custom shadow-custom">
+                <div class="my-4 card bg-custom shadow-custom">
                     <div class="card-body">
                         <h4 class="card-title"><i class="fa fa-gears"></i> Chọn kiểu so sánh:</h4>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -56,40 +51,47 @@
                 </div>
 
             </div>
-            <div class="col-lg-7 my-4 mx-3 mx-lg-0 p-0 shadow-custom" id="carousel-comp-area">
-                <div id="carousel-comp" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-comp" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-comp" data-slide-to="1" class=""></li>
+            <div class="col-lg-7 my-4 mx-3 mx-lg-0 p-0 bg-custom shadow-custom" id="carousel-comp-area">
+                <div class="card">
+                    <div class="card-img-top">
+                        <div id="carousel-comp" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-comp" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-comp" data-slide-to="1" class=""></li>
 
-                    </ol>
-                    <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                            <img data-src="holder.js/600x500/auto/#777:#7a7a7a/text:First slide" alt="First slide" src="../../static/img/VNU.jpg" title="Đại Học Quốc Gia Hà Nội, số 144, Xuân Thủy, Cầu Giấy, Hà Nội" width="100%">
-                            <div class="carousel-caption">
-                                <h2>So sánh theo ngành</h2>
-                                <p>bla bla bla ...</p>
-                                <hr>
-                                <p>bla bla bla ...</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img data-src="holder.js/600x500/auto/#666:#6a6a6a/text:Second slide" alt="Fouth slide" src="../../static/img/VNU.jpg" title="Đại Học Bách Khoa Hà Nội, số 1, Đại Cồ Việt, Bách Khoa, Hai Bà Trưng, Hà Nội" width="100%">
-                            <div class="carousel-caption">
-                                <h2>So sánh theo trường</h2>
-                                <p>bla bla bla ...</p>
-                                <hr>
-                                <p>bla bla bla ...</p>
-                            </div>
-                        </div>
+                            </ol>
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <img data-src="holder.js/600x500/auto/#777:#7a7a7a/text:First slide" alt="First slide" src="../../static/img/VNU.jpg" width="100%">
+                                    <div class="carousel-caption">
+                                        <h2>So sánh theo ngành</h2>
+                                        <p>bla bla bla ...</p>
+                                        <hr>
+                                        <p>bla bla bla ...</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img data-src="holder.js/600x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide" src="../../static/img/VNU.jpg" width="100%">
+                                    <div class="carousel-caption">
+                                        <h2>So sánh theo trường</h2>
+                                        <p>bla bla bla ...</p>
+                                        <hr>
+                                        <p>bla bla bla ...</p>
+                                    </div>
+                                </div>
 
+                            </div>
+                            <a class="left carousel-control-prev" href="#carousel-comp" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            </a>
+                            <a class="right carousel-control-next" href="#carousel-comp" data-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </a>
+                        </div>
                     </div>
-                    <a class="left carousel-control-prev" href="#carousel-comp" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="right carousel-control-next" href="#carousel-comp" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
+                    <div class="card-body">
+                        <div class="card-text">&quot; Cuộc sống không cho bạn tất cả những gì bạn mơ ước, nhưng cuộc sống cho bạn quyền được lựa chọn ước mơ và quyền được thực hiện nó. &quot;</div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-7 my-4 mx-3 mx-lg-0 bg-custom shadow-custom non-display" id="compare__subject_subj-selection">
@@ -280,4 +282,11 @@
 
     });
 </script>
+{% endblock %}
+{% block stt %}
+<script type="text/javascript" src="{% static 'js/iziToast.min.js'%}"></script>
+<link rel="stylesheet" href="{% static 'css/iziToast.min.css'%}">
+
+<script type="text/javascript" src="{% static 'js/compare.js'%}"></script>
+
 {% endblock %}

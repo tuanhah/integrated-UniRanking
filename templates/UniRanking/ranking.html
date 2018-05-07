@@ -1,20 +1,6 @@
 {% extends 'UniRanking/base.html' %} {% load staticfiles %} {% block title %} Xếp hạng chung | Hệ thống xếp hạng các trường
-Đại học {% endblock %} {% block ranking %} class="active" {% endblock %} {% block stt %}
-<script type="text/javascript" src="{% static 'js/iziToast.min.js'%}"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
-
-<script type="text/javascript" src="{% static 'js/ranking.js'%}"></script>
-<link rel="stylesheet" href="{% static 'css/iziToast.min.css'%}">
-
-<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"></script> -->
-<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.6/js/tabulator.min.js"></script> -->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.6/css/tabulator.min.css">  -->
-<!-- <script type="text/javascript" src="{% static 'js/ranking.js'%}"></script> -->
-{% endblock %} {% block body %}
+Đại học {% endblock %} {% block ranking %} class="active" {% endblock %}
+{% block body %}
 
 <div id="page">
     <div class="container-fluid after-menu" id="ranking-introduce">
@@ -67,41 +53,48 @@
                 </div>
 
             </div>
-            <div class="col-lg-7 my-4 mx-3 mx-lg-0 p-0 shadow-custom" id="carousel-rank-area">
-                <div id="carousel-rank" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-rank" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-rank" data-slide-to="1" class=""></li>
+            <div class="col-lg-7 my-4 mx-3 mx-lg-0 p-0 bg-custom shadow-custom" id="carousel-rank-area">
+                <div class="card">
+                    <div class="card-img-top">
+                        <div id="carousel-rank" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-rank" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-rank" data-slide-to="1" class=""></li>
 
-                    </ol>
-                    <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                            <img data-src="holder.js/600x500/auto/#777:#7a7a7a/text:First slide" alt="First slide" src="../../static/img/VNU.jpg" title="Đại Học Quốc Gia Hà Nội, số 144, Xuân Thủy, Cầu Giấy, Hà Nội" width="100%">
-                            <div class="carousel-caption">
-                                <h2>Xếp hạng theo ngành</h2>
-                                <p>Xếp hạng các trường Đại học đào tạo cùng 1 ngành</p>
-                                <hr>
-                                <p>Chọn "Xếp hạng theo ngành" -- Chọn ngành -- Xem bảng xếp hạng</p>
+                            </ol>
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active">
+                                    <img data-src="holder.js/600x500/auto/#777:#7a7a7a/text:First slide" alt="First slide" src="../../static/img/VNU.jpg" title="Đại Học Quốc Gia Hà Nội, số 144, Xuân Thủy, Cầu Giấy, Hà Nội" width="100%">
+                                    <div class="carousel-caption">
+                                        <h2>Xếp hạng theo ngành</h2>
+                                        <p>Xếp hạng các trường Đại học đào tạo cùng 1 ngành</p>
+                                        <hr>
+                                        <p>Chọn "Xếp hạng theo ngành" -- Chọn ngành -- Xem bảng xếp hạng</p>
+                                    </div>
+
+                                </div>
+                                <div class="carousel-item">
+                                    <img data-src="holder.js/600x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide" src="../../static/img/VNU.jpg" width="100%">
+                                    <div class="carousel-caption">
+                                        <h2>Xếp hạng theo trường</h2>
+                                        <p>Xếp hạng tất cả các trường Đạo học</p>
+                                        <hr>
+                                        <p>Chọn "Xếp hạng theo trường" -- Xem bảng xếp hạng</p>
+                                    </div>
+                                </div>
+
                             </div>
-
+                            <a class="left carousel-control-prev" href="#carousel-rank" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            </a>
+                            <a class="right carousel-control-next" href="#carousel-rank" data-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </a>
                         </div>
-                        <div class="carousel-item">
-                            <img data-src="holder.js/600x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide" src="../../static/img/VNU.jpg" width="100%">
-                            <div class="carousel-caption">
-                                <h2>Xếp hạng theo trường</h2>
-                                <p>Xếp hạng tất cả các trường Đạo học</p>
-                                <hr>
-                                <p>Chọn "Xếp hạng theo trường" -- Xem bảng xếp hạng</p>
-                            </div>
-                        </div>
-
                     </div>
-                    <a class="left carousel-control-prev" href="#carousel-rank" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </a>
-                    <a class="right carousel-control-next" href="#carousel-rank" data-slide="next">
-                        <span class="carousel-control-next-icon"></span>
-                    </a>
+                    <div class="card-body">
+                        <div class="card-text">&quot; Cuộc sống không cho bạn tất cả những gì bạn mơ ước, nhưng cuộc sống cho bạn quyền được lựa chọn ước mơ và quyền được thực hiện nó. &quot;</div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-7 my-4 mx-3 mx-lg-0 bg-custom shadow-custom non-display" id="ranking__subject_subj-selection">
@@ -259,3 +252,15 @@
 
 
 {% endblock %}
+{% block stt %}
+<script type="text/javascript" src="{% static 'js/iziToast.min.js'%}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+
+<script type="text/javascript" src="{% static 'js/ranking.js'%}"></script>
+<link rel="stylesheet" href="{% static 'css/iziToast.min.css'%}">
+
+{% endblock %}xx`
