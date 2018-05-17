@@ -1,0 +1,201 @@
+{% extends "UniRanking/base.html" %}
+{% load static %} 
+{% block title %} {{ university.name }} || Chức năng xem thông tin các trường Đại Hoc {% endblock %} 
+{% block info %}class="active"{% endblock %}
+{% block body %}
+    <div class="container-fluid after-menu s-odd">
+        <div class="row" id="background">
+            <div class="col-sm-3">
+                <img id="uni-avatar" src="{% static 'img/vnu_avatar.jpg'%}" width=140px>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-7">
+                        <div class="row">
+                            <h1 class="col-10" id="uni-name">{{university.name}}</h1>
+                            <span class="col-1 fa fa-plus pointer-md-icon" data-toggle="tooltip" title="Thêm vào danh sách yêu thích"></span>
+                            <span class=" col-1 fa fa-envelope-square pointer-md-icon" data-toggle="tooltip" title="Nhận thông báo"></span>
+                        </div>
+                        <div class="row">
+                            <p class="col-12 p-large">Địa chỉ: 144, Xuân Thủy, Cầu Giấy</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <img class="img-thumbnail" id="uni-map" src="{% static 'img/map_sample.png'%}" width=100%>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+                <div class="row mx-0" id="nav-info">
+            <div class="container">
+                    <div class="col-4 text-center">
+                        <p class="p-large">Thông tin</p>
+                    </div>
+                    <div class="col-8">
+                        <ul class="nav ">
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <ul class="nav flex-column">
+                            <li class="nav-item"><btn id="show-all-score" class="btn btn-success btn-lg full-width-btn">Hiển thị tất cả điểm</btn></li>
+                            {% for caCr in CategoryCriterion %}
+                            <li class="nav-item">
+                                <btn id="info-category-criterion-{{ caCr.id }}" class="btn btn-primary btn-lg full-width-btn" data-toggle="collapse" href="#category-criterion-{{ caCr.id }}">{{ caCr.name }} <span class="fa fa-sort"></span></btn>
+                                <div id="category-criterion-{{ caCr.id }}" class="collapse">
+                                    <ul class="list-group">
+                                        {% for cr in Criterion%}
+                                        {% if cr.category_id == caCr.id %}
+                                        <li class="btn btn-info btn-2" id="score-cr-{{ cr.id }}-btn"><btn>{{ cr.name }}</btn></li>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </li>
+                            {% endfor %}
+
+
+
+                        </ul>
+                    </div>
+                    <div class="col-8">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr class="info-col-title">
+                                <th>Tiêu chí</th>
+                                <th>Điểm</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for caCr in CategoryCriterion %}
+                            <tr class="category-criterion">
+                                <td>{{ caCr.name }}</td>
+                                <td>9.05</td>
+                                </tr>
+                            {% for cr in Criterion %}
+                            {% if cr.category_id == caCr.id %}
+                            <tr class="row-cr" id= 'row-cr-{{ cr.id }}'>
+                                <td>{{ cr.name }}</td>
+                                <td>9.1</td>
+                            </tr>
+
+                            {% endif %}
+                            {% endfor %}
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--<div class="modal fade" id="add_subject_modal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModal" aria-hidden="true">-->
+        <!--<div class="modal-dialog modal-dialog-centered modal-lg" role="document">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                    <!--<h5 class="modal-title">Thêm ngành <i class="fas fa-plus"></i></h5>-->
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                        <!--<span aria-hidden="true">&times;</span>-->
+                    <!--</button>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                    <!--<div class="form-group row">-->
+                        <!--<label for="subject_sector_select" class="col-4 col-form-label font-weight-bold">KHỐI NGÀNH</label>-->
+                        <!--<div class="col">-->
+                            <!--<select class="form-control" id="subject_sector_select">-->
+                                <!--<option value="0">&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Chọn khối ngành &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
+                                <!--% if subject_sectors %}-->
+                                    <!--% for subject_sector in subject_sectors %}-->
+                                        <!--<option value="{{subject_sector.id}}">{{subject_sector.name}}</option>-->
+                                    <!--% endfor %}-->
+                                <!--% endif %}-->
+                            <!--</select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group row">-->
+                        <!--<label for="subject_group_select" class="col-4 col-form-label font-weight-bold">NHÓM NGÀNH</label>-->
+                        <!--<div class="col">-->
+                            <!--<select class="form-control" id="subject_group_select">-->
+                            <!--</select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group" style="display:none;">-->
+                        <!--<label for="subject_list_select" class="col-form-label font-weight-bold">NGÀNH</label>-->
+                        <!--<div class="list-group list-group-flush" id="subject_list_select">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="modal fade" id="add_score_modal" tabindex="-1" role="dialog" aria-labelledby="addScoreModal" aria-hidden="true">-->
+        <!--<div class="modal-dialog modal-dialog-centered">-->
+            <!--<div class="modal-content">-->
+                <!--<div class="modal-header">-->
+                    <!--<h5 class="modal-title">Thêm điểm <i class="fas fa-plus"></i></h5>-->
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                        <!--<span aria-hidden="true">&times;</span>-->
+                    <!--</button>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                    <!--<div class="form-group row">-->
+                        <!--<label for="category_list_select" class="col-4 col-form-label font-weight-bold">NHÓM TIÊU CHÍ</label>-->
+                        <!--<div class="col">-->
+                            <!--<select class="form-control" name="category" id="category_list_select">-->
+                            <!--</select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="add_score_field" class="col-form-label font-weight-bold">TIÊU CHÍ</label>-->
+                        <!--<table class="table">-->
+                            <!--<thead>-->
+                                <!--<tr>-->
+                                    <!--<th style="width: 85%;">-->
+                                        <!--<select class="form-control" id="criterion_list_select">-->
+                                        <!--</select>-->
+                                    <!--</th>-->
+                                    <!--<th class="px-0" style="width: 15%;">-->
+                                        <!--<input id="score_input" class="form-control text-center" placeholder="Điểm">-->
+                                    <!--</th>-->
+                                    <!--<th class="text-center">-->
+                                        <!--<button id="score_add_confirm" class="btn btn-outline-success border-0"><i class="fas fa-plus"></i></button>-->
+                                    <!--</th>-->
+                                <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody id="added_score_field">-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+                            <!--% comment %} <div class="form-group row">-->
+                                <!--<div class="col-8">-->
+                                    <!--<select class="form-control" id="criterion_list_select">-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                                <!--<div class="col px-0">-->
+                                    <!--<input id="score_input" class="form-control" placeholder="Điểm">-->
+                                <!--</div>-->
+                                <!--<div class="col-2 pr-0">-->
+                                    <!--<button id="score_add_confirm" class="btn btn-outline-success border-0"><i class="fas fa-plus"></i></button>-->
+                                <!--</div>-->
+                            <!--</div> % endcomment %}-->
+                            <!---->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+{% endblock %}
