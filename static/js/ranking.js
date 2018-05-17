@@ -1,8 +1,9 @@
 jQuery(document).ready(function(){         
-    $(window).resize(function(){
-        var img_width = $('.background-img').parent().width(); 
-        $('.background-img').css({'width':img_width});
-    });
+    // $(window).resize(function(){
+    //     var img_width = $('.background-img').parent().width();
+    //     $('.background-img').css({'width':img_width});
+    // });
+
     iziToast.settings({
         timeout: 2500,
     });
@@ -14,7 +15,7 @@ jQuery(document).ready(function(){
         let $this = $(this);
         $('#subject-ranking i').remove();
         $('#subject-ranking, #university-ranking').removeClass('text-left');
-        $(this).addClass('text-left').append(' <i class="fa fa-check-circle md-icon float-right"></i>');
+        $(this).addClass('text-left').prepend(' <i class="fa fa-check-circle md-icon float-right"></i>');
         $('#university-ranking i').remove();
         jQuery('#ranking__subject_subj-selection, #step-2').hide().animate({opacity:'show'}, 200, function(){
             scroll_to_id($this);
@@ -43,7 +44,7 @@ jQuery(document).ready(function(){
 
         $('#subject-ranking, #university-ranking').removeClass('text-left');
         $('#university-ranking i').remove();
-        $(this).addClass('text-left').append(' <i class="fa fa-check-circle md-icon float-right"></i>');
+        $(this).addClass('text-left').prepend(' <i class="fa fa-check-circle md-icon float-right"></i>');
         $('#subject-ranking i').remove();
         let $this = $(this);
 
@@ -73,7 +74,7 @@ jQuery(document).ready(function(){
             let univ_width = 350;
             let rank_width = 63;
             let number_of_crtr = 3;
-            univ_th_ctgr =`<th rowspan="2" class="subj-rank-th" style="width:${rank_width}px">Thứ hạng</th><th class='rank__univ_table-category-h' rowspan="2" style='width:${univ_width}px'>Trường</th>`;
+            univ_th_ctgr =`<th rowspan="2" class="univ-rank-th bg-custom-2" style="width:${rank_width}px">Thứ hạng</th><th class='rank__univ_table-category-h bg-custom-2' rowspan="2    " style='width:${univ_width}px'>Trường</th>`;
             var ctgr_width = (containerWidth-rank_width-univ_width)/num_of_ctgr;
             univ_th_sort = '<th>s</th><th>s</th>';
             $.each(univ_ctgrCrtr, function(ctgr_index, ctgr){
@@ -192,17 +193,17 @@ jQuery(document).ready(function(){
 		    var num_of_crtr = 4;//$('#rank-subj-multiselect :selected').length;
 		    let univ_width = 350;
             let rank_width = 63;
-            subj_th_ctgr =`<th rowspan="2" style="width:${rank_width}px">Thứ hạng</th><th class='rank__subj_table-category-h' rowspan="2" style='width:${univ_width}px'>Trường</th>`;
+            subj_th_ctgr =`<th class="bg-custom-2" rowspan="2" style="width:${rank_width}px">Thứ hạng</th><th class='rank__subj_table-category-h bg-custom-2' rowspan="2" style='width:${univ_width}px'>Trường</th>`;
             var ctgr_width = (containerWidth-univ_width)/num_of_ctgr;
             subj_th_sort = '<th> </th><th> </th>';
             $.each(array_of_ctgr, function(ctgr_index, ctgr){
                 let colspan = Object.keys(ctgr.criteria).length;
                 let category = ctgr.criterion_category;
-                subj_th_ctgr += `<th class="py-0 pr-0 ctgr comp__subj_table-category comp__subj_table-ctgr-${category.id}" colspan="${num_of_crtr}">${category.name}<btn class="btn change-crtr-btn" data-toggle="modal" data-target="#crtr-modal" ctgr-id="${category.id}"><i class="fa fa-plus"></i><btn></th>`;
+                subj_th_ctgr += `<th class="py-0 pr-0 ctgr comp__subj_table-category comp__subj_table-ctgr-${category.id}" colspan="${num_of_crtr}">${category.name}<btn class="px-2 py-1 btn change-crtr-btn" data-toggle="modal" data-target="#crtr-modal" ctgr-id="${category.id}"><i class="fa fa-plus"></i><btn></th>`;
                 let crtrs = ctgr.criteria;
                 $.each(crtrs, function(crtr_index, crtr){
                     if(crtr_index <= num_of_crtr - 1){
-                       subj_th_crtr += `<th class="comp__subj_table-criterion comp__subj_table-${category.id}-cr" crtr-id="${crtr.id}" ctgr-id="${category.id}">${crtr.name}</th>`;
+                       subj_th_crtr += `<th class="px-2 comp__subj_table-criterion comp__subj_table-${category.id}-cr" crtr-id="${crtr.id}" ctgr-id="${category.id}">${crtr.name}</th>`;
                        subj_th_sort += '<th> </th>';
                    }
                });
@@ -242,7 +243,7 @@ jQuery(document).ready(function(){
         let groups = response.sorted_subjects; groups_list = groups;
         let pane = "";
         $.each(groups, function(index, group){
-        pane += `<div class="col-md-6"><btn show="#ranking__subject_subj-selection" class="btn gs-btn gs2-btn go-to-id" id="gs-2-${group.group.id}" id-gs2="${group.group.id}">${group.group.name}<i class="fa mt-1" style="float:right"></i></btn></div>`; 
+        pane += `<div class="col-md-6"><btn show="#ranking__subject_subj-selection" class="btn gs-btn gs2-btn go-to-id" id="gs-2-${group.group.id}" id-gs2="${group.group.id}"><i class="fa mt-1 right-icon"></i> ${group.group.name}</btn></div>`;
         });
         $('#gs2-area').html(pane);
         $('#tab1, #groupSubject-1').removeClass('active');
@@ -255,7 +256,7 @@ jQuery(document).ready(function(){
     function subjects_list_of_group(subjects){
         let pane = "";
         $.each(subjects, function(index, subject){
-        pane += `<div class="col-md-6"><btn show="#ranking__subject-table" href="#" class="btn gs-btn subject-btn go-to-id" id="subject-${subject.id}" subject-name="${subject.name}" subject-id="${subject.id}">${subject.name}<i class="fa mt-1" style="float:right"></i></btn></div>`;
+        pane += `<div class="col-md-6"><btn show="#ranking__subject-table" class="btn gs-btn subject-btn go-to-id" id="subject-${subject.id}" subject-name="${subject.name}" subject-id="${subject.id}"><i class="fa mt-1 right-icon"></i> ${subject.name}</btn></div>`;
         });
         $('#subject-area').html(pane);
         $('#tab2, #groupSubject-2').removeClass('active');
@@ -328,11 +329,12 @@ jQuery(document).ready(function(){
                 univTablData[index] = new Array();
                     univTablData[index].push(`${general_statistics.rank}`, `${university.name}`);// += `<tr><td class="subj-rank">${general_statistics.rank}</td><td class="subj__table_univ-name">${university.name}</td>`;
                     let scores = univ.scores;
-                    let score;
+
                     for(let i = 0; i < 16; i++){
                         let crtr_id = $(`#subject_table_th-crtr th:nth-child(${i+1})`).attr('crtr-id');
                         let ctgr_id = parseInt($(`#subject_table_th-crtr th:nth-child(${i+1})`).attr('ctgr-id'));
                         let ctgr_index = parseInt(i/4);
+                        let score = "n!"
                         if(scores.length != 0){
                             $(scores[ctgr_index].criterion_scores).filter(function(_i, param){
                                 if(param.criterion.id == crtr_id){
@@ -340,7 +342,7 @@ jQuery(document).ready(function(){
                                 }
                             });
                         }
-                        else score = "E!";
+                        else score = "n!";
                         univTablData[index].push(`${score}`); //+= `<td class="comp__subj_table-${univ_id} comp__subj_table-cr-${crtr_id} comp__subj_score-ctgr-${ctgr_id}">${score}</td>`;
                     }
                     // subjTablData += '</tr>';
@@ -373,7 +375,7 @@ jQuery(document).ready(function(){
         let sectors = response.sectors;
         let pane = "";
         $.each(sectors, function(index, sector){
-            pane += `<div class="col-md-6"><btn show="#ranking__subject_subj-selection" class="btn gs-btn gs1-btn go-to-id" href="#" id-gs1="${sector.id}">${sector.name}<i class="fa mt-1" style="float:right"></i></btn></div>`;
+            pane += `<div class="col-md-6"><btn show="#ranking__subject_subj-selection" class="btn gs-btn gs1-btn go-to-id" id-gs1="${sector.id}"><i class="fa mt-1" style="float:right"></i> ${sector.name}</btn></div>`;
         });
         $("#gs1-area").html(pane);
 
@@ -432,12 +434,12 @@ jQuery(document).ready(function(){
                         "data": subjTablData,
                         "autoWidth": true, 
 
-                        // drawCallback: function () { // this gets rid of duplicate headers
-                        //     $('.dataTables_scrollBody thead tr').addClass('d-none'); 
-                        // },
-                        "initComplete": function(settings, json) {
-                            $('.dataTables_scrollBody thead tr').css({visibility:'collapse'});
+                        drawCallback: function () { // this gets rid of duplicate headers
+                            $('.dataTables_scrollBody thead tr').css({height:'0px'});
                         },
+                        // "initComplete": function(settings, json) {
+                        //     $('.dataTables_scrollBody thead').css({height:'0px'});
+                        // },
                         
 
                         dom: 'Bfrtip',
@@ -475,11 +477,12 @@ jQuery(document).ready(function(){
                     subjTablData[index] = new Array();
                     subjTablData[index].push(`${general_statistics.rank}`, `${university.name}`);// += `<tr><td class="subj-rank">${general_statistics.rank}</td><td class="subj__table_univ-name">${university.name}</td>`;
                     let scores = univ.scores;
-                    let score;
+
                     for(let i = 0; i < 16; i++){
                         let crtr_id = $(`#subject_table_th-crtr th:nth-child(${i+1})`).attr('crtr-id');
                         let ctgr_id = parseInt($(`#subject_table_th-crtr th:nth-child(${i+1})`).attr('ctgr-id'));
                         let ctgr_index = parseInt(i/4);
+                        let score = "n!";
                         if(scores.length != 0){
                             $(scores[ctgr_index].criterion_scores).filter(function(_i, param){
                                 if(param.criterion.id == crtr_id){
@@ -487,7 +490,7 @@ jQuery(document).ready(function(){
                                 }
                             });
                         }
-                        else score = "E!";
+                        else score = "n!";
                         subjTablData[index].push(`${score}`); //+= `<td class="comp__subj_table-${univ_id} comp__subj_table-cr-${crtr_id} comp__subj_score-ctgr-${ctgr_id}">${score}</td>`;
                     }
                     // subjTablData += '</tr>';
@@ -503,13 +506,7 @@ jQuery(document).ready(function(){
                 for(let i = 1; i <= 16; i++){
                     widthArray[i+1] = $(`#subject_table_th-crtr th:nth-child(${i})`).width();
                 }
-                // $('#subject_table_th-crtr th').each(function(){
-                //     let id = $(this).attr('crtr-id');
-                //     let width = $(this).width();
-                //     $(`.comp__subj_table-cr-${id}`).width(width);
-                // });
-                // // $('.subj-rank').width($('.subj-rank-th').width());
-                // $('.subj__table_univ-name').width($('.rank__subj_table-category-h').width());
+
             }
         }
 
