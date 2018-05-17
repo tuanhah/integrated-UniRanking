@@ -75,8 +75,12 @@
                             {% for caCr in CategoryCriterion %}
                             <tr class="category-criterion">
                                 <td>{{ caCr.name }}</td>
+                                <!-- % for usbc in UniversityScoreByCategory %} -->
+                                <!-- % if caCr.id == usbc.category_criterion_id %} -->
                                 <td>9.05</td>
-                                </tr>
+                                <!-- % endif %} -->
+                                <!-- % endfor %} -->
+                            </tr>
                             {% for cr in Criterion %}
                             {% if cr.category_id == caCr.id %}
                             <tr class="row-cr" id= 'row-cr-{{ cr.id }}'>
