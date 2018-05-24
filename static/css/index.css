@@ -254,6 +254,7 @@ hr.under{
 	cursor:pointer;
 }
 #subject_table_th-sort th{height:30px !important}
+
 #DataTables_Table_0_wrapper .row:nth-child(2) .col-sm-12{ padding:0;}
 tr th.sorting{
 	height:28px;

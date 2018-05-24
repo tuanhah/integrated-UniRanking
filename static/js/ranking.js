@@ -464,7 +464,6 @@ jQuery(document).ready(function(){
                         //     $('.dataTables_scrollBody thead').css({height:'0px'});
                         // },
                         
-
                         // dom: 'Bfrtip',
                         // buttons: [
                         // 'copyHtml5',
