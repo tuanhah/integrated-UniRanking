@@ -307,7 +307,7 @@ $(document).ready(function(){
         $('#comp-subj-multiselect').chosen({max_selected_options: 5});
         $(".search-choice").remove();
 
-        $('.subject__selected-box').html('Bajn chua chon truong nao!');
+        $('.subject__selected-box').html('Bạn chưa chọn trường nào!');
         $('#comp-subj-multiselect').trigger('chosen:updated');
         $('#comp-subj-multiselect').bind("chosen:maxselected", function(){    
             iziToast.destroy();
@@ -330,7 +330,7 @@ $(document).ready(function(){
         $('#comp-univ-multiselect').chosen({max_selected_options: 5});
         $('.search-choice, .university__selected-box p').remove();
 
-        $('.university__selected-box').html('Bajn chua chojn truowng nafo !!');
+        $('.university__selected-box').html('Bạn chưa chọn trường nào !!');
         $('#comp-univ-multiselect').trigger('chosen:updated');
         $('#comp-univ-multiselect').bind("chosen:maxselected", function(){
             iziToast.destroy();
@@ -361,7 +361,7 @@ $(document).ready(function(){
             position: 'bottomLeft',
         });
         $.each(selected_univ, function(index, university){  
-            univ_box += `<p class="my-1 ml-0 mr-lg-4"><i title="Xóa khỏi danh sách" data-toggle="tooltip" class="fa fa-remove subject__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i> <a href="/university/${university.id}" target="_blank" data-toogle="tooltip" title="Xem thong tin ${university.name}"> ${university.name} <i class="fa fa-info-circle right-icon" ></i></a> </p>`;
+            univ_box += `<p class="my-1 ml-0 mr-lg-4"><i title="Xóa khỏi danh sách" data-toggle="tooltip" class="fa fa-remove subject__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i> <a href="/university/${university.id}" target="_blank" data-toogle="tooltip" title="Xem thong tin ${university.name}"> ${university.name} </a> </p>`;
         });
         $(".subject__selected-box").html(univ_box);
     });
@@ -386,7 +386,7 @@ $(document).ready(function(){
             position: 'bottomLeft',
         });
         $.each(selected_univ, function(index, university){
-            univ_box += `<p class="my-1 ml-0 mr-xl-4"> <i title="Xóa khỏi danh sách" data-toggle="tooltip" class="fa fa-remove university__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i> <a class="" target="_blank" href="/university/${university.id}" data-toggle="tooltip" title="Xem thông tin ${university.name}"> ${university.name} <i class="fa fa-info-circle right-icon" ></i></a> </p>`;
+            univ_box += `<p class="my-1 ml-0 mr-xl-4"> <i title="Xóa khỏi danh sách" data-toggle="tooltip" class="fa fa-remove university__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i> <a class="" target="_blank" href="/university/${university.id}" data-toggle="tooltip" title="Xem thông tin ${university.name}"> ${university.name} </a> </p>`;
         });
         $('.university__selected-box').html(univ_box);
     });

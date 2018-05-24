@@ -5,7 +5,7 @@
 <div id="page">
     <div class="container-fluid after-menu" id="ranking-introduce">
         <div class="row mx-0 justify-content-center">
-            <div class="col-lg-10 text-left">
+            <div class="col-lg-11 text-left">
                 <div class="row mx-0">
                     <div class="col-lg-9 px-0">
                         <p class="my-2"><a href="/">Trang chủ</a> <i class="fa fa-angle-double-right"></i> Xếp hạng Đại Học</p>
@@ -33,12 +33,12 @@
 
         </div>
     </div>
-    <div class="container-fluid s-odd">
+    <div class="container-fluid s-odd select-area">
 
         <div class="row mx-0 justify-content-center">
-            <div class="col-lg-3">
+            <div class="col-lg-3 selection-card">
 
-                <div class="my-4 bg-custom shadow-custom">
+                <div class="my-4 bg-custom shadow-custom fixed-card">
                     <div class="card-body">
 
                         <h4 class="card-title">Chọn kiểu xếp hạng:</h4>
@@ -47,14 +47,14 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item bg-custom">
                             <!--<div class="pb-3 text-center"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>-->
-                            <btn class="btn btn-primary go-to-id w-100 mt-4" id="subject-ranking" show="#ranking__subject_subj-selection">Xếp hạng theo ngành</btn>
-                            <p class="my-0 p-2 text-center wrap-text">Chọn một ngành cụ thể, hệ thống sẽ lọc cho bạn các trường đào tạo ngành đó</p>
+                            <btn class="btn btn-primary go-to-id w-100 my-2" id="subject-ranking" show="#ranking__subject_subj-selection">Xếp hạng theo ngành</btn>
+                            <!-- <p class="my-0 p-2 text-center wrap-text">Chọn một ngành cụ thể, hệ thống sẽ lọc cho bạn các trường đào tạo ngành đó</p> -->
                         </li>
 
                         <li class="list-group-item bg-custom">
                             <!--<div class="pb-3 text-center"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>-->
-                            <btn class="btn btn-primary go-to-id w-100 mt-4" id="university-ranking" show="#ranking__university-table">Xếp hạng theo trường </btn>
-                            <p class="my-0 p-2 text-center wrap-text">Xếp hạng chung cho tất cả các trường ở tất cả các ngành</p>
+                            <btn class="btn btn-primary go-to-id w-100 my-2" id="university-ranking" show="#ranking__university-table">Xếp hạng theo trường </btn>
+                            <!-- <p class="my-0 p-2 text-center wrap-text">Xếp hạng chung cho tất cả các trường ở tất cả các ngành</p> -->
                         </li>
 
                     </ul>
@@ -62,7 +62,7 @@
                 </div>
 
             </div>
-            <div class="col-lg-7 my-4 mx-3 mx-lg-0 p-0 bg-custom shadow-custom" id="carousel-rank-area">
+            <div class="col-lg-8 my-4 mx-3 mx-lg-0 p-0 bg-custom shadow-custom" id="carousel-rank-area">
                 <div class="card">
                     <div class="card-img-top">
                         <div id="carousel-rank" class="carousel slide" data-ride="carousel">
@@ -86,7 +86,7 @@
                                     <img data-src="holder.js/600x500/auto/#666:#6a6a6a/text:Second slide" alt="Second slide" src="../../static/img/VNU.jpg" width="100%">
                                     <div class="carousel-caption">
                                         <h2>Xếp hạng theo trường</h2>
-                                        <p>Xếp hạng tất cả các trường Đạo học</p>
+                                        <p>Xếp hạng tất cả các trường Đại học</p>
                                         <hr>
                                         <p>Chọn "Xếp hạng theo trường" -- Xem bảng xếp hạng</p>
                                     </div>
@@ -102,11 +102,11 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="card-text">&quot; Cuộc sống không cho bạn tất cả những gì bạn mơ ước, nhưng cuộc sống cho bạn quyền được lựa chọn ước mơ và quyền được thực hiện nó. &quot;</div>
+                        <div class="card-text"><i> &quot; Cuộc sống không cho bạn tất cả những gì bạn mơ ước, nhưng cuộc sống cho bạn quyền được lựa chọn ước mơ và quyền được thực hiện nó. &quot;</i></div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-7 my-4 mx-3 mx-lg-0 bg-custom shadow-custom non-display" id="ranking__subject_subj-selection">
+            <div class="col-lg-8 my-4 mx-3 mx-lg-0 bg-custom shadow-custom non-display" id="ranking__subject_subj-selection">
                 <div class="row mx-0">
                     <div class="col-12">
                         <div class="row mx-0 mt-4">
@@ -156,7 +156,7 @@
     </div>
 
 
-    <div class="container-fluid s-odd non-display" id="ranking__subject-table">
+    <div class="container-fluid s-even non-display" id="ranking__subject-table">
         <div class="row mx-0 justify-content-center">
             <div class="" style="width:94%">
                 <h2 class="title-step px-3 py-2">Bảng xếp hạng ngành: </h2>
@@ -189,7 +189,6 @@
         <div class="row mx-0 justify-content-center">
             <div class="" style="width:94%">
                 <h2 class="title-step px-3 py-2">Bảng xếp hạng các tiêu chí theo trường:(Chưa hoàn thiện) </h2>
-
             </div>
         </div>
         <div class="row mx-0 justify-content-center">

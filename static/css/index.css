@@ -243,7 +243,7 @@ hr.under{
 	background-color: #f8fbfc;
 	border-color: rgba(15,30,38,0.1) !important;
 	cursor: pointer;
-    font-size: 16px;
+    font-size: 13px;
     text-transform: uppercase;
     font-weight:700;
 }
@@ -254,14 +254,14 @@ hr.under{
 	cursor:pointer;
 }
 #subject_table_th-sort th{height:30px !important}
-#DataTables_Table_0_wrapper .row:nth-child(2) .col-sm-12{height:600px; padding:0;}
+#DataTables_Table_0_wrapper .row:nth-child(2) .col-sm-12{ padding:0;}
 tr th.sorting{
 	height:28px;
 }
 .dataTables_scrollBody{
 	overflow-y: scroll !important;
 }
-
+.sort-table {width:100% !important;}
 /*.sort-table td{
 	font-size:14px;
 }*/
@@ -269,6 +269,7 @@ tr th.sorting{
 	padding-left:0;
 	padding-right:0;
 }*/
+
 .ctgr{
 	line-height:45px;
 }

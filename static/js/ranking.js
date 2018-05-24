@@ -4,9 +4,31 @@ jQuery(document).ready(function(){
     //     $('.background-img').css({'width':img_width});
     // });
 
+
+    var scard = $('.selection-card');
+    var fcard = $('.fixed-card');
+    var scard_pos = scard.position();
+    var select_area = $('.select-area');
+
     iziToast.settings({
         timeout: 2500,
     });
+    
+    $(window).scroll(function () {
+        if($('#ranking__university-table').css('display') == "none" && $('#ranking__subject-table').css('display') == "none" && $(window).width() >= 992) {
+            var window_pos = $(window).scrollTop();
+            var select_area_height = select_area.height();
+
+            if (window_pos + 60 >= scard_pos.top && window_pos + 60 + fcard.height() <= select_area.position().top + select_area_height) {
+                $('.fixed-card').addClass('fixed--after-menu');
+            }
+            else {
+                $('.fixed-card').removeClass('fixed--after-menu');
+            }
+        }
+        else $('.fixed-card').removeClass('fixed--after-menu');
+    });
+
     jQuery(document).on('click touch', '#subject-ranking', function(){
         iziToast.info({
             title: 'Đã chọn xếp hạng theo ngành!',
@@ -428,8 +450,9 @@ jQuery(document).ready(function(){
                             },
                             "search" : "Tìm kiếm: ",
                         },
-                        "scrollY" : "200px",
-                        "scrollColapse" : true,
+                        "pageLength": 25,
+                        // "scrollY" : "200px",
+                        // "scrollColapse" : true,
                         // "scrollX" : true,
                         "data": subjTablData,
                         "autoWidth": true, 
@@ -442,28 +465,28 @@ jQuery(document).ready(function(){
                         // },
                         
 
-                        dom: 'Bfrtip',
-                        buttons: [
-                        'copyHtml5',
-                        'excelHtml5',
-                        'csvHtml5',
-                        'pdfHtml5',
-                        {
-                            text: 'Custom PDF',
-                            extend: 'pdfHtml5',
-                            filename: 'dt_custom_pdf',
-                            // orientation: 'landscape', //portrait
-                            pageSize: 'A4', //A3 , A5 , A6 , legal , letter
-                            exportOptions: {
-                                columns: ':visible',
-                            // search: 'applied',
-                            // order: 'applied'
+                        // dom: 'Bfrtip',
+                        // buttons: [
+                        // 'copyHtml5',
+                        // 'excelHtml5',
+                        // 'csvHtml5',
+                        // 'pdfHtml5',
+                        // {
+                        //     text: 'Custom PDF',
+                        //     extend: 'pdfHtml5',
+                        //     filename: 'dt_custom_pdf',
+                        //     // orientation: 'landscape', //portrait
+                        //     pageSize: 'A4', //A3 , A5 , A6 , legal , letter
+                        //     exportOptions: {
+                        //         columns: ':visible',
+                        //     // search: 'applied',
+                        //     // order: 'applied'
 
-                        },
-                        header: true,
-                        footer: true,
-                    },
-                    ]
+                        // },
+                    //     header: true,
+                    //     footer: true,
+                    // },
+                    // ]
                 });
                     // $(".dataTables_scrollBody #subject_table_th-sort").empty();
                     
