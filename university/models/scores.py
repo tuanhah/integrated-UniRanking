@@ -35,22 +35,22 @@ class UniversityScoreByCriterion(ScoreByCriterion):
         score = str(self.score)
         return '{} | Criterion: {} | Score: {}'.format(self.university, self.criterion, score)
 
-    def update_score(self):
-        from subject.models import SubjectScoreByCriterion
-        univ_subjects = self.university.subject_set.all()
-        univ_subject_id_list = [univ_subject.id for univ_subject in univ_subjects]
-        avg_score = SubjectScoreByCriterion.objects.filter(
-                univ_subject_id__in = univ_subject_id_list, criterion_id = self.criterion_id
-            ).aggregate(
-                models.Avg("score")
-            )
-        avg_score = avg_score.get("score__avg")
+    # def update_score(self):
+    #     from subject.models import SubjectScoreByCriterion
+    #     univ_subjects = self.university.subject_set.all()
+    #     univ_subject_id_list = [univ_subject.id for univ_subject in univ_subjects]
+    #     avg_score = SubjectScoreByCriterion.objects.filter(
+    #             univ_subject_id__in = univ_subject_id_list, criterion_id = self.criterion_id
+    #         ).aggregate(
+    #             models.Avg("score")
+    #         )
+    #     avg_score = avg_score.get("score__avg")
         
-        if avg_score is not None:
-            self.score = round(avg_score, 2)
-            self.save(update_fields=['score'])
-        else:
-            self.delete()
+    #     if avg_score is not None:
+    #         self.score = round(avg_score, 2)
+    #         self.save(update_fields=['score'])
+    #     else:
+    #         self.delete()
 
     def get_score_owner_object(self):
         return self.university

@@ -11,7 +11,7 @@ class CriterionCategory(models.Model):
 
     class Meta:
         db_table = 'criterion_category'
-        ordering = ['id']
+        ordering = ['-university_only','id']
 
     def __str__(self):
         return self.name
@@ -34,10 +34,10 @@ class Criterion(models.Model):
     description = models.TextField(null=True, blank=True)
 
     objects = CriterionQueryset.as_manager()
-
+    
     class Meta:
         db_table = 'criterion'
-        ordering = ['id']
+        ordering = ['category', 'id']
 
     def __str__(self):
         return self.name

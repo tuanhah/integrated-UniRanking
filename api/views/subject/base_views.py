@@ -165,7 +165,7 @@ class UniversitySubjectDetailView(BaseManageView):
             "invalid" : "This university or subject is invalid",
         }
     }
-
+    
     def __init__(self, *args, **kwargs):
         self.VIEWS_BY_METHOD = {
             'GET' : self.get_subject,

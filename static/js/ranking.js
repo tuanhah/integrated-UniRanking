@@ -83,9 +83,6 @@ jQuery(document).ready(function(){
         }
         get_all_category('university');
 
-
-
-
         $('.loader-img').fadeIn(200).delay(800).animate({height:"hide"},300);
         set_table_title(function(){
             university_rank();
@@ -119,16 +116,6 @@ jQuery(document).ready(function(){
         }	
 
 
-        // function set_data_title(callback) {   
-        //     $('#university_table_th-ctgr').html(univ_th_ctgr);
-        //     $('#university_table_th-crtr').html(univ_th_crtr);
-        //     $('#university_table_th-sort').html(univ_th_sort);
-        // };
-
-        // $($(this).attr('show')).animate({opacity:"show"},1000, function(){
-        //     scroll_to_id()
-        // });
-        // $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 1000);
     });
     
     var subj_table_th ="";
@@ -154,8 +141,7 @@ jQuery(document).ready(function(){
         $(this).find($('.fa')).addClass('fa-check');
         let sector_id = $(this).attr('id-gs1');
         $('#subject-area').html('<div class="alert alert-warning mx-auto mt-3">Bạn chưa chọn nhóm ngành</div>');
-    	// update_sector_choice(sector_id);
-        let url = `/api/v1/sectors/${sector_id}/subjects`;
+    	let url = `/api/v1/sectors/${sector_id}/subjects`;
         ajax_request(false, true, "GET", "json", url, null, null, group_success_callback, error_callback);
     });
     jQuery(document).on('click touch', '.gs2-btn', function(){
@@ -170,8 +156,7 @@ jQuery(document).ready(function(){
         jQuery(this).addClass('btn-select');
         $(this).find($('.fa')).addClass('fa-check');
         let group_id = $(this).attr('id-gs2');
-    	// update_group_choice(group_id);
-        let subject_list = jQuery(groups_list).filter(function(index, entry){
+    	let subject_list = jQuery(groups_list).filter(function(index, entry){
             if(entry.group.id == group_id) return entry;
         });
         subjects_list_of_group(subject_list[0].subjects);
@@ -207,7 +192,6 @@ jQuery(document).ready(function(){
             ajax_request(false, true, "GET", "json", url, null, data, subject_ranking_success_callback , error_callback);
         }
 
-        
         $('.loader-img').fadeIn(200).delay(800).animate({height:"hide"},300);
         function table_title_data(array_of_ctgr, callback){
             var containerWidth = $('.rank_table').width();
@@ -343,13 +327,14 @@ jQuery(document).ready(function(){
                 // $(".dataTables_scrollBody table thead:nth-child(3)").empty();
             });
         });
+
         function get_data(arrays, callback){
             arrays.forEach(function(univ, index){
                 let university = univ.profile.university;
                 let general_statistics = univ.profile.general_statistics;
                 let univ_id = university.id;
                 univTablData[index] = new Array();
-                    univTablData[index].push(`${general_statistics.rank}`, `${university.name}`);// += `<tr><td class="subj-rank">${general_statistics.rank}</td><td class="subj__table_univ-name">${university.name}</td>`;
+                    univTablData[index].push(`${general_statistics.rank}`, `${university.name}`);
                     let scores = univ.scores;
 
                     for(let i = 0; i < 16; i++){
@@ -357,17 +342,16 @@ jQuery(document).ready(function(){
                         let ctgr_id = parseInt($(`#subject_table_th-crtr th:nth-child(${i+1})`).attr('ctgr-id'));
                         let ctgr_index = parseInt(i/4);
                         let score = "n!"
-                        if(scores.length != 0){
+                        if(scores.length != 0) {
                             $(scores[ctgr_index].criterion_scores).filter(function(_i, param){
                                 if(param.criterion.id == crtr_id){
-                                    score = param.score;
+                                    score = parseFloat(param.score);
                                 }
                             });
                         }
                         else score = "n!";
-                        univTablData[index].push(`${score}`); //+= `<td class="comp__subj_table-${univ_id} comp__subj_table-cr-${crtr_id} comp__subj_score-ctgr-${ctgr_id}">${score}</td>`;
+                        univTablData[index].push(`${score}`);
                     }
-                    // subjTablData += '</tr>';
                 });
             callback();
         }
@@ -468,18 +452,15 @@ jQuery(document).ready(function(){
                         // buttons: [
                         // 'copyHtml5',
                         // 'excelHtml5',
-                        // 'csvHtml5',
+                            // 'csvHtml5',
                         // 'pdfHtml5',
                         // {
-                        //     text: 'Custom PDF',
+                        /           x/     text: 'Custom PDF',
                         //     extend: 'pdfHtml5',
                         //     filename: 'dt_custom_pdf',
                         //     // orientation: 'landscape', //portrait
                         //     pageSize: 'A4', //A3 , A5 , A6 , legal , letter
-                        //     exportOptions: {
-                        //         columns: ':visible',
-                        //     // search: 'applied',
-                        //     // order: 'applied'
+                        //     exportOp     pplied'
 
                         // },
                     //     header: true,

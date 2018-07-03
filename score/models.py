@@ -10,6 +10,7 @@ class ScoreByCriterionCategory(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ['criterion_category']
 
     def __str__(self):
         return str(self.score)
@@ -42,6 +43,7 @@ class ScoreByCriterion(models.Model):
 
     class Meta:
         abstract = True
+        ordering = ['criterion']
 
     def __str__(self):
         return str(self.score)

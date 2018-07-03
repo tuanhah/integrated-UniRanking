@@ -81,7 +81,7 @@ class CriterionScoreRandom:
         for criterion_id in criteria:
             score = self.random_score()
             SubjectScoreByCriterion.objects.create(univ_subject = university_subject, criterion_id = criterion_id, score = score)
-
+    
     def random_criteria(self, score_owner, criteria, max_ignore_criteria):
         ignore_amount = random_ignore_amount(max_ignore_criteria)
         random_criteria = list(criteria) #for support random choice 
@@ -93,7 +93,7 @@ class CriterionScoreRandom:
         return random_criteria - added_criteria
 
     def random_score(self):
-        valid_score_list = list(frange(1,10, 0.25))
+        valid_score_list = list(frange(1, 10, 0.25))
         random_score = choice(valid_score_list)
         return random_score
 

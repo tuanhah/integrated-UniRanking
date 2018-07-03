@@ -19,7 +19,7 @@ university_url_patterns = [
     path('subjects', subject_base_views.UniversitySubjectListView.as_view()),
     path('subjects/<int:subject_id>', subject_base_views.UniversitySubjectDetailView.as_view()),
     path('scores', university_score_views.UniversityScoreDetailView.as_view()),
-    path('subjects/<int:subject_id>/scores', subject_score_views.SubjectScoreDetailView.as_view()),
+    # path('subjects/<int:subject_id>/scores', subject_score_views.SubjectScoreDetailView.as_view()),
 ]
 
 subject_url_patterns = [
@@ -34,7 +34,7 @@ criterion_url_paterns = [
 
 rank_url_patterns = [
     path("university", university_score_views.UniversityRankingView.as_view()),
-    path("subject/<int:subject_id>", subject_score_views.SubjectRankingView.as_view()),
+    # path("subject/<int:subject_id>", subject_score_views.SubjectRankingView.as_view()),
 ]
 
 urlpatterns = [

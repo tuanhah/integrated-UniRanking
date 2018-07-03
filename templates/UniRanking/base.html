@@ -4,10 +4,11 @@
     <meta charset="utf-8"> {% load staticfiles %} 
     <title>{% block title %}Trang chủ | Hệ thống so sánh các trường Đại học{% endblock %}</title> <link rel="shortcut icon" href="{% static 'img/VNU.jpg'%}">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
     <!-- DataTable plugin -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors.bundle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.bundle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/magic.css'%}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
     <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/chosen.min.css'%}">
@@ -15,32 +16,35 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-xl navbar-light fixed-top bg-light" id="navibar">
-        <a class="navbar-brand" href="/"><strong><i class="fa fa-bar-chart"></i> UniRanking</strong></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li {% block home %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Trang chủ" class="nav-item"><a class="nav-link" href="/">Trang chủ</a></li>
-                <li {% block compare %} {% endblock %} class="nav-item"><a class="nav-link" href="/compare" data-placement="bottom" data-toggle="tooltip" title="So sánh các trường Đại học">So sánh</a></li>
-                <li {% block ranking %} {% endblock %} class="nav-item"><a class="nav-link" href="/ranking" data-placement="bottom" data-toggle="tooltip" title="Xếp hạng chung">Xếp hạng</a></li>
-                <li {% block info %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Thông tin trường Đại học"><a href="/university-info" class="nav-link">Thông tin Trường</a></li>
-                <li {% block contact %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Liên hệ, phản hồi"><a href="/contact" class="nav-link">Liên hệ</a></li>
-                <li {% block help %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Trợ giúp"><a class="nav-link" href="/help">Trợ giúp</a></li>
-            </ul>
+    <nav class=" navbar navbar-expand-xl navbar-light fixed-top bg-light" id="navibar">
+    <div class="container px-3">
+            <a class="navbar-brand" href="/"><strong><i class="fa fa-bar-chart"></i> UniRanking</strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li {% block home %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Trang chủ" class="nav-item"><a class="nav-link" href="/">Trang chủ</a></li>
+                    <li {% block compare %} {% endblock %} class="nav-item"><a class="nav-link" href="/compare" data-placement="bottom" data-toggle="tooltip" title="So sánh các trường Đại học">So sánh</a></li>
+                    <li {% block ranking %} {% endblock %} class="nav-item"><a class="nav-link" href="/ranking" data-placement="bottom" data-toggle="tooltip" title="Xếp hạng chung">Xếp hạng</a></li>
+                    <li {% block info %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Thông tin trường Đại học"><a href="/university-info" class="nav-link">Thông tin Trường</a></li>
+                    <li {% block contact %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Liên hệ, phản hồi"><a href="/contact" class="nav-link">Liên hệ</a></li>
+                    <li {% block help %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Trợ giúp"><a class="nav-link" href="/help">Trợ giúp</a></li>
+                </ul>
 
-            <ul class="navbar-nav navbar-right">
-                {% if user.is_authenticated %}
+                <ul class="navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
 
-                {% else %}
-                <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng nhập"><a href="#" class="login nav-link" data-toggle="modal" data-target="#login_div"><i class="fa fa-user"></i> Đăng nhập</a></li>
-                <li {% block register %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng ký"><a href="/register" class="register nav-link"><i class="fa fa-user-plus"></i> Đăng ký</a></li>
-                {% endif %}
-            </ul>
+                    {% else %}
+                    <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng nhập"><a href="#" class="login nav-link" data-toggle="modal" data-target="#login_div"><i class="fa fa-user"></i> Đăng nhập</a></li>
+                    <li {% block register %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng ký"><a href="/register" class="register nav-link"><i class="fa fa-user-plus"></i> Đăng ký</a></li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </nav>           
     {% block body %}
+    
     {% endblock %}
     <div class="modal fade" id="login_div" role="dialog">
         <div class="modal-dialog">
@@ -76,22 +80,30 @@
     <div><button class="btn btn-danger" data-toggle="tooltip" data-placement="left" id="gotop" title="Lên trên cùng"><i class="fa fa-arrow-up"></i></button></div>
     <div id="footer" style="background-color:#fff">
         <div class="container">
-            
-            <div class="col-md-8">
-                <h2 class="area-title">Liên hệ:</h2>
-                <ul>
-                    <p><i class="fa fa-envelope"></i><strong> Email:</strong> uniranking@vnu.edu.vn</p>
-                    <p><i class="fa fa-map-marker"></i><strong> Địa chỉ:</strong> P.320, E3, Trường Đại Học Công Nghệ, ĐHQGNH, 144, Xuân Thủy, Cầu Giấy, Hà Nội.</p>
-                </ul>
-                <p><i class="fa fa-copyright"></i><strong> Copyright @2018 by UET</strong></p>
+            <div class="row">
+                <div class="col-md-8">
+                    <h4 class="area-title font-weight-bold">Liên hệ:</h4>
+                    <ul>
+                        <p><i class="fa fa-envelope"></i><strong> Email:</strong> uniranking@vnu.edu.vn</p>
+                        <p><i class="fa fa-map-marker"></i><strong> Địa chỉ:</strong> P.320, E3, Trường Đại Học Công Nghệ, ĐHQGNH, 144, Xuân Thủy, Cầu Giấy, Hà Nội.</p>
+                    </ul>
+                    <p><i class="fa fa-copyright"></i><strong> Copyright @2018 by UET</strong></p>
 
+                </div>
             </div>
         </div>
     </div>
     <!--Script file-->
+    <script type="text/javascript" src="{% static 'js/vendors.bundle.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/scripts.bundle.js'%}"></script>
+    
+    
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+    
+
     <script type="text/javascript" src="{% static 'js/jquery.dataTables.js'%}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript" src="{% static 'js/chosen.jquery.min.js'%}"></script>
     <script type="text/javascript" src="{% static 'js/base.js'%}"></script>

@@ -2,18 +2,18 @@
 {% load staticfiles %}
 {% block home %}class="active"{% endblock %}
 {% block stt %}
-    <script type="text/javascript" src="{% static 'js/index.js'%}"></script>
-    
+<script type="text/javascript" src="{% static 'js/index.js'%}"></script>
+
 {% endblock %}
 {% block body %} 
 <script>
-   $(function() {
+//  $(function() {
 
-    jQuery(window).resize(function(){
-        var wid = jQuery(window).width();
-        jQuery('.jumbo').css({'width':wid});
-    });
-});
+//     jQuery(window).resize(function(){
+//         var wid = jQuery(window).width();
+//         jQuery('.jumbo').css({'width':wid});
+//     });
+// });
 </script>
 
 <div id="page">
@@ -26,12 +26,12 @@
         </div>
     </div>
     <div class="" id="quote">
-        
+
     </div>
 
-    <div class="container-fluid" id="introduce_area">
+    <div class="container" id="introduce_area">
         <div class= "row justify-content-center">
-            <div class="col-md-4 ">
+            <div class="col-md-5">
                 <div id="carousel-id" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carousel-id" data-slide-to="0" class="active"></li>
@@ -62,24 +62,24 @@
             <div class="col-md-7" id="introduce">
                 <div class="">
                     <h1 class="area-title">Hệ thống so sánh các trường Đại học</h1>
-                    <p class="showlater"><i class="fa fa-thumbs-up"></i> Tìm trường đào tạo ngành bạn thích</p>
-                    <p class="showlater"><i class="fa fa-thumbs-up"></i> So sánh các trường mà bạn đang phân vân</p>
-                    <p class="showlater"><i class="fa fa-thumbs-up"></i> So sánh trường bạn thích với các trường khác</p>
+                    <p class="showlater hover-up"><i class="fa fa-thumbs-up"></i> Tìm trường đào tạo ngành bạn thích</p>
+                    <p class="showlater hover-up"><i class="fa fa-thumbs-up"></i> So sánh các trường mà bạn đang phân vân</p>
+                    <p class="showlater hover-up"><i class="fa fa-thumbs-up"></i> So sánh trường bạn thích với các trường khác</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="container-fluid" id="function_area">
         <div class="row text-center">
-            <div class="col-12">
+            <div class="container">
                 <h2 class="area-title">Chức năng chính</h2>
                 <hr class="under">
             </div>
         </div>
-        <div class="row justify-content-center" id="function">
-            <div class="col-11">
+        <div class="row justify-content-center">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-4 text-center" id ="compare">
+                    <div class="col-md-4 text-center main-function" id ="compare">
                         <div ><i class="fa fa-object-ungroup function-icon"></i></div>
                         <div id="compare-body">
                             <div>
@@ -91,7 +91,7 @@
                         <hr>
                     </div>
 
-                    <div class="col-md-4 text-center" id="uniinfo">
+                    <div class="col-md-4 text-center main-function" id="uniinfo">
                         <div><i class="fa fa-newspaper-o function-icon"></i></div>
                         <div>
                             <div>
@@ -104,7 +104,7 @@
                         <hr>
                     </div>
 
-                    <div class="col-md-4 text-center" id="rank">
+                    <div class="col-md-4 text-center main-function" id="rank">
                         <div ><i class="fa fa-table function-icon"></i></div>
                         <div id="">    
                             <div>
@@ -122,22 +122,26 @@
         </div>
         <div class="container-fluid" id="info_area">
             <div class="row justify-content-center" id="index-intro">
-                <div class="col-5">
-                    <h2 class="area-title">Giới thiệu</h2>
-                    <hr>
-                    <p>UniRanking (University Ranking) là sản phẩm, ứng dụng hướng tới đối tượng chính là học sinh, các tổ chức giáo dục.<br>Ứng dụng giúp người dùng so sánh các trường đại học, cũng như các ngành học giống nhau của các trường dựa trên một số tiêu chí nổi bật. Qua đó giúp người dùng nắm được cơ bản điểm mạnh của mỗi trường/ngành học để đưa ra đánh giá/quyết định của riêng mình.</p> 
-
-                </div>
-                <div class="col-5 text-center" id="counter-area">
+                <div class="container">
                     <div class="row">
-                        <div class="col-sm-12" id="university-number"> 
-                            <span class="count">1000</span><span style="font-size:48px"> + </span><p> lượt so sánh</p>
+                        <div class="col-6">
+                            <h2 class="area-title">Giới thiệu</h2>
+                            <hr>
+                            <p>UniRanking (University Ranking) là sản phẩm, ứng dụng hướng tới đối tượng chính là học sinh, các tổ chức giáo dục.<br>Ứng dụng giúp người dùng so sánh các trường đại học, cũng như các ngành học giống nhau của các trường dựa trên một số tiêu chí nổi bật. Qua đó giúp người dùng nắm được cơ bản điểm mạnh của mỗi trường/ngành học để đưa ra đánh giá/quyết định của riêng mình.</p> 
+
                         </div>
-                        <div class="col-sm-6" id="subject-number">
-                            <span class="count">250</span><span style="font-size:48px"> + </span><p> trường Đại học</p>
-                        </div>
-                        <div class="col-sm-6" id="compare-number">
-                            <span class="count">350</span><span style="font-size:48px"> + </span><p> ngành đào tạo</p>
+                        <div class="col-6 text-center" id="counter-area">
+                            <div class="row">
+                                <div class="col-sm-12" id="university-number"> 
+                                <span class="count">1000</span><span style="font-size:40px"> + </span><p> lượt so sánh</p>
+                                </div>
+                                <div class="col-sm-6" id="subject-number">
+                                    <span class="count">250</span><span style="font-size:40px"> + </span><p> trường Đại học</p>
+                                </div>
+                                <div class="col-sm-6" id="compare-number">
+                                    <span class="count">350</span><span style="font-size:40px"> + </span><p> ngành đào tạo</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -145,28 +149,40 @@
         </div>
         <div id="support_area" class="container-fluid">
             <div class="row" id="support-title">
-                <div class="col-md-12 text-center"><h2 class="area-title">Các ngành/khoa nổi bật (2018):</h2><hr></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center"><h2 class="area-title">Các ngành/khoa nổi bật (2018):</h2><hr></div>
+                    </div>
+                </div>
             </div>
             <div class ="row text-center" id="support-body">
-                <div class="col-md-4">
-                    <p><i class="fa fa-check-square"></i> Y-dược</p>
-                    <p><i class="fa fa-check-square"></i> Công Nghệ Thông Tin</p>
-                    <p><i class="fa fa-check-square"></i> Điện Tử - Viễn Thông</p>
-                </div>
-                <div class="col-md-4">
-                    <p><i class="fa fa-check-square"></i> Kế Toán - Kiểm Toán </p>
-                    <p><i class="fa fa-check-square"></i> Tài Chính - Ngân Hàng </p>
-                    <p><i class="fa fa-check-square"></i> Cơ Học - Kỹ Thuật</p>
-                </div>
-                <div class="col-md-4">
-                    <p><i class="fa fa-check-square"></i> Sân Khấu - Điện Ảnh</p>
-                    <p><i class="fa fa-check-square"></i> Sư Phạm</p>
-                    <p><i class="fa fa-check-square"></i> Chính Trị Học</p>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><i class="fa fa-check-square"></i> Y-dược</p>
+                            <p><i class="fa fa-check-square"></i> Công Nghệ Thông Tin</p>
+                            <p><i class="fa fa-check-square"></i> Điện Tử - Viễn Thông</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p><i class="fa fa-check-square"></i> Kế Toán - Kiểm Toán </p>
+                            <p><i class="fa fa-check-square"></i> Tài Chính - Ngân Hàng </p>
+                            <p><i class="fa fa-check-square"></i> Cơ Học - Kỹ Thuật</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p><i class="fa fa-check-square"></i> Sân Khấu - Điện Ảnh</p>
+                            <p><i class="fa fa-check-square"></i> Sư Phạm</p>
+                            <p><i class="fa fa-check-square"></i> Chính Trị Học</p>
+                        </div>
+                    </div>
                 </div>    
             </div>
             <div class="row text-center">
-                <div class="col-12">
-                    <i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <i class="fa fa-circle"></i> <i class="fa fa-circle"></i> <i class="fa fa-circle"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

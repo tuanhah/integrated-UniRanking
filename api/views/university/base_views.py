@@ -20,6 +20,9 @@ class UniversityListView(BaseManageView):
         "subject" : {
             "invalid" : "This subject is invalid",
         },
+        "sector" : {
+            "invalid" : "This sector is invalid",
+        }
     }
 
     def __init__(self, *args, **kwargs):
@@ -30,24 +33,44 @@ class UniversityListView(BaseManageView):
     def get_universities(self, request):
         request_data = request.GET
         search_keyword = request_data.get("search")
-        subject_id = request_data.get("subject")
-        if subject_id is None:
+        sector_id = request_data.get("sector")
+        universities_queryset = []
+                    
+        if sector_id is None:
             universities_queryset = University.objects.all()
         else:
-            if not subject_id.isdigit():
-                return self.json_error(field = 'subject', code = "invalid")
+            if not sector_id.isdigit():
+                return self.json_error(field = 'sector', code = "invalid")
             else:
                 try:
-                    subject = Subject.objects.get(id = subject_id)
-                except Subject.DoesNotExist:
-                    return self.json_error(field = 'subject', code = "invalid")
+                    sector = SubjectGroup.objects.get(id = sector_id, sector_id = None)
+                except SubjectGroup.DoesNotExist:
+                    return self.json_error(field = 'sector', code = "invalid")
+                
                 else:
-                    universities_queryset = subject.university_set.all()
-        if search_keyword is not None: 
-            universities = universities_queryset.filter(name__icontains = search_keyword)            
-        else: 
-            universities = universities_queryset
-        result = {"universities" : [university.parse_basic_info() for university in universities]}
+                    group_queryset = sector.groups.all().prefetch_related("subjects")
+                    sorted_subjects = []
+                    for group in group_queryset:
+                        parsed_subject_list = group.parse_all_subject_profiles()
+                        sorted_subjects.extend(parsed_subject_list)
+                    # sector_universities = []
+                    for sorted_subject in sorted_subjects:
+                        subject_id = sorted_subject['id']
+                        try:
+                            subject = Subject.objects.get(id = subject_id)
+                        except Subject.DoesNotExist:
+                            return self.json_error(field = 'subject', code = "invalid")
+                        else:
+                            subject_universities = subject.university_set.all()
+                            if search_keyword is not None: 
+                                universities_per_subject = subject_universities.filter(name__icontains = search_keyword)            
+                            else: 
+                                universities_per_subject = subject_universities
+                                for university in universities_per_subject:
+                                    if university not in universities_queryset:
+                                        universities_queryset.append(university)
+
+        result = {"universities" : [university.parse_basic_info() for university in universities_queryset]}
         return JsonResponse(result)
 
 class UniversityDetailView(BaseManageView):

@@ -1,8 +1,13 @@
-// $(window).load(function () {
-// 	// $('.loader-img').fadeIn(200).delay(500).animate({height:"hide"},300);
-// });
+document.onreadystatechange = function () {
+  var state = document.readyState
+  if (state == 'complete') {
+         // document.getElementById('interactive');
+         // document.getElementById('load').style.visibility="hidden";
+         alert("ready");
+  }
+};
 jQuery(document).ready(function(){
-	$('.loader-img').fadeIn(200).delay(500).animate({height:"hide"},300);
+	// $('.loader-img').fadeIn(200).delay(500).animate({height:"hide"},300);
 	get_universities_list();
 	jQuery('#uni-info-btn').click(function() {
 	    var uniName = jQuery('.info-multiple-select').find('option:selected').attr('u-name');
