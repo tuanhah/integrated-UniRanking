@@ -7,21 +7,24 @@ from subject.models import UniversitySubject
 # from subject.forms import SubjectScoreByCriterionCreateForm, SubjectScoreByCriterionEditForm
 from api.views.base import BaseManageView, RankingView, ScoreDetailView
 from api.functions import string_to_boolean
+from api.views.university.base_views import UniversityListView
 
-# class SubjectRankingView(RankingView):
-#     """
-#         GET University ranking of particular Subject
-#     """
+class SubjectRankingView(RankingView):
+    """
+        GET University ranking of particular Subject
+    """
 
-#     def get_ranking(self, request, subject_id):
-#         univ_subjects = UniversitySubject.objects.filter(
-#                 subject_id = subject_id
-#             ).select_related(
-#                 "university",
-#                 "subject"
-#             ).order_by_rank().prefetch_scores()
-#         result = {"rank" : [univ_subject.parse_data() for univ_subject in univ_subjects]}
-#         return JsonResponse(result)
+    def get_ranking(self, request):
+        universities_queryset = UniversityListView.get_universities_queryset(UniversityListView, request)
+        result = {}
+        if type(universities_queryset) is list: 
+            universities_queryset =  sorted(universities_queryset, key = lambda university_sort : university_sort.rank)
+            result = {"universities" : [university.parse_data() for university in universities_queryset]}
+        elif universities_queryset == UniversityListView.error_messages["sector"]["invalid"]:
+            result["message"] =  UniversityListView.error_messages["sector"]["invalid"]
+        elif universities_queryset == UniversityListView.error_messages["subject"]["invalid"]:
+            result["message"] =  UniversityListView.error_messages["subject"]["invalid"]
+        return JsonResponse(result)
 
 # class SubjectScoreDetailView(ScoreDetailView):
 #     """

@@ -13,6 +13,7 @@ class UniversityRankingView(RankingView):
     """
 
     def get_ranking(self, request):
+        
         universities = University.objects.order_by_rank().prefetch_scores()
         result = {"rank" : [university.parse_data() for university in universities]}
         return JsonResponse(result)

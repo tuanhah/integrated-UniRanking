@@ -34,7 +34,7 @@ criterion_url_paterns = [
 
 rank_url_patterns = [
     path("university", university_score_views.UniversityRankingView.as_view()),
-    # path("subject/<int:subject_id>", subject_score_views.SubjectRankingView.as_view()),
+    path("sector", subject_score_views.SubjectRankingView.as_view()),
 ]
 
 urlpatterns = [
