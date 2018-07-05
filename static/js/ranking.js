@@ -1,4 +1,4 @@
-jQuery(document).ready(function(){         
+$(document).ready(function(){         
     // $(window).resize(function(){
     //     var img_width = $('.background-img').parent().width();
     //     $('.background-img').css({'width':img_width});
@@ -10,6 +10,7 @@ jQuery(document).ready(function(){
     var scard_pos = scard.position();
     var select_area = $('.select-area');
 
+    $('#navibar').addClass('navbar__over');
     iziToast.settings({
         timeout: 2500,
     });
@@ -455,7 +456,7 @@ jQuery(document).ready(function(){
                             // 'csvHtml5',
                         // 'pdfHtml5',
                         // {
-                        /           x/     text: 'Custom PDF',
+                        //     text: 'Custom PDF',
                         //     extend: 'pdfHtml5',
                         //     filename: 'dt_custom_pdf',
                         //     // orientation: 'landscape', //portrait

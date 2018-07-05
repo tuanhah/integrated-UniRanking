@@ -1,29 +1,38 @@
-$(document).ready(function(){
-    var subj_table_th ="";
-    var subj_ctgrCrtr = [];
-    var scores = [];
-    var score_list = new Array();
-    var ctgr_width = 161;
-    var crtr_width = 250;
-    var subjectId;
-    var groups_list;
-    var univ_table_th = ""; var univ_ctgrCrtr = [];
-    var subj_display = true;
-    var univ_display = true;
-    var blank_selection = '<div class="blank-select my-1 text-center"></div>';
-    var selected_univ = [];
-    var scores_index = 0;
-    var scard = $('.selection-card');
-    var fcard = $('.fixed-card');
-    var scard_pos = scard.position();
-    var select_area = $('.select-area');
+    // document.onreadystatechange = function () {
+    //     var state = document.readyState
+    //     alert(state);
+    //     if (state == 'complete') {
+    //         $('.dom-loader').fadeOut(500);
+    //     }
+    // };
 
-    iziToast.settings({
-        timeout:2500,
-    });
-    get_all_sector();
-    get_all_category('subject');
-    
+
+    $(document).ready(function(){
+        var subj_table_th ="";
+        var subj_ctgrCrtr = [];
+        var scores = [];
+        var score_list = new Array();
+        var ctgr_width = 161;
+        var crtr_width = 250;
+        var subjectId;
+        var groups_list;
+        var univ_table_th = ""; var univ_ctgrCrtr = [];
+        var subj_display = true;
+        var univ_display = true;
+        var blank_selection = '<div class="blank-select my-1 text-center"></div>';
+        var selected_univ = [];
+        var scores_index = 0;
+        var scard = $('.selection-card');
+        var fcard = $('.fixed-card');
+        var scard_pos = scard.position();
+        var select_area = $('.select-area');
+        $('#navibar').addClass('navbar__over');
+        iziToast.settings({
+            timeout:2500,
+        });
+        get_all_sector();
+        get_all_category('subject');
+
     // $(window).scroll(function () {
     //     if($('#compare__university-table').css('display') == "none" && $('#compare__subject-table').css('display') == "none" && $(window).width() >= 992) {
 	    //      var window_pos = $(window).scrollTop();
@@ -103,7 +112,7 @@ $(document).ready(function(){
             $('html, body').animate({scrollTop:$($(this).attr('show')).offset().top - 104}, 1000);
         }
         else{
-            $('html, body').animate({scrollTop:$('#compare__subject_univ-selection').offset().top - 70}, 200);
+            $('html, body').animate({scrollTop:$('#compare__univ__selection').offset().top - 70}, 200);
             iziToast.error({
                 title: 'Bạn phải chọn ít nhất 2 trường để so sánh!',
                 position: 'bottomLeft',
@@ -168,19 +177,19 @@ $(document).ready(function(){
     //     }
     // });
     $(document).on('click touch', '.gs-btn', function(){
+        let $this = $(this);
         let sectorName = $(this).text();
         let sector_id = $(this).attr('id-gs1');
         // iziToast.info({
         //     title: `Đã chọn khối ngành ${sectorName}`,
         //     position: 'bottomLeft',
         // });
-        $('#compare__subject_univ-selection').hide();
-    	$('.gs-btn').removeClass('btn-select');
-    	$('.gs-btn').find($('.fa')).removeClass('fa-check');
-    	$(this).addClass('btn-select');
-        $(this).addClass('magictime boingInUp');
+        $('.gs-btn').removeClass('btn-select pulse');
+        $('.gs-btn').find($('.fa')).removeClass('fa-check');
+        $(this).addClass('btn-select');
+        $(this).addClass('animated pulse');
         $(this).find($('.fa')).addClass('fa-check');
-    	
+
     	// AJAX request for SECTOR_UNIVERSITIES
         let url = '/api/v1/universities';
         let data = {
@@ -188,9 +197,11 @@ $(document).ready(function(){
         }
         ajax_request(false, true, "GET", "json", url, null, data, universities_success_callback, error_callback);
         
-        $('#compare__subject_univ-selection').hide().animate({opacity: "show"}, 200, function(){
-            // scroll_to_id()
-        })
+        $('#compare__univ__selection').hide().animate({opacity: "show"}, 500, function(){
+            $("html, body").animate({
+                scrollTop: jQuery($this.attr("show")).offset().top - 110
+            }, 500);
+        });  
 
 
     });
@@ -244,22 +255,22 @@ $(document).ready(function(){
     $(document).on('click touch', '.gs-btn', function(){
     	$('#compare__subject-table').hide();
         subj_table_th ="<th>Nhóm tiêu chí</th><th>Tiêu chí</th>";
-                
+
     });
 
     $(document).on('click touch', '.comp__subj_table-category', function(){
-       let ctgr_id = $(this).attr('ctgr-id');
-       if(subj_display){
-           $(`.subj__ctgr_${ctgr_id}-row`).hide();
-           $(this).find('.fa').removeClass('fa-minus-circle').removeClass('text-warning').addClass('fa-plus-circle').addClass('text-success');
-           subj_display = false;
-       }
-       else{
-           $(`.subj__ctgr_${ctgr_id}-row`).show();
-           $(this).find('.fa').removeClass('fa-plus-circle').removeClass('text-success').addClass('fa-minus-circle').addClass('text-warning');
-           subj_display = true;
-       }
-    });
+     let ctgr_id = $(this).attr('ctgr-id');
+     if(subj_display){
+         $(`.subj__ctgr_${ctgr_id}-row`).hide();
+         $(this).find('.fa').removeClass('fa-minus-circle').removeClass('text-warning').addClass('fa-plus-circle').addClass('text-success');
+         subj_display = false;
+     }
+     else{
+         $(`.subj__ctgr_${ctgr_id}-row`).show();
+         $(this).find('.fa').removeClass('fa-plus-circle').removeClass('text-success').addClass('fa-minus-circle').addClass('text-warning');
+         subj_display = true;
+     }
+ });
 
     $(document).on('click touch', '.comp__univ_table-category', function(){
         let ctgr_id = $(this).attr('ctgr-id');
@@ -311,7 +322,7 @@ $(document).ready(function(){
     //     $.each(universities, function(index, university){
     //         pane += `<option univ-name="${university.name}" value="${university.id}">${university.name}</option>`;
     //     });
-        
+
     //     $('#comp-univ-multiselect').html(pane);
     //     $('#comp-univ-multiselect').chosen({max_selected_options: 5});
     //     $('.search-choice, .university__selected-box p').remove();
@@ -348,9 +359,9 @@ $(document).ready(function(){
         });
         $.each(selected_univ, function(index, university){  
             univ_box += `<p class="my-1 ml-0 mr-lg-4">
-                            <i title="Xóa khỏi danh sách" data-toggle="tooltip" class="fa fa-remove subject__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i>
-                            <a href="/university/${university.id}" target="_blank" data-toogle="tooltip" title="Xem thong tin ${university.name}"> ${university.name} </a>
-                        </p>`;
+            <i title="Xóa khỏi danh sách" data-toggle="tooltip" class="fa fa-remove subject__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i>
+            <a href="/university/${university.id}" target="_blank" data-toogle="tooltip" title="Xem thong tin ${university.name}"> ${university.name} </a>
+            </p>`;
         });
         $(".subject__selected-box").html(univ_box);
     });
@@ -427,12 +438,12 @@ $(document).ready(function(){
         let pane = "";
         $.each(sectors, function(index, sector){
             pane += `<div class="col-md-6 px-0">
-                        <btn show="#compare__subject_subj-selection" class="btn gs-btn go-to-id py-3 my-1 w-98 m-portlet" id-gs1="${sector.id}"><i class="fa mt-2" style="float:right"></i> ${sector.name}</btn>
-                    </div>`;
+            <btn show="#compare__univ__selection" class="btn gs-btn go-to-id py-3 my-1 w-98 m-portlet" id-gs1="${sector.id}"><i class="fa mt-2" style="float:right"></i> ${sector.name}</btn>
+            </div>`;
         });
         $("#gs1-area").html(pane);
         $("#gs1-area").children().each(function(){
-            $(this).addClass('magictime spaceInUp');
+            $(this).addClass('animated fadeInDown');
         });
     };
 

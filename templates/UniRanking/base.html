@@ -2,21 +2,23 @@
 <html lang="vi">
 <head>
     <meta charset="utf-8"> {% load staticfiles %} 
-    <title>{% block title %}Trang chủ | Hệ thống so sánh các trường Đại học{% endblock %}</title> <link rel="shortcut icon" href="{% static 'img/VNU.jpg'%}">
+    <title>{% block title %}Trang chủ | Hệ thống so sánh các trường Đại học{% endblock %}</title>
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/competition-soft/512/pedestal-512.png">
     <!-- Latest compiled and minified CSS -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
     <!-- DataTable plugin -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/vendors.bundle.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.bundle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/magic.css'%}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!-- <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/> -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/chosen.min.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css'%}"/>
 </head>
 
 <body>
-    <nav class=" navbar navbar-expand-xl navbar-light fixed-top bg-light" id="navibar">
+    <nav class=" navbar navbar-expand-xl navbar-light fixed-top" id="navibar">
     <div class="container px-3">
             <a class="navbar-brand" href="/"><strong><i class="fa fa-bar-chart"></i> UniRanking</strong></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +29,7 @@
                     <li {% block home %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Trang chủ" class="nav-item"><a class="nav-link" href="/">Trang chủ</a></li>
                     <li {% block compare %} {% endblock %} class="nav-item"><a class="nav-link" href="/compare" data-placement="bottom" data-toggle="tooltip" title="So sánh các trường Đại học">So sánh</a></li>
                     <li {% block ranking %} {% endblock %} class="nav-item"><a class="nav-link" href="/ranking" data-placement="bottom" data-toggle="tooltip" title="Xếp hạng chung">Xếp hạng</a></li>
-                    <li {% block info %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Thông tin trường Đại học"><a href="/university-info" class="nav-link">Thông tin Trường</a></li>
+                    <li {% block info %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Thông tin trường Đại học"><a href="/search-info" class="nav-link">Thông tin Trường</a></li>
                     <li {% block contact %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Liên hệ, phản hồi"><a href="/contact" class="nav-link">Liên hệ</a></li>
                     <li {% block help %} {% endblock %} class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Trợ giúp"><a class="nav-link" href="/help">Trợ giúp</a></li>
                 </ul>
@@ -69,7 +71,6 @@
                         </div>
                     </form>
                 </div>
-
                 <div class="text-center modal-footer">
                     <div class="forgot"><a href="#">Quên tên người dùng?</a></div>
                     <div class="forgot"><a href="#">Quên mật khẩu?</a></div>
@@ -81,11 +82,12 @@
     <div id="footer" style="background-color:#fff">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    <h4 class="area-title font-weight-bold">Liên hệ:</h4>
+                <div class="col-12">
+                    <h4 class="area-title font-weight-bold my-4">Liên hệ:</h4>
                     <ul>
-                        <p><i class="fa fa-envelope"></i><strong> Email:</strong> uniranking@vnu.edu.vn</p>
-                        <p><i class="fa fa-map-marker"></i><strong> Địa chỉ:</strong> P.320, E3, Trường Đại Học Công Nghệ, ĐHQGNH, 144, Xuân Thủy, Cầu Giấy, Hà Nội.</p>
+                        <li class="py-2"><i class="fa fa-envelope"></i><strong> Email:</strong><a href="mailto:uniranking@vnu.edu.vn"> uniranking@vnu.edu.vn</a></li>
+                        <li class="py-2"><i class="fa fa-map-marker"></i><strong> Địa chỉ:</strong> P.320, E3, Trường Đại Học Công Nghệ, ĐHQGNH, 144, Xuân Thủy, Cầu Giấy, Hà Nội.</li>
+                        <li class="py-2"><i class="fa fa-facebook"></i><strong> Facebook:</strong><a target="_blank" href="https://facebook.com/"> Uniranking</a></li>
                     </ul>
                     <p><i class="fa fa-copyright"></i><strong> Copyright @2018 by UET</strong></p>
 
@@ -96,11 +98,7 @@
     <!--Script file-->
     <script type="text/javascript" src="{% static 'js/vendors.bundle.js'%}"></script>
     <script type="text/javascript" src="{% static 'js/scripts.bundle.js'%}"></script>
-    
-    
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-    
-
     <script type="text/javascript" src="{% static 'js/jquery.dataTables.js'%}"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> -->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->

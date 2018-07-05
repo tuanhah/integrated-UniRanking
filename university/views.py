@@ -14,4 +14,4 @@ def university_info(request,id):
     if user_is_editor:
         subject_sectors = SubjectGroup.objects.filter(sector_id = None)
         context["subject_sectors"] = subject_sectors
-    return render(request, "UniRanking/info.html", context)
+    return render(request, "UniRanking/university-info.html", context)

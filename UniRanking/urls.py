@@ -27,14 +27,16 @@ urlpatterns = [
     path('university/', include('university.urls')),
     path('api/v1/', include("api.urls")),
 
-    path('', views.index, name="index"),
+    path('', views.index, name="<home></home>page"),
     path('compare/', views.compare, name="compare"),
-    path('university-info/', views.info, name="info"),
+    path('search-info/', views.info, name="info"),
     path('ranking/', views.ranking, name="ranking"),
     path('contact/', views.contact, name="contact"),
     path('help/', views.help, name="help"),
     path('register/', views.register, name="register"),
     path('rank/', views.rank, name="rank"),
+    path('accounts/', include('django.contrib.auth.urls')),
+
 ]
 
 if settings.DEBUG:

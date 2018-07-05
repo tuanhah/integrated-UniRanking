@@ -1,21 +1,25 @@
+window.onbeforeunload = function() {
+	// window.scrollTo(0,0);
+	jQuery("html, body").animate({
+			scrollTop: jQuery("body").offset().top
+			// document.documentElement.scrollTop = 0,
+	}, 120);
+}
 $(document).ready(function () {
-	$("#example").DataTable();
-	$('[data-toggle="tooltip"]').tooltip();
-	jQuery(".hoveranim").hover(function () {
-		jQuery(".hoveranim").animate({
-			left: "300px"
-		});
-	});
-
+	// $("#example").DataTable();
+	// $('[data-toggle="tooltip"]').tooltip();
+	// jQuery(".hoveranim").hover(function () {
+	// 	jQuery(".hoveranim").animate({
+	// 		left: "300px"
+	// 	});
+	// });
 	$(window).resize(function(){
 		var img_width = $('.background-img').parent().width();
 		$('.background-img').css({'width':img_width});
 	});
-
 	window.onscroll = function () {
 		scroll();
 	};
-
 	function scroll() {
 		if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 			$("#gotop").css({display: "block"});
