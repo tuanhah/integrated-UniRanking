@@ -1,5 +1,5 @@
 from .base import (
-	SubjectGroupForm, SubjectForm, UniversitySubjectForm, UniversitySubjectCreateForm, UniversitySubjectDeleteForm
+	SectorForm, UniversitySectorForm
 )
 
 # from .scores import (

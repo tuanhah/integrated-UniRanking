@@ -16,16 +16,16 @@ app_name = "api"
 
 university_url_patterns = [
     path('', university_base_views.UniversityDetailView.as_view()),
-    path('subjects', subject_base_views.UniversitySubjectListView.as_view()),
-    path('subjects/<int:subject_id>', subject_base_views.UniversitySubjectDetailView.as_view()),
+    # path('subjects', subject_base_views.UniversitySubjectListView.as_view()),
+    # path('subjects/<int:subject_id>', subject_base_views.UniversitySubjectDetailView.as_view()),
     path('scores', university_score_views.UniversityScoreDetailView.as_view()),
     # path('subjects/<int:subject_id>/scores', subject_score_views.SubjectScoreDetailView.as_view()),
 ]
 
 subject_url_patterns = [
-    path('groups', subject_base_views.GroupListView.as_view()),
-    path('subjects', subject_base_views.SubjectsOfSectorListView.as_view()),
-    path('groups/<int:group_id>/subjects', subject_base_views.SubjectOfGroupListView.as_view()),
+    # path('groups', subject_base_views.GroupListView.as_view()),
+    # path('subjects', subject_base_views.SubjectsOfSectorListView.as_view()),
+    # path('groups/<int:group_id>/subjects', subject_base_views.SubjectOfGroupListView.as_view()),
 ]
 
 criterion_url_paterns = [

@@ -1,25 +1,25 @@
 from django.contrib import admin
 
-from .models import SubjectGroup, Subject, UniversitySubject
-from .forms import SubjectGroupForm, SubjectForm, UniversitySubjectForm
+from .models import Sector, UniversitySector
+from .forms import SectorForm, UniversitySectorForm
 # from score.admin import ScoreByCriterionCategoryAdmin
 
 
-@admin.register(SubjectGroup)
-class SubjectGroupAdmin(admin.ModelAdmin):
-    form = SubjectGroupForm
-    list_display = ('id', 'name', 'is_sector', 'is_group')
+# @admin.register(SubjectGroup)
+# class SubjectGroupAdmin(admin.ModelAdmin):
+#     form = SubjectGroupForm
+#     list_display = ('id', 'name', 'is_sector', 'is_group')
 
-@admin.register(Subject)
-class SubjectAdmin(admin.ModelAdmin):
-    form = SubjectForm
-    list_display = ('id', 'name', 'group')
+# @admin.register(Subject)
+# class SubjectAdmin(admin.ModelAdmin):
+#     form = SubjectForm
+#     list_display = ('id', 'name', 'group')
 
-@admin.register(UniversitySubject)
-class UniversitySubjectAdmin(admin.ModelAdmin):
-    form = UniversitySubjectForm
-    list_display = ('id', 'university', 'subject', 'avg_score', 'rank')
-    readonly_fields = ('avg_score', 'rank')
+# @admin.register(UniversitySubject)
+# class UniversitySubjectAdmin(admin.ModelAdmin):
+#     form = UniversitySubjectForm
+#     list_display = ('id', 'university', 'subject', 'avg_score', 'rank')
+#     readonly_fields = ('avg_score', 'rank')
 
 # @admin.register(SubjectScoreByCriterionCategory)
 # class SubjectScoreByCriterionCategoryAdmin(ScoreByCriterionCategoryAdmin):
@@ -47,3 +47,13 @@ class UniversitySubjectAdmin(admin.ModelAdmin):
 #             return readonly_fields
 #         else:
 #             return self.readonly_fields
+
+@admin.register(Sector)
+class SectorAdmin(admin.ModelAdmin):
+	form = SectorForm
+	list_display = ('id', 'name')
+
+@admin.register(UniversitySector)
+class UniversitySectorAdmin(admin.ModelAdmin):
+	form = UniversitySectorForm
+	list_display = ('id', 'university', 'sector')

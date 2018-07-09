@@ -1,5 +1,5 @@
 from .base import (
-    SubjectGroup, Subject, UniversitySubject
+    Sector, UniversitySector
 )
 
 # from .scores import (

@@ -3,7 +3,7 @@ from django.utils.decorators import method_decorator
 from guardian.decorators import permission_required_or_403
 
 from university.models import University
-from subject.models import UniversitySubject
+from subject.models import UniversitySector
 # from subject.forms import SubjectScoreByCriterionCreateForm, SubjectScoreByCriterionEditForm
 from api.views.base import BaseManageView, RankingView, ScoreDetailView
 from api.functions import string_to_boolean

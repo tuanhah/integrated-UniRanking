@@ -10,7 +10,8 @@ class University(models.Model, ScoreOwnerMixin, UniversitySubjectParserMixin, Sc
     name = models.CharField(max_length=100)
     image_path = models.TextField(blank=True, null=True)
     parent = models.ForeignKey('University', on_delete=models.SET_NULL, blank=True, null=True, related_name='child_universities')
-    subjects = models.ManyToManyField('subject.Subject', through='subject.UniversitySubject')
+    # subjects = models.ManyToManyField('subject.Subject', through='subject.UniversitySubject')
+    sector = models.ManyToManyField('subject.Sector', through='subject.UniversitySector')
     avg_score = models.FloatField(default=0)
     rank = models.IntegerField(default=-1)
     
