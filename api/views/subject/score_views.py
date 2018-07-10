@@ -3,11 +3,11 @@ from django.utils.decorators import method_decorator
 from guardian.decorators import permission_required_or_403
 
 from university.models import University
-from subject.models import UniversitySector
+from subject.models import UniversitySector, Sector
 # from subject.forms import SubjectScoreByCriterionCreateForm, SubjectScoreByCriterionEditForm
 from api.views.base import BaseManageView, RankingView, ScoreDetailView
 from api.functions import string_to_boolean
-from api.views.university.base_views import UniversityListView
+# from api.views.university.base_views import UniversityListView
 
 class SubjectRankingView(RankingView):
     """
@@ -15,16 +15,31 @@ class SubjectRankingView(RankingView):
     """
 
     def get_ranking(self, request):
-        universities_queryset = UniversityListView.get_universities_queryset(UniversityListView, request)
-        result = {}
-        if type(universities_queryset) is list: 
-            universities_queryset =  sorted(universities_queryset, key = lambda university_sort : university_sort.rank)
-            result = {"universities" : [university.parse_data() for university in universities_queryset]}
-        elif universities_queryset == UniversityListView.error_messages["sector"]["invalid"]:
-            result["message"] =  UniversityListView.error_messages["sector"]["invalid"]
-        elif universities_queryset == UniversityListView.error_messages["subject"]["invalid"]:
-            result["message"] =  UniversityListView.error_messages["subject"]["invalid"]
-        return JsonResponse(result)
+        request_data = request.GET
+        search_keyword = request_data.get("search")
+        sector_id = request_data.get("sector")
+        if sector_id is None:
+            universities_queryset = University.objects.all()
+        else:
+            if not sector_id.isdigit():
+                return self.json_error(field = 'subject', code = "invalid")
+            else:
+                try:
+                    sector = Sector.objects.get(id = sector_id)
+                except Sector.DoesNotExist:
+                    return self.json_error(field = 'subject', code = "invalid")
+                else:
+                    universities_queryset = sector.university_set.all()
+
+        if search_keyword is not None:
+            universities = universities_queryset.filter(name__icontains = search_keyword)            
+        else: 
+            universities = universities_queryset        
+        universities = sorted(universities, key = lambda university: university.rank)
+        result = {"universities" : [university.parse_data() for university in universities]}
+        return JsonResponse(result) 
+
+        
 
 # class SubjectScoreDetailView(ScoreDetailView):
 #     """

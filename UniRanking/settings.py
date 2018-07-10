@@ -90,9 +90,9 @@ WSGI_APPLICATION = 'UniRanking.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'uniranking',
+        'NAME': 'unirankingBackup',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '1234',
     }
 }
 

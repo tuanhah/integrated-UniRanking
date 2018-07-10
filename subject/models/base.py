@@ -134,4 +134,4 @@ class UniversitySector(models.Model, ScoreOwnerMixin, ScoreParserMixin):
         unique_together = ('university', 'sector')
 
     def __str__(self):
-        return "University: {} | Subject: {}".format(self.university.name, self.subject.name)
+        return "University: {} | Subject: {}".format(self.university.name, self.sector.name)
