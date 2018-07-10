@@ -22,7 +22,7 @@ class SectorListView(BaseManageView):
         } 
 
     def get_sectors(self, request):
-        sectors = Sector.objects.filter(sector_id = None)
+        sectors = Sector.objects.all()
         parsed_sector_list = [sector.parse_profile() for sector in sectors]
         return JsonResponse({"sectors" : parsed_sector_list})
 

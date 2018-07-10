@@ -12,6 +12,6 @@ def university_info(request,id):
             user_is_editor = True
     context = {'university' : university, "user_is_editor" : user_is_editor}
     if user_is_editor:
-        subject_sectors = Sector.objects.filter(sector_id = None)
+        subject_sectors = Sector.objects.all()
         context["subject_sectors"] = subject_sectors
     return render(request, "UniRanking/university-info.html", context)

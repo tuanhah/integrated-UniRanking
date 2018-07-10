@@ -15,20 +15,20 @@ $(document).ready(function(){
         timeout: 2500,
     });
     
-    $(window).scroll(function () {
-        if($('#ranking__university-table').css('display') == "none" && $('#ranking__subject-table').css('display') == "none" && $(window).width() >= 992) {
-            var window_pos = $(window).scrollTop();
-            var select_area_height = select_area.height();
+    // $(window).scroll(function () {
+    //     if($('#ranking__university-table').css('display') == "none" && $('#ranking__subject-table').css('display') == "none" && $(window).width() >= 992) {
+    //         var window_pos = $(window).scrollTop();
+    //         var select_area_height = select_area.height();
 
-            if (window_pos + 60 >= scard_pos.top && window_pos + 60 + fcard.height() <= select_area.position().top + select_area_height) {
-                $('.fixed-card').addClass('fixed--after-menu');
-            }
-            else {
-                $('.fixed-card').removeClass('fixed--after-menu');
-            }
-        }
-        else $('.fixed-card').removeClass('fixed--after-menu');
-    });
+    //         if (window_pos + 60 >= scard_pos.top && window_pos + 60 + fcard.height() <= select_area.position().top + select_area_height) {
+    //             $('.fixed-card').addClass('fixed--after-menu');
+    //         }
+    //         else {
+    //             $('.fixed-card').removeClass('fixed--after-menu');
+    //         }
+    //     }
+    //     else $('.fixed-card').removeClass('fixed--after-menu');
+    // });
 
     jQuery(document).on('click touch', '#subject-ranking', function(){
         iziToast.info({
