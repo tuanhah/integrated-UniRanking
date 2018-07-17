@@ -1168,7 +1168,7 @@
 			
 				$( rowOne[0] ).children('th, td').each( function (i, cell) {
 					var col = oSettings.aoColumns[i];
-			
+					
 					if ( col.mData === i ) {
 						var sort = a( cell, 'sort' ) || a( cell, 'order' );
 						var filter = a( cell, 'filter' ) || a( cell, 'search' );
@@ -5582,7 +5582,7 @@
 	
 			for ( i=0 ; i<visibleColumns.length ; i++ ) {
 				column = columns[ visibleColumns[i] ];
-	
+				// console.log(visibleColumns.length);	
 				headerCells[i].style.width = column.sWidthOrig !== null && column.sWidthOrig !== '' ?
 					_fnStringToCss( column.sWidthOrig ) :
 					'';

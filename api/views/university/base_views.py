@@ -49,7 +49,7 @@ class UniversityListView(BaseManageView):
 
         if search_keyword is not None:
             universities = universities_queryset.filter(name__icontains = search_keyword)            
-        else: 
+        else:
             universities = universities_queryset
         result = {"universities" : [university.parse_basic_info() for university in universities]}
         return JsonResponse(result) 

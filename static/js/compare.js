@@ -177,6 +177,7 @@
     //     }
     // });
     $(document).on('click touch', '.gs-btn', function(){
+        
         let $this = $(this);
         let sectorName = $(this).text();
         let sector_id = $(this).attr('id-gs1');
@@ -500,7 +501,7 @@
                     let score = "Chưa có dữ liệu!";
                     
                     if(score_list[id] != undefined) {
-                        if(score_list[id].length != 0){
+                        if(score_list[id].length != 0 && score_list[id][category_index] != undefined){
                             $(score_list[id][category_index].criterion_scores).filter(function(i, criterion_score){
                                 if(criterion_score.criterion.id == cr_id){
                                     score = parseFloat(criterion_score.score);

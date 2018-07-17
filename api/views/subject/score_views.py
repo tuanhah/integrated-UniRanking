@@ -19,7 +19,7 @@ class SubjectRankingView(RankingView):
         search_keyword = request_data.get("search")
         sector_id = request_data.get("sector")
         if sector_id is None:
-            universities_queryset = University.objects.all()
+            universities_queryset = University.objects.prefetch_scores()
         else:
             if not sector_id.isdigit():
                 return self.json_error(field = 'subject', code = "invalid")
