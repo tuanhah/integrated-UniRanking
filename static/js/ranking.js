@@ -500,7 +500,7 @@ $(document).ready(function () {
                         },
                         "search": "Tìm kiếm: ",
                     },
-                    "pageLength": 25,
+                    "pageLength": 10,
                     // "scrollY" : "200px",
                     // "scrollColapse" : true,
                     // "scrollX" : true,

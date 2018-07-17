@@ -2,7 +2,7 @@ from random import randint, choice
 from django.core.exceptions import ValidationError
 
 from university.models import University, UniversityScoreByCriterion
-from subject.models import Subject, UniversitySubject, SubjectScoreByCriterion
+from subject.models import Sector, UniversitySector
 from criterion.models import Criterion
 
 def frange(start, end, step):
@@ -15,25 +15,25 @@ def random_ignore_amount(max_amount):
         return randint(0, max_amount)
 
 def fake_university(university_id):
-    UniversitySubjectRandom(university_id).random()
+    UniversitySectorRandom(university_id).random()
     CriterionScoreRandom(university_id).random()
     
 class CriterionScoreRandom:
     error_messages = {
         "university" : "university_id is invalid",
         "max_ignore_university_criteria" : "max_ignore_university_criteria must be instance of int and gte than 0 and lte thanuniversity criterion amount",
-        "max_ignore_subject_criteria" : "max_ignore_subject_criteria must be instance of int and gte than 0 and lte than subject criterion amount "
+        "max_ignore_sector_criteria" : "max_ignore_sector_criteria must be instance of int and gte than 0 and lte than sector criterion amount "
     }
     
-    def __init__(self, university_id, max_ignore_university_criteria = 1, max_ignore_subject_criteria = 3):
+    def __init__(self, university_id, max_ignore_university_criteria = 1, max_ignore_sector_criteria = 3):
         self.set_university(university_id)
-        self.university_subjects = UniversitySubject.objects.filter(university = self.university)
+        self.university_sectors = UniversitySector.objects.filter(university = self.university)
 
         self.university_only_criteria = Criterion.objects.university_only().values_list("id", flat = True)
         self.set_max_ignore_university_criteria(max_ignore_university_criteria)
         
-        self.subject_only_criteria = Criterion.objects.subject_only().values_list("id", flat = True)
-        self.set_max_ignore_subject_criteria(max_ignore_subject_criteria)
+        self.all_criteria = Criterion.objects.all().values_list("id", flat = True)
+        self.set_max_ignore_sector_criteria(max_ignore_sector_criteria)
     
     def set_university(self, university_id):
         if isinstance(university_id, int):
@@ -53,18 +53,18 @@ class CriterionScoreRandom:
         else:
             raise ValidationError(self.error_messages["max_ignore_university_criteria"])
 
-    def set_max_ignore_subject_criteria(self, max_ignore_subject_criteria):
+    def set_max_ignore_sector_criteria(self, max_ignore_sector_criteria):
         if (
-            isinstance(max_ignore_subject_criteria, int) 
-            and (max_ignore_subject_criteria >= 0 and max_ignore_subject_criteria <= len(self.subject_only_criteria))
+            isinstance(max_ignore_sector_criteria, int) 
+            and (max_ignore_sector_criteria >= 0 and max_ignore_sector_criteria <= len(self.all_criteria))
            ):
-            self.max_ignore_subject_criteria = max_ignore_subject_criteria
+            self.max_ignore_sector_criteria = max_ignore_sector_criteria
         else:
-            raise ValidationError(self.error_messages["max_ignore_subject_criteria"])
+            raise ValidationError(self.error_messages["max_ignore_sector_criteria"])
 
     def random(self):
         self.random_university_criterion_scores()
-        self.random_all_subject_criterion_scores()
+        # self.random_all_sector_criterion_scores()
     
     def random_university_criterion_scores(self):
         criteria = self.random_criteria(score_owner = self.university, criteria = self.university_only_criteria, max_ignore_criteria = self.max_ignore_university_criteria)
@@ -72,15 +72,15 @@ class CriterionScoreRandom:
             score = self.random_score()
             UniversityScoreByCriterion.objects.create(university = self.university, criterion_id = criterion_id, score = score)
         
-    def random_all_subject_criterion_scores(self):
-        for university_subject in self.university_subjects:
-            self.random_subject_criterion_scores(university_subject)
+    # def random_all_sector_criterion_scores(self):
+    #     for university_sector in self.university_sectors:
+    #         self.random_sector_criterion_scores(university_sector)
 
-    def random_subject_criterion_scores(self, university_subject):
-        criteria = self.random_criteria(score_owner = university_subject, criteria = self.subject_only_criteria, max_ignore_criteria = self.max_ignore_subject_criteria)
-        for criterion_id in criteria:
-            score = self.random_score()
-            SubjectScoreByCriterion.objects.create(univ_subject = university_subject, criterion_id = criterion_id, score = score)
+    # def random_sector_criterion_scores(self, university_sector):
+    #     criteria = self.random_criteria(score_owner = university_sector, criteria = self.all_criteria, max_ignore_criteria = self.max_ignore_sector_criteria)
+    #     for criterion_id in criteria:
+    #         score = self.random_score()
+    #         sectorScoreByCriterion.objects.create(univ_sector = university_sector, criterion_id = criterion_id, score = score)
     
     def random_criteria(self, score_owner, criteria, max_ignore_criteria):
         ignore_amount = random_ignore_amount(max_ignore_criteria)
@@ -97,16 +97,16 @@ class CriterionScoreRandom:
         random_score = choice(valid_score_list)
         return random_score
 
-class UniversitySubjectRandom:
+class UniversitySectorRandom:
     error_messages = {
         "university" : "university_id is invalid",
-        "max_ignore_subjects" : "max_subjects must be instance of int and gte than 0 and lte than subject amount",
+        "max_ignore_sectors" : "max_sectors must be instance of int and gte than 0 and lte than sector amount",
     }
     
-    def __init__(self, university_id, max_random_subjects = 20):
+    def __init__(self, university_id, max_random_sectors = 20):
         self.set_university(university_id)
-        self.subjects = Subject.objects.values_list("id", flat = True)
-        self.set_max_random_subjects(max_random_subjects)
+        self.sectors = Sector.objects.values_list("id", flat = True)
+        self.set_max_random_sectors(max_random_sectors)
 
     def set_university(self, university_id):
         if isinstance(university_id, int):
@@ -117,31 +117,31 @@ class UniversitySubjectRandom:
         else:
             raise ValidationError(self.error_messages["university"])
 
-    def set_max_random_subjects(self, max_random_subjects):
+    def set_max_random_sectors(self, max_random_sectors):
         if (
-                isinstance(max_random_subjects, int) and
-                (max_random_subjects >= 0 and max_random_subjects <= len(self.subjects))
+                isinstance(max_random_sectors, int) and
+                (max_random_sectors >= 0 and max_random_sectors <= len(self.sectors))
            ):
-            self.max_random_subjects = max_random_subjects
+            self.max_random_sectors = max_random_sectors
         else:
-            raise ValidationError(self.error_messages["max_random_subjects"])
+            raise ValidationError(self.error_messages["max_random_sectors"])
 
     def random(self):
-        random_subject_id_list = self.random_subject_id_list()
-        UniversitySubject.objects.bulk_create([UniversitySubject(university = self.university, subject_id = subject_id) for subject_id in random_subject_id_list])
+        random_sector_id_list = self.random_sector_id_list()
+        UniversitySector.objects.bulk_create([UniversitySector(university = self.university, sector_id = sector_id) for sector_id in random_sector_id_list])
     
-    def random_subject_id_list(self):
-        random_subject_id_list = set()
-        for i in range(self.max_random_subjects):
+    def random_sector_id_list(self):
+        random_sector_id_list = set()
+        for i in range(self.max_random_sectors):
             while True:
-                subject_id = choice(self.subjects)
-                if subject_id not in random_subject_id_list:
-                    random_subject_id_list.add(subject_id)
+                sector_id = choice(self.sectors)
+                if sector_id not in random_sector_id_list:
+                    random_sector_id_list.add(sector_id)
                     break
                 else: 
                     continue
-        added_subject = set(self.university.subjects.values_list("id", flat = True))
-        return random_subject_id_list - added_subject
+        added_sector = set(self.university.sector.values_list("id", flat = True))
+        return random_sector_id_list - added_sector
                     
 
         
