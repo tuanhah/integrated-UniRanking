@@ -16,14 +16,7 @@ class CriterionCategoryListView(BaseManageView):
         } 
 
     def get_criterion_categories(self, request):
-        request_data = request.GET
-        target = request_data.get("target")
-        if target == "subject":
-            criterion_categories = CriterionCategory.objects.subject_only()
-        elif target == 'university':
-            criterion_categories = CriterionCategory.objects.university_only()
-        else:
-            criterion_categories = CriterionCategory.objects.all()
+        criterion_categories = CriterionCategory.objects.all()
         parsed_categories = [category.parse_info() for category in criterion_categories]
         return JsonResponse(parsed_categories, safe = False)
 
@@ -65,14 +58,8 @@ class CriterionListView(BaseManageView):
         }
     
     def get_sorted_criteria(self, request):
-        request_data = request.GET
-        target = request_data.get("target")
-        if target == "university":
-            criterion_categories = CriterionCategory.objects.university_only().prefetch_related("criteria")
-        elif target == "subject":
-            criterion_categories = CriterionCategory.objects.subject_only().prefetch_related("criteria")
-        else:
-            criterion_categories = CriterionCategory.objects.prefetch_related("criteria")
+        # request_data = request.GET    
+        criterion_categories = CriterionCategory.objects.prefetch_related("criteria")
         result = []
         for criterion_category in criterion_categories:
             parsed_criterion_category = criterion_category.parse_info()

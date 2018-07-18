@@ -1,17 +1,13 @@
 from django.db import models
 
-from criterion.querysets import CriterionCategoryQueryset, CriterionQueryset
+# from criterion.querysets import CriterionCategoryQueryset, CriterionQueryset
 
 class CriterionCategory(models.Model):
     name = models.CharField(max_length=50)
-    #indenfy whether this category criterion is represented on university level only (not subject)
-    university_only = models.BooleanField(default = False) 
     
-    objects = CriterionCategoryQueryset.as_manager()
-
     class Meta:
         db_table = 'criterion_category'
-        ordering = ['-university_only','id']
+        ordering = ['id']
 
     def __str__(self):
         return self.name
@@ -33,7 +29,6 @@ class Criterion(models.Model):
     name = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
 
-    objects = CriterionQueryset.as_manager()
     
     class Meta:
         db_table = 'criterion'
@@ -48,7 +43,3 @@ class Criterion(models.Model):
         else: 
             data = { "id" : self.id}
         return data
-
-    def university_only(self):
-        return self.category.university_only
-    university_only.boolean = True

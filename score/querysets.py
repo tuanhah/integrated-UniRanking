@@ -31,7 +31,6 @@ class ScoreOwnerQueryset(QuerySet):
         prefetcher = Prefetch(
             "criterion_category_scores",
             queryset = related_score_model.objects.order_by(
-                    "-criterion_category__university_only",
                     "criterion_category_id"
                 ).select_related(
                     'criterion_category'

@@ -54,21 +54,6 @@ class UniversityListView(BaseManageView):
         result = {"universities" : [university.parse_basic_info() for university in universities]}
         return JsonResponse(result) 
 
-
-        
-    # def get_universities(self, request):
-    #     universities_queryset = self.get_universities_queryset(request)
-    #     print(type(universities_queryset))
-    #     result = {}
-    #     if type(universities_queryset) is list:
-    #         result = {"universities" : [university.parse_basic_info() for university in universities_queryset]}
-    #     elif universities_queryset == self.error_messages["sector"]["invalid"]:
-    #         result["message"] =  self.error_messages["sector"]["invalid"]
-    #     elif universities_queryset == self.error_messages["subject"]["invalid"]:
-    #         result["message"] =  self.error_messages["subject"]["invalid"]
-    #     return JsonResponse(result)
-
-
 class UniversityDetailView(BaseManageView):
     """ 
         Get specific university profile
