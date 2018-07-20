@@ -4,7 +4,7 @@
 
 <div id="rank-page">
     <div class="container-fluid after-menu">
-        <!-- <div class="row mx-0 justify-content-center">
+        <div class="row mx-0 justify-content-center">
             <div class="container text-left">
                 <div class="row mx-0">
                     <div class="col-lg-9 px-0">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
     <div class="container-fluid">
         <div class="row">
@@ -44,7 +44,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <button class="btn m-portlet w-100 py-3 m--regular-font-size-lg3">Xếp hạng theo theo trường</button>
+                                <button id="university-rank-btn" class="btn m-portlet w-100 py-3 m--regular-font-size-lg3"><i class="fa mt-2" style="float:right"></i> Xếp hạng theo theo trường</button>
                             </div>
                         </div>
                         <div class="row">
@@ -77,7 +77,7 @@
         </div>
         <div class="row mx-0 justify-content-center">
             <div class="container rank_table">
-                    <table class="table table-bordered table-hover sort-table">
+                    <table class="table table-bordered table-hover sort-table" id="subject-table">
                         <thead>
                             <tr id="subject_table_th-ctgr">
                             </tr>
@@ -95,24 +95,24 @@
         </div>
     </div>
 
-    <div class="container-fluid s-odd non-display" id="ranking__university-table">
+    <div class="container-fluid s-even non-display" id="ranking__university-table">
         <div class="row mx-0 justify-content-center">
-            <div class="" style="width:94%">
+            <div class="container">
                 <h2 class="title-step px-3 py-2">Bảng xếp hạng các tiêu chí theo trường:(Chưa hoàn thiện) </h2>
             </div>
         </div>
         <div class="row mx-0 justify-content-center">
-            <div class="col-10 rank_table">
-                <table class="table table-bordered table-hover table-fixed sortable" id="horizontal_table">
+            <div class="container rank_table">
+                <table class="table table-bordered table-hover sort-table" id="university-table">
                     <thead>
                         <tr id="university_table_th-ctgr">
                         </tr>
-                        <!-- <tr id="university_table_th-crtr"> -->
-                        <!-- </tr> -->
+                        <tr id="university_expand_btn">
+                        </tr>  
                         <tr id="university_table_th-sort">
                         </tr>
                     </thead>
-                    <tbody id="ranking__university_table-tbody">
+                    <tbody id="rank__university_table-tbody">
 
                     </tbody>
                 </table>
@@ -127,7 +127,7 @@
     </div>
 
     <div class="modal fade" id="crtr-modal">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-table">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-table-title">Xếp hạng nhóm tiêu chí</h2>

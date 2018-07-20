@@ -36,7 +36,19 @@
 
                 <ul class="navbar-nav navbar-right">
                     {% if user.is_authenticated %}
-
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{ user }}
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="/admin/password_change">Quản lý tài khoản</a>
+                          <a class="dropdown-item" href="/admin">Quản lý</a>
+                          <!-- <a class="dropdown-item" href="#"></a> -->
+                          
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" href="admin/logout">Đăng xuất</a>
+                        </div>
+                      </div>
                     {% else %}
                     <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng nhập"><a href="#" class="login nav-link" data-toggle="modal" data-target="#login_div"><i class="fa fa-user"></i> Đăng nhập</a></li>
                     <li {% block register %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng ký"><a href="/register" class="register nav-link"><i class="fa fa-user-plus"></i> Đăng ký</a></li>

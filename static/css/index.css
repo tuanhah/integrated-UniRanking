@@ -292,7 +292,7 @@ hr.under{
 
 }
 @media (min-width: 576px) {
-	.modal-dialog {
+	.modal-table {
     	max-width: 96% !important;
 		/* margin: 1.75rem auto; */
 	}
@@ -367,13 +367,13 @@ tr th.sorting{
 .ctgr{
 	line-height:45px;
 }
-.change-crtr-btn{
+.s-expand-btn, .u-expand-btn{
 	float:right;
 	/* height:50px; */
 	border-radius:0px;
 	background-color:rgba(180,114,239,0.33);
 }
-.change-crtr-btn:hover{
+.s-expand-btn:hover, .u-expand-btn:hover{
 	background-color:rgba(8,255,168,0.7);
 	border-radius:0px;
 }

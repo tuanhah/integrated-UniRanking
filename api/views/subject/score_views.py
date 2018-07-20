@@ -29,7 +29,7 @@ class SubjectRankingView(RankingView):
                 except Sector.DoesNotExist:
                     return self.json_error(field = 'subject', code = "invalid")
                 else:
-                    universities_queryset = sector.university_set.all()
+                    universities_queryset = sector.university_set.prefetch_scores()
 
         if search_keyword is not None:
             universities = universities_queryset.filter(name__icontains = search_keyword)            

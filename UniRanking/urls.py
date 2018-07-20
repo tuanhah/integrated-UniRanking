@@ -27,7 +27,7 @@ urlpatterns = [
     path('university/', include('university.urls')),
     path('api/v1/', include("api.urls")),
 
-    path('', views.index, name="<home></home>page"),
+    path('', views.index, name="homepage"),
     path('compare/', views.compare, name="compare"),
     path('search-info/', views.info, name="info"),
     path('ranking/', views.ranking, name="ranking"),
