@@ -57,8 +57,7 @@ class UniversityScoreDetailView(ScoreDetailView):
                 result["scores"] = university.parse_scores(named = named)
                 
         university_info = university.parse_basic_info()
-        subject_info = {"id" : 0, "name" : "Toàn Trường"}
-        result["profile"] = {"university" : university_info, "subject" : subject_info}
+        result["profile"] = {"university" : university_info}
         return JsonResponse(result)
 
     @method_decorator(permission_required_or_403("university.change_university", (University, 'id', 'university_id')))

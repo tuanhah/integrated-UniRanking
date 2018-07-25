@@ -12,6 +12,13 @@ $(document).ready(function () {
     var category_length = 0;
     var subject_rank_universities = '';
     var university_rank_universities = '';
+    var subjTablData = new Array();
+    var univTablData = new Array();
+    var widthArray = new Array();
+    var univ_table_body = '';
+    var univ_table_th = "";
+    var univ_ctgrCrtr = [];
+
 
     $('#navibar').addClass('navbar__over');
     iziToast.settings({
@@ -22,14 +29,7 @@ $(document).ready(function () {
     get_all_category();
     
 
-    var subjTablData = new Array();
-    var univTablData = new Array();
-    var widthArray = new Array();
-    var univ_table_body = '';
-    var univ_table_th = "";
-    var univ_ctgrCrtr = [];
-
-    jQuery(document).on('click touch', '#university-rank-btn', function () {
+    $(document).on('click touch', '#university-rank-btn', function () {
         // iziToast.info({
         //     title: 'Đã chọn xếp hạng theo trường!',
         //     position: 'bottomLeft',
@@ -41,10 +41,10 @@ $(document).ready(function () {
         
 
 
-        jQuery('.gs-btn').removeClass('btn-select');
+        $('.gs-btn').removeClass('btn-select');
         $('.gs-btn').find($('.fa')).removeClass('fa-check');
         $(this).find($('.fa')).removeClass('fa-check');        
-        jQuery(this).addClass('btn-select');
+        $(this).addClass('btn-select');
         $(this).find($('.fa')).addClass('fa-check');
         // alert(univ_ctgrCrtr);
         set_table_title_data(univ_ctgrCrtr, function() {
@@ -76,7 +76,7 @@ $(document).ready(function () {
             univ_th_sort = '<th> </th><th> </th>';
             $.each(array_of_ctgr, function (ctgr_index, ctgr) {
                 let category = ctgr.criterion_category;
-                univ_th_ctgr += `<th class="py-0 pr-0 ctgr comp__subj_table-category comp__subj_table-ctgr-${category.id}" category_id="${category.id}" style="width:${ctgr_width}px">${category.name}</th>`;
+                univ_th_ctgr += `<th class="p-2 ctgr comp__subj_table-category comp__subj_table-ctgr-${category.id}" category_id="${category.id}" style="width:${ctgr_width}px">${category.name}</th>`;
                 univ_expand += `<th class="p-0"><btn class="btn p-3 w-100 u-expand-btn" data-toggle="modal" data-target="#crtr-modal" ctgr-id="${category.id}" ctgr-name="${category.name}"><i>Xem thêm...</i></btn></th>`;
                 univ_th_sort += '<th> </th>';
             });
@@ -102,16 +102,18 @@ $(document).ready(function () {
 
     var groups_list;
     
-    jQuery(document).on('click touch', '.gs-btn', function () {
+    $(document).on('click touch', '.gs-btn', function () {
         let sectorName = $(this).text();
         iziToast.info({
             title: `Đã chọn khối ngành ${sectorName}!`,
             position: 'bottomLeft',
         });
-        jQuery('.gs-btn').removeClass('btn-select');
-        jQuery('#university-rank-btn').removeClass('btn-select');
+        $('.gs-btn').removeClass('btn-select');
+        $('#university-rank-btn').removeClass('btn-select');
+        $("#university-rank-btn").find($('.fa')).removeClass('fa-check');        
+        
         $('.gs-btn').find($('.fa')).removeClass('fa-check');
-        jQuery(this).addClass('btn-select');
+        $(this).addClass('btn-select');
         $(this).find($('.fa')).addClass('fa-check');
         let sector_id = $(this).attr('id-gs');
 
@@ -152,7 +154,7 @@ $(document).ready(function () {
             subj_th_sort = '<th> </th><th> </th>';
             $.each(array_of_ctgr, function (ctgr_index, ctgr) {
                 let category = ctgr.criterion_category;
-                subj_th_ctgr += `<th class="py-0 pr-0 ctgr comp__subj_table-category comp__subj_table-ctgr-${category.id}" category_id="${category.id}" style="width:${ctgr_width}px">${category.name}</th>`;
+                subj_th_ctgr += `<th class="p-0 ctgr comp__subj_table-category comp__subj_table-ctgr-${category.id}" category_id="${category.id}" style="width:${ctgr_width}px">${category.name}</th>`;
                 subj_expand += `<th class="p-0"><btn class="btn p-3 w-100 s-expand-btn" data-toggle="modal" data-target="#crtr-modal" ctgr-id="${category.id}" ctgr-name="${category.name}"><i>Xem thêm...</i></btn></th>`;
                 subj_th_sort += '<th> </th>';
             });
@@ -175,7 +177,7 @@ $(document).ready(function () {
     $(document).on('click touch', '.s-expand-btn', function () {
         let id = $(this).attr('ctgr-id');
         let name = $(this).attr('ctgr-name');
-        let crtrs = [];
+        let crtrs = []; 
         let criterion_th = '';
         let sort_th = '';
         let criterions_length = 0;

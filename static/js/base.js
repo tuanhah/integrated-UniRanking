@@ -6,13 +6,7 @@ window.onbeforeunload = function() {
 	}, 120);
 }
 $(document).ready(function () {
-	// $("#example").DataTable();
-	// $('[data-toggle="tooltip"]').tooltip();
-	// jQuery(".hoveranim").hover(function () {
-	// 	jQuery(".hoveranim").animate({
-	// 		left: "300px"
-	// 	});
-	// });
+	
 	$(window).resize(function(){
 		var img_width = $('.background-img').parent().width();
 		$('.background-img').css({'width':img_width});
@@ -34,31 +28,7 @@ $(document).ready(function () {
 		}, 250);
 	});
 
-	// jQuery('.sortable').DataTable({
-	/*"columnDefs": [{
-		"targets" : "no-sort",
-		"orderable" : false,
-	  }]*/
-	// "pageLength": 25,
-	// "info": "Đang thể hiện từ trường số _START_ tới trường số _END_ trren tổng số _TOTAL_ trường",
-	// "lengthMenu": "Số trường trên bảng: _MENU_ trường.",
-	// "paginate" : {
-	// "next" : "Trang sau",
-	// "previous" : "Trang trước",
-	// },
-	// "search" : "Tìm kiếm: ",
-	// })
-	// jQuery(document).on("click", ".go-to-id", function() {
-	//   jQuery(jQuery(this).attr("show")).show();
-
-	//   jQuery("html, body").animate(
-	//   {
-	//       scrollTop: jQuery(jQuery(this).attr("show")).offset().top - 80
-	//   },800);
-
-	// });
-
-	$("#login").submit(function (e) {
+	$("#login_form").submit(function (e) {
 		e.preventDefault();
 		let csrftoken = getCookie("csrftoken");
 		let data = $(this).serializeArray();
@@ -66,11 +36,11 @@ $(document).ready(function () {
 			name: "csrfmiddlewaretoken",
 			value: csrftoken
 		});
-		let url = "/api/auth";
+		let url = "/api/v1/auth";
 		ajax_request(false, true, "POST", "json", url, null, data, login_success_reload, print_response);
 	});
 
-	$("#signup").submit(function (e) {
+	$("#signup_form").submit(function (e) {
 		e.preventDefault();
 		let csrftoken = getCookie("csrftoken");
 		let data = $(this).serializeArray();
@@ -78,14 +48,17 @@ $(document).ready(function () {
 			name: "csrfmiddlewaretoken",
 			value: csrftoken
 		});
-		let url = "/api/register";
+		let url = "/api/v1/register";
 		ajax_request(false, true, "POST", "json", url, null, data, register_success, print_response);
 	});
 
 	$(".modal").on("hidden.bs.modal", function () {
-		$(this).find("input").val("");
+		// $(this).find("input").val("");
 		$(".alert").empty();
+		$("#signup_errors").addClass('d-none');
+		
 	});
+	
 });
 
 function scroll_to_id($this) {
@@ -134,12 +107,14 @@ function print_response(response) {
 }
 
 function login_success_reload(response) {
-	let login_error_dom = $("#login_errors").empty();
+	let login_error_dom = $("#login_errors").hide();
 	if (response.success == true) {
 		window.location.reload();
 	} else {
 		list_error = message_to_html(response);
 		login_error_dom.append(list_error);
+		$('#login_errors').removeClass('d-none');
+		
 	}
 }
 
@@ -147,13 +122,17 @@ function register_success(response) {
 	let error_dom = $("#signup_errors"),
 		success_dom = $("#signup_success");
 	error_dom.empty();
-	success_dom.empty();
+	success_dom.empty();	
 	if (response.success == true) {
 		success_dom.text("Đăng ký thành công !");
-		success_dom.empty();
+		error_dom.addClass('d-none');
+		success_dom.removeClass('d-none');
+		window.location.reload();
+		
 	} else {
 		let list_error = message_to_html(response);
 		error_dom.append(list_error);
+		error_dom.removeClass('d-none');
 	}
 }
 

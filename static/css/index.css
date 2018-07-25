@@ -294,7 +294,6 @@ hr.under{
 @media (min-width: 576px) {
 	.modal-table {
     	max-width: 96% !important;
-		/* margin: 1.75rem auto; */
 	}
 }
 .rank-by-category {
@@ -318,7 +317,7 @@ hr.under{
 	background-color: #008a63;
 	color: #fff;
 }
-#subject_table_th-sort{
+#subject_table_th-sort, #university_table_th-sort{
 	background-color:#fff;
 }
 .search_choice {
@@ -390,6 +389,10 @@ li.pill-item>a{background-color:rgba(66,129,202,1);color:#fff; border-radius:0px
 .list-group{margin-bottom:0;}
 .fa.pointer-md-icon{cursor:pointer;font-size:2.0rem;}
 .fa.pointer-md-icon:hover{color:rgba(66,130,202,1)}
+.info__portlet {
+	box-shadow: none !important;
+}
+
 
 
 #nav-info{height:46px;background-color:rgba(66,130,202,1);margin:10px 15px;padding-top:10px;}
@@ -415,7 +418,7 @@ li.pill-item>a{background-color:rgba(66,129,202,1);color:#fff; border-radius:0px
 #footer{background-color:#fff;width:100%;}
 /*end home*/
 /*start compare*/ 
-#compare-introduce, #ranking-introduce, #info-introduce{padding:90px 0px 24px 0px;background-color:#FFF;/*rgba(50,30,147,1);*/color:#333333;}
+#compare-introduce, #rank-introduce{padding:90px 0px 24px 0px;background-color:#FFF;/*rgba(50,30,147,1);*/color:#333333;}
 .center-form {margin:30px auto; width:70%;}
 .s-odd{background-color:#edeef363;min-height:300px;}
 .btn-w-100{border-radius:0px; width:100%;}

@@ -22,21 +22,16 @@ from django.conf import settings
 from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('test/', views.test),
-    # path('', TemplateView.as_view(template_name ="index.html"), name = "homepage"),
     path('university/', include('university.urls')),
     path('api/v1/', include("api.urls")),
-
     path('', views.index, name="homepage"),
     path('compare/', views.compare, name="compare"),
     path('search-info/', views.info, name="info"),
-    path('ranking/', views.ranking, name="ranking"),
+    path('rank/', views.rank, name="ranking"),
     path('contact/', views.contact, name="contact"),
     path('help/', views.help, name="help"),
-    path('register/', views.register, name="register"),
-    path('rank/', views.rank, name="rank"),
     path('accounts/', include('django.contrib.auth.urls')),
-
+    # path('logout', auth.views.logout)
 ]
 
 if settings.DEBUG:

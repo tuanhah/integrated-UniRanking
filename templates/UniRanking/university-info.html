@@ -18,7 +18,7 @@
                     </div>
                     <div class="row mt-4">
                         <span class="col-10">
-                            <h2 id="uni-name"><strong>{{university.rank}}. {{university.name}}</strong></h2>
+                            <h2 id="uni-name" university_id="{{ university.id }}"><strong>{{university.rank}}. {{university.name}}</strong></h2>
                         </span>
                         <span class="col-1 fa fa-heart-o pointer-md-icon" data-toggle="tooltip" title="Thêm vào danh sách yêu thích"></span>
                         <span class=" col-1 fa fa-envelope-o pointer-md-icon" data-toggle="tooltip" title="Nhận thông báo"></span>
@@ -44,6 +44,30 @@
                 <div class="col-sm-5">
                     <img class="img-thumbnail" id="uni-map" src="{% static 'img/map_sample.png'%}" width=100%>
                 </div>
+                <div class="col">
+
+                </div>
+            </div>
+            <div class="m-portlet m-portlet--full-height info__portlet">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text m--regular-font-size-lg4">
+                                Đánh giá trường 
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet__body p-3">
+
+                    <!--begin::Section-->
+                    <div class="m-accordion m-accordion--default" id="university-score-accordion" role="tablist">
+
+                        
+                    </div>
+
+                    <!--end::Section-->
+                </div>
             </div>
         </div>
     </div>
@@ -62,7 +86,7 @@
 <!--<div class="modal-body">-->
 <!--<div class="form-group row">-->
 <!--<label for="subject_sector_select" class="col-4 col-form-label font-weight-bold">KHỐI NGÀNH</label>-->
-<!--<div class="col">-->
+<!--<div class="col">-->        
 <!--<select class="form-control" id="subject_sector_select">-->
 <!--<option value="0">&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Chọn khối ngành &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
 <!--% if subject_sectors %}-->

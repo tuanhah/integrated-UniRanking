@@ -43,10 +43,11 @@ class UniversityScoreByCriterionAdmin(admin.ModelAdmin):
         request_data = request.POST
         if 'delete_selected' in request_data.get("action", []):
             selected_object_id = request_data.getlist("_selected_action")
-            return UniversityScoreByCriterion.objects.filter(id__in = selected_object_id, criterion__category__university_only = False).exists()
+            return UniversityScoreByCriterion.objects.filter(id__in = selected_object_id).exists()
 
     def has_delete_permission(self, request, obj=None):
         if (obj is not None and not obj.is_editable) or self.has_non_editable_object_in_delete_selected_object(request):
+        # if (obj is not None and not obj.is_editable):
             return False  
         return super().has_delete_permission(request, obj)  
 

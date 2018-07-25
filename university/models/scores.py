@@ -46,6 +46,6 @@ class UniversityScoreByCriterion(ScoreByCriterion):
 
     @classmethod
     def get_editable_criterion_queryset(self):
-        queryset = Criterion.objects.university_only()
+        queryset = Criterion.objects.all()
         return queryset
 
