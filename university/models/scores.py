@@ -3,6 +3,7 @@ from django.db import models
 from university.models.base import University
 from criterion.models import Criterion
 from score.models import ScoreByCriterion, ScoreByCriterionCategory
+from django.utils.translation import gettext as _
 
 class UniversityScoreByCriterionCategory(ScoreByCriterionCategory):
     university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='criterion_category_scores')
@@ -11,6 +12,9 @@ class UniversityScoreByCriterionCategory(ScoreByCriterionCategory):
         db_table = 'university_score_by_category'
         ordering = ['id']
         unique_together = ('university', 'criterion_category')
+        verbose_name = _('University Score By Criterion Category')   
+        verbose_name_plural = _('University Scores By Criterion Categories')   
+        
 
     def __str__(self):
         score = str(self.score)
@@ -30,6 +34,9 @@ class UniversityScoreByCriterion(ScoreByCriterion):
         db_table = 'university_score'
         ordering = ['id']
         unique_together = ('university', 'criterion')
+        verbose_name = _('University Score By Criterion')   
+        verbose_name_plural = _('University Scores By Criterions')   
+        
 
     def __str__(self):
         score = str(self.score)

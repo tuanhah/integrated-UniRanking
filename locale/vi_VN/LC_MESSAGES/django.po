@@ -1,0 +1,386 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-07-26 18:31+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: criterion/apps.py:7 criterion/models.py:39
+msgid "Criterion"
+msgstr "Tiêu chí so sánh"
+
+#: criterion/apps.py:8 criterion/models.py:40
+msgid "Criterions"
+msgstr "Các tiêu chí so sánh"
+
+#: criterion/models.py:12
+msgid "Criterion Category"
+msgstr "Nhóm tiêu chí"
+
+#: criterion/models.py:13
+msgid "Criterion Categories"
+msgstr "Các nhóm tiêu chí"
+
+#: score/apps.py:7
+msgid "Score"
+msgstr "Điểm"
+
+#: score/models.py:16
+msgid "Score By Criterion Category"
+msgstr "Điểm theo Nhóm tiêu chí"
+
+#: score/models.py:17
+msgid "Scores By Criterion Category"
+msgstr "Điểm theo Nhóm tiêu chí"
+
+#: score/models.py:51
+msgid "Score By Criterion"
+msgstr "Điểm theo Tiêu chí"
+
+#: score/models.py:52
+msgid "Scores By Criterion"
+msgstr "Điểm theo Tiêu chí"
+
+#: subject/apps.py:7
+msgid "Subject"
+msgstr "Ngành"
+
+#: subject/apps.py:8
+msgid "Subjects"
+msgstr "Ngành"
+
+#: subject/models/base.py:18
+msgid "Sector"
+msgstr "Nhóm ngành"
+
+#: subject/models/base.py:19
+msgid "Sectors"
+msgstr "Các nhóm ngành"
+
+#: subject/models/base.py:37
+msgid "University Sector"
+msgstr "Đại học - Nhóm ngành"
+
+#: subject/models/base.py:38
+msgid "Universities Sectors"
+msgstr "Đại học - Nhóm ngành"
+
+#: templates/admin/app_index.html:9
+#: templates/admin/auth/user/change_password.html:13
+#: templates/admin/base.html:61 templates/admin/change_form.html:18
+#: templates/registration/logged_out.html:4
+#: templates/registration/password_change_done.html:6
+#: templates/registration/password_change_form.html:7
+#: templates/registration/password_reset_complete.html:6
+#: templates/registration/password_reset_confirm.html:7
+#: templates/registration/password_reset_done.html:6
+#: templates/registration/password_reset_form.html:7
+msgid "Home"
+msgstr "Trang chủ Quản lý"
+
+#: templates/admin/auth/user/add_form.html:6
+msgid ""
+"First, enter a username and password. Then, you'll be able to edit more user "
+"options."
+msgstr ""
+"Trước tiên, nhập tên tài khoản và mật khẩu. Sau đó, bạn sẽ có thể chỉnh sửa "
+"các người dùng khác"
+
+#: templates/admin/auth/user/add_form.html:8
+msgid "Enter a username and password."
+msgstr "Nhập tên tài khoản và mật khẩu"
+
+#: templates/admin/auth/user/change_password.html:17
+#: templates/admin/auth/user/change_password.html:55
+#: templates/admin/base.html:49
+#: templates/registration/password_change_done.html:3
+#: templates/registration/password_change_form.html:4
+msgid "Change password"
+msgstr "Đổi mật khẩu"
+
+#: templates/admin/auth/user/change_password.html:28
+#: templates/admin/change_form.html:47
+#: templates/registration/password_change_form.html:21
+msgid "Please correct the error below."
+msgstr "Xin hãy điền đúng định dạng"
+
+#: templates/admin/auth/user/change_password.html:28
+#: templates/admin/change_form.html:47
+#: templates/registration/password_change_form.html:21
+msgid "Please correct the errors below."
+msgstr "Xin hãy điền đúng định dạng"
+
+#: templates/admin/auth/user/change_password.html:32
+#, python-format
+msgid "Enter a new password for the user <strong>%(username)s</strong>."
+msgstr "Nhập mật khẩu mới <strong>%(username)s</strong>"
+
+#: templates/admin/base.html:35
+msgid "Welcome,"
+msgstr "Xin chào, "
+
+#: templates/admin/base.html:40
+msgid "View site"
+msgstr "Trang chủ UniRanking"
+
+#: templates/admin/base.html:45
+#: templates/registration/password_change_done.html:3
+#: templates/registration/password_change_form.html:4
+msgid "Documentation"
+msgstr "Tài liệu"
+
+#: templates/admin/base.html:51
+#: templates/registration/password_change_done.html:3
+#: templates/registration/password_change_form.html:4
+msgid "Log out"
+msgstr "Đăng xuất"
+
+#: templates/admin/base_site.html:3
+msgid "Django site admin"
+msgstr "Quản lý UniRanking"
+
+#: templates/admin/base_site.html:6
+msgid "Django administration"
+msgstr "Quản lý UniRanking"
+
+#: templates/admin/change_form.html:21
+#, python-format
+msgid "Add %(name)s"
+msgstr "Thêm %(name)s"
+
+#: templates/admin/change_form.html:33
+msgid "History"
+msgstr "Lịch sử"
+
+#: templates/admin/change_form.html:35
+#: templates/admin/edit_inline/stacked.html:14
+#: templates/admin/edit_inline/tabular.html:36
+msgid "View on site"
+msgstr "Xem trên website"
+
+#: templates/admin/edit_inline/stacked.html:12
+#: templates/admin/edit_inline/tabular.html:34 templates/admin/index.html:37
+#: templates/admin/widgets/related_widget_wrapper.html:10
+msgid "Change"
+msgstr "Thay đổi"
+
+#: templates/admin/edit_inline/tabular.html:20
+msgid "Delete?"
+msgstr "Xóa?"
+
+#: templates/admin/includes/object_delete_summary.html:2
+msgid "Summary"
+msgstr "Kết lại"
+
+#: templates/admin/index.html:20
+#, python-format
+msgid "Models in the %(name)s application"
+msgstr "Model trong %(name)s ứng dụng"
+
+#: templates/admin/index.html:31
+#: templates/admin/widgets/related_widget_wrapper.html:17
+msgid "Add"
+msgstr "Thêm"
+
+#: templates/admin/index.html:47
+msgid "You don't have permission to edit anything."
+msgstr "Bạn không có quyền chỉnh sửa"
+
+#: templates/admin/index.html:55
+msgid "Recent actions"
+msgstr "Lịch sử chỉnh sửa"
+
+#: templates/admin/index.html:56
+msgid "My actions"
+msgstr "Lịch sử chỉnh sửa của bạn"
+
+#: templates/admin/index.html:60
+msgid "None available"
+msgstr "Không khả dụng"
+
+#: templates/admin/index.html:74
+msgid "Unknown content"
+msgstr "Không rõ nội dung"
+
+#: templates/admin/widgets/related_widget_wrapper.html:9
+#, python-format
+msgid "Change selected %(model)s"
+msgstr "Thay đổi %(model)s đã chọn"
+
+#: templates/admin/widgets/related_widget_wrapper.html:16
+#, python-format
+msgid "Add another %(model)s"
+msgstr "Thêm %(model)s khác"
+
+#: templates/admin/widgets/related_widget_wrapper.html:23
+#, python-format
+msgid "Delete selected %(model)s"
+msgstr "Xóa %(model)s đã chọn"
+
+#: templates/admin/widgets/related_widget_wrapper.html:24
+msgid "Delete"
+msgstr "Xóa"
+
+#: templates/registration/logged_out.html:8
+msgid "Thanks for spending some quality time with the Web site today."
+msgstr "Cảm ơn bạn đã quan tâm"
+
+#: templates/registration/logged_out.html:10
+msgid "Log in again"
+msgstr "Đăng nhập trở lại"
+
+#: templates/registration/password_change_done.html:7
+#: templates/registration/password_change_form.html:8
+msgid "Password change"
+msgstr "Thay đổi mật khẩu"
+
+#: templates/registration/password_change_done.html:14
+msgid "Your password was changed."
+msgstr "Mật khẩu đã được thay đổi"
+
+#: templates/registration/password_change_form.html:26
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr "Hãy nhập mật khẩu cũ của bạn, sau đó nhập mật khẩu mới"
+
+#: templates/registration/password_change_form.html:54
+#: templates/registration/password_reset_confirm.html:32
+msgid "Change my password"
+msgstr "Đổi mật khẩu"
+
+#: templates/registration/password_reset_complete.html:7
+#: templates/registration/password_reset_done.html:7
+#: templates/registration/password_reset_form.html:8
+msgid "Password reset"
+msgstr "Tạo lại mật khẩu"
+
+#: templates/registration/password_reset_complete.html:16
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr "Mật khẩu của bạn đã được tạo, bạn sẽ đươc chuyển hướng đăng nhập ngay"
+
+#: templates/registration/password_reset_complete.html:18
+msgid "Log in"
+msgstr "Đăng nhập"
+
+#: templates/registration/password_reset_confirm.html:8
+msgid "Password reset confirmation"
+msgstr "Xác nhận tạo lại mật khẩu"
+
+#: templates/registration/password_reset_confirm.html:18
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr "Hãy nhập mật khẩu mới 2 lần"
+
+#: templates/registration/password_reset_confirm.html:24
+msgid "New password:"
+msgstr "Mật khẩu mới"
+
+#: templates/registration/password_reset_confirm.html:29
+msgid "Confirm password:"
+msgstr "Xác nhận mật khẩu"
+
+#: templates/registration/password_reset_confirm.html:38
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr "Đường dẫn không đúng"
+
+#: templates/registration/password_reset_done.html:15
+msgid ""
+"We've emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+msgstr "Chúng tôi đã gủi email tạo lại mật khẩu cho bạn, hãy check mail."
+
+#: templates/registration/password_reset_done.html:17
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with, and check your spam folder."
+msgstr "Nêu bạn không nhận được email, hãy check thư mục spam"
+
+#: templates/registration/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+"Bạn nhận được mail này vì bạn đã yêu cầu tạo lại mật khẩu tại %(site_name)s"
+
+#: templates/registration/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr "Hãy tới đường dãn này và tạo lại mật khẩu"
+
+#: templates/registration/password_reset_email.html:8
+msgid "Your username, in case you've forgotten:"
+msgstr "Tên tài khoản, trong trường hợp bạn quên"
+
+#: templates/registration/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr "Cảm ơn đã ghé thăm website"
+
+#: templates/registration/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr "Đội ngũ %(site_name)s"
+
+#: templates/registration/password_reset_form.html:16
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr "Quên mật khẩu? Nhập email đã đăng ký của bạn tại đây"
+
+#: templates/registration/password_reset_form.html:22
+msgid "Email address:"
+msgstr "Địa chỉ email"
+
+#: templates/registration/password_reset_form.html:25
+msgid "Reset my password"
+msgstr "Tại lại mật khẩu"
+
+#: university/apps.py:7 university/models/base.py:24
+msgid "University"
+msgstr "Đại hoc"
+
+#: university/apps.py:8 university/models/base.py:25
+msgid "Universities"
+msgstr "Các trường Đại học"
+
+#: university/models/base.py:85
+msgid "University Profile"
+msgstr "Thông tin trường Đại học"
+
+#: university/models/base.py:86
+msgid "Universities Profile"
+msgstr "Thông tin trường Đại học"
+
+#: university/models/scores.py:15
+msgid "University Score By Criterion Category"
+msgstr "Điểm theo Nhóm tiêu chí"
+
+#: university/models/scores.py:16
+msgid "University Scores By Criterion Categories"
+msgstr "Điểm theo nhóm tiêu chí"
+
+#: university/models/scores.py:37
+msgid "University Score By Criterion"
+msgstr "Điểm theo Tiêu chí"
+
+#: university/models/scores.py:38
+msgid "University Scores By Criterions"
+msgstr "Điểm theo Tiêu chí"
+
+#~ msgid "Đổi mật khẩu"
+#~ msgstr "Đổi mật khẩu"

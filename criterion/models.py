@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext as _
 
 # from criterion.querysets import CriterionCategoryQueryset, CriterionQueryset
 
@@ -8,6 +9,8 @@ class CriterionCategory(models.Model):
     class Meta:
         db_table = 'criterion_category'
         ordering = ['id']
+        verbose_name = _('Criterion Category')
+        verbose_name_plural = _('Criterion Categories')        
 
     def __str__(self):
         return self.name
@@ -33,6 +36,9 @@ class Criterion(models.Model):
     class Meta:
         db_table = 'criterion'
         ordering = ['category', 'id']
+        verbose_name = _('Criterion')
+        verbose_name_plural = _('Criterions')        
+
 
     def __str__(self):
         return self.name

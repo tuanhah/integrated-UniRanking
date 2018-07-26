@@ -4,6 +4,7 @@ from django.urls import reverse
 from score.querysets import ScoreOwnerQueryset
 from university.mixins import UniversitySubjectParserMixin
 from score.mixins import ScoreOwnerMixin, ScoreParserMixin
+from django.utils.translation import gettext as _
 
 class University(models.Model, ScoreOwnerMixin, UniversitySubjectParserMixin, ScoreParserMixin):
     code = models.CharField(max_length=7, null=True, unique = True)
@@ -19,8 +20,10 @@ class University(models.Model, ScoreOwnerMixin, UniversitySubjectParserMixin, Sc
 
     class Meta:
         db_table = 'university'
-        ordering = ['id']   
-
+        ordering = ['id']
+        verbose_name = _('University')   
+        verbose_name_plural = _('Universities')   
+        
     def __str__(self):
         return self.name
 
@@ -79,6 +82,8 @@ class UniversityProfile(models.Model):
     class Meta:
         db_table = 'university_profile'
         ordering = ['university']   
-
+        verbose_name = _('University Profile')   
+        verbose_name_plural = _('Universities Profile')   
+        
     def __str__(self):
         return self.university.name

@@ -107,11 +107,11 @@ function print_response(response) {
 }
 
 function login_success_reload(response) {
-	let login_error_dom = $("#login_errors").hide();
+	let login_error_dom = $("#login_errors");
 	if (response.success == true) {
 		window.location.reload();
 	} else {
-		list_error = message_to_html(response);
+		let list_error = message_to_html(response);
 		login_error_dom.append(list_error);
 		$('#login_errors').removeClass('d-none');
 		

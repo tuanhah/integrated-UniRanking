@@ -3,6 +3,8 @@ from .validators import ScoreValidator
 
 from criterion.models import CriterionCategory, Criterion
 
+from django.utils.translation import gettext as _
+
 
 class ScoreByCriterionCategory(models.Model):
     criterion_category = models.ForeignKey(CriterionCategory, on_delete=models.CASCADE)
@@ -11,7 +13,9 @@ class ScoreByCriterionCategory(models.Model):
     class Meta:
         abstract = True
         ordering = ['criterion_category']
-
+        verbose_name = _('Score By Criterion Category')
+        verbose_name_plural = _('Scores By Criterion Category')        
+        
     def __str__(self):
         return str(self.score)
 
@@ -44,6 +48,8 @@ class ScoreByCriterion(models.Model):
     class Meta:
         abstract = True
         ordering = ['criterion']
+        verbose_name = _('Score By Criterion')
+        verbose_name_plural = _('Scores By Criterion')        
 
     def __str__(self):
         return str(self.score)
