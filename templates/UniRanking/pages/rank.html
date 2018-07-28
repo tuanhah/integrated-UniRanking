@@ -1,0 +1,165 @@
+{% extends 'UniRanking/share/base.html' %} 
+{% load staticfiles %} 
+{% block title %} Xếp hạng chung | Hệ thống xếp hạng các trường Đại học {% endblock %} 
+{% block ranking %} class="active" {% endblock %} 
+{% block body %}
+<div id="rank-page">
+    <div class="container-fluid after-menu" id="rank-introduce">
+        <div class="row mx-0 justify-content-center">
+            <div class="container text-left">
+                <div class="row mx-0">
+                    <div class="col-lg-9 px-0">
+                        <p class="my-2">
+                            <a href="/">Trang chủ</a>
+                            <i class="fa fa-angle-double-right"></i> Xếp hạng Đại Học</p>
+                        <h4 class="font-weight-bold">Xếp hạng Đại Học</h4>
+                        <p>Cập nhật dữ liệu tháng 1/2018</p>
+                    </div>
+                    <div class="col-lg-3 px-0">
+
+                    </div>
+                </div>
+                <div class="row mx-0">
+                    <div class="col-12 px-0">
+                        <p>Tính năng
+                            <strong>Xếp hạng</strong> cho phép bạn xếp hạng trường, ngành học dựa trên điểm. Điểm được tổng hợp theo
+                            trường và được xây dựng dựa trên nhiều yếu tố. Điểm được tính theo thang 10.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="row">
+                            <div class="col-12 text-left my-3">
+                                <h2 class="font-weight-bold">
+                                    <i class="fa fa-navicon"></i> Chọn kiểu xem xếp hạng:</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button id="university-rank-btn" class="btn m-portlet w-100 py-3 m--regular-font-size-lg3">
+                                    <i class="fa mt-2" style="float:right"></i> Xếp hạng theo theo trường</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-left my-2">
+                                <h2 class="font-weight-bold">hoặc xem theo khối ngành</h2>
+                            </div>
+                        </div>
+                        <div class="row text-left" id="sector__area">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+
+                    </div>
+                    <div class="col-6">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid s-even non-display" id="ranking__subject-table">
+        <div class="row mx-0 justify-content-center">
+            <div class="container">
+                <h2 class="title-step px-3 py-2">Bảng xếp hạng ngành: </h2>
+            </div>
+        </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="container rank_table">
+                <table class="table table-bordered table-hover sort-table" id="subject-table">
+                    <thead>
+                        <tr id="subject_table_th-ctgr">
+                        </tr>
+                        <tr id="subject_expand_btn">
+                        </tr>
+                        <tr id="subject_table_th-sort">
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid s-even non-display" id="ranking__university-table">
+        <div class="row mx-0 justify-content-center">
+            <div class="container">
+                <h2 class="title-step px-3 py-2">Bảng xếp hạng các tiêu chí theo trường </h2>
+            </div>
+        </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="container rank_table">
+                <table class="table table-bordered table-hover sort-table" id="university-table">
+                    <thead>
+                        <tr id="university_table_th-ctgr">
+                        </tr>
+                        <tr id="university_expand_btn">
+                        </tr>
+                        <tr id="university_table_th-sort">
+                        </tr>
+                    </thead>
+                    <tbody id="rank__university_table-tbody">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="pop-up">
+        <div class="loader-img">
+            <img class="img-loader" src="http://gifimage.net/wp-content/uploads/2017/09/ajax-loader-gif-13.gif" alt="" width="800px">
+        </div>
+    </div>
+
+    <div class="modal fade" id="crtr-modal">
+        <div class="modal-dialog modal-table">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-table-title">Xếp hạng nhóm tiêu chí</h2>
+                    <button class="close" type="button" data-dismiss="modal">X</button>
+                </div>
+                <div class="modal-body px-4 py-2">
+                    <!-- <p class="text-center">Chọn 4 tiêu chí:</p> -->
+                    <table class="rank-by-category table-bordered">
+                        <thead>
+                            <tr class="subject_rank_criterion"></tr>
+                            <tr class="subject_rank_sort"></tr>
+                        </thead>
+                        <tbody class="rank-by-category-body">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-success" id="">Xem bảng</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Hủy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %} 
+{% block stt %}
+<link rel="stylesheet" href="{% static 'css/iziToast.min.css'%}">
+<script type="text/javascript" src="{% static 'js/iziToast.min.js'%}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="{% static 'js/rank.js'%}"></script>
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from .base import (
-	UniversityForm, UniversityProfileForm
+	UniversityForm, UniversityProfileForm, UserFavouriteUniversityForm, UserManagerUniversityForm
 )
 
 from .scores import (

@@ -1,5 +1,6 @@
 from django.db import models, connection
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 from score.querysets import ScoreOwnerQueryset
 from university.mixins import UniversitySubjectParserMixin
@@ -87,3 +88,32 @@ class UniversityProfile(models.Model):
         
     def __str__(self):
         return self.university.name
+
+class UserFavouriteUniversity(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favourite_universities_set')
+    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='favourite_users_set')
+    
+    class Meta:
+        db_table = 'user_favourite_university'
+        ordering = ['id']
+        unique_together = ('user', 'university')
+        verbose_name = _('User - Favourite University')
+        verbose_name_plural = _('User - Favourite Universities')        
+
+    def __str__(self):
+        return "User: {} | University: {}".format(self.user, self.university.name)
+
+
+class UserManagerUniversity(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='manager_universities_set')
+    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='manager_users_set')
+    
+    class Meta:
+        db_table = 'user_manager_university'
+        ordering = ['id']
+        unique_together = ('user', 'university')
+        verbose_name = _('User - Manager University')
+        verbose_name_plural = _('User - Manager Universities')        
+
+    def __str__(self):
+        return "User: {} | University: {}".format(self.user, self.university.name)

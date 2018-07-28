@@ -3,8 +3,8 @@ from guardian.admin import GuardedModelAdmin
 from django.contrib.admin import helpers
 from django.utils.safestring import mark_safe
 
-from .models import University, UniversityProfile, UniversityScoreByCriterion, UniversityScoreByCriterionCategory
-from .forms import UniversityForm, UniversityProfileForm, UniversityScoreByCriterionForm
+from .models import University, UniversityProfile, UserFavouriteUniversity,UserManagerUniversity, UniversityScoreByCriterion, UniversityScoreByCriterionCategory
+from .forms import UniversityForm, UniversityProfileForm, UserFavouriteUniversityForm, UserManagerUniversityForm, UniversityScoreByCriterionForm
 from score.admin import ScoreByCriterionCategoryAdmin
 
 @admin.register(University)
@@ -16,6 +16,16 @@ class UniversityAdmin(GuardedModelAdmin):
 @admin.register(UniversityProfile)
 class UniversityProfile(admin.ModelAdmin):
     form = UniversityProfileForm
+
+@admin.register(UserFavouriteUniversity)
+class UserFavouriteUniversityAdmin(admin.ModelAdmin):
+    form = UserFavouriteUniversityForm
+    list_display = ('id', 'user', 'university')
+
+@admin.register(UserManagerUniversity)
+class UserManagerUniversityAdmin(admin.ModelAdmin):
+    form = UserManagerUniversityForm
+    list_display = ('id', 'user', 'university')    
 
 
 @admin.register(UniversityScoreByCriterionCategory)

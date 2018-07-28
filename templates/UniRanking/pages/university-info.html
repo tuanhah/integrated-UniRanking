@@ -1,0 +1,182 @@
+{% extends "UniRanking/share/base.html" %}
+{% load static %} 
+{% block title %} {{ university.name }} || Chức năng xem thông tin các trường Đại Học {% endblock %} 
+{% block info %} class="active" {% endblock %}
+{% block body %}
+<div class="container-fluid after-menu">
+    <div class="row" id="background">
+
+    </div>
+    <div class="row">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-sm-7">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <img id="uni-avatar" src="{% static 'img/vnu_avatar.jpg'%}" width=140px>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <span class="col-10">
+                            <h2 id="uni-name" university_id="{{ university.id }}"><strong>{{university.rank}}. {{university.name}}</strong></h2>
+                        </span>
+                        <span class="col-1 fa fa-heart-o pointer-md-icon" data-toggle="tooltip" title="Thêm vào danh sách yêu thích"></span>
+                        <span class=" col-1 fa fa-envelope-o pointer-md-icon" data-toggle="tooltip" title="Nhận thông báo"></span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>Thông tin cơ bản:</h4>
+                        </div>
+                        <div class="col-12">    
+                            <ul>
+                                <li class="col-12 p-large">Địa chỉ: {{ university.profile.address }}</li>
+                                <li class="col-12 p-large">Website: {{ university.profile.site_url }}</li>
+                                <li class="col-12 p-large">Điểm trung bình: {{ university.avg_score }}</li>
+                                <li class="col-12 p-large">Thứ hạng: {{ university.rank }}</li>
+                                {% if university.parent is not None %}
+                                <li class="col-12 p-large">Trực thuộc: {{ university.parent }}</li>
+                                {% endif %}
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <img class="img-thumbnail" id="uni-map" src="{% static 'img/map_sample.png'%}" width=100%>
+                </div>
+                <div class="col">
+
+                </div>
+            </div>
+            <div class="m-portlet m-portlet--full-height info__portlet">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text m--regular-font-size-lg4">
+                                Đánh giá trường 
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet__body p-3">
+
+                    <!--begin::Section-->
+                    <div class="m-accordion m-accordion--default" id="university-score-accordion" role="tablist">
+
+                        
+                    </div>
+
+                    <!--end::Section-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="modal fade" id="add_subject_modal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModal" aria-hidden="true">-->
+<!--<div class="modal-dialog modal-dialog-centered modal-lg" role="document">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<h5 class="modal-title">Thêm ngành <i class="fas fa-plus"></i></h5>-->
+<!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--<span aria-hidden="true">&times;</span>-->
+<!--</button>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+<!--<div class="form-group row">-->
+<!--<label for="subject_sector_select" class="col-4 col-form-label font-weight-bold">KHỐI NGÀNH</label>-->
+<!--<div class="col">-->        
+<!--<select class="form-control" id="subject_sector_select">-->
+<!--<option value="0">&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Chọn khối ngành &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
+<!--% if subject_sectors %}-->
+<!--% for subject_sector in subject_sectors %}-->
+<!--<option value="{{subject_sector.id}}">{{subject_sector.name}}</option>-->
+<!--% endfor %}-->
+<!--% endif %}-->
+<!--</select>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="form-group row">-->
+<!--<label for="subject_group_select" class="col-4 col-form-label font-weight-bold">NHÓM NGÀNH</label>-->
+<!--<div class="col">-->
+<!--<select class="form-control" id="subject_group_select">-->
+<!--</select>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="form-group" style="display:none;">-->
+<!--<label for="subject_list_select" class="col-form-label font-weight-bold">NGÀNH</label>-->
+<!--<div class="list-group list-group-flush" id="subject_list_select">-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div class="modal fade" id="add_score_modal" tabindex="-1" role="dialog" aria-labelledby="addScoreModal" aria-hidden="true">-->
+<!--<div class="modal-dialog modal-dialog-centered">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<h5 class="modal-title">Thêm điểm <i class="fas fa-plus"></i></h5>-->
+<!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--<span aria-hidden="true">&times;</span>-->
+<!--</button>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+<!--<div class="form-group row">-->
+<!--<label for="category_list_select" class="col-4 col-form-label font-weight-bold">NHÓM TIÊU CHÍ</label>-->
+<!--<div class="col">-->
+<!--<select class="form-control" name="category" id="category_list_select">-->
+<!--</select>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="form-group">-->
+<!--<label for="add_score_field" class="col-form-label font-weight-bold">TIÊU CHÍ</label>-->
+<!--<table class="table">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th style="width: 85%;">-->
+<!--<select class="form-control" id="criterion_list_select">-->
+<!--</select>-->
+<!--</th>-->
+<!--<th class="px-0" style="width: 15%;">-->
+<!--<input id="score_input" class="form-control text-center" placeholder="Điểm">-->
+<!--</th>-->
+<!--<th class="text-center">-->
+<!--<button id="score_add_confirm" class="btn btn-outline-success border-0"><i class="fas fa-plus"></i></button>-->
+<!--</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody id="added_score_field">-->
+<!--</tbody>-->
+<!--</table>-->
+<!--% comment %} <div class="form-group row">-->
+<!--<div class="col-8">-->
+<!--<select class="form-control" id="criterion_list_select">-->
+<!--</select>-->
+<!--</div>-->
+<!--<div class="col px-0">-->
+<!--<input id="score_input" class="form-control" placeholder="Điểm">-->
+<!--</div>-->
+<!--<div class="col-2 pr-0">-->
+<!--<button id="score_add_confirm" class="btn btn-outline-success border-0"><i class="fas fa-plus"></i></button>-->
+<!--</div>-->
+<!--</div> % endcomment %}-->
+<!---->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+{% endblock %}
+{% block stt %}
+<script type="text/javascript" src="{% static 'js/university-info.js'%}"></script>
+
+{% endblock %}

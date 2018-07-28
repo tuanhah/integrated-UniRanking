@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8"> {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="WebAPP">
+    <title>{% block title %}Trang chủ | Hệ thống so sánh các trường Đại học{% endblock %}</title>
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/competition-soft/512/pedestal-512.png">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors.bundle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.bundle.css'%}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/chosen.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css'%}" />
+</head>
+
+<body>
+    {% include 'UniRanking/include/_navbar.html' %}
+    {% block body %} {% endblock %}
+    <div>
+        <button class="btn btn-danger" data-toggle="tooltip" data-placement="left" id="gotop" title="Lên trên cùng">
+            <i class="fa fa-arrow-up"></i>
+        </button>
+    </div>
+    
+    {% include 'UniRanking/include/_footer.html' %}
+    <!--Script file-->
+    <script type="text/javascript" src="{% static 'js/vendors.bundle.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/scripts.bundle.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.js'%}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/chosen.jquery.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/base.js'%}"></script>
+    {% block stt %} {% endblock %}
+</body>
+
+</html>

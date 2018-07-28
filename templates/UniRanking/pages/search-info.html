@@ -1,0 +1,38 @@
+{% extends 'UniRanking/share/base.html' %}
+{% load staticfiles %}
+
+{% block title %} Thông tin Đại học | Hệ thống so sánh các trường Đại học {% endblock %}
+
+{% block info %}class='active'{% endblock %}
+
+{% block body %}
+<div class="dom-loader">
+    <img class="img-loader" src="http://gifimage.net/wp-content/uploads/2017/09/ajax-loader-gif-13.gif" alt="">
+    
+</div>
+<div id="page">
+    <div class="container-fluid" id="search-uniinfo">
+        <div class="row mx-0 justify-content-center mt-4">
+            <div class="col-10 text-center">
+                <h2 class="title-step">Tìm kiếm theo tên trường bạn muốn tìm hiểu</h2>
+            </div>
+        </div>
+        <div class="row mx-0 justify-content-center">
+            <div class="col-10 text-center"><p class="p-large">---------------------------------------</p></div>
+            <div class="col-10">
+                <form class="form-vertical">
+                    <div class="form-group">
+                        <select name="state[]" data-placeholder=" Tên trường bạn muốn xem thông tin ..." class="info-multiple-select" multiple id="university-select-list">
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
+{% block stt %}
+<script type="text/javascript" src="{% static 'js/search-info.js'%}"></script>
+
+{% endblock %}

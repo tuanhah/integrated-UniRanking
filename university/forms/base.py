@@ -1,6 +1,6 @@
 from django import forms
 
-from university.models import University, UniversityProfile
+from university.models import University, UniversityProfile, UserFavouriteUniversity, UserManagerUniversity
 
 class UniversityForm(forms.ModelForm):
     class Meta:
@@ -12,3 +12,12 @@ class UniversityProfileForm(forms.ModelForm):
         model = UniversityProfile
         exclude = ['university']
 
+class UserFavouriteUniversityForm(forms.ModelForm):
+    class Meta:
+        model = UserFavouriteUniversity
+        exclude = []
+
+class UserManagerUniversityForm(forms.ModelForm):
+    class Meta:
+        model = UserManagerUniversity
+        exclude = []

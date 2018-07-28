@@ -32,6 +32,7 @@ urlpatterns = [
     path('help/', views.help, name="help"),
     path('accounts/', include('django.contrib.auth.urls')),
     # path('logout', auth.views.logout)
+    path('personal/', views.personal, name="personal")
 ]
 
 if settings.DEBUG:

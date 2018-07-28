@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}Trang quản lý cá nhân | Hệ thống so sánh các trường Đại Học{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    {% load staticfiles %}
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/competition-soft/512/pedestal-512.png">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors.bundle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.bundle.css'%}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/chosen.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/personal-page.css'%}" />
+</head>
+<body class="m-content--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-light m-aside--offcanvas-default">
+    <div class="m-grid m-grid--hor m-grid--root m-page">
+
+    {% include 'user/include/_navbar.html' %}
+    <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+        {% include 'user/include/_sidebar.html' %}
+        <div class="m-grid__item m-grid__item--fluid m-wrapper">
+            {% block content %} 
+            {% endblock %}
+        </div>
+        
+    </div>    
+    <div>
+        <button class="btn btn-danger" data-toggle="tooltip" data-placement="left" id="gotop" title="Lên trên cùng">
+            <i class="fa fa-arrow-up"></i>
+        </button>
+    </div>
+    {% include 'user/include/_footer.html' %}
+    </div>
+    <script type="text/javascript" src="{% static 'js/vendors.bundle.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/scripts.bundle.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.dataTables.js'%}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/chosen.jquery.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'js/base.js'%}"></script>
+    {% block static %}
+    {% endblock %}    
+    
+</body>
+</html>

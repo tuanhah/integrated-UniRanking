@@ -1,5 +1,5 @@
 from .base import (
-    University, UniversityProfile
+    University, UniversityProfile, UserFavouriteUniversity, UserManagerUniversity
 )
 
 from .scores import (

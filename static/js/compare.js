@@ -360,7 +360,7 @@
         });
         $.each(selected_univ, function(index, university){  
             univ_box += `<p class="my-1 ml-0 mr-lg-4">
-            <i title="Xóa khỏi danh sách" data-toggle="tooltip" class="fa fa-remove subject__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i>
+            <i title="Xóa khỏi danh sách" data-toggle="tooltip" class="fa fa-times subject__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i>
             <a href="/university/${university.id}" target="_blank" data-toogle="tooltip" title="Xem thong tin ${university.name}"> ${university.name} </a>
             </p>`;
         });
@@ -387,7 +387,7 @@
     //         position: 'bottomLeft',
     //     });
     //     $.each(selected_univ, function(index, university){
-    //         univ_box += `<p class="my-1 ml-0 mr-xl-4"> <i title="Xóa khỏi danh sách" data-toggle="tooltip" class="fa fa-remove university__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i> <a class="" target="_blank" href="/university/${university.id}" data-toggle="tooltip" title="Xem thông tin ${university.name}"> ${university.name} </a> </p>`;
+    //         univ_box += `<p class="my-1 ml-0 mr-xl-4"> <i title="Xóa khỏi danh sách" data-toggle="tooltip" class="fa fa-times university__remove-univ mr-4" target="${university.id}" target-name="${university.name}"></i> <a class="" target="_blank" href="/university/${university.id}" data-toggle="tooltip" title="Xem thông tin ${university.name}"> ${university.name} </a> </p>`;
     //     });
     //     $('.university__selected-box').html(univ_box);
     // });
