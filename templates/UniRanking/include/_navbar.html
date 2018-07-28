@@ -1,9 +1,8 @@
-
 <nav class=" navbar navbar-expand-xl navbar-light fixed-top" id="navibar">
     <div class="container px-3">
         <a class="navbar-brand" href="/">
             <strong>
-                <i class="fa fa-bar-chart"></i> UniRanking</strong>
+                <i class="fa fa-chart-bar" style="font-size: 30px"></i> UniRanking</strong>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -40,10 +39,10 @@
                     <div class="dropdown-menu">
                         {% if user.is_superuser %}
                         <a class="dropdown-item" href="/admin/">Quản lý</a>
-                        
+
                         {% endif %}
                         <a class="dropdown-item" href="/accounts/password_change">Đổi mật khẩu</a>
-                        
+
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/accounts/logout">Đăng xuất</a>
                     </div>
@@ -66,93 +65,93 @@
 </nav>
 
 <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title m--regular-font-size-lg4">Đăng Nhập</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="login_form" class="form-vertical" action="">
-                        <div class="alert alert-danger d-none" role="alert" id="login_errors"></div>
-                        <div class="form-group">
-                            <label class="control-label" for="user">Tài Khoản: </label>
-                            <input type="text" class="form-control" name="username" placeholder="Tên người dùng hoặc email" required/>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="password">Mật Khẩu: </label>
-                            <input type="password" class="form-control" name="password" placeholder="Password" required/>
-                        </div>
-                        <div class="form-group text-right">
-                            <span class="m--pull-left">
-                                <input type="checkbox" checked="checked" /> Ghi nhớ tôi.</span>
-                            <button type="submit" class="btn btn-success m--pull-right">Đăng nhập</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <div class="forgot">
-                        <a href="accounts/password_reset/">Quên mật khẩu?</a>
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title m--regular-font-size-lg4">Đăng Nhập</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="login_form" class="form-vertical" action="">
+                    <div class="alert alert-danger d-none" role="alert" id="login_errors"></div>
+                    <div class="form-group">
+                        <label class="control-label" for="user">Tài Khoản: </label>
+                        <input type="text" class="form-control" name="username" placeholder="Tên người dùng hoặc email" required/>
                     </div>
-                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                    <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+                    <div class="form-group">
+                        <label class="control-label" for="password">Mật Khẩu: </label>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required/>
+                    </div>
+                    <div class="form-group text-right">
+                        <span class="m--pull-left">
+                            <input type="checkbox" checked="checked" /> Ghi nhớ tôi.</span>
+                        <button type="submit" class="btn btn-success m--pull-right">Đăng nhập</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <div class="forgot">
+                    <a href="accounts/password_reset/">Quên mật khẩu?</a>
                 </div>
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
             </div>
         </div>
     </div>
-    <div class="modal fade" id="signup_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title m--regular-font-size-lg4">Tạo tài khoản mới</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="signup_form" action="">
-                        <div class="alert alert-success d-none" role="alert" id="signup_success"></div>
-                        <div class="alert alert-danger d-none" role="alert" id="signup_errors"></div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="lastname">Họ</label>
-                                <input type="text" name="last_name" id="lastname" class="form-control" placeholder="Họ của bạn ..." />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="firstname">Tên</label>
-                                <input type="text" class="form-control" name="first_name" id="firstname" placeholder="Tên của bạn ...">
-                            </div>
+</div>
+<div class="modal fade" id="signup_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="display: none;"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title m--regular-font-size-lg4">Tạo tài khoản mới</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="signup_form" action="">
+                    <div class="alert alert-success d-none" role="alert" id="signup_success"></div>
+                    <div class="alert alert-danger d-none" role="alert" id="signup_errors"></div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="lastname">Họ</label>
+                            <input type="text" name="last_name" id="lastname" class="form-control" placeholder="Họ của bạn ..." />
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Email của bạn ...">
+                        <div class="form-group col-md-6">
+                            <label for="firstname">Tên</label>
+                            <input type="text" class="form-control" name="first_name" id="firstname" placeholder="Tên của bạn ...">
                         </div>
-                        <div class="form-group">
-                            <label for="username">Tên tài khoản</label>
-                            <input type="text" class="form-control" name="username" id="username2" placeholder="Tên tài khoản ...">
-                        </div>
-                        <div class="form-group">
-                            <label for="password1">Mật khẩu</label>
-                            <input type="password" class="form-control" name="password1" id="password1" placeholder="Mật khẩu ...">
-                        </div>
-                        <div class="form-group">
-                            <label for="password2">Nhập lại mật khẩu</label>
-                            <input type="password" class="form-control" name="password2" id="password2" placeholder="Nhập lại mật khẩu ...">
-                        </div>
-                        <div class="form-group  m--pull-right">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                            <button type="submit" class="btn btn-primary">Đăng ký</button>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                    <!-- <button type="submit" class="btn btn-primary">Đăng ký</button> -->
-                </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" name="email" id="email" placeholder="Email của bạn ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Tên tài khoản</label>
+                        <input type="text" class="form-control" name="username" id="username2" placeholder="Tên tài khoản ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="password1">Mật khẩu</label>
+                        <input type="password" class="form-control" name="password1" id="password1" placeholder="Mật khẩu ...">
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">Nhập lại mật khẩu</label>
+                        <input type="password" class="form-control" name="password2" id="password2" placeholder="Nhập lại mật khẩu ...">
+                    </div>
+                    <div class="form-group  m--pull-right">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                <!-- <button type="submit" class="btn btn-primary">Đăng ký</button> -->
             </div>
         </div>
     </div>
+</div>

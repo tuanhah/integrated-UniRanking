@@ -67,7 +67,7 @@ class CriterionScoreRandom:
         # self.random_all_sector_criterion_scores()
     
     def random_university_criterion_scores(self):
-        criteria = self.random_criteria(score_owner = self.university, criteria = self.all_criteria, max_ignore_criteria = self.max_ignore_university_criteria)
+        criteria = self.random_criteria(score_owner = self.university, criteria = self.all  _criteria, max_ignore_criteria = self.max_ignore_university_criteria)
         for criterion_id in criteria:
             score = self.random_score()
             UniversityScoreByCriterion.objects.create(university = self.university, criterion_id = criterion_id, score = score)
