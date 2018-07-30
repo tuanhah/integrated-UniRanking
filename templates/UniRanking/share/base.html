@@ -7,30 +7,84 @@
     <meta name="description" content="WebAPP">
     <title>{% block title %}Trang chủ | Hệ thống so sánh các trường Đại học{% endblock %}</title>
     <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/competition-soft/512/pedestal-512.png">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors.bundle.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.bundle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'share/stylesheets/vendors.bundle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'share/stylesheets/style.bundle.css'%}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/chosen.min.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'share/stylesheets/chosen.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'UniRanking/stylesheets/index.css'%}" />
 </head>
 
 <body>
-    {% include 'UniRanking/include/_navbar.html' %}
+    <nav class=" navbar navbar-expand-xl navbar-light fixed-top" id="navibar">
+        <div class="container px-3">
+            <a class="navbar-brand" href="/">
+                <strong>
+                    <i class="fa fa-chart-bar" style="font-size: 30px"></i> UniRanking</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li data-toggle="tooltip" data-placement="bottom" title="Trang chủ" class="nav-item {% block home %} {% endblock %}">
+                        <a class="nav-link" href="/">Trang chủ</a>
+                    </li>
+                    <li class="nav-item {% block compare %} {% endblock %}">
+                        <a class="nav-link" href="/compare" data-placement="bottom" data-toggle="tooltip" title="So sánh các trường Đại học">So sánh</a>
+                    </li>
+                    <li class="nav-item {% block rank %} {% endblock %}">
+                        <a class="nav-link" href="/rank" data-placement="bottom" data-toggle="tooltip" title="Xếp hạng chung">Xếp hạng</a>
+                    </li>
+                    <li class="nav-item {% block info %} {% endblock %}" data-toggle="tooltip" data-placement="bottom" title="Thông tin trường Đại học">
+                        <a href="/search-info" class="nav-link">Thông tin Trường</a>
+                    </li>
+                    <li class="nav-item {% block contact %} {% endblock %}" data-toggle="tooltip" data-placement="bottom" title="Liên hệ, phản hồi">
+                        <a href="/contact" class="nav-link">Liên hệ</a>
+                    </li>
+                    <li class="nav-item {% block help %} {% endblock %}" data-toggle="tooltip" data-placement="bottom" title="Trợ giúp">
+                        <a class="nav-link" href="/help">Trợ giúp</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                    <li class="m-nav__item m-topbar__user-profile m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light"
+                        m-dropdown-toggle="click" aria-expanded="true">
+                        {% include 'share/_user.html' %}
+                    </li>
+                    {% else %}
+                    <li {% block login %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng nhập">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#login_modal">
+                            <i class="fa fa-user"></i> Đăng nhập</a>
+                    </li>
+                    <li {% block register %} {% endblock %} data-toggle="tooltip" data-placement="bottom" title="Đăng ký">
+                        <!-- <a href="/register" class="register nav-link"> -->
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#signup_modal">
+
+                            <i class="fa fa-user-plus"></i> Đăng ký</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    {% include 'UniRanking/include/_modal.html' %}
     {% block body %} {% endblock %}
     <div>
         <button class="btn btn-danger" data-toggle="tooltip" data-placement="left" id="gotop" title="Lên trên cùng">
             <i class="fa fa-arrow-up"></i>
         </button>
     </div>
-    
+
     {% include 'UniRanking/include/_footer.html' %}
     <!--Script file-->
-    <script type="text/javascript" src="{% static 'js/vendors.bundle.js'%}"></script>
-    <script type="text/javascript" src="{% static 'js/scripts.bundle.js'%}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.dataTables.js'%}"></script>
+    <script type="text/javascript" src="{% static 'share/javascripts/vendors.bundle.js'%}"></script>
+    <script type="text/javascript" src="{% static 'share/javascripts/scripts.bundle.js'%}"></script>
+    <script type="text/javascript" src="{% static 'share/javascripts/jquery.dataTables.js'%}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/chosen.jquery.min.js'%}"></script>
-    <script type="text/javascript" src="{% static 'js/base.js'%}"></script>
+    <script type="text/javascript" src="{% static 'share/javascripts/chosen.jquery.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'share/javascripts/base.js'%}"></script>
     {% block stt %} {% endblock %}
 </body>
 

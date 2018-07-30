@@ -1,0 +1,70 @@
+<div class="btn-group">
+        <a href="#" class="m-nav__link m-dropdown__toggle">
+            <button id="user-menu" user-id="{{ user.id }}" type="button" class="btn btn-success">
+                <span>
+                    <i class="fa fa-user"></i> {{ user }}
+                </span>
+                <span>
+                    <i class="m-menu__ver-arrow la la-angle-down" style="font-size:1rem"></i>
+                </span>
+            </button>
+        </a>
+        <div class="m-dropdown__wrapper" style="z-index: 101;">
+            <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 12.5px;"></span>
+            <div class="m-dropdown__inner">
+                <div class="m-dropdown__header m--align-center">
+                    <div class="m-card-user m-card-user--skin-light">
+                        <div class="m-card-user__pic">
+                            <img src="" class="m--img-rounded m--marginless" alt="">
+                        </div>
+                        <div class="m-card-user__details">
+                            <span class="m-card-user__name m--font-weight-500">{{ user }}</span>
+                            <a href="" class="m-card-user__email m--font-weight-300 m-link">{{ user.email }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-dropdown__body">
+                    <div class="m-dropdown__content">
+                        <ul class="m-nav m-nav--skin-light">
+                            <li class="m-nav__section m--hide">
+                                <span class="m-nav__section-text">Menu</span>
+                            </li>
+                            {% if user.is_superuser %}        
+                            <li class="m-nav__item">
+                                <a href="/admin" class="m-nav__link">
+                                    <i class="m-nav__link-icon flaticon-profile-1"></i>
+                                    <span class="m-nav__link-title">
+                                        <span class="m-nav__link-wrap">
+                                            <span class="m-nav__link-text">Quản lý UniRanking</span>
+                                            <span class="m-nav__link-badge">
+                                                <span class="m-badge m-badge--success">2</span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            <li class="m-nav__item">
+                                <a href="/user/overview" class="m-nav__link">
+                                    <i class="m-nav__link-icon flaticon-share"></i>
+                                    <span class="m-nav__link-text">Trang cá nhân</span>
+                                </a>
+                            </li>
+                            <li class="m-nav__item">
+                                <a href="/accounts/password_change" class="m-nav__link">
+                                    <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                    <span class="m-nav__link-text">Đổi mật khẩu</span>
+                                </a>
+                            </li>
+                            
+                            <li class="m-nav__separator m-nav__separator--fit">
+                            </li>
+                            <li class="m-nav__item">
+                                <a href="/accounts/logout" class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">Đăng xuất</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

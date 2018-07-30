@@ -1,45 +1,166 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{% block title %}Trang quản lý cá nhân | Hệ thống so sánh các trường Đại Học{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1"> {% load staticfiles %}
     <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/competition-soft/512/pedestal-512.png">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors.bundle.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.bundle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'share/stylesheets/vendors.bundle.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'share/stylesheets/style.bundle.css'%}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/chosen.min.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/personal-page.css'%}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'share/stylesheets/chosen.min.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'user/stylesheets/base.css'%}" />
+    {% block stylesheets %} {% endblock %}
+    
 </head>
+
 <body class="m-content--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-light m-aside--offcanvas-default">
     <div class="m-grid m-grid--hor m-grid--root m-page">
 
-    {% include 'user/include/_navbar.html' %}
-    <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
-        {% include 'user/include/_sidebar.html' %}
-        <div class="m-grid__item m-grid__item--fluid m-wrapper">
-            {% block content %} 
-            {% endblock %}
+        {% include 'user/include/_navbar.html' %}
+        <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+            <button class="m-aside-left-close  m-aside-left-close--skin-light " id="m_aside_left_close_btn">
+                <i class="la la-close"></i>
+            </button>
+            <div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-light ">
+                <!-- BEGIN: Aside Menu -->
+                <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-light m-aside-menu--submenu-skin-light " m-menu-vertical="1"
+                    m-menu-scrollable="0" m-menu-dropdown-timeout="500">
+                    <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
+                        <li class="m-menu__section m-menu__section--first">
+                            <h4 class="m-menu__section-text m--regular-font-size-lg3">Danh Mục</h4>
+                            <i class="m-menu__section-icon flaticon-more-v3"></i>
+                        </li>
+                        <li class="m-menu__item {% block overview %} {% endblock %}" aria-haspopup="true" m-menu-link-redirect="1">
+                            <a href="/user/overview" class="m-menu__link">
+                                <i class="m-menu__link-icon flaticon-layers"></i>
+                                <span class="m-menu__link-text">Tổng quan</span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item {% block favourite_university %} {% endblock %}" aria-haspopup="true" m-menu-link-redirect="1">
+                            <a href="/user/favourite-university" class="m-menu__link">
+                                <i class="m-menu__link-icon flaticon-suitcase"></i>
+                                <span class="m-menu__link-text">Trường yêu thích</span>
+                            </a>
+                        </li>
+                        {% if user.is_staff %}
+                        <!-- <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover" m-menu-link-redirect="1">
+                            <a href="javascript:;" class="m-menu__link m-menu__toggle">
+                                <i class="m-menu__link-icon flaticon-graphic-1"></i>
+                                <span class="m-menu__link-title">
+                                    <span class="m-menu__link-wrap">
+                                        <span class="m-menu__link-text">Quản lý Trường</span>
+                                        <span class="m-menu__link-badge">
+                                            <span class="m-badge m-badge--accent">3</span>
+                                        </span>
+                                    </span>
+                                </span>
+                                <i class="m-menu__ver-arrow la la-angle-right"></i>
+                            </a> -->
+                            <!-- <div class="m-menu__submenu ">
+                                <span class="m-menu__arrow"></span>
+                                <ul class="m-menu__subnav">
+                                    <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" m-menu-link-redirect="1">
+                                        <span class="m-menu__link">
+                                            <span class="m-menu__link-title">
+                                                <span class="m-menu__link-wrap">
+                                                    <span class="m-menu__link-text">Quản lý Trường</span>
+                                                    <span class="m-menu__link-badge">
+                                                        <span class="m-badge m-badge--accent">3</span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </span>
+                                    </li>
+                                    <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
+                                        <a href="#" class="m-menu__link">
+                                            <span class="m-menu__link-text">Đại Học Quốc Gia Hà Nội</span>
+                                        </a>
+                                    </li>
+                                    <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
+                                        <a href="#" class="m-menu__link ">
+                                            <span class="m-menu__link-text">Đại Học Bách Khoa Hà Nội</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div> -->
+                        <!-- </li> -->
+                        <li class="m-menu__item {% block manage_university %} {% endblock %}" aria-haspopup="true" m-menu-link-redirect="1">
+                            <a href="/user/manage-university" class="m-menu__link">
+                                <i class="m-menu__link-icon flaticon-suitcase"></i>
+                                <span class="m-menu__link-text">Quản lý Trường</span>
+                                <span class="m-menu__link-badge">
+                                    <span class="m-badge m-badge--accent">3</span>
+                                </span>
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="m-menu__section ">
+                            <h4 class="m-menu__section-text m--regular-font-size-lg3">Tài khoản</h4>
+                            <i class="m-menu__section-icon flaticon-more-v3"></i>
+                        </li>
+                        <li class="m-menu__item  {% block personal_page %} {% endblock %}" aria-haspopup="true" m-menu-link-redirect="1">
+                            <a href="/user/me" class="m-menu__link ">
+                                <i class="m-menu__link-icon flaticon-graphic"></i>
+                                <span class="m-menu__link-text">Thông tin tài khoản</span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
+                            <a href="#" class="m-menu__link ">
+                                <i class="m-menu__link-icon flaticon-network"></i>
+                                <span class="m-menu__link-text">Đổi mật khẩu</span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
+                            <a href="#" class="m-menu__link ">
+                                <i class="m-menu__link-icon flaticon-network"></i>
+                                <span class="m-menu__link-text">Lịch sử chỉnh sửa</span>
+                            </a>
+                        </li>
+
+                        <li class="m-menu__section ">
+                            <h4 class="m-menu__section-text m--regular-font-size-lg3">Tùy chọn khác</h4>
+                            <i class="m-menu__section-icon flaticon-more-v3"></i>
+                        </li>
+                        <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
+                            <a href="#" class="m-menu__link ">
+                                <i class="m-menu__link-icon flaticon-cogwheel"></i>
+                                <span class="m-menu__link-text">Liên hệ Quản trị viên</span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
+                            <a href="#" class="m-menu__link ">
+                                <i class="m-menu__link-icon flaticon-lifebuoy"></i>
+                                <span class="m-menu__link-text">Cài đặt thông báo</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END: Aside Menu -->
+            </div>
+
+            <div class="m-grid__item m-grid__item--fluid m-wrapper">
+                {% block content %} {% endblock %}
+            </div>
+
         </div>
-        
-    </div>    
-    <div>
-        <button class="btn btn-danger" data-toggle="tooltip" data-placement="left" id="gotop" title="Lên trên cùng">
-            <i class="fa fa-arrow-up"></i>
-        </button>
+        <div>
+            <button class="btn btn-danger" data-toggle="tooltip" data-placement="left" id="gotop" title="Lên trên cùng">
+                <i class="fa fa-arrow-up"></i>
+            </button>
+        </div>
+        {% include 'user/include/_footer.html' %}
     </div>
-    {% include 'user/include/_footer.html' %}
-    </div>
-    <script type="text/javascript" src="{% static 'js/vendors.bundle.js'%}"></script>
-    <script type="text/javascript" src="{% static 'js/scripts.bundle.js'%}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.dataTables.js'%}"></script>
+    <script type="text/javascript" src="{% static 'share/javascripts/vendors.bundle.js'%}"></script>
+    <script type="text/javascript" src="{% static 'share/javascripts/scripts.bundle.js'%}"></script>
+    <script type="text/javascript" src="{% static 'share/javascripts/jquery.dataTables.js'%}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/chosen.jquery.min.js'%}"></script>
-    <script type="text/javascript" src="{% static 'js/base.js'%}"></script>
-    {% block static %}
-    {% endblock %}    
-    
+    <script type="text/javascript" src="{% static 'share/javascripts/chosen.jquery.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'share/javascripts/base.js'%}"></script>
+    {% block javascripts %} {% endblock %}
+
 </body>
+
 </html>

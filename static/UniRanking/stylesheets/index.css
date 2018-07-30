@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Muli');
 @import url('https://fonts.googleapis.com/css?family=Cabin');
-body {
-	font-family: 'Muli', sans-serif;
+body{
+	font-family: 'Muli', sans-serif !important;
 	font-size: 15px;
 }
 
@@ -162,7 +162,7 @@ hr.under {
 	height: 635px;
 	margin-top: -20px !important;
 	background-color: #68b7d47a !important;
-	background: url('../img/trans.png') no-repeat scroll center bottom -120px / 100% auto;
+	background: url('../../share/images/trans.png') no-repeat scroll center bottom -120px / 100% auto;
 }
 
 .home__introduce {

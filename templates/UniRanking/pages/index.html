@@ -1,5 +1,5 @@
-{% extends 'UniRanking/share/base.html' %} {% load staticfiles %} {% block home %}class="active"{% endblock %} {% block stt%}
-<script type="text/javascript" src="{% static 'js/index.js'%}"></script>
+{% extends 'UniRanking/share/base.html' %} {% load staticfiles %} {% block home %} active {% endblock %} {% block stt%}
+<script type="text/javascript" src="{% static 'UniRanking/javascripts/index.js'%}"></script>
 
 {% endblock %} {% block body %}
 <div id="page">
@@ -12,7 +12,7 @@
                         <p id="home__title__description">Hệ thống so sánh, đánh giá các trường Đại Học</p>
                     </div>
                     <div class="col-lg-6 animated bounceInRight hide-sm">
-                        <img src="{% static 'img/rank.svg'%}" alt="" width="500vw">
+                        <img src="{% static 'share/images/rank.svg'%}" alt="" width="500vw">
                     </div>
                     
                 </div>
@@ -34,15 +34,15 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <img data-src="holder.js/600x500/auto/#777:#7a7a7a/text:First slide" alt="First slide" src="../../static/img/VNU.jpg" title="Đại Học Quốc Gia Hà Nội, số 144, Xuân Thủy, Cầu Giấy, Hà Nội"
+                            <img data-src="holder.js/600x500/auto/#777:#7a7a7a/text:First slide" alt="First slide" src="{% static 'share/images/VNU.jpg'%}" title="Đại Học Quốc Gia Hà Nội, số 144, Xuân Thủy, Cầu Giấy, Hà Nội"
                                 width="100%">
                         </div>
                         <div class="carousel-item">
-                            <img data-src="holder.js/600x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide" src="../../static/img/FTU.jpg" title="Đại Học Ngoại Thương, số 91, chùa Láng, Láng Thượng, Đống Đa, Hà Nội"
+                            <img data-src="holder.js/600x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide" src="{% static 'share/images/FTU.jpg'%}" title="Đại Học Ngoại Thương, số 91, chùa Láng, Láng Thượng, Đống Đa, Hà Nội"
                                 width="100%">
                         </div>
                         <div class="carousel-item">
-                            <img data-src="holder.js/600x500/auto/#666:#6a6a6a/text:Second slide" alt="Fouth slide" src="../../static/img/HUST.jpg" title="Đại Học Bách Khoa Hà Nội, số 1, Đại Cồ Việt, Bách Khoa, Hai Bà Trưng, Hà Nội"
+                            <img data-src="holder.js/600x500/auto/#666:#6a6a6a/text:Second slide" alt="Fouth slide" src="{% static 'share/images/HUST.jpg'%}" title="Đại Học Bách Khoa Hà Nội, số 1, Đại Cồ Việt, Bách Khoa, Hai Bà Trưng, Hà Nội"
                                 width="100%">
                         </div>
                     </div>
@@ -142,7 +142,7 @@
 
                     </div>
                     <div class="col-lg-6 animated bounceInRight hide-sm">
-                        <img src="{% static 'img/chart.svg'%}" alt="" width="500vw">
+                        <img src="{% static 'share/images/chart.svg'%}" alt="" width="500vw">
                     </div>
                 </div>
                 <div class="row text-center my-5">

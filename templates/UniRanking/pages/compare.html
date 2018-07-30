@@ -1,5 +1,5 @@
 {% extends 'UniRanking/share/base.html' %} {% load staticfiles %} {% block title %} So sánh | Hệ thống so sánh các trường Đại học
-{% endblock %} {% block compare %} class="active" {% endblock %}
+{% endblock %} {% block compare %} active {% endblock %}
 {% block body %}
 <div id="compare-page">
     <div class="container-fluid after-menu" id="compare-introduce">
@@ -124,9 +124,8 @@
 </div>
 {% endblock %}
 {% block stt %}
-<script type="text/javascript" src="{% static 'js/iziToast.min.js'%}"></script>
-<link rel="stylesheet" href="{% static 'css/iziToast.min.css'%}">
-
-<script type="text/javascript" src="{% static 'js/compare.js'%}"></script>
+<link rel="stylesheet" href="{% static 'share/stylesheets/iziToast.min.css'%}">
+<script type="text/javascript" src="{% static 'share/javascripts/iziToast.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'UniRanking/javascripts/compare.js'%}"></script>
 
 {% endblock %}

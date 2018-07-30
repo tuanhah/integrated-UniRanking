@@ -1,7 +1,7 @@
 {% extends 'UniRanking/share/base.html' %} 
 {% load staticfiles %} 
 {% block title %} Xếp hạng chung | Hệ thống xếp hạng các trường Đại học {% endblock %} 
-{% block ranking %} class="active" {% endblock %} 
+{% block rank %} active {% endblock %} 
 {% block body %}
 <div id="rank-page">
     <div class="container-fluid after-menu" id="rank-introduce">
@@ -157,9 +157,9 @@
 
 {% endblock %} 
 {% block stt %}
-<link rel="stylesheet" href="{% static 'css/iziToast.min.css'%}">
-<script type="text/javascript" src="{% static 'js/iziToast.min.js'%}"></script>
+<link rel="stylesheet" href="{% static 'share/stylesheets/iziToast.min.css'%}">
+<script type="text/javascript" src="{% static 'share/javascripts/iziToast.min.js'%}"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="{% static 'js/rank.js'%}"></script>
+<script type="text/javascript" src="{% static 'UniRanking/javascripts/rank.js'%}"></script>
 
 {% endblock %}

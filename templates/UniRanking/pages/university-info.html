@@ -1,7 +1,7 @@
 {% extends "UniRanking/share/base.html" %}
 {% load static %} 
 {% block title %} {{ university.name }} || Chức năng xem thông tin các trường Đại Học {% endblock %} 
-{% block info %} class="active" {% endblock %}
+{% block info %} active {% endblock %}
 {% block body %}
 <div class="container-fluid after-menu">
     <div class="row" id="background">
@@ -177,6 +177,6 @@
 <!--</div>-->
 {% endblock %}
 {% block stt %}
-<script type="text/javascript" src="{% static 'js/university-info.js'%}"></script>
+<script type="text/javascript" src="{% static 'UniRanking/javascripts/university-info.js'%}"></script>
 
 {% endblock %}

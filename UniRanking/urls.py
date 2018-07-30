@@ -16,10 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include, url
 from django.views.generic import TemplateView
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 
 from . import views
+
+user_urlpatterns = [
+    path('overview/', views.overview, name="overview"),
+    path('favourite-university', views.favourite_university, name="favourite-university"),
+    path('manage-university', views.manage_university, name="manage-university"),
+    path('me', views.personal, name="personalpage"),
+    
+]
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('university/', include('university.urls')),
@@ -32,7 +42,7 @@ urlpatterns = [
     path('help/', views.help, name="help"),
     path('accounts/', include('django.contrib.auth.urls')),
     # path('logout', auth.views.logout)
-    path('personal/', views.personal, name="personal")
+    path('user/', include(user_urlpatterns))
 ]
 
 if settings.DEBUG:

@@ -1,7 +1,7 @@
 {% extends 'UniRanking/share/base.html' %}
 {% load staticfiles %}
 {% block title %} Liên hệ | Hệ thống so sánh các trường Đại học{% endblock %}
-{% block contact %} class='active'{% endblock %}
+{% block contact %} active {% endblock %}
 {% block body %}
 <div class="container-fluid after-menu" id="contact-body">
 	<div class="row">
@@ -56,7 +56,7 @@
 </div>
 {% endblock %}
 {% block stt %}
-<script type="text/javascript" src="{% static 'js/iziToast.min.js'%}"></script>
-<script type="text/javascript" src="{% static 'js/contact.js'%}"></script>
-<link rel="stylesheet" href="{% static 'css/iziToast.min.css'%}"> 
+<link rel="stylesheet" href="{% static 'share/stylesheets/iziToast.min.css'%}"> 
+<script type="text/javascript" src="{% static 'share/javascripts/iziToast.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'UniRanking/javascripts/contact.js'%}"></script>
 {% endblock %}
