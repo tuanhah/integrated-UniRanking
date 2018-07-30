@@ -72,16 +72,6 @@ class CriterionScoreRandom:
             score = self.random_score()
             UniversityScoreByCriterion.objects.create(university = self.university, criterion_id = criterion_id, score = score)
         
-    # def random_all_sector_criterion_scores(self):
-    #     for university_sector in self.university_sectors:
-    #         self.random_sector_criterion_scores(university_sector)
-
-    # def random_sector_criterion_scores(self, university_sector):
-    #     criteria = self.random_criteria(score_owner = university_sector, criteria = self.all_criteria, max_ignore_criteria = self.max_ignore_sector_criteria)
-    #     for criterion_id in criteria:
-    #         score = self.random_score()
-    #         sectorScoreByCriterion.objects.create(univ_sector = university_sector, criterion_id = criterion_id, score = score)
-    
     def random_criteria(self, score_owner, criteria, max_ignore_criteria):
         ignore_amount = random_ignore_amount(max_ignore_criteria)
         random_criteria = list(criteria) #for support random choice 
@@ -138,7 +128,7 @@ class UniversitySectorRandom:
                 if sector_id not in random_sector_id_list:
                     random_sector_id_list.add(sector_id)
                     break
-                else: 
+                else:
                     continue
         added_sector = set(self.university.sector.values_list("id", flat = True))
         return random_sector_id_list - added_sector

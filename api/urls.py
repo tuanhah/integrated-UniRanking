@@ -11,8 +11,16 @@ from .views.subject import (
 from .views.criterion import (
     base_views as criterion_base_views,
 )
+from .views.user import (
+    favourite_views as user_favourite_views,
+    manage_views as user_manage_views,
+)
 app_name = "api"
 
+user_url_patterns = [
+    path('favourite', user_favourite_views.FavouriteUniversityListView.as_view()),
+    path('manage', user_manage_views.ManageUniversityListView.as_view())
+]
 
 university_url_patterns = [
     path('', university_base_views.UniversityDetailView.as_view()),
@@ -39,4 +47,5 @@ urlpatterns = [
     path('categories/<int:category_id>/', include(criterion_url_paterns)),
     path('criteria', criterion_base_views.CriterionListView.as_view()),
     path("rank/", include(rank_url_patterns)),
+    path('user/', include(user_url_patterns)),
 ]

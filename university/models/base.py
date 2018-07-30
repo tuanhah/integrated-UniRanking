@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 from score.querysets import ScoreOwnerQueryset
 from university.mixins import UniversitySubjectParserMixin
+
 from score.mixins import ScoreOwnerMixin, ScoreParserMixin
 from django.utils.translation import gettext as _
 
@@ -12,8 +13,9 @@ class University(models.Model, ScoreOwnerMixin, UniversitySubjectParserMixin, Sc
     name = models.CharField(max_length=100)
     image_path = models.TextField(blank=True, null=True)
     parent = models.ForeignKey('University', on_delete=models.SET_NULL, blank=True, null=True, related_name='child_universities')
-    # subjects = models.ManyToManyField('subject.Subject', through='subject.UniversitySubject')
-    sector = models.ManyToManyField('subject.Sector', through='subject.UniversitySector')
+    sectors = models.ManyToManyField('subject.Sector', through='subject.UniversitySector')
+    favourite_users = models.ManyToManyField('auth.User', through='university.UserFavouriteUniversity', related_name="favourite_university_set")
+    manage_users = models.ManyToManyField('auth.User', through='university.UserManagerUniversity', related_name="manage_university_set")    
     avg_score = models.FloatField(default=0)
     rank = models.IntegerField(default=-1)
     
