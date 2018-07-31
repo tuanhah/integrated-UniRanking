@@ -9,15 +9,16 @@ from score.mixins import ScoreOwnerMixin, ScoreParserMixin
 from django.utils.translation import gettext as _
 
 class University(models.Model, ScoreOwnerMixin, UniversitySubjectParserMixin, ScoreParserMixin):
-    code = models.CharField(max_length=7, null=True, unique = True)
-    name = models.CharField(max_length=100)
-    image_path = models.TextField(blank=True, null=True)
-    parent = models.ForeignKey('University', on_delete=models.SET_NULL, blank=True, null=True, related_name='child_universities')
+    code = models.CharField(max_length=7, null=True, unique = True, verbose_name=_('Code'))
+    name = models.CharField(max_length=100, verbose_name=_('Name'))
+    image_path = models.TextField(blank=True, null=True, verbose_name=_('Image_path'))
+    avatar_path = models.TextField(blank=True, null=True, verbose_name=_('Avatar_path'))
+    parent = models.ForeignKey('University', on_delete=models.SET_NULL, blank=True, null=True, related_name='child_universities', verbose_name=_('Parent University'))
     sectors = models.ManyToManyField('subject.Sector', through='subject.UniversitySector')
     favourite_users = models.ManyToManyField('auth.User', through='university.UserFavouriteUniversity', related_name="favourite_university_set")
     manage_users = models.ManyToManyField('auth.User', through='university.UserManagerUniversity', related_name="manage_university_set")    
-    avg_score = models.FloatField(default=0)
-    rank = models.IntegerField(default=-1)
+    avg_score = models.FloatField(default=0, verbose_name=_('Average Score'))
+    rank = models.IntegerField(default=-1, verbose_name=_('Rank'))
     
     objects = ScoreOwnerQueryset.as_manager()
 
@@ -77,10 +78,10 @@ class University(models.Model, ScoreOwnerMixin, UniversitySubjectParserMixin, Sc
 
 
 class UniversityProfile(models.Model):
-    university = models.OneToOneField(University, on_delete=models.CASCADE, primary_key=True, related_name="profile")
-    overview = models.TextField(blank = True, null=True)
-    site_url = models.URLField(blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
+    university = models.OneToOneField(University, on_delete=models.CASCADE, primary_key=True, related_name="profile", verbose_name=_('University'))
+    overview = models.TextField(blank = True, null=True, verbose_name=_('Overview'))
+    site_url = models.URLField(blank=True, null=True, verbose_name=_("Site's URL"))
+    address = models.TextField(blank=True, null=True, verbose_name=_('Address'))
 
     class Meta:
         db_table = 'university_profile'
@@ -92,8 +93,8 @@ class UniversityProfile(models.Model):
         return self.university.name
 
 class UserFavouriteUniversity(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favourite_universities_set')
-    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='favourite_users_set')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favourite_universities_set', verbose_name=_('User'))
+    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='favourite_users_set', verbose_name=_('University'))
     
     class Meta:
         db_table = 'user_favourite_university'
@@ -103,12 +104,12 @@ class UserFavouriteUniversity(models.Model):
         verbose_name_plural = _('User - Favourite Universities')        
 
     def __str__(self):
-        return "User: {} | University: {}".format(self.user, self.university.name)
+        return _("User: {} | University: {}".format(self.user, self.university.name))
 
 
 class UserManagerUniversity(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='manager_universities_set')
-    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='manager_users_set')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='manager_universities_set', verbose_name=_('User'))
+    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='manager_users_set', verbose_name=_('University'))
     
     class Meta:
         db_table = 'user_manager_university'
@@ -118,4 +119,4 @@ class UserManagerUniversity(models.Model):
         verbose_name_plural = _('User - Manager Universities')        
 
     def __str__(self):
-        return "User: {} | University: {}".format(self.user, self.university.name)
+        return _("User: {} | University: {}".format(self.user, self.university.name))

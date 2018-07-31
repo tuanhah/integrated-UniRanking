@@ -1,13 +1,17 @@
-@import url('https://fonts.googleapis.com/css?family=Muli');
-body {
-    font-family: 'Muli', sans-serif;
-    font-size: 16px;
+var current_user = $('#user-menu').attr('user-id');
+$(document).ready(function () {
+	get_favourite_universities(current_user);
+});
+
+function get_favourite_universities(user_id) {
+	let url = `/api/v1/user/favourite?user=${user_id}`;
+	ajax_request(false, true, "GET", "json", url, null, null, favourite_universities_success_callback, error_callback);
 }
-#gotop {
-	float: right;
-	position: fixed;
-	bottom: 10px;
-	right: 30px;
-	display: none;
-	z-index: 8;
+
+function favourite_universities_success_callback(response) {
+	console.log(response);
+}
+
+function error_callback(response) {
+	alert("Đã xảy ra lỗi, xem response tại console !!")
 }

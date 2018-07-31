@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-26 18:31+0700\n"
+"POT-Creation-Date: 2018-07-31 15:42+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: criterion/apps.py:7 criterion/models.py:39
+#: criterion/apps.py:7 criterion/models.py:39 score/models.py:45
 msgid "Criterion"
 msgstr "Tiêu chí so sánh"
 
@@ -25,7 +25,12 @@ msgstr "Tiêu chí so sánh"
 msgid "Criterions"
 msgstr "Các tiêu chí so sánh"
 
-#: criterion/models.py:12
+#: criterion/models.py:7 criterion/models.py:32 subject/models/base.py:13
+#: university/models/base.py:13
+msgid "Name"
+msgstr "Tên"
+
+#: criterion/models.py:12 score/models.py:10
 msgid "Criterion Category"
 msgstr "Nhóm tiêu chí"
 
@@ -33,7 +38,17 @@ msgstr "Nhóm tiêu chí"
 msgid "Criterion Categories"
 msgstr "Các nhóm tiêu chí"
 
-#: score/apps.py:7
+#: criterion/models.py:31
+#, fuzzy
+#| msgid "Criterion Category"
+msgid "Category"
+msgstr "Nhóm tiêu chí"
+
+#: criterion/models.py:33
+msgid "Description"
+msgstr "Mô tả"
+
+#: score/apps.py:7 score/models.py:11 score/models.py:46
 msgid "Score"
 msgstr "Điểm"
 
@@ -61,13 +76,20 @@ msgstr "Ngành"
 msgid "Subjects"
 msgstr "Ngành"
 
-#: subject/models/base.py:18
+#: subject/models/base.py:18 subject/models/base.py:31
 msgid "Sector"
 msgstr "Nhóm ngành"
 
 #: subject/models/base.py:19
 msgid "Sectors"
 msgstr "Các nhóm ngành"
+
+#: subject/models/base.py:30 university/apps.py:7 university/models/base.py:28
+#: university/models/base.py:81 university/models/base.py:97
+#: university/models/base.py:112 university/models/scores.py:9
+#: university/models/scores.py:31
+msgid "University"
+msgstr "Đại hoc"
 
 #: subject/models/base.py:37
 msgid "University Sector"
@@ -350,21 +372,83 @@ msgstr "Địa chỉ email"
 msgid "Reset my password"
 msgstr "Tại lại mật khẩu"
 
-#: university/apps.py:7 university/models/base.py:24
-msgid "University"
-msgstr "Đại hoc"
+#: templates/share/_user.html:22
+msgid "Bạn chưa cập nhật email"
+msgstr ""
 
-#: university/apps.py:8 university/models/base.py:25
+#: university/apps.py:8 university/models/base.py:29
 msgid "Universities"
 msgstr "Các trường Đại học"
 
-#: university/models/base.py:85
+#: university/models/base.py:12
+msgid "Code"
+msgstr "Mã viết tắt"
+
+#: university/models/base.py:14
+msgid "Image_path"
+msgstr "Đường dẫn ảnh"
+
+#: university/models/base.py:15
+msgid "Avatar_path"
+msgstr "Đường dẫn ảnh đại diện"
+
+#: university/models/base.py:16
+#, fuzzy
+#| msgid "University"
+msgid "Parent University"
+msgstr "Đại hoc"
+
+#: university/models/base.py:20
+msgid "Average Score"
+msgstr "Điểm trung bình"
+
+#: university/models/base.py:21
+msgid "Rank"
+msgstr "Thứ hạng"
+
+#: university/models/base.py:82
+msgid "Overview"
+msgstr "Tổng quan"
+
+#: university/models/base.py:83
+msgid "Site's URL"
+msgstr "Địa chỉ website"
+
+#: university/models/base.py:84
+msgid "Address"
+msgstr "Địa chỉ"
+
+#: university/models/base.py:89
 msgid "University Profile"
 msgstr "Thông tin trường Đại học"
 
-#: university/models/base.py:86
+#: university/models/base.py:90
 msgid "Universities Profile"
 msgstr "Thông tin trường Đại học"
+
+#: university/models/base.py:96 university/models/base.py:111
+msgid "User"
+msgstr "Người dùng"
+
+#: university/models/base.py:103
+msgid "User - Favourite University"
+msgstr "Người dùng - Trường yêu thích"
+
+#: university/models/base.py:104
+msgid "User - Favourite Universities"
+msgstr "Người dùng - Trường yêu thích"
+
+#: university/models/base.py:107 university/models/base.py:122
+msgid "User: {} | University: {}"
+msgstr "Người dùng: {} | Đại học: {}"
+
+#: university/models/base.py:118
+msgid "User - Manager University"
+msgstr "Người dùng - Trường quản lý"
+
+#: university/models/base.py:119
+msgid "User - Manager Universities"
+msgstr "Người dùng - Trường quản lý"
 
 #: university/models/scores.py:15
 msgid "University Score By Criterion Category"
@@ -374,6 +458,10 @@ msgstr "Điểm theo Nhóm tiêu chí"
 msgid "University Scores By Criterion Categories"
 msgstr "Điểm theo nhóm tiêu chí"
 
+#: university/models/scores.py:21
+msgid "{} | Category: {} | Score: {}"
+msgstr "{} | Nhóm tiêu chí: {} | Điểm: {}"
+
 #: university/models/scores.py:37
 msgid "University Score By Criterion"
 msgstr "Điểm theo Tiêu chí"
@@ -381,6 +469,10 @@ msgstr "Điểm theo Tiêu chí"
 #: university/models/scores.py:38
 msgid "University Scores By Criterions"
 msgstr "Điểm theo Tiêu chí"
+
+#: university/models/scores.py:43
+msgid "{} | Criterion: {} | Score: {}"
+msgstr "{} | Tiêu chí: {} | Điểm: {}"
 
 #~ msgid "Đổi mật khẩu"
 #~ msgstr "Đổi mật khẩu"

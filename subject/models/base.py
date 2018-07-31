@@ -10,7 +10,7 @@ from django.utils.translation import gettext as _
 
 
 class Sector(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, verbose_name=_('Name'))
 
     class Meta:
         db_table = 'sector'
@@ -27,8 +27,8 @@ class Sector(models.Model):
         return data
 
 class UniversitySector(models.Model, ScoreOwnerMixin, ScoreParserMixin):
-    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='sector_set')
-    sector = models.ForeignKey(Sector, on_delete=models.CASCADE, related_name='universities')
+    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='sector_set', verbose_name=_('University'))
+    sector = models.ForeignKey(Sector, on_delete=models.CASCADE, related_name='universities', verbose_name=_('Sector'))
     
     class Meta:
         db_table = 'university_sector'

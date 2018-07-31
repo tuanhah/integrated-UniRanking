@@ -10,12 +10,13 @@ from score.admin import ScoreByCriterionCategoryAdmin
 @admin.register(University)
 class UniversityAdmin(GuardedModelAdmin):
     form = UniversityForm
-    list_display = ('id', 'code', 'name', 'avg_score' ,'rank')
+    list_display = ('id', 'code', 'name', 'avg_score' ,'rank', 'image_path', 'avatar_path')
     readonly_fields = ('avg_score', 'rank')
 
 @admin.register(UniversityProfile)
 class UniversityProfile(admin.ModelAdmin):
     form = UniversityProfileForm
+    list_display = ('university', 'address', 'site_url', 'overview')
 
 @admin.register(UserFavouriteUniversity)
 class UserFavouriteUniversityAdmin(admin.ModelAdmin):

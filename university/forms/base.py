@@ -5,12 +5,14 @@ from university.models import University, UniversityProfile, UserFavouriteUniver
 class UniversityForm(forms.ModelForm):
     class Meta:
         model = University
-        exclude = ['avg_score', 'rank']
-    
+        exclude = []
+        # exclude = ['avg_score', 'rank']
+
 class UniversityProfileForm(forms.ModelForm):
     class Meta: 
         model = UniversityProfile
-        exclude = ['university']
+        exclude = []
+        # exclude = ['university']
 
 class UserFavouriteUniversityForm(forms.ModelForm):
     class Meta:

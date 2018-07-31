@@ -6,7 +6,7 @@ from score.models import ScoreByCriterion, ScoreByCriterionCategory
 from django.utils.translation import gettext as _
 
 class UniversityScoreByCriterionCategory(ScoreByCriterionCategory):
-    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='criterion_category_scores')
+    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='criterion_category_scores', verbose_name=_('University'))
 
     class Meta: 
         db_table = 'university_score_by_category'
@@ -18,7 +18,7 @@ class UniversityScoreByCriterionCategory(ScoreByCriterionCategory):
 
     def __str__(self):
         score = str(self.score)
-        return '{} | Category: {} | Score: {}'.format(self.university, self.criterion_category, score)
+        return _('{} | Category: {} | Score: {}'.format(self.university, self.criterion_category, score))
     
     def update_university_avg_score_and_rank(self):
         self.university.update_avg_score_and_rank()
@@ -28,7 +28,7 @@ class UniversityScoreByCriterionCategory(ScoreByCriterionCategory):
     
 
 class UniversityScoreByCriterion(ScoreByCriterion):
-    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='criterion_scores')
+    university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='criterion_scores', verbose_name=_('University'))
     
     class Meta:
         db_table = 'university_score'
@@ -40,7 +40,7 @@ class UniversityScoreByCriterion(ScoreByCriterion):
 
     def __str__(self):
         score = str(self.score)
-        return '{} | Criterion: {} | Score: {}'.format(self.university, self.criterion, score)
+        return _('{} | Criterion: {} | Score: {}'.format(self.university, self.criterion, score))
 
     def get_score_owner_object(self):
         return self.university

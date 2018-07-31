@@ -41,5 +41,5 @@ class FavouriteUniversityListView(BaseManageView):
                     return self.json_error(field="user", code="invalid")
                 else:
                     universities_queryset = user.favourite_university_set.all()
-        result = {"manage_universities" : [university.parse_basic_info() for university in universities_queryset]}
+        result = {"favourite_universities" : [university.parse_full_profile() for university in universities_queryset]}
         return JsonResponse(result)

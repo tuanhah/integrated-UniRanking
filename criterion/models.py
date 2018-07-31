@@ -4,8 +4,8 @@ from django.utils.translation import gettext as _
 # from criterion.querysets import CriterionCategoryQueryset, CriterionQueryset
 
 class CriterionCategory(models.Model):
-    name = models.CharField(max_length=50)
-    
+    name = models.CharField(max_length=50, verbose_name=_('Name'))
+
     class Meta:
         db_table = 'criterion_category'
         ordering = ['id']
@@ -28,9 +28,9 @@ class CriterionCategory(models.Model):
         return data
 
 class Criterion(models.Model):
-    category = models.ForeignKey(CriterionCategory, on_delete=models.CASCADE, related_name='criteria')
-    name = models.CharField(max_length=50)
-    description = models.TextField(null=True, blank=True)
+    category = models.ForeignKey(CriterionCategory, on_delete=models.CASCADE, related_name='criteria', verbose_name=_('Category'))
+    name = models.CharField(max_length=50, verbose_name=_('Name'))
+    description = models.TextField(null=True, blank=True, verbose_name=_('Description'))
 
     
     class Meta:

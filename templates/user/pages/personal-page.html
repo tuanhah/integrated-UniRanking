@@ -2,7 +2,23 @@
 {% load staticfiles %}
 
 {% block title %} {% endblock %}
-{% block stylesheets %} {% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'user/stylesheets/personal-page.css' %}">
+{% endblock %}
 {% block personal_page %} active {% endblock %}
+{% block inner_title %}
+    Trang cá nhân
+{% endblock %}
+{% block breadcrumbs %}
+    <a href="/user/personal-page" class="m-nav__link">
+        <span class="m-nav__link-text">Thông tin tài khoản</span>
+    </a>
+{% endblock %}
 
+{% block content %}
 
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{% static 'user/javascripts/personal-page.js' %}" ></script>
+{% endblock  %}

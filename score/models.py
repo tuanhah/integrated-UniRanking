@@ -7,8 +7,8 @@ from django.utils.translation import gettext as _
 
 
 class ScoreByCriterionCategory(models.Model):
-    criterion_category = models.ForeignKey(CriterionCategory, on_delete=models.CASCADE)
-    score = models.FloatField(default=0, validators=[ScoreValidator(),])
+    criterion_category = models.ForeignKey(CriterionCategory, on_delete=models.CASCADE, verbose_name=_('Criterion Category'))
+    score = models.FloatField(default=0, validators=[ScoreValidator(),], verbose_name=_('Score'))
 
     class Meta:
         abstract = True
@@ -42,8 +42,8 @@ class ScoreByCriterionCategory(models.Model):
         raise NotImplementedError("subclassess must implement this method for getting owner score object")
 
 class ScoreByCriterion(models.Model):
-    criterion = models.ForeignKey(Criterion, on_delete=models.CASCADE)
-    score = models.FloatField(default=0, validators=[ScoreValidator(),])
+    criterion = models.ForeignKey(Criterion, on_delete=models.CASCADE, verbose_name=_('Criterion'))
+    score = models.FloatField(default=0, validators=[ScoreValidator(),], verbose_name=_('Score'))
 
     class Meta:
         abstract = True
