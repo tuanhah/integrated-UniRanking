@@ -3,28 +3,108 @@
 
 {% block title %} {% endblock %}
 {% block stylesheets %}
-    <link rel="stylesheet" href="{% static 'user/stylesheets/manage-sector.css' %}">
+<link rel="stylesheet" href="{% static 'user/stylesheets/manage-sector.css' %}">
 {% endblock %}
-{% block favourite_university %} active {% endblock %}
+{% block manage_sector %} active {% endblock %}
 {% block inner_title %}
-    Quản lý Nhóm ngành
+Quản lý Nhóm ngành
 {% endblock %}
 {% block breadcrumbs %}
-    <a href="/user/favourite-university" class="m-nav__link">
-        <span class="m-nav__link-text">Các nhóm ngành</span>
-    </a>
+<a href="/user/manage-sector" class="m-nav__link">
+    <span class="m-nav__link-text">Các nhóm ngành</span>
+</a>
 {% endblock %}
 
 {% block content %}
-<form id="add-sector">
-    <div class="form-group">
-        <label for="sector">Nhập tên nhóm ngành</label>
-        <input type="text" class="form-control" id="sector" name="name" placeholder="Tên nhóm ngành...">
+<div class="row">
+    <div class="col-lg-7">
+        <div class="m-portlet m-portlet--tabs">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                <span class="m-portlet__head-icon">
+                    <i class="flaticon-multimedia"></i>
+                </span>
+                        <h3 class="m-portlet__head-text">
+                            Quản lý nhóm ngành
+
+                        </h3>
+                    </div>
+                </div>
+                <div class="m-portlet__head-tools">
+                    <ul class="nav nav-tabs m-tabs m-tabs-line m-tabs-line--right m-tabs-line--info" role="tablist">
+                        <li class="nav-item m-tabs__item">
+                            <a href="#add-sector-tab" class="nav-link m-tabs__link active show" data-toggle="tab"
+                               role="tab" aria-selected="true">Thêm</a>
+                        </li>
+                        <li class="nav-item m-tabs__item">
+                            <a href="#edit-sector-tab" class="nav-link m-tabs__link" data-toggle="tab" role="tab"
+                               aria-selected="true">Sửa</a>
+                        </li>
+                        <li class="nav-item m-tabs__item">
+                            <a href="#remove-sector-tab" class="nav-link m-tabs__link" data-toggle="tab" role="tab"
+                               aria-selected="true">Xóa</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="m-portlet__body">
+                <div class="tab-content">
+                    <div class="tab-pane active show" id="add-sector-tab">
+                        <form id="add-sector">
+                            <div class="form-group">
+                                <label for="sector">Nhập tên nhóm ngành</label>
+                                <input type="text" class="form-control" id="sector" name="name"
+                                           placeholder="Tên nhóm ngành...">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Thêm nhóm ngành</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="edit-sector-tab">
+
+                    </div>
+                    <div class="tab-pane" id="remove-sector-tab">
+
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m--hide">
+
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <div class="col-lg-5">
+        <div class="m-portlet">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                <span class="m-portlet__head-icon">
+                    <i class="flaticon-multimedia"></i>
+                </span>
+                        <h3 class="m-portlet__head-text">
+                            Các nhóm ngành đã có
+                            <small></small>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__body">
+                <div class="m-container--fluid">
+                    <div class="row mx-0" id="total-sector"></div>
+                    <div class="row mx-0" id="sectors-portlet">
+
+                    </div>
+                </div>
+            </div>
+            <div class="m-portlet__foot m--hide">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript" src="{% static 'user/javascripts/manage-sector.js' %}" ></script>
+<script type="text/javascript" src="{% static 'user/javascripts/manage-sector.js' %}"></script>
 {% endblock  %}
