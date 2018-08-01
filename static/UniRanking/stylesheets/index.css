@@ -106,7 +106,6 @@ h1 {
 }
 
 #home__title {
-	display: none;
 	margin-top: 0;
 	font-weight: 500;
 	color: rgba(17, 17, 173, 1);
@@ -122,7 +121,6 @@ h1 {
 }
 
 #home__title__description {
-	display: none;
 	font-size: 22px;
 	color: rgba(11, 15, 131, 1);
 	padding-top: 10px;

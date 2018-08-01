@@ -48,4 +48,6 @@ urlpatterns = [
     path('criteria', criterion_base_views.CriterionListView.as_view()),
     path("rank/", include(rank_url_patterns)),
     path('user/', include(user_url_patterns)),
+
+    path('add_sector', views.add_sector, name="add_sector")
 ]

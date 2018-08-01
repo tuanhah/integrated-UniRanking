@@ -23,8 +23,8 @@ $.fn.isOnViewport = function() {
 // }
 
 $(document).ready(function(){
-	$('#home__title').show().addClass('animated bounceInDown');
-	$('#home__title__description').show().addClass('animated bounceInUp');
+	// $('#home__title').show().addClass('animated bounceInDown');
+	// $('#home__title__description').show().addClass('animated bounceInUp');
 
     $('.navbar-toggler').click(function() {
     	if(!$(window).scrollTop()) {

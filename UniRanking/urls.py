@@ -25,6 +25,7 @@ user_urlpatterns = [
     path('overview/', views.overview, name="overview"),
     path('favourite-university', views.favourite_university, name="favourite-university"),
     path('manage-university', views.manage_university, name="manage-university"),
+    path('manage-sector', views.manage_sector, name="manage-sector"),
     path('me', views.personal, name="personalpage"),
     
 ]

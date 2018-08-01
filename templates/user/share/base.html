@@ -2,215 +2,231 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{% block title %}Trang quản lý cá nhân | Hệ thống so sánh các trường Đại Học{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"> {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load staticfiles %}
     <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/competition-soft/512/pedestal-512.png">
     <link rel="stylesheet" type="text/css" href="{% static 'share/stylesheets/vendors.bundle.css'%}">
     <link rel="stylesheet" type="text/css" href="{% static 'share/stylesheets/style.bundle.css'%}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css"/>
     <link rel="stylesheet" type="text/css" href="{% static 'share/stylesheets/chosen.min.css'%}">
-    <link rel="stylesheet" type="text/css" href="{% static 'user/stylesheets/base.css'%}" /> {% block stylesheets %} {% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'user/stylesheets/base.css'%}"/>
+    {% block stylesheets %} {% endblock %}
 
 </head>
 
 <body class="m-content--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-light m-aside--offcanvas-default">
-    <div class="m-grid m-grid--hor m-grid--root m-page">
+<div class="m-grid m-grid--hor m-grid--root m-page">
 
-        {% include 'user/include/_navbar.html' %}
-        <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
-            <button class="m-aside-left-close  m-aside-left-close--skin-light " id="m_aside_left_close_btn">
-                <i class="la la-close"></i>
-            </button>
-            <div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-light ">
-                <!-- BEGIN: Aside Menu -->
-                <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-light m-aside-menu--submenu-skin-light " m-menu-vertical="1"
-                    m-menu-scrollable="0" m-menu-dropdown-timeout="500">
-                    <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
-                        <li class="m-menu__section m-menu__section--first">
-                            <h4 class="m-menu__section-text m--regular-font-size-lg3">Danh Mục</h4>
-                            <i class="m-menu__section-icon flaticon-more-v3"></i>
-                        </li>
-                        <li class="m-menu__item {% block overview %} {% endblock %}" aria-haspopup="true" m-menu-link-redirect="1">
-                            <a href="/user/overview" class="m-menu__link">
-                                <i class="m-menu__link-icon flaticon-layers"></i>
-                                <span class="m-menu__link-text">Tổng quan</span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item {% block favourite_university %} {% endblock %}" aria-haspopup="true" m-menu-link-redirect="1">
-                            <a href="/user/favourite-university" class="m-menu__link">
-                                <i class="m-menu__link-icon flaticon-suitcase"></i>
-                                <span class="m-menu__link-text">Trường yêu thích</span>
-                            </a>
-                        </li>
-                        {% if user.is_staff %}
-                        <!-- <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover" m-menu-link-redirect="1">
-                            <a href="javascript:;" class="m-menu__link m-menu__toggle">
-                                <i class="m-menu__link-icon flaticon-graphic-1"></i>
-                                <span class="m-menu__link-title">
-                                    <span class="m-menu__link-wrap">
-                                        <span class="m-menu__link-text">Quản lý Trường</span>
-                                        <span class="m-menu__link-badge">
-                                            <span class="m-badge m-badge--accent">3</span>
-                                        </span>
+    {% include 'user/include/_navbar.html' %}
+    <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+        <button class="m-aside-left-close  m-aside-left-close--skin-light " id="m_aside_left_close_btn">
+            <i class="la la-close"></i>
+        </button>
+        <div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-light ">
+            <!-- BEGIN: Aside Menu -->
+            <div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-light m-aside-menu--submenu-skin-light "
+                 m-menu-vertical="1"
+                 m-menu-scrollable="0" m-menu-dropdown-timeout="500">
+                <ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
+                    <li class="m-menu__section m-menu__section--first">
+                        <h4 class="m-menu__section-text m--regular-font-size-lg3">Danh Mục</h4>
+                        <i class="m-menu__section-icon flaticon-more-v3"></i>
+                    </li>
+                    <li class="m-menu__item {% block overview %} {% endblock %}" aria-haspopup="true"
+                        m-menu-link-redirect="1">
+                        <a href="/user/overview" class="m-menu__link">
+                            <i class="m-menu__link-icon flaticon-layers"></i>
+                            <span class="m-menu__link-text">Tổng quan</span>
+                        </a>
+                    </li>
+                    <li class="m-menu__item {% block favourite_university %} {% endblock %}" aria-haspopup="true"
+                        m-menu-link-redirect="1">
+                        <a href="/user/favourite-university" class="m-menu__link">
+                            <i class="m-menu__link-icon flaticon-suitcase"></i>
+                            <span class="m-menu__link-text">Trường yêu thích</span>
+                        </a>
+                    </li>
+                    {% if user.is_staff %}
+                    <!-- <li class="m-menu__item m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover" m-menu-link-redirect="1">
+                        <a href="javascript:;" class="m-menu__link m-menu__toggle">
+                            <i class="m-menu__link-icon flaticon-graphic-1"></i>
+                            <span class="m-menu__link-title">
+                                <span class="m-menu__link-wrap">
+                                    <span class="m-menu__link-text">Quản lý Trường</span>
+                                    <span class="m-menu__link-badge">
+                                        <span class="m-badge m-badge--accent">3</span>
                                     </span>
                                 </span>
-                                <i class="m-menu__ver-arrow la la-angle-right"></i>
-                            </a> -->
-                        <!-- <div class="m-menu__submenu ">
-                                <span class="m-menu__arrow"></span>
-                                <ul class="m-menu__subnav">
-                                    <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" m-menu-link-redirect="1">
-                                        <span class="m-menu__link">
-                                            <span class="m-menu__link-title">
-                                                <span class="m-menu__link-wrap">
-                                                    <span class="m-menu__link-text">Quản lý Trường</span>
-                                                    <span class="m-menu__link-badge">
-                                                        <span class="m-badge m-badge--accent">3</span>
-                                                    </span>
+                            </span>
+                            <i class="m-menu__ver-arrow la la-angle-right"></i>
+                        </a> -->
+                    <!-- <div class="m-menu__submenu ">
+                            <span class="m-menu__arrow"></span>
+                            <ul class="m-menu__subnav">
+                                <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true" m-menu-link-redirect="1">
+                                    <span class="m-menu__link">
+                                        <span class="m-menu__link-title">
+                                            <span class="m-menu__link-wrap">
+                                                <span class="m-menu__link-text">Quản lý Trường</span>
+                                                <span class="m-menu__link-badge">
+                                                    <span class="m-badge m-badge--accent">3</span>
                                                 </span>
                                             </span>
                                         </span>
-                                    </li>
-                                    <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
-                                        <a href="#" class="m-menu__link">
-                                            <span class="m-menu__link-text">Đại Học Quốc Gia Hà Nội</span>
-                                        </a>
-                                    </li>
-                                    <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
-                                        <a href="#" class="m-menu__link ">
-                                            <span class="m-menu__link-text">Đại Học Bách Khoa Hà Nội</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div> -->
-                        <!-- </li> -->
-                        <li class="m-menu__item {% block manage_university %} {% endblock %}" aria-haspopup="true" m-menu-link-redirect="1">
-                            <a href="/user/manage-university" class="m-menu__link">
-                                <i class="m-menu__link-icon flaticon-suitcase"></i>
-                                <span class="m-menu__link-text">Quản lý Trường</span>
-                                <span class="m-menu__link-badge">
-                                    <span class="m-badge m-badge--accent">3</span>
-                                </span>
-                            </a>
-                        </li>
-                        {% endif %}
-                        <li class="m-menu__section ">
-                            <h4 class="m-menu__section-text m--regular-font-size-lg3">Tài khoản</h4>
-                            <i class="m-menu__section-icon flaticon-more-v3"></i>
-                        </li>
-                        <li class="m-menu__item  {% block personal_page %} {% endblock %}" aria-haspopup="true" m-menu-link-redirect="1">
-                            <a href="/user/me" class="m-menu__link ">
-                                <i class="m-menu__link-icon flaticon-graphic"></i>
-                                <span class="m-menu__link-text">Thông tin tài khoản</span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
-                            <a href="#" class="m-menu__link ">
-                                <i class="m-menu__link-icon flaticon-network"></i>
-                                <span class="m-menu__link-text">Đổi mật khẩu</span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
-                            <a href="#" class="m-menu__link ">
-                                <i class="m-menu__link-icon flaticon-network"></i>
-                                <span class="m-menu__link-text">Lịch sử chỉnh sửa</span>
-                            </a>
-                        </li>
-
-                        <li class="m-menu__section ">
-                            <h4 class="m-menu__section-text m--regular-font-size-lg3">Tùy chọn khác</h4>
-                            <i class="m-menu__section-icon flaticon-more-v3"></i>
-                        </li>
-                        <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
-                            <a href="#" class="m-menu__link ">
-                                <i class="m-menu__link-icon flaticon-cogwheel"></i>
-                                <span class="m-menu__link-text">Liên hệ Quản trị viên</span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
-                            <a href="#" class="m-menu__link ">
-                                <i class="m-menu__link-icon flaticon-lifebuoy"></i>
-                                <span class="m-menu__link-text">Cài đặt thông báo</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- END: Aside Menu -->
-            </div>
-
-            <div class="m-grid__item m-grid__item--fluid m-wrapper">
-                <div class="m-subheader ">
-                    <div class="d-flex align-items-center">
-                        <div class="mr-auto">
-                            <h3 class="m-subheader__title m-subheader__title--separator">
-                                {% block inner_title %}
-                                
-                                {% endblock %}
-                            </h3>
-                            <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
-                                <li class="m-nav__item m-nav__item--home">
-                                    <a href="/" class="m-nav__link m-nav__link--icon">
-                                        <i class="m-nav__link-icon la la-home"></i>
+                                    </span>
+                                </li>
+                                <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
+                                    <a href="#" class="m-menu__link">
+                                        <span class="m-menu__link-text">Đại Học Quốc Gia Hà Nội</span>
                                     </a>
                                 </li>
-                                <li class="m-nav__separator">-</li>
-                                <li class="m-nav__item">
-                                    {% block breadcrumbs %}
-                                    
-                                    {% endblock  %}
+                                <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
+                                    <a href="#" class="m-menu__link ">
+                                        <span class="m-menu__link-text">Đại Học Bách Khoa Hà Nội</span>
+                                    </a>
                                 </li>
-                                
                             </ul>
-                        </div>
-                        <div>
-                            <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover"
-                                aria-expanded="true">
-                                <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
-                                    <i class="la la-plus m--hide"></i>
-                                    <i class="la la-ellipsis-h"></i>
+                        </div> -->
+                    <!-- </li> -->
+                    <li class="m-menu__item {% block manage_university %} {% endblock %}" aria-haspopup="true"
+                        m-menu-link-redirect="1">
+                        <a href="/user/manage-university" class="m-menu__link">
+                            <i class="m-menu__link-icon flaticon-suitcase"></i>
+                            <span class="m-menu__link-text">Quản lý Trường</span>
+                            <span class="m-menu__link-badge">
+                                    <span class="m-badge m-badge--accent">3</span>
+                                </span>
+                        </a>
+                    </li>
+                    <li class="m-menu__item {% block manage_sector %} {% endblock %}" aria-haspopup="true"
+                        m-menu-link-redirect="1">
+                        <a href="/user/manage-sector" class="m-menu__link">
+                            <i class="m-menu__link-icon flaticon-suitcase"></i>
+                            <span class="m-menu__link-text">Quản lý nhóm ngành</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li class="m-menu__section ">
+                        <h4 class="m-menu__section-text m--regular-font-size-lg3">Tài khoản</h4>
+                        <i class="m-menu__section-icon flaticon-more-v3"></i>
+                    </li>
+                    <li class="m-menu__item  {% block personal_page %} {% endblock %}" aria-haspopup="true"
+                        m-menu-link-redirect="1">
+                        <a href="/user/me" class="m-menu__link ">
+                            <i class="m-menu__link-icon flaticon-graphic"></i>
+                            <span class="m-menu__link-text">Thông tin tài khoản</span>
+                        </a>
+                    </li>
+                    <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
+                        <a href="#" class="m-menu__link ">
+                            <i class="m-menu__link-icon flaticon-network"></i>
+                            <span class="m-menu__link-text">Đổi mật khẩu</span>
+                        </a>
+                    </li>
+                    <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
+                        <a href="#" class="m-menu__link ">
+                            <i class="m-menu__link-icon flaticon-network"></i>
+                            <span class="m-menu__link-text">Lịch sử chỉnh sửa</span>
+                        </a>
+                    </li>
+
+                    <li class="m-menu__section ">
+                        <h4 class="m-menu__section-text m--regular-font-size-lg3">Tùy chọn khác</h4>
+                        <i class="m-menu__section-icon flaticon-more-v3"></i>
+                    </li>
+                    <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
+                        <a href="#" class="m-menu__link ">
+                            <i class="m-menu__link-icon flaticon-cogwheel"></i>
+                            <span class="m-menu__link-text">Liên hệ Quản trị viên</span>
+                        </a>
+                    </li>
+                    <li class="m-menu__item " aria-haspopup="true" m-menu-link-redirect="1">
+                        <a href="#" class="m-menu__link ">
+                            <i class="m-menu__link-icon flaticon-lifebuoy"></i>
+                            <span class="m-menu__link-text">Cài đặt thông báo</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- END: Aside Menu -->
+        </div>
+
+        <div class="m-grid__item m-grid__item--fluid m-wrapper">
+            <div class="m-subheader ">
+                <div class="d-flex align-items-center">
+                    <div class="mr-auto">
+                        <h3 class="m-subheader__title m-subheader__title--separator">
+                            {% block inner_title %}
+
+                            {% endblock %}
+                        </h3>
+                        <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+                            <li class="m-nav__item m-nav__item--home">
+                                <a href="/" class="m-nav__link m-nav__link--icon">
+                                    <i class="m-nav__link-icon la la-home"></i>
                                 </a>
-                                <div class="m-dropdown__wrapper">
-                                    <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
-                                    <div class="m-dropdown__inner">
-                                        <div class="m-dropdown__body">
-                                            <div class="m-dropdown__content">
-                                                <ul class="m-nav">
-                                                    <li class="m-nav__section m-nav__section--first m--hide">
-                                                        <span class="m-nav__section-text">Quick Actions</span>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="" class="m-nav__link">
-                                                            <i class="m-nav__link-icon flaticon-share"></i>
-                                                            <span class="m-nav__link-text">Activity</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="" class="m-nav__link">
-                                                            <i class="m-nav__link-icon flaticon-chat-1"></i>
-                                                            <span class="m-nav__link-text">Messages</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="" class="m-nav__link">
-                                                            <i class="m-nav__link-icon flaticon-info"></i>
-                                                            <span class="m-nav__link-text">FAQ</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="" class="m-nav__link">
-                                                            <i class="m-nav__link-icon flaticon-lifebuoy"></i>
-                                                            <span class="m-nav__link-text">Support</span>
-                                                        </a>
-                                                    </li>
-                                                    <li class="m-nav__separator m-nav__separator--fit">
-                                                    </li>
-                                                    <li class="m-nav__item">
-                                                        <a href="#" class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">Submit</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                            </li>
+                            <li class="m-nav__separator">-</li>
+                            <li class="m-nav__item">
+                                {% block breadcrumbs %}
+
+                                {% endblock %}
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+                             m-dropdown-toggle="hover"
+                             aria-expanded="true">
+                            <a href="#"
+                               class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+                                <i class="la la-plus m--hide"></i>
+                                <i class="la la-ellipsis-h"></i>
+                            </a>
+                            <div class="m-dropdown__wrapper">
+                                <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                                <div class="m-dropdown__inner">
+                                    <div class="m-dropdown__body">
+                                        <div class="m-dropdown__content">
+                                            <ul class="m-nav">
+                                                <li class="m-nav__section m-nav__section--first m--hide">
+                                                    <span class="m-nav__section-text">Quick Actions</span>
+                                                </li>
+                                                <li class="m-nav__item">
+                                                    <a href="" class="m-nav__link">
+                                                        <i class="m-nav__link-icon flaticon-share"></i>
+                                                        <span class="m-nav__link-text">Activity</span>
+                                                    </a>
+                                                </li>
+                                                <li class="m-nav__item">
+                                                    <a href="" class="m-nav__link">
+                                                        <i class="m-nav__link-icon flaticon-chat-1"></i>
+                                                        <span class="m-nav__link-text">Messages</span>
+                                                    </a>
+                                                </li>
+                                                <li class="m-nav__item">
+                                                    <a href="" class="m-nav__link">
+                                                        <i class="m-nav__link-icon flaticon-info"></i>
+                                                        <span class="m-nav__link-text">FAQ</span>
+                                                    </a>
+                                                </li>
+                                                <li class="m-nav__item">
+                                                    <a href="" class="m-nav__link">
+                                                        <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                        <span class="m-nav__link-text">Support</span>
+                                                    </a>
+                                                </li>
+                                                <li class="m-nav__separator m-nav__separator--fit">
+                                                </li>
+                                                <li class="m-nav__item">
+                                                    <a href="#"
+                                                       class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm">Submit</a>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -218,27 +234,28 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="m-content">
-                    {% block content %} {% endblock %}
-                </div>
             </div>
 
+            <div class="m-content">
+                {% block content %} {% endblock %}
+            </div>
         </div>
-        <div>
-            <button class="btn btn-danger" data-toggle="tooltip" data-placement="left" id="gotop" title="Lên trên cùng">
-                <i class="fa fa-arrow-up"></i>
-            </button>
-        </div>
-        {% include 'user/include/_footer.html' %}
+
     </div>
-    <script type="text/javascript" src="{% static 'share/javascripts/vendors.bundle.js'%}"></script>
-    <script type="text/javascript" src="{% static 'share/javascripts/scripts.bundle.js'%}"></script>
-    <script type="text/javascript" src="{% static 'share/javascripts/jquery.dataTables.js'%}"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-    <script type="text/javascript" src="{% static 'share/javascripts/chosen.jquery.min.js'%}"></script>
-    <script type="text/javascript" src="{% static 'share/javascripts/base.js'%}"></script>
-    {% block javascripts %} {% endblock %}
+    <div>
+        <button class="btn btn-danger" data-toggle="tooltip" data-placement="left" id="gotop" title="Lên trên cùng">
+            <i class="fa fa-arrow-up"></i>
+        </button>
+    </div>
+    {% include 'user/include/_footer.html' %}
+</div>
+<script type="text/javascript" src="{% static 'share/javascripts/vendors.bundle.js'%}"></script>
+<script type="text/javascript" src="{% static 'share/javascripts/scripts.bundle.js'%}"></script>
+<script type="text/javascript" src="{% static 'share/javascripts/jquery.dataTables.js'%}"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script type="text/javascript" src="{% static 'share/javascripts/chosen.jquery.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'share/javascripts/base.js'%}"></script>
+{% block javascripts %} {% endblock %}
 
 </body>
 

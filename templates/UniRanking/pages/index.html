@@ -8,13 +8,14 @@
             <div class="container home__introduce">
                 <div class="row">
                     <div class="col-lg-6">
-                        <h2 id="home__title">UniRanking</h2>
-                        <p id="home__title__description">Hệ thống so sánh, đánh giá các trường Đại Học</p>
+                        <h2 id="home__title" class="animated bounceInDown">UniRanking</h2>
+                        <p id="home__title__description" class="animated bounceInUp">Hệ thống so sánh, đánh giá các
+                            trường Đại Học</p>
                     </div>
                     <div class="col-lg-6 animated bounceInRight hide-sm">
                         <img src="{% static 'share/images/rank.svg'%}" alt="" width="500vw">
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -34,16 +35,22 @@
                     </ol>
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active">
-                            <img data-src="holder.js/600x500/auto/#777:#7a7a7a/text:First slide" alt="First slide" src="{% static 'share/images/VNU.jpg'%}" title="Đại Học Quốc Gia Hà Nội, số 144, Xuân Thủy, Cầu Giấy, Hà Nội"
-                                width="100%">
+                            <img data-src="holder.js/600x500/auto/#777:#7a7a7a/text:First slide" alt="First slide"
+                                 src="{% static 'share/images/VNU.jpg'%}"
+                                 title="Đại Học Quốc Gia Hà Nội, số 144, Xuân Thủy, Cầu Giấy, Hà Nội"
+                                 width="100%">
                         </div>
                         <div class="carousel-item">
-                            <img data-src="holder.js/600x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide" src="{% static 'share/images/FTU.jpg'%}" title="Đại Học Ngoại Thương, số 91, chùa Láng, Láng Thượng, Đống Đa, Hà Nội"
-                                width="100%">
+                            <img data-src="holder.js/600x500/auto/#555:#5a5a5a/text:Third slide" alt="Third slide"
+                                 src="{% static 'share/images/FTU.jpg'%}"
+                                 title="Đại Học Ngoại Thương, số 91, chùa Láng, Láng Thượng, Đống Đa, Hà Nội"
+                                 width="100%">
                         </div>
                         <div class="carousel-item">
-                            <img data-src="holder.js/600x500/auto/#666:#6a6a6a/text:Second slide" alt="Fouth slide" src="{% static 'share/images/HUST.jpg'%}" title="Đại Học Bách Khoa Hà Nội, số 1, Đại Cồ Việt, Bách Khoa, Hai Bà Trưng, Hà Nội"
-                                width="100%">
+                            <img data-src="holder.js/600x500/auto/#666:#6a6a6a/text:Second slide" alt="Fouth slide"
+                                 src="{% static 'share/images/HUST.jpg'%}"
+                                 title="Đại Học Bách Khoa Hà Nội, số 1, Đại Cồ Việt, Bách Khoa, Hai Bà Trưng, Hà Nội"
+                                 width="100%">
                         </div>
                     </div>
                     <a class="left carousel-control-prev" href="#carousel-id" data-slide="prev">
@@ -85,8 +92,9 @@
                             <div>
                                 <h3>So sánh</h3>
                                 <p>So sánh dựa trên các tiêu chí, so sánh theo ngành, so sánh theo trường</p>
-                                <a class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Đi đến chức năng 'So sánh'" role="button"
-                                    href="/compare">Đi và So sánh</a>
+                                <a class="btn btn-success" data-toggle="tooltip" data-placement="bottom"
+                                   title="Đi đến chức năng 'So sánh'" role="button"
+                                   href="/compare">Đi và So sánh</a>
                             </div>
                         </div>
                         <hr>
@@ -100,8 +108,9 @@
                             <div>
                                 <h3>Thông tin Trường</h3>
                                 <p>Hiển thị tất cả thông tin về một trường do bạn chọn</p>
-                                <a class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Đi đến xem thông tin Trường" role="button"
-                                    href="/university-info">Xem thông tin</a>
+                                <a class="btn btn-success" data-toggle="tooltip" data-placement="bottom"
+                                   title="Đi đến xem thông tin Trường" role="button"
+                                   href="/university-info">Xem thông tin</a>
 
                             </div>
                         </div>
@@ -116,7 +125,8 @@
                             <div>
                                 <h3>Xếp hạng chung</h3>
                                 <p>Xếp hạng chung theo ngành hoặc theo trường</p>
-                                <a class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Xem bảng xếp hạng" role="button" href="/ranking">Xem bảng xếp hạng</a>
+                                <a class="btn btn-success" data-toggle="tooltip" data-placement="bottom"
+                                   title="Xem bảng xếp hạng" role="button" href="/ranking">Xem bảng xếp hạng</a>
                             </div>
                         </div>
 
@@ -134,10 +144,13 @@
                     <div class="col-lg-6">
                         <h2 class="area-title">Giới thiệu</h2>
                         <hr>
-                        <p>UniRanking (University Ranking) là sản phẩm, ứng dụng hướng tới đối tượng chính là học sinh, các
+                        <p>UniRanking (University Ranking) là sản phẩm, ứng dụng hướng tới đối tượng chính là học sinh,
+                            các
                             tổ chức giáo dục.
-                            <br>Ứng dụng giúp người dùng so sánh các trường đại học, cũng như các ngành học giống nhau của các
-                            trường dựa trên một số tiêu chí nổi bật. Qua đó giúp người dùng nắm được cơ bản điểm mạnh của
+                            <br>Ứng dụng giúp người dùng so sánh các trường đại học, cũng như các ngành học giống nhau
+                            của các
+                            trường dựa trên một số tiêu chí nổi bật. Qua đó giúp người dùng nắm được cơ bản điểm mạnh
+                            của
                             mỗi trường/ngành học để đưa ra đánh giá/quyết định của riêng mình.</p>
 
                     </div>

@@ -1,5 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm
 
+
+from django import forms
+from subject.models import Sector
+
+
 UserModel = UserCreationForm.Meta.model
 
 class UserRegistrationForm(UserCreationForm):
@@ -13,4 +18,9 @@ class UserRegistrationForm(UserCreationForm):
     class Meta: 
         model = UserModel
         fields = ('first_name', 'last_name','username','email')
-        
+
+
+class SectorForm(forms.ModelForm):
+    class Meta:
+        model = Sector
+        fields = ('name',)

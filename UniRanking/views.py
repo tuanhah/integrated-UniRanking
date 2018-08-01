@@ -23,5 +23,7 @@ def favourite_university(request):
 	return render(request, 'user/pages/favourite-university.html')
 def manage_university(request):
 	return render(request, 'user/pages/manage-university.html')
+def manage_sector(request):
+	return render(request, 'user/pages/manage-sector.html')
 
 	
