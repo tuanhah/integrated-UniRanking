@@ -15,12 +15,25 @@ from .views.user import (
     favourite_views as user_favourite_views,
     manage_views as user_manage_views,
 )
+from .views.crud import (
+    sector as edit_sector,
+    university_score as edit_university_score,
+    university_sector as edit_university_sector
+)
 app_name = "api"
 
 user_url_patterns = [
     path('favourite', user_favourite_views.FavouriteUniversityListView.as_view()),
     path('manage', user_manage_views.ManageUniversityListView.as_view())
 ]
+
+edit_url_patterns = [
+    path('sector/add_sector', edit_sector.add_sector, name="add_sector"),
+    path('sector/update_sector', edit_sector.update_sector, name="update_sector"),
+    path('sector/remove_sector', edit_sector.remove_sector, name="remove_sector"),
+
+]
+
 
 university_url_patterns = [
     path('', university_base_views.UniversityDetailView.as_view()),
@@ -48,6 +61,5 @@ urlpatterns = [
     path('criteria', criterion_base_views.CriterionListView.as_view()),
     path("rank/", include(rank_url_patterns)),
     path('user/', include(user_url_patterns)),
-
-    path('add_sector', views.add_sector, name="add_sector")
+    path('edit/', include(edit_url_patterns)),
 ]

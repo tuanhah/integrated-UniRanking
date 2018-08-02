@@ -53,18 +53,36 @@ Quản lý Nhóm ngành
                     <div class="tab-pane active show" id="add-sector-tab">
                         <form id="add-sector">
                             <div class="form-group">
-                                <label for="sector">Nhập tên nhóm ngành</label>
-                                <input type="text" class="form-control" id="sector" name="name"
-                                           placeholder="Tên nhóm ngành...">
+                                <label for="sector-add-form">Nhập tên nhóm ngành</label>
+                                <input type="text" class="form-control" id="sector-add-form" name="name"
+                                       placeholder="Tên nhóm ngành...">
                             </div>
                             <button type="submit" class="btn btn-primary">Thêm nhóm ngành</button>
                         </form>
                     </div>
                     <div class="tab-pane" id="edit-sector-tab">
-
+                        <form id="edit-sector">
+                            <div class="form-group m-form__group">
+                                <label for="sector-edit-select-form">Chọn ngành cần sửa</label>
+                                <select class="form-control m-input" id="sector-edit-select-form" name="sector_id">
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="sector-edit-form">Nhập tên mới cho nhóm ngành này</label>
+                                <input type="text" class="form-control" id="sector-edit-form" name="name"
+                                       placeholder="Tên nhóm ngành...">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Thêm nhóm ngành</button>
+                        </form>
                     </div>
                     <div class="tab-pane" id="remove-sector-tab">
-
+                        <form action="" id="remove-sector">
+                            <div class="m-form__group form-group">
+                                <label class="m--regular-font-size-lg2 my-4 mt-0">Note: Click "Xóa" cạnh mỗi nhóm nhành để xóa</label>
+                                <div class="m-checkbox-list" id="sector-remove-form">
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -98,6 +116,30 @@ Quản lý Nhóm ngành
             </div>
             <div class="m-portlet__foot m--hide">
 
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="ConfirmModalLabel"
+     style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title m--regular-font-size-lg4" id="ConfirmModalLabel">Xác nhận xóa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="m-form__group form-group">
+                    <h5 class="text-warning">Bạn có chắc chắn muốn xóa nhóm ngành này không?</h5>
+                    <ul id="sector-remove-checked">
+
+                    </ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="confirmed-remove-btn">Xác nhận xóa</button>
             </div>
         </div>
     </div>
