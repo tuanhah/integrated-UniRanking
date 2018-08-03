@@ -43,5 +43,5 @@ class ManageUniversityListView(BaseManageView):
                 else:
                     universities_queryset = user.manage_university_set.all()
         result = {"manage_universities": [
-            university.parse_full_profile() for university in universities_queryset]}
+            university.parse_basic_info() for university in universities_queryset]}
         return JsonResponse(result)
