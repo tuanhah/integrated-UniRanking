@@ -1,14 +1,17 @@
+var logined = $('#user-authenticated').attr('logined');
 var current_user = $('#user-menu').attr('user-id');
 $(document).ready(function () {
-	get_favourite_universities(current_user);
+	if(logined == 'true') {
+		get_manage_universities(current_user);
+    }
 });
 
-function get_favourite_universities(user_id) {
-	let url = `/api/v1/user/favourite?user=${user_id}`;
-	ajax_request(false, true, "GET", "json", url, null, null, favourite_universities_success_callback, error_callback);
+function get_manage_universities(user_id) {
+	let url = `/api/v1/user/manage?user=${user_id}`;
+	ajax_request(false, true, "GET", "json", url, null, null, manage_universities_success_callback, error_callback);
 }
 
-function favourite_universities_success_callback(response) {
+function manage_universities_success_callback(response) {
 	console.log(response);
 }
 

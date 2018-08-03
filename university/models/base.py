@@ -56,6 +56,7 @@ class University(models.Model, ScoreOwnerMixin, UniversitySubjectParserMixin, Sc
             "id" : self.id,
             "name" : self.name,
             "image_href" : self.image_path,
+            "avatar_href": self.avatar_path,
             "site_href" : self.get_absolute_url(),
         }
         return data

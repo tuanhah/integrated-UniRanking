@@ -19,8 +19,9 @@
 
 <body class="m-content--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-light m-aside--offcanvas-default">
 <div class="m-grid m-grid--hor m-grid--root m-page">
-
+    {% if user.is_authenticated %}
     {% include 'user/include/_navbar.html' %}
+    <div class="m--hide" id="user-authenticated" logined="true"><</div>
     <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
         <button class="m-aside-left-close  m-aside-left-close--skin-light " id="m_aside_left_close_btn">
             <i class="la la-close"></i>
@@ -146,6 +147,10 @@
         </div>
 
     </div>
+    {% else %}
+    <!--<div class="m&#45;&#45;hide" id="user-authenticated" logined="false"><</div>-->
+        {% include 'user/include/_login-required.html' %}
+    {% endif %}
     <div>
         <button class="btn btn-danger" data-toggle="tooltip" data-placement="left" id="gotop" title="Lên trên cùng">
             <i class="fa fa-arrow-up"></i>

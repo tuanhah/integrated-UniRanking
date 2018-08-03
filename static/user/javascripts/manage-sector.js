@@ -16,7 +16,10 @@ $(document).ready(function () {
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     };
-    get_all_sectors();
+    let logined = $('#user-authenticated').attr('logined');
+    if(logined == 'true') {
+        get_all_sectors();
+    }
     $("#add-sector").submit(function (e) {
         e.preventDefault();
         let csrftoken = getCookie("csrftoken");
@@ -132,7 +135,7 @@ function sectors_success_callback(response) {
     let inner_remove_sector = '';
     $.each(sectors, function (index, sector) {
         let name = capitalize(sector.name.toLowerCase());
-        inner_add_sector += `<div class="col-12 px-0 my-2"><i class="la la-angle-double-right"></i> ${name}</div>`;
+        inner_add_sector += `<div class="col-12 px-0 my-2 animated bounceInRight"><i class="la la-angle-double-right"></i> ${name}</div>`;
         inner_edit_sector += `<option value="${sector.id}">${name}</option>`;
         inner_remove_sector += `<label class="m-checkbox m-checkbox--brand">
                                     <button type="button" class="btn btn-sm btn-warning sector-remove-btn" sector-id="${sector.id}" data-toggle="modal"

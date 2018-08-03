@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from subject.models import *
 from django.shortcuts import render, redirect
 
+
 def index(request):
 	return render(request, 'UniRanking/pages/index.html')
 def compare(request):
