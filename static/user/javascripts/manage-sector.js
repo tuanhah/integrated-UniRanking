@@ -130,26 +130,27 @@ function get_all_sectors() {
 function sectors_success_callback(response) {
     let sectors = response.sectors;
     let sector_length = response.sectors.length;
-    let inner_add_sector = '';
+    let inner_sector = '';
     let inner_edit_sector = '';
     let inner_remove_sector = '';
     $.each(sectors, function (index, sector) {
         let name = capitalize(sector.name.toLowerCase());
-        inner_add_sector += `<div class="col-12 px-0 my-2 animated bounceInRight"><i class="la la-angle-double-right"></i> ${name}</div>`;
+        let reverse_name = capitalize(sectors[sector_length - index -1].name.toLowerCase());
+        // console.log(sectors[sector_length - index - 1].name);
+        inner_sector += `<div class="col-12 px-0 my-2 animated bounceInRight"><i class="la la-angle-double-right"></i> ${reverse_name}</div>`;
         inner_edit_sector += `<option value="${sector.id}">${name}</option>`;
         inner_remove_sector += `<label class="m-checkbox m-checkbox--brand">
                                     <button type="button" class="btn btn-sm btn-warning sector-remove-btn" sector-id="${sector.id}" data-toggle="modal"
                                         data-target="#confirm-modal">Xóa</button>
-                                    ----<input type="checkbox" value="${sector.id}" sector-name="${name}" name="sector_id"> ${name}             
+                                    ----<input type="checkbox" value="${sector.id}" sector-name="${name}" name="sector_id"> ${name}
                                 </label>`;
     });
     $('#total-sector').html(`<h4>Hiện có ${sector_length} nhóm ngành</h4>`);
-    $('#sectors-portlet').html(inner_add_sector);
+    $('#sectors-portlet').html(inner_sector);
     $('#sector-edit-select-form').html(inner_edit_sector);
     $('#sector-remove-form').html(inner_remove_sector);
 
 }
-
 
 function error_callback(response) {
     alert("Có lỗi xảy ra, xem thêm tại console!")

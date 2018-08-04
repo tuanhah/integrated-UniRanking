@@ -1,33 +1,32 @@
 {% extends "UniRanking/share/base.html" %}
-{% load static %} 
-{% block title %} {{ university.name }} || Chức năng xem thông tin các trường Đại Học {% endblock %} 
+{% load static %}
+{% block title %} {{ university.name }} || Chức năng xem thông tin các trường Đại Học {% endblock %}
 {% block info %} active {% endblock %}
 {% block body %}
 <div class="container-fluid after-menu">
-    <div class="row" id="background">
+    <div class="row" id="background" style="background: url(../../../static/{{university.image_path}});background-size: cover;height: 460px;">
 
     </div>
     <div class="row">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-sm-7">
+                <div class="col-md-7">
                     <div class="row">
                         <div class="col-sm-3">
-                            <img id="uni-avatar" src="{% static 'img/vnu_avatar.jpg'%}" width=140px>
+                            <img id="uni-avatar" src="../../../static/{{university.avatar_path}}" width=140px>
                         </div>
                     </div>
                     <div class="row mt-4">
                         <span class="col-10">
                             <h2 id="uni-name" university_id="{{ university.id }}"><strong>{{university.rank}}. {{university.name}}</strong></h2>
                         </span>
-                        <span class="col-1 fa fa-heart-o pointer-md-icon" data-toggle="tooltip" title="Thêm vào danh sách yêu thích"></span>
-                        <span class=" col-1 fa fa-envelope-o pointer-md-icon" data-toggle="tooltip" title="Nhận thông báo"></span>
+                        <span class="col-1 la la-heart-o pointer-md-icon" data-toggle="tooltip" title="Thêm vào danh sách yêu thích"></span>
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <h4>Thông tin cơ bản:</h4>
                         </div>
-                        <div class="col-12">    
+                        <div class="col-12">
                             <ul>
                                 <li class="col-12 p-large">Địa chỉ: {{ university.profile.address }}</li>
                                 <li class="col-12 p-large">Website: {{ university.profile.site_url }}</li>
@@ -37,23 +36,23 @@
                                 <li class="col-12 p-large">Trực thuộc: {{ university.parent }}</li>
                                 {% endif %}
                             </ul>
-                            
+
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-5">
-                    <img class="img-thumbnail" id="uni-map" src="{% static 'img/map_sample.png'%}" width=100%>
+                <div class="col-md-5">
+                    <img class="img-thumbnail" id="uni-map" src="{% static 'share/images/map_sample.png'%}" width=100%>
                 </div>
                 <div class="col">
 
                 </div>
             </div>
-            <div class="m-portlet m-portlet--full-height info__portlet">
+            <div class="m-portlet info__portlet">
                 <div class="m-portlet__head">
                     <div class="m-portlet__head-caption">
                         <div class="m-portlet__head-title">
                             <h3 class="m-portlet__head-text m--regular-font-size-lg4">
-                                Đánh giá trường 
+                                Đánh giá trường
                             </h3>
                         </div>
                     </div>
@@ -63,7 +62,7 @@
                     <!--begin::Section-->
                     <div class="m-accordion m-accordion--default" id="university-score-accordion" role="tablist">
 
-                        
+
                     </div>
 
                     <!--end::Section-->
@@ -86,7 +85,7 @@
 <!--<div class="modal-body">-->
 <!--<div class="form-group row">-->
 <!--<label for="subject_sector_select" class="col-4 col-form-label font-weight-bold">KHỐI NGÀNH</label>-->
-<!--<div class="col">-->        
+<!--<div class="col">-->
 <!--<select class="form-control" id="subject_sector_select">-->
 <!--<option value="0">&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Chọn khối ngành &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
 <!--% if subject_sectors %}-->

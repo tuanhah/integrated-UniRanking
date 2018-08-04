@@ -433,11 +433,6 @@ tr th.sorting {
 
 /*info*/
 
-#background {
-	background: url(../img/vnu_cover.jpg);
-	background-size: cover;
-	height: 460px;
-}
 
 #uni-avatar {
 	margin-top: -70%;
@@ -472,12 +467,12 @@ li.pill-item>a {
 	margin-bottom: 0;
 }
 
-.fa.pointer-md-icon {
+.la.pointer-md-icon {
 	cursor: pointer;
-	font-size: 2.0rem;
+	font-size: 2.0rem !important;
 }
 
-.fa.pointer-md-icon:hover {
+.la.pointer-md-icon:hover {
 	color: rgba(66, 130, 202, 1)
 }
 

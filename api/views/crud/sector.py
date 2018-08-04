@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from UniRanking.forms import AddSectorForm, UpdateSectorForm, RemoveSectorForm
+from user.forms import AddSectorForm, UpdateSectorForm, RemoveSectorForm
 from subject.models import Sector, UniversitySector
 
 def add_sector(request):
