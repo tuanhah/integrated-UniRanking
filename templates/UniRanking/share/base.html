@@ -49,6 +49,7 @@
 
                 <ul class="navbar-nav navbar-right">
                     {% if user.is_authenticated %}
+
                     <li class="m-nav__item m-topbar__user-profile m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light"
                         m-dropdown-toggle="click" aria-expanded="true">
                         {% include 'share/_user.html' %}
@@ -76,7 +77,9 @@
             <i class="fa fa-arrow-up"></i>
         </button>
     </div>
-
+    {% if user.is_authenticated %}
+        <div class="m--hide" id="user-authenticated" logined="true"></div>
+    {% endif %}
     {% include 'UniRanking/include/_footer.html' %}
     <!--Script file-->
     <script type="text/javascript" src="{% static 'share/javascripts/vendors.bundle.js'%}"></script>

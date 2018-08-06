@@ -13,4 +13,8 @@ body {
 }
 .m-menu__item.active {
 	background-color: #f4f3f9
-} 
+}
+
+.toast {
+	opacity: 1 !important;
+}

@@ -1,9 +1,21 @@
 var logined = $('#user-authenticated').attr('logined');
 var current_user = $('#user-menu').attr('user-id');
 $(document).ready(function () {
-    if(logined == 'true') {
+    let university_id = '';
+    if (logined == 'true') {
         get_favourite_universities(current_user);
-    }
+    };
+    $(document).on('click', '.udelete-btn', function () {
+        let modal_inner = '';
+        let name = $(this).attr('university-name');
+        modal_inner += `Bạn chuẩn bị xóa trường <strong>${name}</strong> ra khỏi danh sách yêu thích. Bạn có chắc chắn muốn xóa không?`;
+        $('#confirm-delete-modal .modal-body').html(modal_inner);
+        university_id = $(this).attr('university-id');
+    });
+
+    $(document).on('click', '#confirm-btn', function () {
+        remove_favourite_university(current_user, university_id);
+    });
 });
 
 function get_favourite_universities(user_id) {
@@ -21,7 +33,14 @@ function favourite_universities_success_callback(response) {
                             <div class="m-portlet__head-caption">
                                 <div class="m-portlet__head-action">
                                     <button type="button" class="btn btn-sm m-btn--pill  btn-brand">#${f_univ.general_statistics.rank}</button>
-                                </div>
+                                </div>    
+                            </div>
+                            <div class="m-portlet__head-tools">
+                                <ul class="m-portlet__nav">
+                                    <li class="m-portlet__nav-item">
+                                        <button type="button" class="btn btn-sm m-btn--pill btn-danger udelete-btn" data-toggle="modal" data-target="#confirm-delete-modal" university-name="${f_univ.university.name}" university-id="${f_univ.university.id}">Xóa</button>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <div class="m-portlet__body">
@@ -39,8 +58,7 @@ function favourite_universities_success_callback(response) {
                                             <img class="m-widget19__img" src="../../../static/share/images/vnu_avatar.jpg" alt="">
                                         </div>
                                         <div class="m-widget19__info">
-                                            <span class="m-widget19__username m--regular-font-size-lg2" style="line-height:160%">
-                                                ${f_univ.university.name}
+                                            <span class="m-widget19__username m--regular-font-size-lg2" style="line-height:160%" class="university-name" >${f_univ.university.name}
                                             </span>
                                             <br>
                                             <span class="m-widget19__time">
@@ -69,7 +87,37 @@ function favourite_universities_success_callback(response) {
                     </div>
                 </div>`;
     });
-    $('#favourite-university-area').html(inner)
+    $('#favourite-university-area').html(inner);
+}
+
+function remove_favourite_university(user, university) {
+    let csrftoken = getCookie("csrftoken");
+    let url = '/api/v1/edit/favourite/remove_university';
+    data = [{
+        name: "university",
+        value: university
+    }];
+    data.push({
+        name: "csrfmiddlewaretoken",
+        value: csrftoken
+    });
+    ajax_request(false, true, "POST", "json", url, null, data, remove_favourite_universities_success_callback, error_callback);
+}
+
+function remove_favourite_universities_success_callback(response) {
+    let result = response;
+    if (result.success === true) {
+        toastr.info(`Bạn đã xoá thành công trường "${result.name}" khỏi danh sách yêu thích`);
+    }
+    else {
+        let error = '';
+        error = "Không thể xóa trường này. Bạn hãy kiểm tra lại !";
+        toastr.error(error);
+    }
+    let current_user = $('#user-menu').attr('user-id');
+
+    get_favourite_universities(current_user);
+
 }
 
 function error_callback(response) {

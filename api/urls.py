@@ -18,7 +18,8 @@ from .views.user import (
 from .views.crud import (
     sector as edit_sector,
     university_score as edit_university_score,
-    university_sector as edit_university_sector
+    university_sector as edit_university_sector,
+    favourite_university as edit_favourite_university
 )
 app_name = "api"
 
@@ -31,6 +32,8 @@ edit_url_patterns = [
     path('sector/add_sector', edit_sector.add_sector, name="add_sector"),
     path('sector/update_sector', edit_sector.update_sector, name="update_sector"),
     path('sector/remove_sector', edit_sector.remove_sector, name="remove_sector"),
+    path('favourite/add_university', edit_favourite_university.add_favourite_university, name="add_favourite"),
+    path('favourite/remove_university', edit_favourite_university.remove_favourite_university, name="remove_favourite"),
 
 ]
 

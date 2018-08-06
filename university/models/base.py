@@ -1,10 +1,10 @@
 from django.db import models, connection
 from django.urls import reverse
 from django.contrib.auth.models import User
+from guardian.shortcuts import assign_perm, remove_perm
 
 from score.querysets import ScoreOwnerQueryset
 from university.mixins import UniversitySubjectParserMixin
-
 from score.mixins import ScoreOwnerMixin, ScoreParserMixin
 from django.utils.translation import gettext as _
 
@@ -25,9 +25,11 @@ class University(models.Model, ScoreOwnerMixin, UniversitySubjectParserMixin, Sc
     class Meta:
         db_table = 'university'
         ordering = ['id']
-        verbose_name = _('University')   
-        verbose_name_plural = _('Universities')   
-        
+        verbose_name = _('University')
+        verbose_name_plural = _('Universities')
+        permissions = (
+        )
+
     def __str__(self):
         return self.name
 
@@ -121,3 +123,13 @@ class UserManagerUniversity(models.Model):
 
     def __str__(self):
         return _("User: {} | University: {}".format(self.user, self.university.name))
+
+    def add_permissions(self):
+        user = self.user
+        university = self.university
+        assign_perm('change_university', user, university)
+
+    def remove_permissions(self):
+        user = self.user
+        university = self.university
+        remove_perm("change_university", user, university)

@@ -1,21 +1,5 @@
 $(document).ready(function () {
-    toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": true,
-        "progressBar": false,
-        "positionClass": "toast-top-right",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "200",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    };
+
     let logined = $('#user-authenticated').attr('logined');
     if(logined == 'true') {
         get_all_sectors();
@@ -48,7 +32,6 @@ $(document).ready(function () {
         e.preventDefault();
         let csrftoken = getCookie("csrftoken");
         let data = $(this).serializeArray();
-        console.log(data);
         data.push({
             name: "csrfmiddlewaretoken",
             value: csrftoken

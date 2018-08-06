@@ -6,7 +6,23 @@ window.onbeforeunload = function() {
 	}, 120);
 }
 $(document).ready(function () {
-	
+	toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": true,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "200",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
 	$(window).resize(function(){
 		var img_width = $('.background-img').parent().width();
 		$('.background-img').css({'width':img_width});

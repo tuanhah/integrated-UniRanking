@@ -1,12 +1,13 @@
 from django import forms
 from university.models import UserFavouriteUniversity
 
-class AddFavouriteUniversity(forms.ModelForm):
+class AddFavouriteUniversityForm(forms.ModelForm):
     class Meta:
         model = UserFavouriteUniversity
-        field = ('user', 'university',)
+        # fields = ('user', 'university',)
+        fields = ()
 
-class RemoveFavouriteUniversity(forms.ModelForm):
+class RemoveFavouriteUniversityForm(forms.ModelForm):
     class Meta:
         model = UserFavouriteUniversity
-        field = ()
+        fields = ()
