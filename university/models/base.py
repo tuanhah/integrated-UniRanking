@@ -16,10 +16,10 @@ class University(models.Model, ScoreOwnerMixin, UniversitySubjectParserMixin, Sc
     parent = models.ForeignKey('University', on_delete=models.SET_NULL, blank=True, null=True, related_name='child_universities', verbose_name=_('Parent University'))
     sectors = models.ManyToManyField('subject.Sector', through='subject.UniversitySector')
     favourite_users = models.ManyToManyField('auth.User', through='university.UserFavouriteUniversity', related_name="favourite_university_set")
-    manage_users = models.ManyToManyField('auth.User', through='university.UserManagerUniversity', related_name="manage_university_set")    
+    manage_users = models.ManyToManyField('auth.User', through='university.UserManagerUniversity', related_name="manage_university_set")
     avg_score = models.FloatField(default=0, verbose_name=_('Average Score'))
     rank = models.IntegerField(default=-1, verbose_name=_('Rank'))
-    
+
     objects = ScoreOwnerQueryset.as_manager()
 
     class Meta:
@@ -39,7 +39,7 @@ class University(models.Model, ScoreOwnerMixin, UniversitySubjectParserMixin, Sc
     def parse_profile(self):
         data= {
             "university" : self.parse_basic_info(),
-            "general_statistics" : self.parse_general_statistics() 
+            "general_statistics" : self.parse_general_statistics()
         }
         return data
 
@@ -56,7 +56,8 @@ class University(models.Model, ScoreOwnerMixin, UniversitySubjectParserMixin, Sc
     def parse_basic_info(self):
         data = {
             "id" : self.id,
-            "name" : self.name,
+            "name": self.name,
+            # "address": self.profile.address,
             "image_href" : self.image_path,
             "avatar_href": self.avatar_path,
             "site_href" : self.get_absolute_url(),
@@ -66,7 +67,7 @@ class University(models.Model, ScoreOwnerMixin, UniversitySubjectParserMixin, Sc
     def get_avg_score(self):
         avg_score = self.criterion_category_scores.aggregate(models.Avg('score'))
         avg_score = avg_score['score__avg'] or 0
-        return avg_score        
+        return avg_score
 
     def update_rank(self):
         university_table_name = self._meta.db_table
@@ -88,23 +89,23 @@ class UniversityProfile(models.Model):
 
     class Meta:
         db_table = 'university_profile'
-        ordering = ['university']   
-        verbose_name = _('University Profile')   
-        verbose_name_plural = _('Universities Profile')   
-        
+        ordering = ['university']
+        verbose_name = _('University Profile')
+        verbose_name_plural = _('Universities Profile')
+
     def __str__(self):
         return self.university.name
 
 class UserFavouriteUniversity(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='favourite_universities_set', verbose_name=_('User'))
     university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='favourite_users_set', verbose_name=_('University'))
-    
+
     class Meta:
         db_table = 'user_favourite_university'
         ordering = ['id']
         unique_together = ('user', 'university')
         verbose_name = _('User - Favourite University')
-        verbose_name_plural = _('User - Favourite Universities')        
+        verbose_name_plural = _('User - Favourite Universities')
 
     def __str__(self):
         return _("User: {} | University: {}".format(self.user, self.university.name))
@@ -113,13 +114,13 @@ class UserFavouriteUniversity(models.Model):
 class UserManagerUniversity(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='manager_universities_set', verbose_name=_('User'))
     university = models.ForeignKey(University, on_delete=models.CASCADE, related_name='manager_users_set', verbose_name=_('University'))
-    
+
     class Meta:
         db_table = 'user_manager_university'
         ordering = ['id']
         unique_together = ('user', 'university')
         verbose_name = _('User - Manager University')
-        verbose_name_plural = _('User - Manager Universities')        
+        verbose_name_plural = _('User - Manager Universities')
 
     def __str__(self):
         return _("User: {} | University: {}".format(self.user, self.university.name))

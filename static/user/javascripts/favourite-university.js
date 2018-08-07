@@ -33,7 +33,7 @@ function favourite_universities_success_callback(response) {
                             <div class="m-portlet__head-caption">
                                 <div class="m-portlet__head-action">
                                     <button type="button" class="btn btn-sm m-btn--pill  btn-brand">#${f_univ.general_statistics.rank}</button>
-                                </div>    
+                                </div>
                             </div>
                             <div class="m-portlet__head-tools">
                                 <ul class="m-portlet__nav">
@@ -48,7 +48,7 @@ function favourite_universities_success_callback(response) {
                                 <div class="m-widget19__pic m-portlet-fit--top m-portlet-fit--sides" style="min-height-: 286px">
                                     <img src="../../../static/share/images/vnu_cover.jpg" alt="">
                                     <h3 class="m-widget19__title m--font-light">
-                                        
+
                                     </h3>
                                     <div class="m-widget19__shadow"></div>
                                 </div>
@@ -108,8 +108,7 @@ function remove_favourite_universities_success_callback(response) {
     let result = response;
     if (result.success === true) {
         toastr.info(`Bạn đã xoá thành công trường "${result.name}" khỏi danh sách yêu thích`);
-    }
-    else {
+    } else {
         let error = '';
         error = "Không thể xóa trường này. Bạn hãy kiểm tra lại !";
         toastr.error(error);
@@ -123,4 +122,3 @@ function remove_favourite_universities_success_callback(response) {
 function error_callback(response) {
     alert("Đã xảy ra lỗi, xem response tại console !!")
 }
-

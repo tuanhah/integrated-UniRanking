@@ -16,6 +16,119 @@ Quản lý trường
 {% endblock %}
 
 {% block content %}
+<div class="row">
+    <div class="col-12">
+        <!--begin:: Widgets/New Users-->
+        <div class="m-portlet m-portlet--full-height ">
+            <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                    <div class="m-portlet__head-title">
+                        <h3 class="m-portlet__head-text">
+                            Danh sách truờng
+                        </h3>
+                    </div>
+                </div>
+                <div class="m-portlet__head-tools">
+                    <ul class="nav nav-pills nav-pills--brand m-nav-pills--align-right m-nav-pills--btn-pill m-nav-pills--btn-sm"
+                        role="tablist">
+                        <li class="nav-item m-tabs__item">
+                            <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_widget4_tab1_content"
+                               role="tab">
+                                Quản lý
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="m-portlet__body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="m_widget4_tab1_content">
+                        <!--begin::Widget 14-->
+                        <div class="m-widget4">
+                            <div class="m-loader m-loader--success" style="width: 30px; display: inline-block;"></div>
+                            <!--end::Widget 14 Item-->
+                        </div>
+                        <!--end::Widget 14-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--end:: Widgets/New Users-->
+    </div>
+</div>
+<div class="modal fade" id="sector-modal" tabindex="-1" role="dialog"
+     style="display: none;" aria-hidden="true">
+    <div class="modal-dialog w-75" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title m--regular-font-size-lg4">Quản lý nhóm ngành</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs  m-tabs-line m-tabs-line--primary" role="tablist">
+                    <li class="nav-item m-tabs__item">
+                        <a class="nav-link m-tabs__link active" data-toggle="tab" href="#add-sector" role="tab">
+                            <i class="flaticon-add"></i> Thêm nhóm ngành</a>
+                    </li>
+                    <li class="nav-item m-tabs__item">
+                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#remove-sector" role="tab">
+                            <i class="flaticon-delete-1"></i> Xóa nhóm ngành</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="add-sector" role="tabpanel">
+                        <h5>Thêm nhóm ngành cho Đạo Học Quốc Gia Hà Nội</h5>
+
+                        <form id="add-sector-form">
+                            <div class="form-group">
+                                <label for="add-sector-name" class="">Nhóm ngành</label>
+                                <select name="sector" id="add-sector-name" class="form-control">
+                                    <option value="">a</option>
+                                    <option value="">b</option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Trở lại danh sách</button>
+                            <button type="submit" class="btn btn-primary m--pull-right">Thêm</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="remove-sector" role="tabpanel">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="score-modal" tabindex="-1" role="dialog"
+     style="display: none;" aria-hidden="true">
+    <div class="modal-dialog w-75" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title m--regular-font-size-lg4">Quản lý điểm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"></button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 

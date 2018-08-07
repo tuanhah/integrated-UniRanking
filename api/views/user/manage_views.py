@@ -41,7 +41,10 @@ class ManageUniversityListView(BaseManageView):
                 except User.DoesNotExist:
                     return self.json_error(field="user", code="invalid")
                 else:
-                    universities_queryset = user.manage_university_set.all()
+                    if user.is_superuser:
+                        universities_queryset = University.objects.all()
+                    else:
+                        universities_queryset = user.manage_university_set.all()
         result = {"manage_universities": [
             university.parse_basic_info() for university in universities_queryset]}
         return JsonResponse(result)

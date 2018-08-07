@@ -129,7 +129,7 @@ function sectors_success_callback(response) {
                                 </label>`;
     });
     $('#total-sector').html(`<h4>Hiện có ${sector_length} nhóm ngành</h4>`);
-    $('#sectors-portlet').html(inner_sector);
+    $('#sectors-portlet').empty().html(inner_sector);
     $('#sector-edit-select-form').html(inner_edit_sector);
     $('#sector-remove-form').html(inner_remove_sector);
 
