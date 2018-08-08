@@ -11,6 +11,7 @@
             </div>
             <div class="modal-body">
                 <form id="login_form" class="form-vertical" action="">
+                    {% csrf_token %)
                     <div class="alert alert-danger d-none" role="alert" id="login_errors"></div>
                     <div class="form-group">
                         <label class="control-label" for="user">Tài Khoản: </label>
@@ -49,6 +50,7 @@
             </div>
             <div class="modal-body">
                 <form id="signup_form" action="">
+                    {% csrf_token %)
                     <div class="alert alert-success d-none" role="alert" id="signup_success"></div>
                     <div class="alert alert-danger d-none" role="alert" id="signup_errors"></div>
                     <div class="form-row">
