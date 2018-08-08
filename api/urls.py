@@ -57,6 +57,7 @@ urlpatterns = [
     path('auth',views.login, name="login"),
     path('register',views.register, name="register"),
     path('sectors', subject_base_views.SectorListView.as_view()),
+    path('unasign-sectors', subject_base_views.UnasignSectorListView.as_view()),
     path('universities', university_base_views.UniversityListView.as_view()),
     path('universities/<int:university_id>/', include(university_url_patterns)),
     path('categories', criterion_base_views.CriterionCategoryListView.as_view()),

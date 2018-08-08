@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'criterion',
     'score',
     'subject',
-    'university', 
+    'university',
     'api',
 ]
 
@@ -72,7 +72,7 @@ TEMPLATES = [
         'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
-            'context_processors': [ 
+            'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -148,14 +148,24 @@ LOCALE_PATHS = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/' 
+STATIC_URL = '/static/'
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-]   
+]
 
 LOGOUT_REDIRECT_URL = 'homepage'
 
 INTERNAL_IPS = ['127.0.0.1']
+
+
+#EMAIL settings
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'uniranking.vn@gmail.com'
+EMAIL_HOST_PASSWORD = 'UniRanking147'

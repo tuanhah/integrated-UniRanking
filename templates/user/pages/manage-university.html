@@ -82,19 +82,31 @@ Quản lý trường
 
                 <div class="tab-content">
                     <div class="tab-pane active" id="add-sector" role="tabpanel">
-                        <h5>Thêm nhóm ngành cho Đạo Học Quốc Gia Hà Nội</h5>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h4>Thêm nhóm ngành cho <strong class="modal-uname"></strong></h4>
 
-                        <form id="add-sector-form">
-                            <div class="form-group">
-                                <label for="add-sector-name" class="">Nhóm ngành</label>
-                                <select name="sector" id="add-sector-name" class="form-control">
-                                    <option value="">a</option>
-                                    <option value="">b</option>
-                                </select>
+                                <form id="add-sector-form">
+                                    <div class="form-group">
+                                        <label for="add-sector-name" class="">Nhóm ngành</label>
+                                        <select name="sector" id="add-sector-options" class="form-control">
+                                            <option value="">a</option>
+                                            <option value="">b</option>
+                                        </select>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Trở lại danh
+                                        sách
+                                    </button>
+                                    <button type="submit" class="btn btn-primary m--pull-right">Thêm</button>
+                                </form>
                             </div>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Trở lại danh sách</button>
-                            <button type="submit" class="btn btn-primary m--pull-right">Thêm</button>
-                        </form>
+                            <div class="col-lg-6">
+                                <h4>Các nhóm ngành đã có</h4>
+                                <div id="current-sectors">
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="tab-pane" id="remove-sector" role="tabpanel">
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been

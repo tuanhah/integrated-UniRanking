@@ -138,7 +138,3 @@ function sectors_success_callback(response) {
 function error_callback(response) {
     alert("Có lỗi xảy ra, xem thêm tại console!")
 }
-
-function capitalize(text) {
-    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-}

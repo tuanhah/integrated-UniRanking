@@ -27,4 +27,3 @@ def manage_university(request):
 def manage_sector(request):
 	return render(request, 'user/pages/manage-sector.html')
 
-	

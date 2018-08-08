@@ -27,7 +27,6 @@ user_urlpatterns = [
     path('manage-university', views.manage_university, name="manage-university"),
     path('manage-sector', views.manage_sector, name="manage-sector"),
     path('me', views.personal, name="personalpage"),
-    
 ]
 
 
@@ -42,8 +41,8 @@ urlpatterns = [
     path('contact/', views.contact, name="contact"),
     path('help/', views.help, name="help"),
     path('accounts/', include('django.contrib.auth.urls')),
-    # path('logout', auth.views.logout)
-    path('user/', include(user_urlpatterns))
+    # path('logout', auth.views.logout),
+    path('user/', include(user_urlpatterns)),
 ]
 
 if settings.DEBUG:
