@@ -9,7 +9,6 @@ from university.models import University, UserManagerUniversity
 from api.views.base import BaseManageView
 from api.functions import string_to_boolean
 
-
 class ManageUniversityListView(BaseManageView):
     """
         List all Universities that a user can manage

@@ -1,13 +1,6 @@
 var logined = $('#user-authenticated').attr('logined');
 var current_user = $('#user-menu').attr('user-id');
-var BootstrapSelect = {
-    init: function () {
-        $(".m_selectpicker").selectpicker()
-    }
-};
-jQuery(document).ready(function () {
-    BootstrapSelect.init()
-});
+var university;
 $(document).ready(function () {
     if (logined == 'true') {
         get_manage_universities(current_user);
@@ -15,11 +8,48 @@ $(document).ready(function () {
     $(document).on('click', '.sector-manage', function() {
         let university_id = $(this).attr('university-id');
         let university_name = $(this).attr('university-name');
+        university = university_id;
         $('.modal-uname').text(university_name);
         get_university_sectors(university_id);
         get_university_unasign_sectors(university_id);
     });
+    $("#add-sector-form").submit(function (e) {
+        e.preventDefault();
+        let csrftoken = getCookie("csrftoken");
+        let data = $(this).serializeArray();
+        data.push({
+            name: "university",
+            value: university
+        });
+        data.push({
+            name: "csrfmiddlewaretoken",
+            value: csrftoken
+        });
+        console.log(data);
+        let url = "/api/v1/edit/manage/add-university-sector";
+        ajax_request(false, true, "POST", "json", url, null, data, add_sector_success_callback, error_callback);
+    });
 });
+
+function add_sector_success_callback(response) {
+    let result = response;
+    if(result.success) {
+        toastr.success(`Bạn đã thêm thành công nhóm ngành "${result.sector}" vào "${result.university}"`);
+        get_university_sectors(university);
+        get_university_unasign_sectors(university);
+    }
+    else {
+        let error = '';
+        if (result.code === "universitydoesnotexist") {
+            error = `Trường này không tồn tại!`;
+        }
+        else if(result.code === "sectordoesnotexist") {
+            error = `Nhóm ngành này không tồn tại`;
+        }
+        else error = "Không thể sửa nhóm ngành này. Bạn hãy kiểm tra lại !";
+        toastr.error(error);
+    }
+}
 
 function get_manage_universities(user_id) {
     let url = `/api/v1/user/manage?user=${user_id}`;

@@ -132,8 +132,7 @@ function sectors_success_callback(response) {
     $('#sectors-portlet').empty().html(inner_sector);
     $('#sector-edit-select-form').html(inner_edit_sector);
     $('#sector-remove-form').html(inner_remove_sector);
-
-}
+};
 
 function error_callback(response) {
     alert("Có lỗi xảy ra, xem thêm tại console!")

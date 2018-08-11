@@ -34,6 +34,8 @@ edit_url_patterns = [
     path('sector/remove_sector', edit_sector.remove_sector, name="remove_sector"),
     path('favourite/add_university', edit_favourite_university.add_favourite_university, name="add_favourite"),
     path('favourite/remove_university', edit_favourite_university.remove_favourite_university, name="remove_favourite"),
+    path('manage/add-university-sector', edit_university_sector.add_university_sector, name="add-university-sector"),
+    path('manage/remove-university-sector', edit_university_sector.remove_university_sector, name="remove-university-sector"),
 
 ]
 
