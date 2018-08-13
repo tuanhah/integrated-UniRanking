@@ -27,7 +27,7 @@ function favourite_universities_success_callback(response) {
     favourite_universities = response.favourite_universities;
     let inner = '';
     $.each(favourite_universities, function (index, f_univ) {
-        inner += `<div class="col-lg-6 animated flipInY">
+        inner += `<div class="col-lg-6 animated zoomIn">
                     <div class="m-portlet m-portlet--bordered-semi m-portlet--full-height  m-portlet--rounded-force">
                         <div class="m-portlet__head m-portlet__head--fit">
                             <div class="m-portlet__head-caption">
