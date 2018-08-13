@@ -33,8 +33,20 @@ $(document).ready(function () {
         let name = $(this).attr('sector-name');
         let confirm_inner = `<li>${name}</li>`;
         $('#sector-remove-checked').empty().html(confirm_inner);
+        swal({
+            type: "warning",
+            title: `Bạn có chắc chắn muốn xóa nhóm ngành "${name}" không?`,
+            showCancelButton: !0,
+            reverseButtons:!0,
+            cancelButtonText: "<span><span>Hủy</span></span>",
+            cancelButtonClass: "btn btn-secondary m-btn m-btn--pill m-btn--icon",
+            confirmButtonText: "<span><span>Xác nhận xóa</span></span>",
+            confirmButtonClass: "btn btn-danger m-btn m-btn--pill m-btn--icon",
+        }).then(function (e) {
+            e.value ? confirm_remove_sector() : "cancel" === e.dismiss;
+        });
     });
-    $(document).on('click', '#confirmed-remove-btn', function () {
+    function confirm_remove_sector() {
         let csrftoken = getCookie("csrftoken");
         let data = [{
            name: "sector_id",
@@ -46,7 +58,7 @@ $(document).ready(function () {
         });
         let url = "/api/v1/edit/sector/remove_sector";
         ajax_request(false, true, "POST", "json", url, null, data, remove_sector_success_callback, error_callback);
-    })
+    };
 });
 
 function add_sector_success_callback(response) {
@@ -115,9 +127,8 @@ function sectors_success_callback(response) {
         inner_sector += `<div class="col-12 px-0 my-2 animated fadeIn"><i class="la la-angle-double-right"></i> ${reverse_name}</div>`;
         inner_edit_sector += `<option value="${sector.id}">${name}</option>`;
         inner_remove_sector += `<div class="col-12 my-3">
-                                    <button type="button" class="btn btn-sm btn-warning m--pull-right sector-remove-btn" sector-name="${name}" sector-id="${sector.id}" data-toggle="modal"
-                                        data-target="#confirm-modal">Xóa</button>
-                                    <span value="${sector.id}" name="sector_id"> ${name}</span>;
+                                    <button type="button" class="btn btn-sm btn-warning m--pull-right sector-remove-btn" sector-name="${name}" sector-id="${sector.id}">Xóa</button>
+                                    <span value="${sector.id}" name="sector_id"> ${name}</span>
                                     <hr>
                                 </div>`;
     });

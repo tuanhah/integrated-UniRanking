@@ -3,12 +3,13 @@ var current_user = $('#user-menu').attr('user-id');
 var university;
 $(document).ready(function () {
     let remove_sector;
+    let university_name;
     if (logined == 'true') {
         get_manage_universities(current_user);
     }
     $(document).on('click', '.sector-manage-btn', function () {
         let university_id = $(this).attr('university-id');
-        let university_name = $(this).attr('university-name');
+        university_name = $(this).attr('university-name');
         $('#universities-list').hide();
         $('#sector-manager').show();
         university = university_id;
@@ -24,21 +25,21 @@ $(document).ready(function () {
     });
 
     $(document).on('click', '#remove-sector-btn', function () {
-
+        let name = $("#remove-sector-options").find(":selected").text();
         swal({
             type: "warning",
-            title: "Good job!",
-            text: "You clicked the button!",
-            // icon: "warning",
+            title: `Bạn có chắc chắn muốn xóa nhóm ngành "${name}" khỏi "${university_name}" không?`,
             showCancelButton: !0,
-            reverseButtons:!0,
-            cancelButtonText: "<span><i class='la la-thumbs-down'></i><span>No, thanks</span></span>",
+            reverseButtons: !0,
+            cancelButtonText: "<span><span>Hủy</span></span>",
             cancelButtonClass: "btn btn-secondary m-btn m-btn--pill m-btn--icon",
-            confirmButtonText: "<span><i class='la la-headphones'></i><span>I am game!</span></span>",
-            confirmButtonClass: "btn btn-outline-light m-btn m-btn--pill m-btn--icon",
-
+            confirmButtonText: "<span><span>Xác nhận xóa</span></span>",
+            confirmButtonClass: "btn btn-danger m-btn m-btn--pill m-btn--icon sector-rm-confirm-btn",
+        }).then(function (e) {
+            e.value ? $('#remove-sector-form').submit() : "cancel" === e.dismiss;
         });
     });
+
 
     $("#add-sector-form").submit(function (e) {
         e.preventDefault();
@@ -52,9 +53,26 @@ $(document).ready(function () {
             name: "csrfmiddlewaretoken",
             value: csrftoken
         });
-        console.log(data);
+        // console.log(data);
         let url = "/api/v1/edit/manage/add-university-sector";
         ajax_request(false, true, "POST", "json", url, null, data, add_sector_success_callback, error_callback);
+    });
+
+    $('#remove-sector-form').submit(function (e) {
+        e.preventDefault();
+        let csrftoken = getCookie("csrftoken");
+        let data = $(this).serializeArray();
+        data.push({
+            name: "university",
+            value: university
+        });
+        data.push({
+            name: "csrfmiddlewaretoken",
+            value: csrftoken
+        });
+        console.log(data);
+        let url = "/api/v1/edit/manage/remove-university-sector";
+        ajax_request(false, true, "POST", "json", url, null, data, remove_sector_success_callback, error_callback);
     });
 });
 
@@ -62,6 +80,26 @@ function add_sector_success_callback(response) {
     let result = response;
     if (result.success) {
         toastr.success(`Bạn đã thêm thành công nhóm ngành "${result.sector}" vào "${result.university}"`);
+        get_university_sectors(university);
+        get_university_unasign_sectors(university);
+    }
+    else {
+        let error = '';
+        if (result.code === "universitydoesnotexist") {
+            error = `Trường này không tồn tại!`;
+        }
+        else if (result.code === "sectordoesnotexist") {
+            error = `Nhóm ngành này không tồn tại`;
+        }
+        else error = "Không thể sửa nhóm ngành này. Bạn hãy kiểm tra lại !";
+        toastr.error(error);
+    }
+}
+
+function remove_sector_success_callback(response) {
+    let result = response;
+    if (result.success) {
+        toastr.success(`Bạn đã xóa thành công nhóm ngành "${result.sector}" của "${result.university}"`);
         get_university_sectors(university);
         get_university_unasign_sectors(university);
     }
