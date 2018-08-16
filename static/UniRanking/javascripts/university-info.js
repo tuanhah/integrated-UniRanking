@@ -31,14 +31,12 @@ function university_scores(university) {
 }
 
 function university_scores_success_callback(response) {
-    university = response;
-    // console.log(university.scores[0]);
+    let university = response;
     let scores = university.scores;
     let accordion_content = '';
     if (university.scores.length == 0) {
         accordion_content = '<div class="alert alert-warning w-100">Trường này chưa có điểm! Bạn vui lòng quay lại sau ...</div>'
-    }
-    ;
+    };
     $.each(scores, function (index, score) {
         let category_id = score.criterion_category_score.criterion_category.id;
         let category_name = score.criterion_category_score.criterion_category.name;

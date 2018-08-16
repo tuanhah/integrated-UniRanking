@@ -1,4 +1,6 @@
 from django.http import JsonResponse
+from django.utils.decorators import method_decorator
+from guardian.decorators import permission_required_or_403
 from user.forms import AddUniversitySectorForm, RemoveUniversitySectorForm
 from subject.models import Sector, UniversitySector
 from university.models import University

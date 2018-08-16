@@ -27,7 +27,6 @@ def update_sector(request):
     sectors_name = []
     for sector in all_sector:
         sectors_name.append(sector.name)
-
     if request.method == "POST":
         if form.is_valid():
             update_sector_id = request.POST['sector_id']
@@ -46,13 +45,13 @@ def update_sector(request):
                 return JsonResponse({'success' : False, 'code' : 'already'})
     errors = {'success': False, 'code': "failed"}
     return JsonResponse(errors)
+
 def remove_sector(request):
     form = RemoveSectorForm(request.POST)
     all_sector = Sector.objects.all()
     sectors_name = []
     for sector in all_sector:
         sectors_name.append(sector.name)
-
     if request.method == "POST":
         if form.is_valid():
             delete_sectors_id = request.POST['sector_id']

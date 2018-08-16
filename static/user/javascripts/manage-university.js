@@ -18,10 +18,19 @@ $(document).ready(function () {
         get_university_unasign_sectors(university_id);
     });
 
+    $(document).on('click', '.score-manage-btn', function () {
+        $('#universities-list').hide();
+        $('#score-manager').show();
+    });
+
     $(document).on('click', '#sector-manager-back-btn', function () {
         $('#universities-list').show().addClass('bounceInLeft');
         $('#sector-manager').hide();
+    });
 
+    $(document).on('click', '#score-manager-back-btn', function () {
+        $('#universities-list').show().addClass('bounceInLeft');
+        $('#score-manager').hide();
     });
 
     $(document).on('click', '#remove-sector-btn', function () {
@@ -40,7 +49,6 @@ $(document).ready(function () {
         });
     });
 
-
     $("#add-sector-form").submit(function (e) {
         e.preventDefault();
         let csrftoken = getCookie("csrftoken");
@@ -53,7 +61,6 @@ $(document).ready(function () {
             name: "csrfmiddlewaretoken",
             value: csrftoken
         });
-        // console.log(data);
         let url = "/api/v1/edit/manage/add-university-sector";
         ajax_request(false, true, "POST", "json", url, null, data, add_sector_success_callback, error_callback);
     });
@@ -75,6 +82,26 @@ $(document).ready(function () {
         ajax_request(false, true, "POST", "json", url, null, data, remove_sector_success_callback, error_callback);
     });
 });
+
+function university_scores(university) {
+    let url = `/api/v1/universities/${university}/scores`;
+    ajax_request(false, true, "GET", "json", url, null, null, university_scores_success_callback, error_callback);
+}
+
+function university_scores_success_callback(response) {
+    let univ_object = response;
+    let scores = univ_object.scores;
+    let accordion_content = '';
+    if (univ_object.scores.length == 0) {
+        accordion_content = '<div class="alert alert-warning w-100">Trường này chưa có điểm! Bạn vui lòng quay lại sau ...</div>'
+    };
+    $.each(scores, function (index, score) {
+        let category_id = score.criterion_category_score.criterion_category.id;
+        let category_name = score.criterion_category_score.criterion_category.name;
+        let category_score = score.criterion_category_score.score;
+        let criterions = score.criterion_scores;
+    });
+}
 
 function add_sector_success_callback(response) {
     let result = response;
@@ -140,7 +167,7 @@ function manage_universities_success_callback(response) {
                         </div>
                         <div class="btn-group">
                             <span><button href="#" class="m-btn m-btn--pill m-btn--hover-info btn btn-sm btn-secondary mx-2 sector-manage-btn" university-id="${university.id}" university-name="${university.name}" >Quản lý nhóm ngành</button></span>
-                            <span><button href="#" class="m-btn m-btn--pill m-btn--hover-accent btn btn-sm btn-secondary" university-id="${university.id}" university-name="${university.name}">Quản lý điểm</button></span>
+                            <span><button href="#" class="m-btn m-btn--pill m-btn--hover-accent btn btn-sm btn-secondary score-manage-btn" university-id="${university.id}" university-name="${university.name}">Quản lý điểm</button></span>
 						</div>
                     </div>`;
         // $('.m-widget4').append(inner);
