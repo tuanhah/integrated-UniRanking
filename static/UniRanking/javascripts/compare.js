@@ -438,15 +438,34 @@
         let sectors = response.sectors;
         let pane = "";
         $.each(sectors, function(index, sector){
-            pane += `<div class="col-md-6 px-0">
-            <btn show="#compare__univ__selection" class="btn gs-btn go-to-id py-3 my-1 w-98 m-portlet" id-gs1="${sector.id}"><i class="fa mt-2" style="float:right"></i> ${sector.name}</btn>
-            </div>`;
+            if(index < 6) {
+                pane += `<div class="col-md-6 px-0 visual-sector">
+                <btn show="#compare__univ__selection" class="btn gs-btn go-to-id py-3 my-1 w-98 m-portlet" id-gs1="${sector.id}"><i class="fa mt-2" style="float:right"></i> ${sector.name}</btn>
+                </div>`;
+            } else {
+                pane += `<div class="col-md-6 px-0 hidden-sector non-display">
+                <btn show="#compare__univ__selection" class="btn gs-btn go-to-id py-3 my-1 w-98 m-portlet" id-gs1="${sector.id}"><i class="fa mt-2" style="float:right"></i> ${sector.name}</btn>
+                </div>`;
+            }
         });
+        pane += `<div class="col-md-6 px-0" id="more-choice-btn">
+            <btn class="btn py-3 my-1 w-98 m-portlet" >Xem thêm...</btn>
+            </div>`;
+
         $("#gs1-area").html(pane);
         $("#gs1-area").children().each(function(){
             $(this).addClass('animated fadeInDown');
         });
     };
+
+    $(document).on('click touch', '#more-choice-btn', function(){
+        $("#more-choice-btn").addClass("animated fadeOutRight").delay(280).queue(function(){
+            $(".visual-sector").addClass("zoomOut").delay(400).queue(function(){
+                $(".visual-sector").removeClass("zoomOut").addClass("zoomIn");
+                $(".hidden-sector").removeClass("non-display").addClass('animated zoomIn');
+            });            
+        });
+    });
 
     function get_all_category(target){
         let url = "/api/v1/criteria";

@@ -420,16 +420,34 @@ $(document).ready(function () {
         let sectors = response.sectors;
         let pane = "";
         $.each(sectors, function (index, sector) {
-            pane += `<div class="col-md-6">
+            if(index < 6) {
+                pane += `<div class="col-md-6 visual-sector">
                         <btn class="btn gs-btn m-portlet py-3 my-1 w-100" id-gs="${sector.id}"><i class="fa mt-2" style="float:right"></i> ${sector.name}</btn>
                     </div>`;
+            } else {
+                pane += `<div class="col-md-6 hidden-sector non-display">
+                        <btn class="btn gs-btn m-portlet py-3 my-1 w-100 " id-gs="${sector.id}"><i class="fa mt-2" style="float:right"></i> ${sector.name}</btn>
+                    </div>`;
+            }            
         });
+        pane += `<div class="col-md-6 mb-3" id="more-choice-btn">
+            <btn show="#hidden-sector" class="btn py-3 my-1 w-100 m-portlet">Xem thêm...</btn>
+            </div>`;
+
         $("#sector__area").html(pane);
         $("#sector__area").children().each(function () {
             $(this).addClass('animated fadeInDown');
         });
+    };
 
-    }
+    $(document).on('click touch', '#more-choice-btn', function(){
+        $("#more-choice-btn").addClass("animated fadeOutRight").delay(280).queue(function(){
+            $(".visual-sector").addClass("zoomOut").delay(400).queue(function(){
+                $(".visual-sector").removeClass("zoomOut").addClass("zoomIn");
+                $(".hidden-sector").removeClass("non-display").addClass('animated zoomIn');
+            });            
+        });
+    });
 
     function get_all_category() {
         let url = "/api/v1/criteria";
